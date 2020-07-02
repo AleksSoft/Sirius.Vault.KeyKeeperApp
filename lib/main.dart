@@ -10,7 +10,7 @@ void main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
-      showPerformanceOverlay: true,
+      showPerformanceOverlay: false,
       showSemanticsDebugger: false,
       enableLog: true,
       locale: Locale('en'),

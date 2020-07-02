@@ -1,25 +1,23 @@
-import 'dart:typed_data';
-
-import 'package:pointycastle/pointycastle.dart';
+import 'package:steel_crypt/steel_crypt.dart';
 
 class SymmetricEncryptionService {
   static const int keyBitSize = 256;
   static const int macBitSize = 128;
   static const int nonceBitSize = 128;
 
-  final SecureRandom _random = SecureRandom();
+  static aesEncrypter(String key) => AesCrypt(
+        mode: ModeAES.gcm,
+        padding: PaddingAES.none,
+        key: key,
+      );
 
-  Uint8List encode(Uint8List data, Uint8List key) {
-    if (data == null) throw Exception('DataNull');
-    if (key == null) throw Exception('KeyNull');
-    if (data.length == 0) throw Exception('DataLength0');
-    if (data.length == 0) throw Exception('KeyLength0');
-    if (key.length != keyBitSize / 8) throw Exception('KeyLengthDiffBitSize');
+  static final nonce = CryptKey().genDart(length: (nonceBitSize / 8) as int);
 
-    var nonce = new Uint8List((nonceBitSize / 8) as int);
+  String get generateKey => CryptKey().genFortuna();
 
-    // _random.nextBytes();
+  String encode(String data, String key) =>
+      aesEncrypter(key).encrypt(data, iv: nonce);
 
-    // var cipher = Cipher
-  }
+  String decode(String data, String key) =>
+      aesEncrypter(key).decrypt(data, iv: nonce);
 }
