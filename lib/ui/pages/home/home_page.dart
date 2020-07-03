@@ -1,4 +1,5 @@
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
+import 'package:KeyKeeperApp/ui/widgets/vault_list_selector.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,30 +37,9 @@ class HomePage extends StatelessWidget {
                   right: 16,
                   child: Visibility(
                     visible: !_.secured,
-                    child: Card(
-                      color: _.secured ? Colors.black : Colors.white,
-                      elevation: 16.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: () => print('Vaults'),
-                            child: Text('Vaults'),
-                          ),
-                          Container(
-                            color: Colors.black,
-                            width: 1.0,
-                            height: 24.0,
-                          ),
-                          FlatButton(
-                            onPressed: () => print('Requests'),
-                            child: Text('Requests'),
-                          ),
-                        ],
-                      ),
+                    child: VaultListsSelector(
+                      vaultsClick: () => _.openVaultLists(vaults: true),
+                      requestsClick: () => _.openVaultLists(vaults: false),
                     ),
                   ),
                 ),

@@ -1,7 +1,9 @@
 import 'package:KeyKeeperApp/bindings/home_binding.dart';
 import 'package:KeyKeeperApp/bindings/root_binding.dart';
+import 'package:KeyKeeperApp/bindings/vault_lists_binding.dart';
 import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
+import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -16,6 +18,12 @@ class AppRoutes {
       name: HomePage.route,
       page: () => HomePage(),
       binding: HomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: VaultListsPage.route,
+      page: () => VaultListsPage(),
+      binding: VaultListsBinding(),
       transition: Transition.fadeIn,
     ),
     // GetPage(name: '/vaults', page: () => MyPage()),

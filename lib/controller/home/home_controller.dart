@@ -2,6 +2,7 @@ import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/services/crypto/asymmetric_encryption_service.dart';
 import 'package:KeyKeeperApp/services/crypto/symmetric_encryption_service.dart';
 import 'package:KeyKeeperApp/services/local_auth_service.dart';
+import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -49,6 +50,9 @@ class HomeController extends GetxController {
     _obtainRSAKeyPair();
     _obtainIdKey();
   }
+
+  void openVaultLists({bool vaults = false}) =>
+      Get.toNamed(VaultListsPage.route, arguments: vaults);
 
   void _obtainRSAKeyPair() async {
     if (!_box.hasData(AppStorageKeys.publicKey) ||
