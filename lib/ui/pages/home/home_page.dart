@@ -34,24 +34,29 @@ class HomePage extends StatelessWidget {
                 Positioned(
                   bottom: 16,
                   right: 16,
-                  child: Card(
-                    color: _.secured ? Colors.black : Colors.white,
-                    elevation: 16.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                    child: Visibility(
-                      visible: !_.secured,
+                  child: Visibility(
+                    visible: !_.secured,
+                    child: Card(
+                      color: _.secured ? Colors.black : Colors.white,
+                      elevation: 16.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           FlatButton(
-                            onPressed: () {},
-                            child: Text('One'),
+                            onPressed: () => print('Vaults'),
+                            child: Text('Vaults'),
+                          ),
+                          Container(
+                            color: Colors.black,
+                            width: 1.0,
+                            height: 24.0,
                           ),
                           FlatButton(
-                            onPressed: () {},
-                            child: Text('Two'),
+                            onPressed: () => print('Requests'),
+                            child: Text('Requests'),
                           ),
                         ],
                       ),
@@ -68,20 +73,11 @@ class HomePage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text(
-                          'ID Key:',
+                          _.secured ? 'Public Key' : 'ID Key',
                           style: Theme.of(context).textTheme.headline6.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: _.secured ? Colors.white : Colors.black,
                               ),
-                        ),
-                        SizedBox(height: 8.0),
-                        SelectableText(
-                          _.idKey,
-                          cursorColor: _.secured ? Colors.white : Colors.black,
-                          style: Theme.of(context).textTheme.button.copyWith(
-                                color: _.secured ? Colors.white : Colors.black,
-                              ),
-                          textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 24.0),
                         FlipCard(
@@ -91,7 +87,7 @@ class HomePage extends StatelessWidget {
                             elevation: 16.0,
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
+                              borderRadius: BorderRadius.circular(16.0),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -107,27 +103,43 @@ class HomePage extends StatelessWidget {
                           back: Card(
                             elevation: 16.0,
                             color: Colors.black,
-                            shadowColor: Colors.white24,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: QrImage(
-                                data: _.idKey,
-                                backgroundColor: Colors.black,
-                                foregroundColor: Colors.white,
-                                version: QrVersions.auto,
-                                size: 250.0,
+                              child: AnimatedSwitcher(
+                                duration: Duration(milliseconds: 300),
+                                child: _.showPublic
+                                    ? QrImage(
+                                        data: _.publicKey,
+                                        backgroundColor: Colors.black,
+                                        foregroundColor: Colors.white,
+                                        version: QrVersions.auto,
+                                        size: 250.0,
+                                      )
+                                    : Container(
+                                        height: 250.0,
+                                        width: 250.0,
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          Icons.lock,
+                                          size: 48.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 24.0),
                         Text(
-                          'Tap QR code to view Public Key',
+                          _.secured
+                              ? 'Do not sow this to everyone!'
+                              : 'Tap QR code to view Public Key',
                           style: Theme.of(context).textTheme.caption.apply(
-                                color: Colors.black26,
+                                color:
+                                    _.secured ? Colors.white24 : Colors.black26,
                               ),
                         ),
                         SizedBox(height: 24.0),

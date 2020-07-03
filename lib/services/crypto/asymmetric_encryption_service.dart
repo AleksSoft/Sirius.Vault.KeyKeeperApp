@@ -1,20 +1,13 @@
-import 'package:KeyKeeperApp/services/crypto/rsa_key_helper.dart';
-import 'package:pointycastle/pointycastle.dart';
+import 'package:crypton/crypton.dart';
 
 class AsymmetricEncryptionService {
-  final RsaKeyHelper _keyHelper = RsaKeyHelper();
+  static const int publicExponent = 3;
+  static const int strength = 1024;
+  static const int certainty = 25;
 
-  Future<AsymmetricKeyPair<PublicKey, PrivateKey>> createKeys() async {
-    return await _keyHelper.computeRSAKeyPair(
-      _keyHelper.getSecureRandom(),
-    );
-  }
+  RSAKeypair createKeys() => RSAKeypair.fromRandom(keySize: strength);
 
-  String encodePublicKey(RSAPublicKey key) {
-    return _keyHelper.encodePublicKeyToPemPKCS1(key);
-  }
+  RSAPrivateKey privateKeyFromPem(String pem) => RSAPrivateKey.fromPEM(pem);
 
-  String encodePrivateKey(RSAPrivateKey key) {
-    return _keyHelper.encodePrivateKeyToPemPKCS1(key);
-  }
+  RSAPublicKey publicKeyFromPem(String pem) => RSAPublicKey.fromPEM(pem);
 }
