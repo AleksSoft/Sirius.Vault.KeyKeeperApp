@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:share/share.dart';
 // import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
@@ -24,7 +25,14 @@ class HomePage extends StatelessWidget {
                   top: 16,
                   right: 16,
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final RenderBox box = context.findRenderObject();
+                      Share.share(
+                        _.secured ? _.publicKey : _.idKey,
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size,
+                      );
+                    },
                     child: Icon(
                       Icons.share,
                       color: _.secured ? Colors.white : Colors.black,
