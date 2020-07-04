@@ -15,40 +15,37 @@ class HomeController extends GetxController {
 
   final _secured = false.obs;
 
-  get secured => this._secured.value;
+  get secured => _secured.value;
 
-  set secured(val) => this._secured.value = val;
+  set secured(val) => _secured.value = val;
 
   final _privateKey = ''.obs;
 
-  get privateKey => this._privateKey.value;
-
   final _publicKey = ''.obs;
-
-  get publicKey => this._publicKey.value;
-
-  get showPublic => this._secured.value && this._isAuth.value;
 
   final _idKey = ''.obs;
 
-  get idKey => this._idKey.value;
-
-  get idKeyEmpty => this._idKey.value == '';
-
   final _isAuth = false.obs;
+
+  get key => _secured.value ? _publicKey.value : _idKey.value;
+
+  get keyLocked => _secured.value && _isAuth.value;
 
   @override
   void onInit() {
     super.onInit();
-    _secured.listen((value) async {
-      if (value) {
-        _isAuth.value = await _localAuthService.authenticate();
-      } else {
-        _isAuth.value = false;
-      }
-    });
+    ever(_secured, checkAuth);
     _obtainRSAKeyPair();
     _obtainIdKey();
+  }
+
+  checkAuth(value) async {
+    await Future.delayed(Duration(milliseconds: 300));
+    if (value) {
+      _isAuth.value = await _localAuthService.authenticate();
+    } else {
+      _isAuth.value = false;
+    }
   }
 
   void openVaultLists({bool vaults = false}) =>
@@ -70,8 +67,9 @@ class HomeController extends GetxController {
       _publicKey.value = _box.read(AppStorageKeys.publicKey);
       _privateKey.value = _box.read(AppStorageKeys.privateKey);
     }
-    String encrypted = RSAPublicKey.fromPEM(publicKey).encrypt('12345');
-    String decrypted = RSAPrivateKey.fromPEM(privateKey).decrypt(encrypted);
+    String encrypted = RSAPublicKey.fromPEM(_publicKey.value).encrypt('12345');
+    String decrypted =
+        RSAPrivateKey.fromPEM(_privateKey.value).decrypt(encrypted);
     print('decrypted = $decrypted');
   }
 
@@ -88,7 +86,7 @@ class HomeController extends GetxController {
     var encrypted = _symCryptoService.encrypt('12345', _idKey.value);
     var decrypted = _symCryptoService.decrypt(encrypted, _idKey.value);
     print('\n\n----AES----\n'
-        'key: $idKey\n'
+        'key: ${_idKey.value}\n'
         'encoded: $encrypted\n'
         'decoded: $decrypted\n');
   }

@@ -11,135 +11,133 @@ import 'package:share/share.dart';
 class HomePage extends StatelessWidget {
   static final String route = '/home';
 
+  final HomeController c = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
-    return GetX<HomeController>(
-      init: HomeController(),
-      builder: (_) {
-        return Scaffold(
-          backgroundColor: _.secured ? Colors.grey[900] : Colors.white,
-          body: SafeArea(
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 16,
-                  right: 16,
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      final RenderBox box = context.findRenderObject();
-                      Share.share(
-                        _.secured ? _.publicKey : _.idKey,
-                        sharePositionOrigin:
-                            box.localToGlobal(Offset.zero) & box.size,
-                      );
-                    },
-                    child: Icon(
-                      Icons.share,
-                      color: _.secured ? Colors.white : Colors.black,
-                    ),
-                    backgroundColor: _.secured ? Colors.black : Colors.white,
-                  ),
-                ),
-                Positioned(
-                  bottom: 16,
-                  right: 16,
-                  child: Visibility(
-                    visible: !_.secured,
-                    child: VaultListsSelector(
-                      vaultsClick: () => _.openVaultLists(vaults: true),
-                      requestsClick: () => _.openVaultLists(vaults: false),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  alignment: Alignment.center,
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    opacity: _.idKeyEmpty ? 0.0 : 1.0,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          _.secured ? 'Public Key' : 'ID Key',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: _.secured ? Colors.white : Colors.black,
-                              ),
-                        ),
-                        SizedBox(height: 24.0),
-                        FlipCard(
-                          direction: FlipDirection.VERTICAL,
-                          onFlipDone: (value) => _.secured = !value,
-                          front: Card(
-                            elevation: 16.0,
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: QrImage(
-                                data: _.idKey,
-                                backgroundColor: Colors.white,
-                                foregroundColor: Colors.black,
-                                version: QrVersions.auto,
-                                size: 250.0,
-                              ),
-                            ),
-                          ),
-                          back: Card(
-                            elevation: 16.0,
-                            color: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: AnimatedSwitcher(
-                                duration: Duration(milliseconds: 300),
-                                child: _.showPublic
-                                    ? QrImage(
-                                        data: _.publicKey,
-                                        backgroundColor: Colors.black,
-                                        foregroundColor: Colors.white,
-                                        version: QrVersions.auto,
-                                        size: 250.0,
-                                      )
-                                    : Container(
-                                        height: 250.0,
-                                        width: 250.0,
-                                        alignment: Alignment.center,
-                                        child: Icon(
-                                          Icons.lock,
-                                          size: 48.0,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 24.0),
-                        Text(
-                          _.secured
-                              ? 'Do not sow this to everyone!'
-                              : 'Tap QR code to view Public Key',
-                          style: Theme.of(context).textTheme.caption.apply(
-                                color:
-                                    _.secured ? Colors.white24 : Colors.black26,
-                              ),
-                        ),
-                        SizedBox(height: 24.0),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+    print('\nHOME_BUILD');
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Obx(
+              () => AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                color: c.secured ? Colors.grey[900] : Colors.white,
+              ),
             ),
-          ),
-        );
-      },
+            Positioned(
+              top: 16,
+              right: 16,
+              child: Obx(
+                () => FloatingActionButton(
+                  onPressed: () => Share.share(c.key),
+                  child: Icon(
+                    Icons.share,
+                    color: c.secured ? Colors.white : Colors.black,
+                  ),
+                  backgroundColor: c.secured ? Colors.black : Colors.white,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 16,
+              right: 16,
+              child: Obx(() => Visibility(
+                    visible: !c.secured,
+                    child: VaultListsSelector(
+                      vaultsClick: () => c.openVaultLists(vaults: true),
+                      requestsClick: () => c.openVaultLists(vaults: false),
+                    ),
+                  )),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Obx(() => Text(
+                        c.secured ? 'Public Key' : 'ID Key',
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: c.secured ? Colors.white : Colors.black,
+                            ),
+                      )),
+                  const SizedBox(height: 24.0),
+                  FlipCard(
+                    direction: FlipDirection.VERTICAL,
+                    speed: 300,
+                    onFlipDone: (value) => c.secured = !value,
+                    front: Card(
+                      elevation: 16.0,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: QrImage(
+                          data: c.key,
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          version: QrVersions.auto,
+                          size: 250.0,
+                        ),
+                      ),
+                    ),
+                    back: Card(
+                      elevation: 16.0,
+                      color: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Obx(
+                          () => AnimatedSwitcher(
+                            duration: Duration(milliseconds: 300),
+                            child: c.keyLocked
+                                ? QrImage(
+                                    data: c.key,
+                                    backgroundColor: Colors.black,
+                                    foregroundColor: Colors.white,
+                                    version: QrVersions.auto,
+                                    size: 250.0,
+                                  )
+                                : Container(
+                                    height: 250.0,
+                                    width: 250.0,
+                                    alignment: Alignment.center,
+                                    child: Icon(
+                                      Icons.lock,
+                                      size: 48.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24.0),
+                  Obx(
+                    () => Text(
+                      c.secured
+                          ? 'Do not sow this to everyone!'
+                          : 'Tap QR code to view Public Key',
+                      style: Theme.of(context).textTheme.caption.apply(
+                            color: c.secured ? Colors.white54 : Colors.black26,
+                          ),
+                    ),
+                  ),
+                  const SizedBox(height: 24.0),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
