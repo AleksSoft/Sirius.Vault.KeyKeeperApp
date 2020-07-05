@@ -10,40 +10,34 @@ class VaultListsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-        child: GetX<VaultListsController>(
-          init: VaultListsController(),
-          builder: (_) {
-            return Stack(
-              children: <Widget>[
-                _ListSwitcher(),
-                Positioned(
-                  top: 16.0,
-                  left: 16.0,
-                  child: FloatingActionButton(
-                    onPressed: null,
-                    child: BackButton(color: Colors.black),
-                    backgroundColor: Colors.white,
-                  ),
+        child: Stack(
+          children: <Widget>[
+            _ListSwitcher(),
+            Positioned(
+              left: 16.0,
+              top: 16.0,
+              child: FloatingActionButton(
+                onPressed: null,
+                child: BackButton(color: Colors.black),
+                backgroundColor: Colors.white,
+              ),
+            ),
+            Positioned(
+              left: 32.0,
+              right: 32.0,
+              bottom: 16.0,
+              child: Obx(
+                () => VaultListsSelector(
+                  vaultsClick: () => c.modeVaults = true,
+                  requestsClick: () => c.modeVaults = false,
+                  vaultsChecked: c.modeVaults,
+                  requestsCount: c.requests.length,
                 ),
-                Positioned(
-                  bottom: 16.0,
-                  left: screenWidth / 6,
-                  right: screenWidth / 6,
-                  child: Obx(
-                    () => VaultListsSelector(
-                      vaultsClick: () => c.modeVaults = true,
-                      requestsClick: () => c.modeVaults = false,
-                      vaultsChecked: c.modeVaults,
-                      requestsCount: c.requests.length,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+          ],
         ),
       ),
     );

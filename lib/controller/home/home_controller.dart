@@ -2,6 +2,7 @@ import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/services/crypto/asymmetric_encryption_service.dart';
 import 'package:KeyKeeperApp/services/crypto/symmetric_encryption_service.dart';
 import 'package:KeyKeeperApp/services/local_auth_service.dart';
+import 'package:KeyKeeperApp/ui/pages/key_keepers/key_keepers_page.dart';
 import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
@@ -47,6 +48,8 @@ class HomeController extends GetxController {
       _isAuth.value = false;
     }
   }
+
+  openKeyPeekersPage() => Get.toNamed(KeyKeepersPage.route);
 
   void openVaultLists({bool vaults = false}) =>
       Get.toNamed(VaultListsPage.route, arguments: vaults);

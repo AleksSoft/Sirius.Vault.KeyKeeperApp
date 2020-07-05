@@ -42,6 +42,36 @@ class HomePage extends StatelessWidget {
             ),
             Positioned(
               bottom: 16,
+              left: 16,
+              child: Obx(
+                () => Visibility(
+                  visible: !c.secured,
+                  child: SizedBox(
+                    height: 56.0,
+                    child: Card(
+                      elevation: 16.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                      child: FlatButton(
+                        onPressed: () => c.openKeyPeekersPage(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            const Radius.circular(32.0),
+                          ),
+                        ),
+                        child: Text(
+                          'Key keepers',
+                          style: Theme.of(context).textTheme.button,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 16,
               right: 16,
               child: Obx(() => Visibility(
                     visible: !c.secured,

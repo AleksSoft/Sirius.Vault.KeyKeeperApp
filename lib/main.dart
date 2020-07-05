@@ -7,19 +7,24 @@ import 'package:get/get.dart';
 void main() async {
   await GetStorage.init();
   runApp(
-    GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
-      showPerformanceOverlay: false,
-      showSemanticsDebugger: false,
-      enableLog: true,
-      locale: Locale('en'),
-      title: 'Key Keeper',
-      theme: AppThemes.light,
-      darkTheme: AppThemes.light,
-      themeMode: ThemeMode.system,
-      getPages: AppRoutes.routes,
-      initialRoute: '/',
+    GestureDetector(
+      onTap: () {
+        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+      },
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        debugShowMaterialGrid: false,
+        showPerformanceOverlay: false,
+        showSemanticsDebugger: false,
+        enableLog: true,
+        locale: Locale('en'),
+        title: 'Key Keeper',
+        theme: AppThemes.light,
+        darkTheme: AppThemes.light,
+        themeMode: ThemeMode.system,
+        getPages: AppRoutes.routes,
+        initialRoute: '/',
+      ),
     ),
   );
 }
