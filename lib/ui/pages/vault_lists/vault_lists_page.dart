@@ -14,7 +14,11 @@ class VaultListsPage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: <Widget>[
-            _ListSwitcher(),
+            RefreshIndicator(
+              color: Colors.black,
+              onRefresh: () => c.reload(),
+              child: _ListSwitcher(),
+            ),
             Positioned(
               left: 16.0,
               top: 16.0,
@@ -22,6 +26,30 @@ class VaultListsPage extends StatelessWidget {
                 onPressed: null,
                 child: BackButton(color: Colors.black),
                 backgroundColor: Colors.white,
+              ),
+            ),
+            Obx(
+              () => Visibility(
+                visible: c.modeVaults,
+                child: Positioned(
+                  top: 16.0,
+                  right: 16.0,
+                  child: DropdownButton<String>(
+                    items: VaultListsController.vaultStatusList
+                        .map((status) => DropdownMenuItem(
+                              value: status,
+                              child: Text(
+                                status,
+                                style: Get.textTheme.button.copyWith(
+                                  color: c.getStatusColor(status),
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (value) => c.filterStatus = value,
+                    value: c.filterStatus,
+                  ),
+                ),
               ),
             ),
             Positioned(
@@ -68,7 +96,12 @@ class _ListSwitcher extends StatelessWidget {
                   return ListTile(
                     title: Text('Name: ${v.name}'),
                     subtitle: Text('Type: ${v.type}'),
-                    trailing: Text(v.status),
+                    trailing: Text(
+                      v.status,
+                      style: Get.textTheme.button.copyWith(
+                        color: c.getStatusColor(v.status),
+                      ),
+                    ),
                   );
                 },
               )

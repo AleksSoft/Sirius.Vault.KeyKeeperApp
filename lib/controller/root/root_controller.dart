@@ -17,8 +17,6 @@ class RootController extends GetxController {
 
   void checkAuth() async {
     var auth = await Get.toNamed(LocalAuthPage.route);
-    if (auth) {
-      Get.offNamed(HomePage.route);
-    }
+    if (auth) Get.offNamed(HomePage.route);
   }
 }

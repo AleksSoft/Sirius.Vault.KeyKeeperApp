@@ -6,8 +6,9 @@ class LocalAuthService {
 
   Future<bool> authenticate() async {
     try {
+      await Future.delayed(Duration(milliseconds: 300));
       return await _auth.authenticateWithBiometrics(
-        localizedReason: 'authenticate to access',
+        localizedReason: 'Authenticate to access',
         useErrorDialogs: true,
         stickyAuth: true,
       );

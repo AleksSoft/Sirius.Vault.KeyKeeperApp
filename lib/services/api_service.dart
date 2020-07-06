@@ -19,10 +19,12 @@ class ApiService {
   static const String requestsEndpoint = '/vault-activation-requests';
   static const String vaultsEndpoint = '/vaults';
 
+  String get usedBearer => bearers[4];
+
   Future<VaultsModel> fetchVaults() async {
     final response = await http.get(
       baseUrl + vaultsEndpoint,
-      headers: {HttpHeaders.authorizationHeader: bearers[0]},
+      headers: {HttpHeaders.authorizationHeader: usedBearer},
     );
 
     if (response.statusCode == 200) {
@@ -38,7 +40,7 @@ class ApiService {
   Future<ActivationRequestsModel> fetchRequests() async {
     final response = await http.get(
       baseUrl + requestsEndpoint,
-      headers: {HttpHeaders.authorizationHeader: bearers[0]},
+      headers: {HttpHeaders.authorizationHeader: usedBearer},
     );
 
     if (response.statusCode == 200) {

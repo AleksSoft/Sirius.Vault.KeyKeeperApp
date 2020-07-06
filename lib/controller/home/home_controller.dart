@@ -3,6 +3,7 @@ import 'package:KeyKeeperApp/services/crypto/asymmetric_encryption_service.dart'
 import 'package:KeyKeeperApp/services/crypto/symmetric_encryption_service.dart';
 import 'package:KeyKeeperApp/services/local_auth_service.dart';
 import 'package:KeyKeeperApp/ui/pages/key_keepers/key_keepers_page.dart';
+import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
 import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
@@ -41,9 +42,9 @@ class HomeController extends GetxController {
   }
 
   checkAuth(value) async {
-    await Future.delayed(Duration(milliseconds: 300));
     if (value) {
-      _isAuth.value = await _localAuthService.authenticate();
+      var authorized = await Get.toNamed(LocalAuthPage.route, arguments: true);
+      _isAuth.value = authorized;
     } else {
       _isAuth.value = false;
     }
