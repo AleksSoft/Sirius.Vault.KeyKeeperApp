@@ -15,16 +15,14 @@ class LocalAuthPage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: <Widget>[
-            Obx(
-              () => Visibility(
-                visible: c.showBack,
-                child: Positioned(
-                  top: 16.0,
-                  left: 16.0,
-                  child: IconButton(
-                    onPressed: () => c.navigateBack(false),
-                    icon: Icon(Icons.close, color: Colors.black),
-                  ),
+            Visibility(
+              visible: c.showBack,
+              child: Positioned(
+                top: 16.0,
+                left: 16.0,
+                child: IconButton(
+                  onPressed: () => c.navigateBack(false),
+                  icon: Icon(Icons.close, color: Colors.black),
                 ),
               ),
             ),
@@ -54,23 +52,21 @@ class LocalAuthPage extends StatelessWidget {
       color: Colors.grey.withOpacity(0.4),
       borderRadius: BorderRadius.circular(5),
     );
-    return Obx(
-      () => PinPut(
-        fieldsCount: 4,
-        textStyle: Get.textTheme.headline5,
-        eachFieldWidth: 48,
-        eachFieldHeight: 56,
-        onSubmit: (pin) => c.submit(pin),
-        focusNode: c.pinPutFocusNode,
-        controller: c.pinPutController,
-        submittedFieldDecoration: pinPutDecoration,
-        selectedFieldDecoration: pinPutDecoration.copyWith(
-          color: Colors.white,
-          border: Border.all(width: 2, color: Colors.black),
-        ),
-        followingFieldDecoration: pinPutDecoration,
-        pinAnimationType: PinAnimationType.scale,
+    return PinPut(
+      fieldsCount: 4,
+      textStyle: Get.textTheme.headline5,
+      eachFieldWidth: 48,
+      eachFieldHeight: 56,
+      onSubmit: (pin) => c.submit(pin),
+      focusNode: c.pinPutFocusNode,
+      controller: c.pinPutController,
+      submittedFieldDecoration: pinPutDecoration,
+      selectedFieldDecoration: pinPutDecoration.copyWith(
+        color: Colors.white,
+        border: Border.all(width: 2, color: Colors.black),
       ),
+      followingFieldDecoration: pinPutDecoration,
+      pinAnimationType: PinAnimationType.scale,
     );
   }
 

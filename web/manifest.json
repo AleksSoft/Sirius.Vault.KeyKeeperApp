@@ -1,6 +1,6 @@
 {
-    "name": "KeyKeeperApp",
-    "short_name": "KeyKeeperApp",
+    "name": "KeyKeeper",
+    "short_name": "KeyKeeper",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
