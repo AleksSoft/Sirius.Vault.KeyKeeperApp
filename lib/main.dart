@@ -1,5 +1,6 @@
 import 'package:KeyKeeperApp/app/routes/app_routes.dart';
 import 'package:KeyKeeperApp/app/themes/app_themes.dart';
+import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
@@ -20,10 +21,9 @@ void main() async {
         locale: Locale('en'),
         title: 'Key Keeper',
         theme: AppThemes.light,
-        darkTheme: AppThemes.light,
         themeMode: ThemeMode.system,
         getPages: AppRoutes.routes,
-        initialRoute: '/',
+        initialRoute: RootPage.route,
       ),
     ),
   );

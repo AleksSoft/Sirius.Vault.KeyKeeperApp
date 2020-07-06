@@ -1,7 +1,6 @@
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/services/crypto/asymmetric_encryption_service.dart';
 import 'package:KeyKeeperApp/services/crypto/symmetric_encryption_service.dart';
-import 'package:KeyKeeperApp/services/local_auth_service.dart';
 import 'package:KeyKeeperApp/ui/pages/key_keepers/key_keepers_page.dart';
 import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
 import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
@@ -12,7 +11,6 @@ import 'package:get_storage/get_storage.dart';
 class HomeController extends GetxController {
   final _asymCryptoService = Get.find<AsymmetricEncryptionService>();
   final _symCryptoService = Get.find<SymmetricEncryptionService>();
-  final _localAuthService = Get.find<LocalAuthService>();
   final _box = GetStorage();
 
   final _secured = false.obs;

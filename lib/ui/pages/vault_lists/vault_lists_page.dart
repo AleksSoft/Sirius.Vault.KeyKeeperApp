@@ -34,20 +34,31 @@ class VaultListsPage extends StatelessWidget {
                 child: Positioned(
                   top: 16.0,
                   right: 16.0,
-                  child: DropdownButton<String>(
-                    items: VaultListsController.vaultStatusList
-                        .map((status) => DropdownMenuItem(
-                              value: status,
-                              child: Text(
-                                status,
-                                style: Get.textTheme.button.copyWith(
-                                  color: c.getStatusColor(status),
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                    onChanged: (value) => c.filterStatus = value,
-                    value: c.filterStatus,
+                  child: Card(
+                    elevation: 16.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: DropdownButton<String>(
+                        underline: SizedBox.shrink(),
+                        elevation: 16,
+                        items: VaultListsController.vaultStatusList
+                            .map((status) => DropdownMenuItem(
+                                  value: status,
+                                  child: Text(
+                                    status,
+                                    style: Get.textTheme.button.copyWith(
+                                      color: c.getStatusColor(status),
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: (value) => c.filterStatus = value,
+                        value: c.filterStatus,
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -41,7 +41,7 @@ class VaultListsSelector extends StatelessWidget {
                     style: this.vaultsChecked != null && this.vaultsChecked
                         ? textStyle.copyWith(fontWeight: FontWeight.bold)
                         : textStyle.copyWith(fontWeight: FontWeight.normal),
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 100),
                     child: Text('Vaults'),
                   ),
                 ),
@@ -60,7 +60,7 @@ class VaultListsSelector extends StatelessWidget {
                     style: this.vaultsChecked != null && !this.vaultsChecked
                         ? textStyle.copyWith(fontWeight: FontWeight.bold)
                         : textStyle.copyWith(fontWeight: FontWeight.normal),
-                    duration: const Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 100),
                     child: Badge(
                       elevation: 0.0,
                       badgeColor: Colors.transparent,
