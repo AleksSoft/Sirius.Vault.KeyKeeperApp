@@ -3,7 +3,9 @@ import 'dart:typed_data';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:steel_crypt/PointyCastleN/export.dart';
+import 'package:steel_crypt/PointyCastleN/api.dart';
+import 'package:steel_crypt/PointyCastleN/block/aes_fast.dart';
+import 'package:steel_crypt/PointyCastleN/block/modes/gcm.dart';
 
 import 'secure_random.dart';
 
