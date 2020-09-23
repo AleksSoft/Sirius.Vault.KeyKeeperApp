@@ -23,7 +23,7 @@ class RootController extends GetxController {
   void checkAuthRegister() async {
     var auth = await Get.toNamed(LocalAuthPage.route);
     if (auth) {
-      if (!_storage.hasData(AppStorageKeys.appPrivateKey)) {
+      if (!_storage.hasData(AppStorageKeys.token)) {
         await Get.toNamed(RegisterPage.route);
       }
       Get.offAllNamed(HomePage.route);

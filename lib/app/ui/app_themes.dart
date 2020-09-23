@@ -1,5 +1,6 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
   static final ThemeData light = ThemeData(
@@ -9,6 +10,6 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.background,
     backgroundColor: AppColors.background,
     cursorColor: AppColors.coursorColor,
-    fontFamily: 'Proxima_Nova',
+    textTheme: GoogleFonts.latoTextTheme(),
   );
 }

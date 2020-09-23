@@ -9,6 +9,7 @@ class AppColors {
   static const Color green = Colors.green;
   static const Color red = Colors.red;
   static const Color dark = Colors.black87;
+  static const Color light = Colors.white;
   static const Color progressColor = Colors.black87;
   static const Color coursorColor = Colors.black87;
 }

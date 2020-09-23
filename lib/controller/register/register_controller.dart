@@ -8,12 +8,12 @@ class RegisterController extends GetxController {
   final _storage = GetStorage();
 
   final _appKeyValue = ''.obs;
-  String get appKeyValue => this._appKeyValue.value;
-  set appKeyValue(String value) => this._appKeyValue.value = value;
+  String get tokenValue => this._appKeyValue.value;
+  set tokenValue(String value) => this._appKeyValue.value = value;
 
-  bool get actionAllowed => !appKeyValue.isNullOrBlank;
+  bool get actionAllowed => !tokenValue.isNullOrBlank;
 
   void submit() => _storage
-      .writeIfNull(AppStorageKeys.appPrivateKey, appKeyValue)
+      .writeIfNull(AppStorageKeys.token, tokenValue)
       .then((value) => Get.back());
 }

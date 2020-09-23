@@ -27,7 +27,7 @@ class RootPage extends StatelessWidget {
                   Icon(Icons.lock_open, size: 36),
                   Text(
                     'Key Keeper',
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Get.textTheme.headline5,
                     textAlign: TextAlign.center,
                   ),
                 ],

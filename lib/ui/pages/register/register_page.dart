@@ -37,11 +37,11 @@ class RegisterPage extends StatelessWidget {
                       children: [
                         TextFormField(
                           keyboardType: TextInputType.multiline,
-                          initialValue: _.appKeyValue,
+                          initialValue: _.tokenValue,
                           maxLines: null,
-                          onChanged: (String value) => _.appKeyValue = value,
+                          onChanged: (String value) => _.tokenValue = value,
                           decoration: InputDecoration(
-                            labelText: 'App key',
+                            labelText: 'Token',
                           ),
                         ),
                         AppUiHelpers.vSpaceMedium,
@@ -60,7 +60,7 @@ class RegisterPage extends StatelessWidget {
                   child: Obx(
                     () => CupertinoButton.filled(
                       onPressed: _.actionAllowed ? () => _.submit() : null,
-                      child: Text('Submit app key'),
+                      child: Text('Submit'),
                     ),
                   ),
                 ),

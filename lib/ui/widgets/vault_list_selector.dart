@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VaultListsSelector extends StatelessWidget {
   const VaultListsSelector({
@@ -16,7 +17,7 @@ class VaultListsSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.button;
+    final textStyle = Get.textTheme.button;
     return Hero(
       tag: 'vault-lists-selector-tag',
       child: SizedBox(
