@@ -1,10 +1,10 @@
 import 'package:KeyKeeperApp/bindings/home_binding.dart';
 import 'package:KeyKeeperApp/bindings/key_keepers_binding.dart';
-import 'package:KeyKeeperApp/bindings/local_auth_binding.dart';
 import 'package:KeyKeeperApp/bindings/vault_lists_binding.dart';
 import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
 import 'package:KeyKeeperApp/ui/pages/key_keepers/key_keepers_page.dart';
 import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
+import 'package:KeyKeeperApp/ui/pages/register/register_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,11 @@ class AppRoutes {
     GetPage(
       name: LocalAuthPage.route,
       page: () => LocalAuthPage(),
-      binding: LocalAuthBinding(),
+      fullscreenDialog: true,
+    ),
+    GetPage(
+      name: RegisterPage.route,
+      page: () => RegisterPage(),
       fullscreenDialog: true,
     ),
     GetPage(

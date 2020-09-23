@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class RootPage extends StatelessWidget {
   static final String route = '/';
-  final duration = const Duration(milliseconds: 300);
+  final duration = const Duration(milliseconds: 600);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class RootPage extends StatelessWidget {
           fit: StackFit.expand,
           children: <Widget>[
             AnimatedPositioned(
-              onEnd: () => _.checkAuth(),
+              onEnd: () => _.checkAuthRegister(),
               duration: duration,
               top: _.showUi ? 120 : -10,
               right: 10,

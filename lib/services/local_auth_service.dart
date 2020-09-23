@@ -1,14 +1,10 @@
-import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LocalAuthService {
-  final _auth = LocalAuthentication();
-
-  Future<bool> authenticate() async {
+  static Future<bool> authenticate() async {
+    final _auth = LocalAuthentication();
     try {
-      List<BiometricType> availableBiometrics =
-          await _auth.getAvailableBiometrics();
-      if (availableBiometrics.isNotEmpty) {
+      if (await canCheckBiometrics) {
         await Future.delayed(Duration(milliseconds: 300));
         return await _auth.authenticateWithBiometrics(
           localizedReason: 'Authenticate to access',
@@ -18,9 +14,11 @@ class LocalAuthService {
       } else {
         return false;
       }
-    } on PlatformException catch (e) {
+    } catch (e) {
       print(e);
       return false;
     }
   }
+
+  static Future<bool> get canCheckBiometrics async => await LocalAuthentication().canCheckBiometrics;
 }

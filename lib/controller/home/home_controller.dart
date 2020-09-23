@@ -41,7 +41,7 @@ class HomeController extends GetxController {
 
   checkAuth(value) async {
     if (value) {
-      var authorized = await Get.toNamed(LocalAuthPage.route, arguments: true);
+      var authorized = await Get.toNamed(LocalAuthPage.route);
       _isAuth.value = authorized;
     } else {
       _isAuth.value = false;
