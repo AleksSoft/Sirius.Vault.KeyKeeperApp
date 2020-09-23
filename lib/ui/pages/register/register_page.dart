@@ -59,7 +59,7 @@ class RegisterPage extends StatelessWidget {
                   left: AppSizes.medium,
                   child: Obx(
                     () => CupertinoButton.filled(
-                      onPressed: _.actionAllowed ? () {} : null,
+                      onPressed: _.actionAllowed ? () => _.submit() : null,
                       child: Text('Submit app key'),
                     ),
                   ),
