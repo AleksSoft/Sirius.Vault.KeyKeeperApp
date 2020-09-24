@@ -5,34 +5,34 @@
 // @dart = 2.3
 // ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
 
-const RequestToApprovalRequests$json = const {
-  '1': 'RequestToApprovalRequests',
+const GetApprovalRequestsRequests$json = const {
+  '1': 'GetApprovalRequestsRequests',
   '2': const [
     const {'1': 'deviceInfo', '3': 1, '4': 1, '5': 9, '10': 'deviceInfo'},
   ],
 };
 
-const RequestToApprovalResponse$json = const {
-  '1': 'RequestToApprovalResponse',
+const GetApprovalRequestsResponse$json = const {
+  '1': 'GetApprovalRequestsResponse',
   '2': const [
     const {'1': 'error', '3': 1, '4': 1, '5': 11, '6': '.ValidatorApi.ValidatorApiError', '10': 'error'},
-    const {'1': 'payload', '3': 2, '4': 3, '5': 11, '6': '.ValidatorApi.RequestToApprovalResponse.RequestToApproval', '10': 'payload'},
+    const {'1': 'payload', '3': 2, '4': 3, '5': 11, '6': '.ValidatorApi.GetApprovalRequestsResponse.ApprovalRequest', '10': 'payload'},
   ],
-  '3': const [RequestToApprovalResponse_RequestToApproval$json],
+  '3': const [GetApprovalRequestsResponse_ApprovalRequest$json],
 };
 
-const RequestToApprovalResponse_RequestToApproval$json = const {
-  '1': 'RequestToApproval',
+const GetApprovalRequestsResponse_ApprovalRequest$json = const {
+  '1': 'ApprovalRequest',
   '2': const [
     const {'1': 'transferSigningRequestId', '3': 1, '4': 1, '5': 9, '10': 'transferSigningRequestId'},
-    const {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.ValidatorApi.RequestToApprovalResponse.RequestToApproval.RequestStatus', '10': 'status'},
-    const {'1': 'transactionDetailEnc', '3': 3, '4': 1, '5': 12, '10': 'transactionDetailEnc'},
+    const {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.ValidatorApi.GetApprovalRequestsResponse.ApprovalRequest.RequestStatus', '10': 'status'},
+    const {'1': 'transactionDetailsEnc', '3': 3, '4': 1, '5': 12, '10': 'transactionDetailsEnc'},
     const {'1': 'secretEnc', '3': 4, '4': 1, '5': 12, '10': 'secretEnc'},
   ],
-  '4': const [RequestToApprovalResponse_RequestToApproval_RequestStatus$json],
+  '4': const [GetApprovalRequestsResponse_ApprovalRequest_RequestStatus$json],
 };
 
-const RequestToApprovalResponse_RequestToApproval_RequestStatus$json = const {
+const GetApprovalRequestsResponse_ApprovalRequest_RequestStatus$json = const {
   '1': 'RequestStatus',
   '2': const [
     const {'1': 'open', '2': 0},
@@ -40,19 +40,19 @@ const RequestToApprovalResponse_RequestToApproval_RequestStatus$json = const {
   ],
 };
 
-const ResolveRequestToApprovalRequest$json = const {
-  '1': 'ResolveRequestToApprovalRequest',
+const ResolveApprovalRequestsRequest$json = const {
+  '1': 'ResolveApprovalRequestsRequest',
   '2': const [
     const {'1': 'DeviceInfo', '3': 1, '4': 1, '5': 9, '10': 'DeviceInfo'},
     const {'1': 'TransferSigningRequestId', '3': 2, '4': 1, '5': 9, '10': 'TransferSigningRequestId'},
-    const {'1': 'resolution', '3': 3, '4': 1, '5': 14, '6': '.ValidatorApi.ResolveRequestToApprovalRequest.ResolutionStatus', '10': 'resolution'},
+    const {'1': 'resolution', '3': 3, '4': 1, '5': 14, '6': '.ValidatorApi.ResolveApprovalRequestsRequest.ResolutionStatus', '10': 'resolution'},
     const {'1': 'resolutionMessage', '3': 4, '4': 1, '5': 9, '10': 'resolutionMessage'},
     const {'1': 'signature', '3': 5, '4': 1, '5': 9, '10': 'signature'},
   ],
-  '4': const [ResolveRequestToApprovalRequest_ResolutionStatus$json],
+  '4': const [ResolveApprovalRequestsRequest_ResolutionStatus$json],
 };
 
-const ResolveRequestToApprovalRequest_ResolutionStatus$json = const {
+const ResolveApprovalRequestsRequest_ResolutionStatus$json = const {
   '1': 'ResolutionStatus',
   '2': const [
     const {'1': 'approve', '2': 0},
@@ -61,8 +61,8 @@ const ResolveRequestToApprovalRequest_ResolutionStatus$json = const {
   ],
 };
 
-const ResolveRequestToApprovalResponse$json = const {
-  '1': 'ResolveRequestToApprovalResponse',
+const ResolveApprovalRequestsResponse$json = const {
+  '1': 'ResolveApprovalRequestsResponse',
   '2': const [
     const {'1': 'error', '3': 1, '4': 1, '5': 11, '6': '.ValidatorApi.ValidatorApiError', '10': 'error'},
   ],

@@ -2,7 +2,6 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/transaction_details/transaction_details_controller.dart';
-import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -209,7 +208,7 @@ class TransactionDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -14,52 +14,37 @@ import 'api.pb.dart' as $0;
 export 'api.pb.dart';
 
 class TransfersClient extends $grpc.Client {
-  static final _$getRequestToApprovalStream = $grpc.ClientMethod<
-          $0.RequestToApprovalRequests, $0.RequestToApprovalResponse>(
-      '/ValidatorApi.Transfers/GetRequestToApprovalStream',
-      ($0.RequestToApprovalRequests value) => value.writeToBuffer(),
+  static final _$getApprovalRequests = $grpc.ClientMethod<
+          $0.GetApprovalRequestsRequests, $0.GetApprovalRequestsResponse>(
+      '/ValidatorApi.Transfers/GetApprovalRequests',
+      ($0.GetApprovalRequestsRequests value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $0.RequestToApprovalResponse.fromBuffer(value));
-  static final _$getRequestToApproval = $grpc.ClientMethod<
-          $0.RequestToApprovalRequests, $0.RequestToApprovalResponse>(
-      '/ValidatorApi.Transfers/GetRequestToApproval',
-      ($0.RequestToApprovalRequests value) => value.writeToBuffer(),
+          $0.GetApprovalRequestsResponse.fromBuffer(value));
+  static final _$resolveApprovalRequests = $grpc.ClientMethod<
+          $0.ResolveApprovalRequestsRequest,
+          $0.ResolveApprovalRequestsResponse>(
+      '/ValidatorApi.Transfers/ResolveApprovalRequests',
+      ($0.ResolveApprovalRequestsRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $0.RequestToApprovalResponse.fromBuffer(value));
-  static final _$resolveRequestToApproval = $grpc.ClientMethod<
-          $0.ResolveRequestToApprovalRequest,
-          $0.ResolveRequestToApprovalResponse>(
-      '/ValidatorApi.Transfers/ResolveRequestToApproval',
-      ($0.ResolveRequestToApprovalRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) =>
-          $0.ResolveRequestToApprovalResponse.fromBuffer(value));
+          $0.ResolveApprovalRequestsResponse.fromBuffer(value));
 
   TransfersClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
 
-  $grpc.ResponseStream<$0.RequestToApprovalResponse> getRequestToApprovalStream(
-      $0.RequestToApprovalRequests request,
+  $grpc.ResponseFuture<$0.GetApprovalRequestsResponse> getApprovalRequests(
+      $0.GetApprovalRequestsRequests request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$getRequestToApprovalStream, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseStream(call);
-  }
-
-  $grpc.ResponseFuture<$0.RequestToApprovalResponse> getRequestToApproval(
-      $0.RequestToApprovalRequests request,
-      {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$getRequestToApproval, $async.Stream.fromIterable([request]),
+        _$getApprovalRequests, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.ResolveRequestToApprovalResponse>
-      resolveRequestToApproval($0.ResolveRequestToApprovalRequest request,
+  $grpc.ResponseFuture<$0.ResolveApprovalRequestsResponse>
+      resolveApprovalRequests($0.ResolveApprovalRequestsRequest request,
           {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$resolveRequestToApproval, $async.Stream.fromIterable([request]),
+        _$resolveApprovalRequests, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -69,59 +54,42 @@ abstract class TransfersServiceBase extends $grpc.Service {
   $core.String get $name => 'ValidatorApi.Transfers';
 
   TransfersServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.RequestToApprovalRequests,
-            $0.RequestToApprovalResponse>(
-        'GetRequestToApprovalStream',
-        getRequestToApprovalStream_Pre,
-        false,
-        true,
-        ($core.List<$core.int> value) =>
-            $0.RequestToApprovalRequests.fromBuffer(value),
-        ($0.RequestToApprovalResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.RequestToApprovalRequests,
-            $0.RequestToApprovalResponse>(
-        'GetRequestToApproval',
-        getRequestToApproval_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetApprovalRequestsRequests,
+            $0.GetApprovalRequestsResponse>(
+        'GetApprovalRequests',
+        getApprovalRequests_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $0.RequestToApprovalRequests.fromBuffer(value),
-        ($0.RequestToApprovalResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.ResolveRequestToApprovalRequest,
-            $0.ResolveRequestToApprovalResponse>(
-        'ResolveRequestToApproval',
-        resolveRequestToApproval_Pre,
+            $0.GetApprovalRequestsRequests.fromBuffer(value),
+        ($0.GetApprovalRequestsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ResolveApprovalRequestsRequest,
+            $0.ResolveApprovalRequestsResponse>(
+        'ResolveApprovalRequests',
+        resolveApprovalRequests_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $0.ResolveRequestToApprovalRequest.fromBuffer(value),
-        ($0.ResolveRequestToApprovalResponse value) => value.writeToBuffer()));
+            $0.ResolveApprovalRequestsRequest.fromBuffer(value),
+        ($0.ResolveApprovalRequestsResponse value) => value.writeToBuffer()));
   }
 
-  $async.Stream<$0.RequestToApprovalResponse> getRequestToApprovalStream_Pre(
+  $async.Future<$0.GetApprovalRequestsResponse> getApprovalRequests_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$0.RequestToApprovalRequests> request) async* {
-    yield* getRequestToApprovalStream(call, await request);
+      $async.Future<$0.GetApprovalRequestsRequests> request) async {
+    return getApprovalRequests(call, await request);
   }
 
-  $async.Future<$0.RequestToApprovalResponse> getRequestToApproval_Pre(
+  $async.Future<$0.ResolveApprovalRequestsResponse> resolveApprovalRequests_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$0.RequestToApprovalRequests> request) async {
-    return getRequestToApproval(call, await request);
+      $async.Future<$0.ResolveApprovalRequestsRequest> request) async {
+    return resolveApprovalRequests(call, await request);
   }
 
-  $async.Future<$0.ResolveRequestToApprovalResponse>
-      resolveRequestToApproval_Pre($grpc.ServiceCall call,
-          $async.Future<$0.ResolveRequestToApprovalRequest> request) async {
-    return resolveRequestToApproval(call, await request);
-  }
-
-  $async.Stream<$0.RequestToApprovalResponse> getRequestToApprovalStream(
-      $grpc.ServiceCall call, $0.RequestToApprovalRequests request);
-  $async.Future<$0.RequestToApprovalResponse> getRequestToApproval(
-      $grpc.ServiceCall call, $0.RequestToApprovalRequests request);
-  $async.Future<$0.ResolveRequestToApprovalResponse> resolveRequestToApproval(
-      $grpc.ServiceCall call, $0.ResolveRequestToApprovalRequest request);
+  $async.Future<$0.GetApprovalRequestsResponse> getApprovalRequests(
+      $grpc.ServiceCall call, $0.GetApprovalRequestsRequests request);
+  $async.Future<$0.ResolveApprovalRequestsResponse> resolveApprovalRequests(
+      $grpc.ServiceCall call, $0.ResolveApprovalRequestsRequest request);
 }
 
 class InvitesClient extends $grpc.Client {

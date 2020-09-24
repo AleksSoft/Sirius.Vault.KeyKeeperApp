@@ -25,8 +25,8 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  void logout() => _storage.erase().then(
-        (value) => Get.offAllNamed(RootPage.route),
+  void logout() => _storage.erase().whenComplete(
+        () => Get.offAllNamed(RootPage.route),
       );
 
   void sharePublicKeyPem() {

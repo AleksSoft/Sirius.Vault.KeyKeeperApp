@@ -1,5 +1,6 @@
 import 'package:KeyKeeperApp/app/routes/app_routes.dart';
 import 'package:KeyKeeperApp/app/ui/app_themes.dart';
+import 'package:KeyKeeperApp/bindings/initial_binding.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -24,6 +25,7 @@ void main() async {
         getPages: AppRoutes.routes,
         transitionDuration: const Duration(milliseconds: 150),
         initialRoute: RootPage.route,
+        initialBinding: InitialBinding(),
       ),
     ),
   );

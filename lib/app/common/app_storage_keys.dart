@@ -3,6 +3,8 @@ class AppStorageKeys {
   static final String publicKey = 'publicKey';
   static final String privateKey = 'privateKey';
   static final String token = 'token';
+  static final String baseUrl = 'baseUrl';
+  static final String errorList = 'errorList';
   static final String idKey = 'idKey';
   static final String idKeyNonce = 'idKeyNonce';
 }

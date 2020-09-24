@@ -1,6 +1,5 @@
 import 'package:KeyKeeperApp/models/activation_requests_model.dart';
 import 'package:KeyKeeperApp/models/vaults_model.dart';
-import 'package:KeyKeeperApp/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +11,6 @@ class VaultListsController extends GetxController {
     'activating',
     'active',
   ];
-
-  final _api = Get.find<ApiService>();
 
   final _filterStatus = vaultStatusList[0].obs;
 
@@ -55,10 +52,7 @@ class VaultListsController extends GetxController {
     super.onReady();
   }
 
-  reload() async {
-    _vaultsModel.value = await _api.fetchVaults();
-    _requestsModel.value = await _api.fetchRequests();
-  }
+  reload() async {}
 
   Color getStatusColor(String status) {
     if (status == vaultStatusList[1]) {

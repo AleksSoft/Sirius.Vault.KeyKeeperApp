@@ -7,11 +7,11 @@ import 'package:get/get.dart';
 class TransactionDetailsController extends GetxController {
   static TransactionDetailsController get con => Get.find();
 
-  final Map<int, ResolveRequestToApprovalRequest_ResolutionStatus>
+  final Map<int, ResolveApprovalRequestsRequest_ResolutionStatus>
       resolutionsMap = {
-    0: ResolveRequestToApprovalRequest_ResolutionStatus.approve,
-    1: ResolveRequestToApprovalRequest_ResolutionStatus.reject,
-    2: ResolveRequestToApprovalRequest_ResolutionStatus.skip,
+    0: ResolveApprovalRequestsRequest_ResolutionStatus.approve,
+    1: ResolveApprovalRequestsRequest_ResolutionStatus.reject,
+    2: ResolveApprovalRequestsRequest_ResolutionStatus.skip,
   };
 
   var msgTextController = TextEditingController();
@@ -22,7 +22,7 @@ class TransactionDetailsController extends GetxController {
       );
 
   var selectedResolution =
-      ResolveRequestToApprovalRequest_ResolutionStatus.approve;
+      ResolveApprovalRequestsRequest_ResolutionStatus.approve;
 
   void copy(String value) =>
       ClipboardManager.copyToClipBoard(value).then((result) {
@@ -52,11 +52,11 @@ class TransactionDetailsController extends GetxController {
 
   String getResolutionName(int index) {
     switch (resolutionsMap[index]) {
-      case ResolveRequestToApprovalRequest_ResolutionStatus.approve:
+      case ResolveApprovalRequestsRequest_ResolutionStatus.approve:
         return 'Approve';
-      case ResolveRequestToApprovalRequest_ResolutionStatus.reject:
+      case ResolveApprovalRequestsRequest_ResolutionStatus.reject:
         return 'Reject';
-      case ResolveRequestToApprovalRequest_ResolutionStatus.skip:
+      case ResolveApprovalRequestsRequest_ResolutionStatus.skip:
         return 'Skip';
       default:
         return '';

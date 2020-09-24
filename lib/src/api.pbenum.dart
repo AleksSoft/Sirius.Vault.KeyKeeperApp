@@ -9,36 +9,36 @@
 import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class RequestToApprovalResponse_RequestToApproval_RequestStatus extends $pb.ProtobufEnum {
-  static const RequestToApprovalResponse_RequestToApproval_RequestStatus open = RequestToApprovalResponse_RequestToApproval_RequestStatus._(0, 'open');
-  static const RequestToApprovalResponse_RequestToApproval_RequestStatus close = RequestToApprovalResponse_RequestToApproval_RequestStatus._(1, 'close');
+class GetApprovalRequestsResponse_ApprovalRequest_RequestStatus extends $pb.ProtobufEnum {
+  static const GetApprovalRequestsResponse_ApprovalRequest_RequestStatus open = GetApprovalRequestsResponse_ApprovalRequest_RequestStatus._(0, 'open');
+  static const GetApprovalRequestsResponse_ApprovalRequest_RequestStatus close = GetApprovalRequestsResponse_ApprovalRequest_RequestStatus._(1, 'close');
 
-  static const $core.List<RequestToApprovalResponse_RequestToApproval_RequestStatus> values = <RequestToApprovalResponse_RequestToApproval_RequestStatus> [
+  static const $core.List<GetApprovalRequestsResponse_ApprovalRequest_RequestStatus> values = <GetApprovalRequestsResponse_ApprovalRequest_RequestStatus> [
     open,
     close,
   ];
 
-  static final $core.Map<$core.int, RequestToApprovalResponse_RequestToApproval_RequestStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static RequestToApprovalResponse_RequestToApproval_RequestStatus valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, GetApprovalRequestsResponse_ApprovalRequest_RequestStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static GetApprovalRequestsResponse_ApprovalRequest_RequestStatus valueOf($core.int value) => _byValue[value];
 
-  const RequestToApprovalResponse_RequestToApproval_RequestStatus._($core.int v, $core.String n) : super(v, n);
+  const GetApprovalRequestsResponse_ApprovalRequest_RequestStatus._($core.int v, $core.String n) : super(v, n);
 }
 
-class ResolveRequestToApprovalRequest_ResolutionStatus extends $pb.ProtobufEnum {
-  static const ResolveRequestToApprovalRequest_ResolutionStatus approve = ResolveRequestToApprovalRequest_ResolutionStatus._(0, 'approve');
-  static const ResolveRequestToApprovalRequest_ResolutionStatus reject = ResolveRequestToApprovalRequest_ResolutionStatus._(1, 'reject');
-  static const ResolveRequestToApprovalRequest_ResolutionStatus skip = ResolveRequestToApprovalRequest_ResolutionStatus._(2, 'skip');
+class ResolveApprovalRequestsRequest_ResolutionStatus extends $pb.ProtobufEnum {
+  static const ResolveApprovalRequestsRequest_ResolutionStatus approve = ResolveApprovalRequestsRequest_ResolutionStatus._(0, 'approve');
+  static const ResolveApprovalRequestsRequest_ResolutionStatus reject = ResolveApprovalRequestsRequest_ResolutionStatus._(1, 'reject');
+  static const ResolveApprovalRequestsRequest_ResolutionStatus skip = ResolveApprovalRequestsRequest_ResolutionStatus._(2, 'skip');
 
-  static const $core.List<ResolveRequestToApprovalRequest_ResolutionStatus> values = <ResolveRequestToApprovalRequest_ResolutionStatus> [
+  static const $core.List<ResolveApprovalRequestsRequest_ResolutionStatus> values = <ResolveApprovalRequestsRequest_ResolutionStatus> [
     approve,
     reject,
     skip,
   ];
 
-  static final $core.Map<$core.int, ResolveRequestToApprovalRequest_ResolutionStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static ResolveRequestToApprovalRequest_ResolutionStatus valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, ResolveApprovalRequestsRequest_ResolutionStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static ResolveApprovalRequestsRequest_ResolutionStatus valueOf($core.int value) => _byValue[value];
 
-  const ResolveRequestToApprovalRequest_ResolutionStatus._($core.int v, $core.String n) : super(v, n);
+  const ResolveApprovalRequestsRequest_ResolutionStatus._($core.int v, $core.String n) : super(v, n);
 }
 
 class ValidatorApiError_ErrorCodes extends $pb.ProtobufEnum {

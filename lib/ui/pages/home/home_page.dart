@@ -2,7 +2,6 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
-import 'package:KeyKeeperApp/ui/pages/transaction_details/transaction_details_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,11 +9,10 @@ import 'package:get/get.dart';
 class HomePage extends StatelessWidget {
   static final String route = '/home';
 
-  final HomeController c = HomeController.con;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
+      init: HomeController(),
       builder: (_) => Scaffold(
         drawer: _DrawerMenu(),
         body: Container(color: AppColors.background),
@@ -60,11 +58,6 @@ class _DrawerMenu extends StatelessWidget {
               onTap: () {},
               leading: Icon(Icons.dialpad),
               title: Text('Change PIN'),
-            ),
-            ListTile(
-              onTap: () => Get.toNamed(TransactionDetailsPage.route),
-              leading: Icon(Icons.arrow_back_ios),
-              title: Text('transdetails'),
             ),
             ListTile(
               onTap: () => c.logout(),
