@@ -22,6 +22,7 @@ void main() async {
         title: 'Key Keeper',
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
+        transitionDuration: const Duration(milliseconds: 150),
         initialRoute: RootPage.route,
       ),
     ),
