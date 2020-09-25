@@ -7,7 +7,7 @@ import 'package:pointycastle/export.dart' as pointy;
 import 'package:crypton/crypton.dart';
 import 'package:flutter/material.dart';
 
-class AsymmetricEncryptionService {
+class RSAService {
   static const int publicExponent = 3;
   static const int strength = 1024;
   static const int certainty = 25;
@@ -52,7 +52,7 @@ class RSAKeypairSir implements RSAKeypair {
   RSAKeypairSir(this._privateKey)
       : _publicKey = RSAPublicKey(
           _privateKey.asPointyCastle.modulus,
-          BigInt.from(AsymmetricEncryptionService.publicExponent),
+          BigInt.from(RSAService.publicExponent),
         );
 
   RSAKeypairSir.fromParameters({

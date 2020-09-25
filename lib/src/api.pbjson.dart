@@ -28,6 +28,7 @@ const GetApprovalRequestsResponse_ApprovalRequest$json = const {
     const {'1': 'status', '3': 2, '4': 1, '5': 14, '6': '.ValidatorApi.GetApprovalRequestsResponse.ApprovalRequest.RequestStatus', '10': 'status'},
     const {'1': 'transactionDetailsEncBase64', '3': 3, '4': 1, '5': 9, '10': 'transactionDetailsEncBase64'},
     const {'1': 'secretEncBase64', '3': 4, '4': 1, '5': 9, '10': 'secretEncBase64'},
+    const {'1': 'ivNonce', '3': 5, '4': 1, '5': 9, '10': 'ivNonce'},
   ],
   '4': const [GetApprovalRequestsResponse_ApprovalRequest_RequestStatus$json],
 };

@@ -3,7 +3,8 @@ import 'dart:typed_data';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/asymmetric_encryption_service.dart';
+import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
+import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,8 @@ class RequestsController extends GetxController {
 
   final _storage = GetStorage();
   final _repository = TransfersRepository();
-  final _asymCryptoService = Get.find<AsymmetricEncryptionService>();
+  final _rsaService = Get.find<RSAService>();
+  final _aesService = Get.find<AESService>();
 
   var requests = <GetApprovalRequestsResponse_ApprovalRequest>[];
 
@@ -31,19 +33,18 @@ class RequestsController extends GetxController {
       requests = await _repository.getApprovalRequests(
         deviceInfo: deviceInfoUID,
       );
-      var privateKey = await _asymCryptoService.privateKey;
-      // String decrypted = utf8.decode(
-      //   privateKey.decryptData(Uint8List.fromList(requests.first.secretEnc)),
-      // );
-      // Uint8List s = base64.decode(
-      //   'Y1hLuvDfQ4Dr71zIBYwcOPIfpzIMo+RWpgaY3A51s4xS1NeHcrWMCfMr4qq8d0mQbotx4g0UXu8Y4yTZSuYMeMW8ezjzGpbzV8aikk1Skc72OnmUuwt8/ns/HVQmMwYumn0VlKGiJMKiFOUHROUBC3D1bAv1L363qnu1Vmiifn8=',
-      // );
-      // Uint8List s = requests.first.secretEnc;
+      var privateKey = await _rsaService.privateKey;
+
       Uint8List list = privateKey.decryptData(
         base64.decode(requests.first.secretEncBase64),
       );
-      String decrypted = base64.encode(list);
-      print('decrypted secret: $decrypted');
+
+      String decryptedJson = _aesService.decrypt(
+        requests.first.transactionDetailsEncBase64,
+        requests.first.ivNonce,
+        base64.encode(list),
+      );
+      print('decrypted json: $decryptedJson');
     }
     update();
   }

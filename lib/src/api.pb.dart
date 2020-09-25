@@ -50,6 +50,7 @@ class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
     ..e<GetApprovalRequestsResponse_ApprovalRequest_RequestStatus>(2, 'status', $pb.PbFieldType.OE, defaultOrMaker: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.open, valueOf: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.valueOf, enumValues: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.values)
     ..aOS(3, 'transactionDetailsEncBase64', protoName: 'transactionDetailsEncBase64')
     ..aOS(4, 'secretEncBase64', protoName: 'secretEncBase64')
+    ..aOS(5, 'ivNonce', protoName: 'ivNonce')
     ..hasRequiredFields = false
   ;
 
@@ -103,6 +104,15 @@ class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
   $core.bool hasSecretEncBase64() => $_has(3);
   @$pb.TagNumber(4)
   void clearSecretEncBase64() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get ivNonce => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set ivNonce($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasIvNonce() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearIvNonce() => clearField(5);
 }
 
 class GetApprovalRequestsResponse extends $pb.GeneratedMessage {
