@@ -21,7 +21,9 @@ class RequestsPage extends StatelessWidget {
           itemBuilder: (context, index) {
             var r = _.requests[index];
             return ListTile(
-              title: Text('Encrypted details:\n${r.transactionDetailsEnc}'),
+              title: Text(
+                'Encrypted details:\n${r.transactionDetailsEncBase64}',
+              ),
             );
           },
         ),

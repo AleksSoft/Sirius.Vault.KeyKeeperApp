@@ -48,8 +48,8 @@ class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetApprovalRequestsResponse.ApprovalRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
     ..aOS(1, 'transferSigningRequestId', protoName: 'transferSigningRequestId')
     ..e<GetApprovalRequestsResponse_ApprovalRequest_RequestStatus>(2, 'status', $pb.PbFieldType.OE, defaultOrMaker: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.open, valueOf: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.valueOf, enumValues: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.values)
-    ..a<$core.List<$core.int>>(3, 'transactionDetailsEnc', $pb.PbFieldType.OY, protoName: 'transactionDetailsEnc')
-    ..a<$core.List<$core.int>>(4, 'secretEnc', $pb.PbFieldType.OY, protoName: 'secretEnc')
+    ..aOS(3, 'transactionDetailsEncBase64', protoName: 'transactionDetailsEncBase64')
+    ..aOS(4, 'secretEncBase64', protoName: 'secretEncBase64')
     ..hasRequiredFields = false
   ;
 
@@ -87,22 +87,22 @@ class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
   void clearStatus() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.int> get transactionDetailsEnc => $_getN(2);
+  $core.String get transactionDetailsEncBase64 => $_getSZ(2);
   @$pb.TagNumber(3)
-  set transactionDetailsEnc($core.List<$core.int> v) { $_setBytes(2, v); }
+  set transactionDetailsEncBase64($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTransactionDetailsEnc() => $_has(2);
+  $core.bool hasTransactionDetailsEncBase64() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTransactionDetailsEnc() => clearField(3);
+  void clearTransactionDetailsEncBase64() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$core.int> get secretEnc => $_getN(3);
+  $core.String get secretEncBase64 => $_getSZ(3);
   @$pb.TagNumber(4)
-  set secretEnc($core.List<$core.int> v) { $_setBytes(3, v); }
+  set secretEncBase64($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasSecretEnc() => $_has(3);
+  $core.bool hasSecretEncBase64() => $_has(3);
   @$pb.TagNumber(4)
-  void clearSecretEnc() => clearField(4);
+  void clearSecretEncBase64() => clearField(4);
 }
 
 class GetApprovalRequestsResponse extends $pb.GeneratedMessage {
