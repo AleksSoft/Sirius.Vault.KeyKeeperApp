@@ -15,7 +15,13 @@ class RegisterController extends GetxController {
 
   bool get actionAllowed => !tokenValue.isNullOrBlank;
 
+  @override
+  void onInit() {
+    tokenValue = _storage.read(AppStorageKeys.token) ?? '';
+    super.onInit();
+  }
+
   void submit() => _storage
-      .writeIfNull(AppStorageKeys.token, tokenValue)
+      .write(AppStorageKeys.token, tokenValue)
       .then((value) => _api.update().then((value) => Get.back()));
 }

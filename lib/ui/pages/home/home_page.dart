@@ -2,6 +2,7 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
+import 'package:KeyKeeperApp/ui/pages/requests/requests_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
       init: HomeController(),
       builder: (_) => Scaffold(
         drawer: _DrawerMenu(),
-        body: Container(color: AppColors.background),
+        body: RequestsPage(),
         appBar: AppBar(
           title: Text('Requests'),
         ),

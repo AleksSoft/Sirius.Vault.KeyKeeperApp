@@ -37,17 +37,21 @@ class RegisterPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Theme(
-                            data: Get.theme.copyWith(
-                              primaryColor: AppColors.dark,
-                            ),
-                            child: TextFormField(
-                              keyboardType: TextInputType.multiline,
-                              initialValue: _.tokenValue,
-                              maxLines: null,
-                              onChanged: (String value) => _.tokenValue = value,
-                              decoration: InputDecoration(
-                                labelText: 'Token',
+                          Obx(
+                            () => Theme(
+                              data: Get.theme.copyWith(
+                                primaryColor: AppColors.dark,
+                              ),
+                              child: TextFormField(
+                                keyboardType: TextInputType.multiline,
+                                initialValue: _.tokenValue,
+                                maxLines: 5,
+                                onChanged: (value) => _.tokenValue = value,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Token',
+                                  alignLabelWithHint: true,
+                                ),
                               ),
                             ),
                           ),
@@ -64,11 +68,9 @@ class RegisterPage extends StatelessWidget {
                     bottom: AppSizes.medium,
                     right: AppSizes.medium,
                     left: AppSizes.medium,
-                    child: Obx(
-                      () => CupertinoButton.filled(
-                        onPressed: _.actionAllowed ? () => _.submit() : null,
-                        child: Text('Submit'),
-                      ),
+                    child: CupertinoButton.filled(
+                      onPressed: () => _.submit(),
+                      child: Text('Submit'),
                     ),
                   ),
                 ],

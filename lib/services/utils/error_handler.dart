@@ -26,7 +26,7 @@ class ErrorHandler {
     try {
       if (response?.error != null && response.error.hasMessage()) {
         await _handleApiError(response.error, future, method);
-        return response;
+        return null;
       }
     } catch (e) {
       return response;

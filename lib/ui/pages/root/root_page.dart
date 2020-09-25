@@ -1,10 +1,13 @@
+import 'package:KeyKeeperApp/app/ui/app_colors.dart';
+import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class RootPage extends StatelessWidget {
   static final String route = '/';
-  final duration = const Duration(milliseconds: 600);
+  final duration = const Duration(seconds: 2);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,10 @@ class RootPage extends StatelessWidget {
               duration: duration,
               opacity: _.showUi ? 1.0 : 0.0,
               child: Center(
-                child: CircularProgressIndicator(),
+                child: SpinKitRotatingCircle(
+                  color: AppColors.dark,
+                  size: AppSizes.extraLarge,
+                ),
               ),
             ),
           ],

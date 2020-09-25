@@ -17,7 +17,7 @@ class ApiService {
   final Map _clientsSecured = Map();
 
   T client<T extends Client>() => _clients[T];
-  T clientSecure<T extends Client>() => _clientsSecured[T];
+  T clientSecured<T extends Client>() => _clientsSecured[T];
 
   static String get defaultUrl {
     String url = GetStorage().read(AppStorageKeys.baseUrl);
