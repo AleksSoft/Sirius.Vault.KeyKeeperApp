@@ -193,7 +193,7 @@ class TransactionDetailsPage extends StatelessWidget {
                           startLoading();
                           _.checkSubmit().whenComplete(() => stopLoading());
                         }
-                      },
+                      }, 
                       child: Text(
                         "Submit",
                         style: Get.textTheme.button.copyWith(

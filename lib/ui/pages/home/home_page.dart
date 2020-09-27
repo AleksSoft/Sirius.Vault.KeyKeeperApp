@@ -3,7 +3,6 @@ import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
 import 'package:KeyKeeperApp/ui/pages/requests/requests_page.dart';
-import 'package:KeyKeeperApp/ui/pages/transaction_details/transaction_details_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,11 +59,6 @@ class _DrawerMenu extends StatelessWidget {
               onTap: () {},
               leading: Icon(Icons.dialpad),
               title: Text('Change PIN'),
-            ),
-            ListTile(
-              onTap: () => Get.toNamed(TransactionDetailsPage.route),
-              leading: Icon(Icons.dashboard),
-              title: Text('Transaction details'),
             ),
             ListTile(
               onTap: () => c.logout(),
