@@ -44,7 +44,7 @@ class _RequestCard extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        onTap: () => Get.toNamed(TransactionDetailsPage.route),
+        onTap: () => Get.toNamed(TransactionDetailsPage.route, arguments: r),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.baseline,

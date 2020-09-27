@@ -1,4 +1,5 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
+import 'package:KeyKeeperApp/models/request_model.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class TransactionDetailsController extends GetxController {
 
   var msgTextController = TextEditingController();
 
+  RequestModel requestModel;
+
   int get selectedResolutionIndex => resolutionsMap.keys.firstWhere(
         (key) => resolutionsMap[key] == selectedResolution,
         orElse: () => 0,
@@ -24,10 +27,17 @@ class TransactionDetailsController extends GetxController {
   var selectedResolution =
       ResolveApprovalRequestsRequest_ResolutionStatus.approve;
 
-  void copy(String value) =>
+  @override
+  void onInit() {
+    requestModel = Get.arguments as RequestModel;
+    super.onInit();
+  }
+
+  void copy(String title, String value) =>
       ClipboardManager.copyToClipBoard(value).then((result) {
+        if (Get.isSnackbarOpen) Get.back();
         Get.rawSnackbar(
-          message: 'Selection copied to clipboard',
+          message: '$title copied to clipboard',
           snackStyle: SnackStyle.GROUNDED,
         );
       });
