@@ -7,8 +7,7 @@ class AESService {
 
   String get randKey => CryptKey().genFortuna();
 
-  String encrypt(String input, String keyStr) {
-    var nonce = CryptKey().genFortuna(len: nonceBitSize);
+  String encrypt(String input, String nonce, String keyStr) {
     var aes = AesCrypt(key: keyStr, padding: PaddingAES.none);
     var encrypted = aes.gcm.encrypt(inp: input, iv: nonce);
     return encrypted;

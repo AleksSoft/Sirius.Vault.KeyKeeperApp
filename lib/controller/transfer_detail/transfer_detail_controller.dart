@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
+import 'package:KeyKeeperApp/models/resolution_document_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
+import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
+import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
@@ -17,11 +22,15 @@ class TransferDetailController extends GetxController {
     2: ResolveApprovalRequestsRequest_ResolutionStatus.skip,
   };
 
-  final _repository = Get.find<TransfersRepository>();
+  final _aesService = Get.find<AESService>();
+  final _rsaService = Get.find<RSAService>();
+  final _repository = TransfersRepository();
 
   var msgTextController = TextEditingController();
 
-  TransferDetailModel transferDetail;
+  TransferDetailArgs _transferDetailArgs;
+
+  TransferDetailModel get transferDetail => _transferDetailArgs.transferDetail;
 
   int get selectedResolutionIndex => resolutionsMap.keys.firstWhere(
         (key) => resolutionsMap[key] == selectedResolution,
@@ -33,7 +42,7 @@ class TransferDetailController extends GetxController {
 
   @override
   void onInit() {
-    transferDetail = Get.arguments as TransferDetailModel;
+    _transferDetailArgs = Get.arguments as TransferDetailArgs;
     super.onInit();
   }
 
@@ -80,11 +89,41 @@ class TransferDetailController extends GetxController {
   Future<bool> _resolveRequest() async {
     var deviceInfo = await DeviceInfoService.uid;
 
+    var resolutionDocument = ResolutionDocumentModel(
+      transferDetail: transferDetail,
+      resolution: selectedResolution,
+      resolutionMessage: msgTextController.text ?? '',
+    );
+
+    var resolutionDocumentEnc = _aesService.encrypt(
+      resolutionDocument.toString(),
+      _transferDetailArgs.aesIvNonce,
+      _transferDetailArgs.aesSecretKey,
+    );
+
+    var privateKey = await _rsaService.privateKey;
+    var binaryDocument = utf8.encode(resolutionDocument.toString());
+    var binarySignature = privateKey.createSHA256Signature(binaryDocument);
+    var signatureBase64 = base64.encode(binarySignature);
+
     return await _repository.resolveApprovalRequest(
       deviceInfo: deviceInfo,
-      transferSigningRequestId: transferDetail.operationId,
-      resolutionDocumentEnc: null,
-      signature: null,
+      transferSigningRequestId: _transferDetailArgs.transferSigningRequestId,
+      resolutionDocumentEnc: resolutionDocumentEnc,
+      signature: signatureBase64,
     );
   }
+}
+
+class TransferDetailArgs {
+  final TransferDetailModel transferDetail;
+  final String aesSecretKey;
+  final String aesIvNonce;
+  final String transferSigningRequestId;
+  TransferDetailArgs(
+    this.transferDetail,
+    this.transferSigningRequestId,
+    this.aesSecretKey,
+    this.aesIvNonce,
+  );
 }

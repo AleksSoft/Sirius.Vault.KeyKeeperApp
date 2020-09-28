@@ -1,13 +1,14 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
+import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
+import 'package:KeyKeeperApp/ui/pages/transfer_detail/transfer_detail_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -22,7 +23,7 @@ class RequestsController extends GetxController {
 
   RSAPrivateKey _privateKey;
 
-  var requests = <TransferDetailModel>[];
+  var requests = <TransferDetailArgs>[];
 
   @override
   void onInit() async {
@@ -48,17 +49,25 @@ class RequestsController extends GetxController {
     update();
   }
 
-  TransferDetailModel _buildTransferDetail(
+  void openDetails(TransferDetailArgs args) =>
+      Get.toNamed(TransferDetailPage.route, arguments: args);
+
+  TransferDetailArgs _buildTransferDetail(
     GetApprovalRequestsResponse_ApprovalRequest request,
   ) {
-    Uint8List list = _privateKey.decryptData(
-      base64.decode(request.secretEncBase64),
+    String secretKey = base64.encode(
+      _privateKey.decryptData(base64.decode(request.secretEncBase64)),
     );
     String decryptedJson = _aesService.decrypt(
       request.transactionDetailsEncBase64,
       request.ivNonce,
-      base64.encode(list),
+      secretKey,
     );
-    return TransferDetailModel.fromJson(json.decode(decryptedJson));
+    return TransferDetailArgs(
+      TransferDetailModel.fromJson(json.decode(decryptedJson)),
+      request.transferSigningRequestId,
+      secretKey,
+      request.ivNonce,
+    );
   }
 }

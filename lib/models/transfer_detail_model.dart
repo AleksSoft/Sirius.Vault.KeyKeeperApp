@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:intl/intl.dart';
 
 class TransferDetailModel {
@@ -69,6 +71,9 @@ class TransferDetailModel {
     }
     return data;
   }
+
+  @override
+  String toString() => json.encode(this.toJson());
 }
 
 class Asset {

@@ -2,9 +2,9 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/requests/requests_controller.dart';
+import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
-import 'package:KeyKeeperApp/ui/pages/transfer_detail/transfer_detail_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,12 +29,13 @@ class RequestsPage extends StatelessWidget {
 }
 
 class _RequestCard extends StatelessWidget {
-  const _RequestCard(this.r, {Key key}) : super(key: key);
+  const _RequestCard(this.args, {Key key}) : super(key: key);
 
-  final TransferDetailModel r;
+  final TransferDetailArgs args;
 
   @override
   Widget build(BuildContext context) {
+    var r = args.transferDetail;
     return Card(
       elevation: AppSizes.extraSmall,
       shadowColor: AppColors.dark.withOpacity(0.5),
@@ -44,7 +45,7 @@ class _RequestCard extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        onTap: () => Get.toNamed(TransferDetailPage.route, arguments: r),
+        onTap: () => RequestsController.con.openDetails(args),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.baseline,
