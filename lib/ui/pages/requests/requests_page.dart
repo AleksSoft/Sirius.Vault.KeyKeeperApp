@@ -2,7 +2,7 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/requests/requests_controller.dart';
-import 'package:KeyKeeperApp/models/request_model.dart';
+import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
 import 'package:KeyKeeperApp/ui/pages/transaction_details/transaction_details_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
@@ -31,7 +31,7 @@ class RequestsPage extends StatelessWidget {
 class _RequestCard extends StatelessWidget {
   const _RequestCard(this.r, {Key key}) : super(key: key);
 
-  final RequestModel r;
+  final TransferDetailModel r;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class _RequestCard extends StatelessWidget {
 class _NetworkChip extends StatelessWidget {
   const _NetworkChip(this.r, {Key key}) : super(key: key);
 
-  final RequestModel r;
+  final TransferDetailModel r;
 
   @override
   Widget build(BuildContext context) {

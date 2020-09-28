@@ -17,21 +17,19 @@ class TransfersRepository extends BaseRepository<TransfersClient> {
     return response?.payload ?? [];
   }
 
-  Future<bool> resolveApprovalRequests({
+  Future<bool> resolveApprovalRequest({
     @required String deviceInfo,
     @required String transferSigningRequestId,
-    @required String resolutionMessage,
+    @required String resolutionDocumentEnc,
     @required String signature,
-    @required ResolveApprovalRequestsRequest_ResolutionStatus resolution,
   }) async {
     final response = await ErrorHandler.safeCall(
       () => clientSecured.resolveApprovalRequests(
         ResolveApprovalRequestsRequest()
           ..deviceInfo = deviceInfo
           ..transferSigningRequestId = transferSigningRequestId
-          ..resolutionMessage = resolutionMessage
-          ..signature = signature
-          ..resolution = resolution,
+          ..resolutionDocumentEncBase64 = resolutionDocumentEnc
+          ..signature = signature,
       ),
       method: 'resolveApprovalRequests',
     );

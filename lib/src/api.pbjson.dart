@@ -46,9 +46,8 @@ const ResolveApprovalRequestsRequest$json = const {
   '2': const [
     const {'1': 'DeviceInfo', '3': 1, '4': 1, '5': 9, '10': 'DeviceInfo'},
     const {'1': 'TransferSigningRequestId', '3': 2, '4': 1, '5': 9, '10': 'TransferSigningRequestId'},
-    const {'1': 'resolution', '3': 3, '4': 1, '5': 14, '6': '.ValidatorApi.ResolveApprovalRequestsRequest.ResolutionStatus', '10': 'resolution'},
-    const {'1': 'resolutionMessage', '3': 4, '4': 1, '5': 9, '10': 'resolutionMessage'},
-    const {'1': 'signature', '3': 5, '4': 1, '5': 9, '10': 'signature'},
+    const {'1': 'resolutionDocumentEncBase64', '3': 3, '4': 1, '5': 9, '10': 'resolutionDocumentEncBase64'},
+    const {'1': 'signature', '3': 4, '4': 1, '5': 9, '10': 'signature'},
   ],
   '4': const [ResolveApprovalRequestsRequest_ResolutionStatus$json],
 };

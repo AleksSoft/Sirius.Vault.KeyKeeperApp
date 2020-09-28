@@ -1,13 +1,13 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
-import 'package:KeyKeeperApp/models/request_model.dart';
+import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TransactionTypeChip extends StatelessWidget {
   const TransactionTypeChip(this.r, {Key key}) : super(key: key);
 
-  final RequestModel r;
+  final TransferDetailModel r;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,7 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/models/request_model.dart';
+import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
+import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
+import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +17,11 @@ class TransactionDetailsController extends GetxController {
     2: ResolveApprovalRequestsRequest_ResolutionStatus.skip,
   };
 
+  final _repository = Get.find<TransfersRepository>();
+
   var msgTextController = TextEditingController();
 
-  RequestModel requestModel;
+  TransferDetailModel requestModel;
 
   int get selectedResolutionIndex => resolutionsMap.keys.firstWhere(
         (key) => resolutionsMap[key] == selectedResolution,
@@ -29,7 +33,7 @@ class TransactionDetailsController extends GetxController {
 
   @override
   void onInit() {
-    requestModel = Get.arguments as RequestModel;
+    requestModel = Get.arguments as TransferDetailModel;
     super.onInit();
   }
 
@@ -57,7 +61,7 @@ class TransactionDetailsController extends GetxController {
         confirmTextColor: AppColors.light,
         buttonColor: AppColors.dark,
         cancelTextColor: AppColors.dark,
-        onConfirm: () => Get.back(),
+        onConfirm: () => _resolveRequest().then((value) => Get.back()),
       );
 
   String getResolutionName(int index) {
@@ -71,5 +75,16 @@ class TransactionDetailsController extends GetxController {
       default:
         return '';
     }
+  }
+
+  Future<bool> _resolveRequest() async {
+    var deviceInfo = await DeviceInfoService.uid;
+
+    return await _repository.resolveApprovalRequest(
+      deviceInfo: deviceInfo,
+      transferSigningRequestId: requestModel.operationId,
+      resolutionDocumentEnc: null,
+      signature: null,
+    );
   }
 }

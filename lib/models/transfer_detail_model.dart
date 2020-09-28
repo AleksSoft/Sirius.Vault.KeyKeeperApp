@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class RequestModel {
+class TransferDetailModel {
   String operationId;
   String blockchainId;
   String networkType;
@@ -15,7 +15,7 @@ class RequestModel {
   bool get isExternal => source.addressGroup != destination.addressGroup;
   String get addressLabel => isExternal ? 'External' : 'Internal';
 
-  RequestModel({
+  TransferDetailModel({
     this.operationId,
     this.blockchainId,
     this.networkType,
@@ -27,7 +27,7 @@ class RequestModel {
     this.clientContext,
   });
 
-  RequestModel.fromJson(Map<String, dynamic> json) {
+  TransferDetailModel.fromJson(Map<String, dynamic> json) {
     operationId = json['OperationId'];
     blockchainId = json['BlockchainId'];
     networkType = json['NetworkType'];

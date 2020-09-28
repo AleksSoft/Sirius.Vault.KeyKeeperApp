@@ -156,9 +156,8 @@ class ResolveApprovalRequestsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResolveApprovalRequestsRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
     ..aOS(1, 'DeviceInfo', protoName: 'DeviceInfo')
     ..aOS(2, 'TransferSigningRequestId', protoName: 'TransferSigningRequestId')
-    ..e<ResolveApprovalRequestsRequest_ResolutionStatus>(3, 'resolution', $pb.PbFieldType.OE, defaultOrMaker: ResolveApprovalRequestsRequest_ResolutionStatus.approve, valueOf: ResolveApprovalRequestsRequest_ResolutionStatus.valueOf, enumValues: ResolveApprovalRequestsRequest_ResolutionStatus.values)
-    ..aOS(4, 'resolutionMessage', protoName: 'resolutionMessage')
-    ..aOS(5, 'signature')
+    ..aOS(3, 'resolutionDocumentEncBase64', protoName: 'resolutionDocumentEncBase64')
+    ..aOS(4, 'signature')
     ..hasRequiredFields = false
   ;
 
@@ -196,31 +195,22 @@ class ResolveApprovalRequestsRequest extends $pb.GeneratedMessage {
   void clearTransferSigningRequestId() => clearField(2);
 
   @$pb.TagNumber(3)
-  ResolveApprovalRequestsRequest_ResolutionStatus get resolution => $_getN(2);
+  $core.String get resolutionDocumentEncBase64 => $_getSZ(2);
   @$pb.TagNumber(3)
-  set resolution(ResolveApprovalRequestsRequest_ResolutionStatus v) { setField(3, v); }
+  set resolutionDocumentEncBase64($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasResolution() => $_has(2);
+  $core.bool hasResolutionDocumentEncBase64() => $_has(2);
   @$pb.TagNumber(3)
-  void clearResolution() => clearField(3);
+  void clearResolutionDocumentEncBase64() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get resolutionMessage => $_getSZ(3);
+  $core.String get signature => $_getSZ(3);
   @$pb.TagNumber(4)
-  set resolutionMessage($core.String v) { $_setString(3, v); }
+  set signature($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasResolutionMessage() => $_has(3);
+  $core.bool hasSignature() => $_has(3);
   @$pb.TagNumber(4)
-  void clearResolutionMessage() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.String get signature => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set signature($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasSignature() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearSignature() => clearField(5);
+  void clearSignature() => clearField(4);
 }
 
 class ResolveApprovalRequestsResponse extends $pb.GeneratedMessage {

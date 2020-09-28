@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
-import 'package:KeyKeeperApp/models/request_model.dart';
+import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
@@ -22,7 +22,7 @@ class RequestsController extends GetxController {
 
   RSAPrivateKey _privateKey;
 
-  var requests = <RequestModel>[];
+  var requests = <TransferDetailModel>[];
 
   @override
   void onInit() async {
@@ -48,7 +48,7 @@ class RequestsController extends GetxController {
     update();
   }
 
-  RequestModel _buildRequestModel(
+  TransferDetailModel _buildRequestModel(
     GetApprovalRequestsResponse_ApprovalRequest request,
   ) {
     Uint8List list = _privateKey.decryptData(
@@ -59,6 +59,6 @@ class RequestsController extends GetxController {
       request.ivNonce,
       base64.encode(list),
     );
-    return RequestModel.fromJson(json.decode(decryptedJson));
+    return TransferDetailModel.fromJson(json.decode(decryptedJson));
   }
 }
