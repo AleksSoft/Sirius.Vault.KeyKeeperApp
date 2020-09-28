@@ -5,7 +5,7 @@ import 'package:KeyKeeperApp/ui/pages/key_keepers/key_keepers_page.dart';
 import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
 import 'package:KeyKeeperApp/ui/pages/register/register_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
-import 'package:KeyKeeperApp/ui/pages/transaction_details/transaction_details_page.dart';
+import 'package:KeyKeeperApp/ui/pages/transfer_detail/transfer_detail_page.dart';
 import 'package:KeyKeeperApp/ui/pages/vault_lists/vault_lists_page.dart';
 import 'package:get/get.dart';
 
@@ -40,8 +40,8 @@ class AppRoutes {
       binding: KeyKeepersBinding(),
     ),
     GetPage(
-      name: TransactionDetailsPage.route,
-      page: () => TransactionDetailsPage(),
+      name: TransferDetailPage.route,
+      page: () => TransferDetailPage(),
     ),
   ];
 }

@@ -1,7 +1,7 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
-import 'package:KeyKeeperApp/controller/transaction_details/transaction_details_controller.dart';
+import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-class TransactionDetailsPage extends StatelessWidget {
+class TransferDetailPage extends StatelessWidget {
   static final String route = '/transaction-details';
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ class TransactionDetailsPage extends StatelessWidget {
         title: Text('vault name'),
       ),
       body: SingleChildScrollView(
-        child: GetBuilder<TransactionDetailsController>(
-          init: TransactionDetailsController(),
+        child: GetBuilder<TransferDetailController>(
+          init: TransferDetailController(),
           builder: (_) => Padding(
             padding: const EdgeInsets.only(
               top: AppSizes.medium,
@@ -40,21 +40,21 @@ class TransactionDetailsPage extends StatelessWidget {
                 AppUiHelpers.vSpaceSmall,
                 _DetailsTile(
                   title: 'Operation ID',
-                  value: _.requestModel.operationId,
+                  value: _.transferDetail.operationId,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'Amount',
                   value:
-                      '${_.requestModel.asset.symbol} ${Formatter.currency(_.requestModel.amount)}',
+                      '${_.transferDetail.asset.symbol} ${Formatter.currency(_.transferDetail.amount)}',
                 ),
                 _DetailsTile(
                   title: 'Network Type',
-                  value: _.requestModel.networkType,
+                  value: _.transferDetail.networkType,
                 ),
                 _DetailsTile(
                   title: 'Blockchain ID',
-                  value: _.requestModel.blockchainId,
+                  value: _.transferDetail.blockchainId,
                   enableCopy: true,
                 ),
                 Divider(),
@@ -68,24 +68,24 @@ class TransactionDetailsPage extends StatelessWidget {
                 AppUiHelpers.vSpaceSmall,
                 _DetailsTile(
                   title: 'Address',
-                  value: _.requestModel.source.address,
+                  value: _.transferDetail.source.address,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'Address Group',
-                  value: _.requestModel.source.addressGroup,
+                  value: _.transferDetail.source.addressGroup,
                 ),
                 _DetailsTile(
                   title: 'Name',
-                  value: _.requestModel.source.name,
+                  value: _.transferDetail.source.name,
                 ),
                 _DetailsTile(
                   title: 'Tag',
-                  value: _.requestModel.source.tag,
+                  value: _.transferDetail.source.tag,
                 ),
                 _DetailsTile(
                   title: 'Tag Type',
-                  value: _.requestModel.source.tagType,
+                  value: _.transferDetail.source.tagType,
                 ),
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
@@ -98,54 +98,54 @@ class TransactionDetailsPage extends StatelessWidget {
                 AppUiHelpers.vSpaceSmall,
                 _DetailsTile(
                   title: 'Address',
-                  value: _.requestModel.destination.address,
+                  value: _.transferDetail.destination.address,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'Address Group',
-                  value: _.requestModel.destination.addressGroup,
+                  value: _.transferDetail.destination.addressGroup,
                 ),
                 _DetailsTile(
                   title: 'Name',
-                  value: _.requestModel.destination.name,
+                  value: _.transferDetail.destination.name,
                 ),
                 _DetailsTile(
                   title: 'Tag',
-                  value: _.requestModel.destination.tag,
+                  value: _.transferDetail.destination.tag,
                 ),
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
                 _DetailsTile(
                   title: 'Fee limit',
-                  value: _.requestModel.feeLimit,
+                  value: _.transferDetail.feeLimit,
                 ),
                 _DetailsTile(
                   title: 'Account reference id',
-                  value: _.requestModel.clientContext.accountReferenceId,
+                  value: _.transferDetail.clientContext.accountReferenceId,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'Api Key ID',
-                  value: _.requestModel.clientContext.apiKeyId,
+                  value: _.transferDetail.clientContext.apiKeyId,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'IP',
-                  value: _.requestModel.clientContext.iP,
+                  value: _.transferDetail.clientContext.iP,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'Timestamp',
-                  value: _.requestModel.clientContext.timestamp,
+                  value: _.transferDetail.clientContext.timestamp,
                 ),
                 _DetailsTile(
                   title: 'User ID',
-                  value: _.requestModel.clientContext.userId,
+                  value: _.transferDetail.clientContext.userId,
                   enableCopy: true,
                 ),
                 _DetailsTile(
                   title: 'Withdraw reference ID',
-                  value: _.requestModel.clientContext.withdrawalReferenceId,
+                  value: _.transferDetail.clientContext.withdrawalReferenceId,
                   enableCopy: true,
                 ),
                 Divider(),
@@ -250,7 +250,7 @@ class _DetailsTile extends StatelessWidget {
         trailing: Visibility(
           visible: this.enableCopy,
           child: IconButton(
-            onPressed: () => TransactionDetailsController.con.copy(
+            onPressed: () => TransferDetailController.con.copy(
               this.title,
               this.value,
             ),

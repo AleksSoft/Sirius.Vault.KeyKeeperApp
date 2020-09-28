@@ -4,7 +4,7 @@ import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/requests/requests_controller.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
-import 'package:KeyKeeperApp/ui/pages/transaction_details/transaction_details_page.dart';
+import 'package:KeyKeeperApp/ui/pages/transfer_detail/transfer_detail_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,7 +44,7 @@ class _RequestCard extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        onTap: () => Get.toNamed(TransactionDetailsPage.route, arguments: r),
+        onTap: () => Get.toNamed(TransferDetailPage.route, arguments: r),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.baseline,

@@ -43,12 +43,12 @@ class RequestsController extends GetxController {
       var approvalRequests = await _repository.getApprovalRequests(
         deviceInfo: deviceInfoUID,
       );
-      requests = approvalRequests.map((r) => _buildRequestModel(r)).toList();
+      requests = approvalRequests.map((r) => _buildTransferDetail(r)).toList();
     }
     update();
   }
 
-  TransferDetailModel _buildRequestModel(
+  TransferDetailModel _buildTransferDetail(
     GetApprovalRequestsResponse_ApprovalRequest request,
   ) {
     Uint8List list = _privateKey.decryptData(

@@ -7,8 +7,8 @@ import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TransactionDetailsController extends GetxController {
-  static TransactionDetailsController get con => Get.find();
+class TransferDetailController extends GetxController {
+  static TransferDetailController get con => Get.find();
 
   final Map<int, ResolveApprovalRequestsRequest_ResolutionStatus>
       resolutionsMap = {
@@ -21,7 +21,7 @@ class TransactionDetailsController extends GetxController {
 
   var msgTextController = TextEditingController();
 
-  TransferDetailModel requestModel;
+  TransferDetailModel transferDetail;
 
   int get selectedResolutionIndex => resolutionsMap.keys.firstWhere(
         (key) => resolutionsMap[key] == selectedResolution,
@@ -33,7 +33,7 @@ class TransactionDetailsController extends GetxController {
 
   @override
   void onInit() {
-    requestModel = Get.arguments as TransferDetailModel;
+    transferDetail = Get.arguments as TransferDetailModel;
     super.onInit();
   }
 
@@ -82,7 +82,7 @@ class TransactionDetailsController extends GetxController {
 
     return await _repository.resolveApprovalRequest(
       deviceInfo: deviceInfo,
-      transferSigningRequestId: requestModel.operationId,
+      transferSigningRequestId: transferDetail.operationId,
       resolutionDocumentEnc: null,
       signature: null,
     );
