@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 class TransferDetailModel {
+  String blockchainProtocolId;
   String operationId;
   String blockchainId;
   String networkType;
@@ -16,6 +17,7 @@ class TransferDetailModel {
   String get addressLabel => isExternal ? 'External' : 'Internal';
 
   TransferDetailModel({
+    this.blockchainProtocolId,
     this.operationId,
     this.blockchainId,
     this.networkType,
@@ -28,6 +30,7 @@ class TransferDetailModel {
   });
 
   TransferDetailModel.fromJson(Map<String, dynamic> json) {
+    blockchainProtocolId = json['BlockchainProtocolId'];
     operationId = json['OperationId'];
     blockchainId = json['BlockchainId'];
     networkType = json['NetworkType'];
@@ -46,6 +49,7 @@ class TransferDetailModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['BlockchainProtocolId'] = this.blockchainProtocolId;
     data['OperationId'] = this.operationId;
     data['BlockchainId'] = this.blockchainId;
     data['NetworkType'] = this.networkType;
