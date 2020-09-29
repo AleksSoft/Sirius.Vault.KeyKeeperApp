@@ -3,11 +3,13 @@ import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
 import 'package:KeyKeeperApp/ui/pages/requests/requests_page.dart';
+import 'package:KeyKeeperApp/ui/pages/vaults/vaults_page.dart';
+import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends MenuPage {
   static final String route = '/home';
 
   @override
@@ -16,9 +18,12 @@ class HomePage extends StatelessWidget {
       init: HomeController(),
       builder: (_) => Scaffold(
         drawer: _DrawerMenu(),
-        body: RequestsPage(),
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: _.selectedPage,
+        ),
         appBar: AppBar(
-          title: Text('Requests'),
+          title: Text(_.selectedPage.title),
         ),
       ),
     );
@@ -36,33 +41,33 @@ class _DrawerMenu extends StatelessWidget {
           children: [
             _VaultStatusView(),
             ListTile(
-              onTap: () {},
+              onTap: () => c.selectedPage = RequestsPage(),
               leading: Icon(Icons.list),
               title: Text('Requests'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () => c.selectedPage = VaultsPage(),
               leading: Icon(Icons.view_carousel),
               title: Text('Vaults'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () => c.selectedPage = HomePage(),
               leading: Icon(Icons.backup),
               title: Text('Backup'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () => c.selectedPage = HomePage(),
               leading: Icon(Icons.inbox),
               title: Text('Inbox'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () => c.selectedPage = HomePage(),
               leading: Icon(Icons.dialpad),
               title: Text('Change PIN'),
             ),
             ListTile(
               onTap: () => c.logout(),
-              leading: Icon(Icons.arrow_back_ios),
+              leading: Icon(Icons.exit_to_app),
               title: Text('Logout'),
             ),
             AppUiHelpers.vSpaceExtraLarge,
