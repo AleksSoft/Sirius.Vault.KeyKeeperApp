@@ -1,8 +1,7 @@
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
-import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
 import 'package:KeyKeeperApp/ui/pages/requests/requests_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
-import 'package:flutter/material.dart';
+import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:share/share.dart';
@@ -15,9 +14,9 @@ class HomeController extends GetxController {
 
   RSAKeypairSir _keyPair;
 
-  HomePage _selectedPage = RequestsPage();
-  HomePage get selectedPage => _selectedPage;
-  set selectedPage(HomePage value) {
+  MenuPage _selectedPage = RequestsPage();
+  MenuPage get selectedPage => _selectedPage;
+  set selectedPage(MenuPage value) {
     if (value != _selectedPage) {
       _selectedPage = value;
       update();

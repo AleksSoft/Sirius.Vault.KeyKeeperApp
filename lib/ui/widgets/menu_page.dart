@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {
-  @protected
   String get title => null;
 
   @override

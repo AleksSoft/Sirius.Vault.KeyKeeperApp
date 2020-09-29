@@ -5,7 +5,6 @@ import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
 import 'package:KeyKeeperApp/ui/pages/register/register_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:KeyKeeperApp/ui/pages/transfer_detail/transfer_detail_page.dart';
-import 'package:KeyKeeperApp/ui/pages/vaults/vaults_page.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {

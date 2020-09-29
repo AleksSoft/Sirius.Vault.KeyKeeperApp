@@ -5,12 +5,12 @@ import 'package:KeyKeeperApp/controller/requests/requests_controller.dart';
 import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
-import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
+import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RequestsPage extends HomePage {
+class RequestsPage extends MenuPage {
   @override
   String get title => 'Requests';
 

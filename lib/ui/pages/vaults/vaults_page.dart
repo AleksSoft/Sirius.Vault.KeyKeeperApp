@@ -2,11 +2,11 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
-import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
+import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VaultsPage extends HomePage {
+class VaultsPage extends MenuPage {
   @override
   String get title => 'Vaults';
 

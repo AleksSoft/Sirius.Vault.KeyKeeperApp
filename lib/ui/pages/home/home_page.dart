@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends MenuPage {
+class HomePage extends StatelessWidget {
   static final String route = '/home';
 
   @override
@@ -23,7 +23,7 @@ class HomePage extends MenuPage {
           child: _.selectedPage,
         ),
         appBar: AppBar(
-          title: Text(_.selectedPage.title),
+          title: Text(_.selectedPage.title ?? ''),
         ),
       ),
     );
@@ -51,17 +51,17 @@ class _DrawerMenu extends StatelessWidget {
               title: Text('Vaults'),
             ),
             ListTile(
-              onTap: () => c.selectedPage = HomePage(),
+              onTap: () => c.selectedPage = MenuPage(),
               leading: Icon(Icons.backup),
               title: Text('Backup'),
             ),
             ListTile(
-              onTap: () => c.selectedPage = HomePage(),
+              onTap: () => c.selectedPage = MenuPage(),
               leading: Icon(Icons.inbox),
               title: Text('Inbox'),
             ),
             ListTile(
-              onTap: () => c.selectedPage = HomePage(),
+              onTap: () => c.selectedPage = MenuPage(),
               leading: Icon(Icons.dialpad),
               title: Text('Change PIN'),
             ),
