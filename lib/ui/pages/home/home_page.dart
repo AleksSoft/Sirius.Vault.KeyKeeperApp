@@ -2,12 +2,12 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
-import 'package:KeyKeeperApp/ui/pages/requests/requests_page.dart';
-import 'package:KeyKeeperApp/ui/pages/vaults/vaults_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'pages/menu_pages.dart';
 
 class HomePage extends StatelessWidget {
   static final String route = '/home';

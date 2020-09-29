@@ -1,5 +1,5 @@
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
-import 'package:KeyKeeperApp/ui/pages/requests/requests_page.dart';
+import 'package:KeyKeeperApp/ui/pages/home/pages/requests/requests_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:get/get.dart';
