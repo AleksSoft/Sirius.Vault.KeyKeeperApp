@@ -7,4 +7,5 @@ class AppStorageKeys {
   static final String errorList = 'errorList';
   static final String idKey = 'idKey';
   static final String idKeyNonce = 'idKeyNonce';
+  static final String vaultsList = 'vaultsList';
 }

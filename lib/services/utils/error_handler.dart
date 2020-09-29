@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/models/saved_errors_model.dart';
 import 'package:KeyKeeperApp/services/api/api_service.dart';
+import 'package:KeyKeeperApp/services/utils/dialog_manager.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:enum_to_string/enum_to_string.dart';
@@ -14,15 +15,19 @@ import 'package:grpc/grpc.dart';
 typedef Future<T> FutureGenerator<T>();
 
 class ErrorHandler {
+  static final _dialogManager = Get.find<DialogManager>();
+
   static Future safeCall(FutureGenerator future,
       {@required String method}) async {
-    dynamic response = await future()
-        .timeout(ApiService.timeoutDuration)
-        .catchError(
-          (e) => _handleGrpcError(e, method),
-          test: (e) => e is GrpcError,
-        )
-        .catchError((e) async => await _handleError(e, method));
+    dynamic response;
+    try {
+      await future().timeout(ApiService.timeoutDuration).catchError(
+            (e) => _handleGrpcError(e, method),
+            test: (e) => e is GrpcError,
+          );
+    } catch (e) {
+      await _handleError(e, method);
+    }
     try {
       if (response?.error != null && response.error.hasMessage()) {
         await _handleApiError(response.error, future, method);
@@ -39,17 +44,65 @@ class ErrorHandler {
     FutureGenerator future,
     String method,
   ) async =>
-      await saveError(
+      saveError(
         code: EnumToString.convertToString(error.code),
         message: error.message,
         method: method,
+      ).whenComplete(
+        () {
+          switch (error.code) {
+            case ValidatorApiError_ErrorCodes.ExpiredInvitation:
+              _dialogManager.error(ErrorContent(
+                title: 'Invitation expired',
+                message: 'Please try again',
+              ));
+              break;
+            case ValidatorApiError_ErrorCodes.InternalServerError:
+              _dialogManager.error(ErrorContent(
+                title: 'Internal server error',
+                message: 'Please try again later',
+              ));
+              break;
+            case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
+              _dialogManager.error(ErrorContent(
+                title: 'Oops',
+                message: 'Wrong device info',
+              ));
+              break;
+            case ValidatorApiError_ErrorCodes.WrongInvitation:
+              _dialogManager.error(ErrorContent(
+                title: 'Wrong invitation',
+                message: 'Please try another code',
+              ));
+              break;
+            case ValidatorApiError_ErrorCodes.WrongSignature:
+              _dialogManager.error(ErrorContent(
+                title: 'Wrong signature',
+                message: 'Please try again',
+              ));
+              break;
+            case ValidatorApiError_ErrorCodes.Unknown:
+            default:
+              _dialogManager.error(ErrorContent(
+                title: 'Oops',
+                message: 'Something wrong. Try again later.',
+              ));
+              break;
+          }
+        },
       );
 
   static _handleGrpcError(GrpcError e, String method) async {
     if (e.code == StatusCode.unauthenticated) {
-      GetStorage().erase().whenComplete(
-            () => Get.offAllNamed(RootPage.route),
-          );
+      _dialogManager.error(
+        ErrorContent(
+          title: 'Session expired',
+          message: 'Please log in again',
+          action: () => GetStorage().erase().whenComplete(
+                () => Get.offAllNamed(RootPage.route),
+              ),
+        ),
+      );
     }
     await saveError(
       code: e.code.toString(),
@@ -58,13 +111,18 @@ class ErrorHandler {
     );
   }
 
-  static _handleError(dynamic e, String method) async => await saveError(
-        code: '',
-        message: e.message,
+  static _handleError(dynamic e, String method) => saveError(
+        code: e.runtimeType.toString(),
+        message: '',
         method: method,
+      ).whenComplete(
+        () => _dialogManager.error(ErrorContent(
+          title: 'Oops',
+          message: 'Something wrong. Try again later.',
+        )),
       );
 
-  static saveError({
+  static Future<void> saveError({
     @required String code,
     @required String message,
     @required String method,

@@ -70,7 +70,9 @@ class TransferDetailController extends GetxController {
         confirmTextColor: AppColors.light,
         buttonColor: AppColors.dark,
         cancelTextColor: AppColors.dark,
-        onConfirm: () => _resolveRequest().then((value) => Get.back()),
+        onConfirm: () => _resolveRequest().then(
+          (value) => Get.back(closeOverlays: value),
+        ),
       );
 
   String getResolutionName(int index) {

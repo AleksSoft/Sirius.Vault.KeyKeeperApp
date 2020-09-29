@@ -3,6 +3,7 @@ import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
+import 'package:KeyKeeperApp/ui/widgets/details_tile.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,7 @@ class TransferDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('vault name'),
-      ),
+      appBar: AppBar(title: Text('Transfer validation')),
       body: SingleChildScrollView(
         child: GetBuilder<TransferDetailController>(
           init: TransferDetailController(),
@@ -32,27 +30,27 @@ class TransferDetailPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Transaction details',
+                  'Details:',
                   style: Get.textTheme.headline6.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 AppUiHelpers.vSpaceSmall,
-                _DetailsTile(
+                DetailsTile(
                   title: 'Operation ID',
                   value: _.transferDetail.operationId,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Amount',
                   value:
                       '${_.transferDetail.asset.symbol} ${Formatter.currency(_.transferDetail.amount)}',
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Network Type',
                   value: _.transferDetail.networkType,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Blockchain ID',
                   value: _.transferDetail.blockchainId,
                   enableCopy: true,
@@ -60,90 +58,90 @@ class TransferDetailPage extends StatelessWidget {
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
                 Text(
-                  'Source',
+                  'Source:',
                   style: Get.textTheme.headline6.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 AppUiHelpers.vSpaceSmall,
-                _DetailsTile(
+                DetailsTile(
                   title: 'Address',
                   value: _.transferDetail.source.address,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Address Group',
                   value: _.transferDetail.source.addressGroup,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Name',
                   value: _.transferDetail.source.name,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Tag',
                   value: _.transferDetail.source.tag,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Tag Type',
                   value: _.transferDetail.source.tagType,
                 ),
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
                 Text(
-                  'Destination',
+                  'Destination:',
                   style: Get.textTheme.headline6.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 AppUiHelpers.vSpaceSmall,
-                _DetailsTile(
+                DetailsTile(
                   title: 'Address',
                   value: _.transferDetail.destination.address,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Address Group',
                   value: _.transferDetail.destination.addressGroup,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Name',
                   value: _.transferDetail.destination.name,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Tag',
                   value: _.transferDetail.destination.tag,
                 ),
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
-                _DetailsTile(
+                DetailsTile(
                   title: 'Fee limit',
                   value: _.transferDetail.feeLimit,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Account reference id',
                   value: _.transferDetail.clientContext.accountReferenceId,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Api Key ID',
                   value: _.transferDetail.clientContext.apiKeyId,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'IP',
                   value: _.transferDetail.clientContext.iP,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Timestamp',
                   value: _.transferDetail.clientContext.timestamp,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'User ID',
                   value: _.transferDetail.clientContext.userId,
                   enableCopy: true,
                 ),
-                _DetailsTile(
+                DetailsTile(
                   title: 'Withdraw reference ID',
                   value: _.transferDetail.clientContext.withdrawalReferenceId,
                   enableCopy: true,
@@ -151,7 +149,7 @@ class TransferDetailPage extends StatelessWidget {
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
                 Text(
-                  'Resolution',
+                  'Resolution:',
                   style: Get.textTheme.headline6.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -221,40 +219,6 @@ class TransferDetailPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _DetailsTile extends StatelessWidget {
-  const _DetailsTile({
-    @required this.title,
-    @required this.value,
-    this.enableCopy = false,
-    Key key,
-  }) : super(key: key);
-  final String title;
-  final String value;
-  final bool enableCopy;
-
-  @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: this.value != null,
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(0),
-        title: Text(this.title ?? ''),
-        subtitle: Text(this.value ?? ''),
-        trailing: Visibility(
-          visible: this.enableCopy,
-          child: IconButton(
-            onPressed: () => TransferDetailController.con.copy(
-              this.title,
-              this.value,
-            ),
-            icon: Icon(Icons.content_copy),
           ),
         ),
       ),
