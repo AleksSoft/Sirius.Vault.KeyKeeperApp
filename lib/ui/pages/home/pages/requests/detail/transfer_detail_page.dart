@@ -10,7 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class TransferDetailPage extends StatelessWidget {
-  static final String route = '/transaction-details';
+  static final String route = '/transfer-detail';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

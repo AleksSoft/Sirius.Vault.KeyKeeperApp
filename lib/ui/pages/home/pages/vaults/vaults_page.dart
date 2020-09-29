@@ -14,14 +14,21 @@ class VaultsPage extends MenuPage {
   Widget build(BuildContext context) {
     return GetBuilder<VaultsController>(
       init: VaultsController(),
-      builder: (_) => RefreshIndicator(
-        color: AppColors.dark,
-        onRefresh: () => _.loadVaults(),
-        child: ListView.separated(
-          padding: const EdgeInsets.all(AppSizes.medium),
-          itemCount: _.vaults.length,
-          separatorBuilder: (context, index) => AppUiHelpers.vSpaceMedium,
-          itemBuilder: (context, index) => _VaultCard(),
+      builder: (_) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _.openNewInvite(),
+          child: Icon(Icons.add),
+          backgroundColor: AppColors.dark,
+        ),
+        body: RefreshIndicator(
+          color: AppColors.dark,
+          onRefresh: () => _.loadVaults(),
+          child: ListView.separated(
+            padding: const EdgeInsets.all(AppSizes.medium),
+            itemCount: _.vaults.length,
+            separatorBuilder: (context, index) => AppUiHelpers.vSpaceMedium,
+            itemBuilder: (context, index) => _VaultCard(),
+          ),
         ),
       ),
     );

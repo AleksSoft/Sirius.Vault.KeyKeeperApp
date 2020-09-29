@@ -1,3 +1,5 @@
+import 'package:KeyKeeperApp/ui/pages/home/pages/vaults/detail/vault_detail_page.dart';
+import 'package:KeyKeeperApp/ui/pages/home/pages/vaults/invite/invite_page.dart';
 import 'package:get/get.dart';
 
 class VaultsController extends GetxController {
@@ -13,5 +15,7 @@ class VaultsController extends GetxController {
 
   Future<void> loadVaults() async {}
 
-  openDetails() => Get.toNamed('');
+  void openDetails() => Get.toNamed(VaultDetailPage.route);
+
+  void openNewInvite() => Get.toNamed(InvitePage.route);
 }

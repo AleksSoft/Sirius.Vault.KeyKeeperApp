@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
+import 'package:crypto/crypto.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pointycastle/export.dart' as pointy;
 import 'package:crypton/crypton.dart';
@@ -17,6 +19,13 @@ class RSAService {
   Future<RSAPrivateKey> get privateKey async => (await keyPair).privateKey;
 
   Future<RSAPublicKey> get publicKey async => (await keyPair).publicKey;
+
+  Future<String> get validatorId async {
+    var key = await publicKey;
+    var bytes = utf8.encode(key.toPEM());
+    var sha256Digest = sha256.convert(bytes);
+    return base64.encode(sha256Digest.bytes);
+  }
 
   Future<RSAKeypairSir> get keyPair async {
     if (!_storage.hasData(AppStorageKeys.privateKey)) {

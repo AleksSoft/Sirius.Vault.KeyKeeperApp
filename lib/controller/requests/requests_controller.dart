@@ -8,7 +8,7 @@ import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
-import 'package:KeyKeeperApp/ui/pages/transfer_detail/transfer_detail_page.dart';
+import 'package:KeyKeeperApp/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

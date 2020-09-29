@@ -2,6 +2,7 @@ import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/requests/requests_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
+import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:share/share.dart';
@@ -12,7 +13,8 @@ class HomeController extends GetxController {
   final _rsaService = Get.find<RSAService>();
   final _storage = GetStorage();
 
-  RSAKeypairSir _keyPair;
+  RSAPublicKey _publicKey;
+  String _validatorId;
 
   MenuPage _selectedPage = RequestsPage();
   MenuPage get selectedPage => _selectedPage;
@@ -26,7 +28,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    _keyPair = await _rsaService.keyPair;
+    _publicKey = await _rsaService.publicKey;
+    _validatorId = await _rsaService.validatorId;
     super.onInit();
   }
 
@@ -34,11 +37,7 @@ class HomeController extends GetxController {
         () => Get.offAllNamed(RootPage.route),
       );
 
-  void sharePublicKeyPem() {
-    Share.share(_keyPair.publicKey.toPEM());
-  }
+  void sharePublicKeyPem() => Share.share(_publicKey.toPEM());
 
-  void shareValidatorId() {
-    Share.share(_keyPair.publicKey.toString());
-  }
+  void shareValidatorId() => Share.share(_validatorId);
 }
