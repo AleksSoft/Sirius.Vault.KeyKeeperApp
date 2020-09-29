@@ -1,13 +1,13 @@
 class SavedVaultsModel {
-  List<Vaults> vaults = [];
+  List<Vault> vaults = [];
 
   SavedVaultsModel({this.vaults});
 
   SavedVaultsModel.fromJson(Map<String, dynamic> json) {
     if (json['vaults'] != null) {
-      vaults = new List<Vaults>();
+      vaults = new List<Vault>();
       json['vaults'].forEach((v) {
-        vaults.add(new Vaults.fromJson(v));
+        vaults.add(new Vault.fromJson(v));
       });
     }
   }
@@ -21,14 +21,14 @@ class SavedVaultsModel {
   }
 }
 
-class Vaults {
+class Vault {
   String localName;
   String name;
   String apiKey;
   String position;
   String description;
 
-  Vaults({
+  Vault({
     this.localName,
     this.name,
     this.apiKey,
@@ -36,7 +36,7 @@ class Vaults {
     this.description,
   });
 
-  Vaults.fromJson(Map<String, dynamic> json) {
+  Vault.fromJson(Map<String, dynamic> json) {
     localName = json['localName'];
     name = json['name'];
     apiKey = json['apiKey'];

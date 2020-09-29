@@ -10,7 +10,7 @@ class VaultsController extends GetxController {
 
   final _storage = GetStorage();
 
-  var vaults = <Vaults>[];
+  var vaults = <Vault>[];
 
   @override
   void onInit() async {

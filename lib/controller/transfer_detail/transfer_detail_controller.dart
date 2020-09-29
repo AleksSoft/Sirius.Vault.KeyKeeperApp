@@ -89,7 +89,7 @@ class TransferDetailController extends GetxController {
   }
 
   Future<bool> _resolveRequest() async {
-    var deviceInfo = await DeviceInfoService.uid;
+    var deviceInfo = await DeviceInfoService.deviceInfo;
 
     var resolutionDocument = ResolutionDocumentModel(
       transferDetail: transferDetail,

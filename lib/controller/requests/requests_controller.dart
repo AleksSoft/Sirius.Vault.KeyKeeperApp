@@ -38,7 +38,7 @@ class RequestsController extends GetxController {
   }
 
   Future<void> loadRequests() async {
-    String deviceInfoUID = await DeviceInfoService.uid;
+    String deviceInfoUID = await DeviceInfoService.deviceInfo;
     String token = _storage.read(AppStorageKeys.token);
     if (!deviceInfoUID.isNullOrBlank && !token.isNullOrBlank) {
       var approvalRequests = await _repository.getApprovalRequests(

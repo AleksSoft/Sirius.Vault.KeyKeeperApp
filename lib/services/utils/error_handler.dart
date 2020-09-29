@@ -27,6 +27,7 @@ class ErrorHandler {
           );
     } catch (e) {
       await _handleError(e, method);
+      return null;
     }
     try {
       if (response?.error != null && response.error.hasMessage()) {

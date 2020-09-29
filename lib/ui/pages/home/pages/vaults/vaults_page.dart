@@ -2,6 +2,7 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
+import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class VaultsPage extends MenuPage {
             padding: const EdgeInsets.all(AppSizes.medium),
             itemCount: _.vaults.length,
             separatorBuilder: (context, index) => AppUiHelpers.vSpaceMedium,
-            itemBuilder: (context, index) => _VaultCard(),
+            itemBuilder: (context, index) => _VaultCard(_.vaults[index]),
           ),
         ),
       ),
@@ -36,9 +37,9 @@ class VaultsPage extends MenuPage {
 }
 
 class _VaultCard extends StatelessWidget {
-  // const _VaultCard(this.args, {Key key}) : super(key: key);
+  const _VaultCard(this.vault, {Key key}) : super(key: key);
 
-  // final TransferDetailArgs args;
+  final Vault vault;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +53,33 @@ class _VaultCard extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () => VaultsController.con.openDetails(),
-        title: Text('somevault'),
+        title: Text(vault.localName),
+        subtitle: Text(vault.name),
+        trailing: _StatusChip(false),
       ),
+    );
+  }
+}
+
+class _StatusChip extends StatelessWidget {
+  const _StatusChip(this.online, {Key key}) : super(key: key);
+
+  final bool online;
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSizes.small,
+      ),
+      label: Text(
+        this.online ? 'Online' : 'Offline',
+        style: Get.textTheme.button.copyWith(
+          color: AppColors.primary,
+        ),
+      ),
+      backgroundColor: this.online ? AppColors.green : AppColors.red,
+      elevation: 0,
     );
   }
 }
