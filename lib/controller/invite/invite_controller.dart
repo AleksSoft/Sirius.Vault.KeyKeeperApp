@@ -26,12 +26,13 @@ class InviteController extends GetxController {
     var validatorId = await _rsaService.validatorId;
     var publicKeyPem = (await _rsaService.publicKey).toPEM();
     String deviceInfo = await DeviceInfoService.deviceInfo;
+    String inviteId = inviteCodeController.text.trim();
 
     var response = await _repository.accept(
       publicKeyPem: publicKeyPem,
       validatorId: validatorId,
       deviceInfo: deviceInfo,
-      inviteId: inviteCodeController.text,
+      inviteId: inviteId,
     );
 
     if (response != null) await _saveNewVaultAndReload(response);
@@ -59,5 +60,6 @@ class InviteController extends GetxController {
       ..position = response.position
       ..description = response.description);
     await VaultsController.con.loadVaults();
+    Get.back();
   }
 }

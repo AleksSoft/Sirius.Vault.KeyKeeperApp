@@ -55,7 +55,7 @@ class _VaultCard extends StatelessWidget {
         onTap: () => VaultsController.con.openDetails(vault),
         title: Text(vault.localName),
         subtitle: Text(vault.name),
-        trailing: _StatusChip(false),
+        trailing: _StatusChip(true),
       ),
     );
   }

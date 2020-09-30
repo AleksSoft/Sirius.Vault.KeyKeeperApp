@@ -18,7 +18,7 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
             ..publicKeyPem = publicKeyPem
             ..validatorId = validatorId
             ..deviceInfo = deviceInfo
-            ..inviteId,
+            ..inviteId = inviteId,
         ),
         method: 'accept',
       );

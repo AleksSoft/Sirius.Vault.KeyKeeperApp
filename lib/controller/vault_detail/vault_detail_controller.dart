@@ -21,5 +21,5 @@ class VaultDetailController extends GetxController {
     super.onReady();
   }
 
-  bool get stausOk => false;
+  bool get stausOk => true;
 }

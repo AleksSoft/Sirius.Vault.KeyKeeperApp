@@ -19,6 +19,7 @@ class ErrorHandler {
   static Future safeCall(
     FutureGenerator future, {
     @required String method,
+    bool hideErrorDialog = false,
   }) async {
     dynamic response = await future()
         .timeout(ApiService.timeoutDuration)
@@ -37,48 +38,25 @@ class ErrorHandler {
     return response;
   }
 
-  static _handleApiError(
+  static Future<void> _handleApiError(
     ValidatorApiError error,
     FutureGenerator future,
     String method,
   ) async {
     switch (error.code) {
       case ValidatorApiError_ErrorCodes.ExpiredInvitation:
-        _dialogManager.error(ErrorContent(
-          title: 'Invitation expired',
-          message: 'Please try again',
-        ));
-        break;
       case ValidatorApiError_ErrorCodes.InternalServerError:
-        _dialogManager.error(ErrorContent(
-          title: 'Internal server error',
-          message: 'Please try again later',
-        ));
-        break;
       case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
-        _dialogManager.error(ErrorContent(
-          title: 'Oops',
-          message: 'Wrong device info',
-        ));
-        break;
       case ValidatorApiError_ErrorCodes.WrongInvitation:
-        _dialogManager.error(ErrorContent(
-          title: 'Wrong invitation',
-          message: 'Please try another code',
-        ));
-        break;
       case ValidatorApiError_ErrorCodes.WrongSignature:
+      case ValidatorApiError_ErrorCodes.Unknown:
         _dialogManager.error(ErrorContent(
-          title: 'Wrong signature',
-          message: 'Please try again',
+          title: error.code.name,
+          message: error.message,
         ));
         break;
-      case ValidatorApiError_ErrorCodes.Unknown:
       default:
-        _dialogManager.error(ErrorContent(
-          title: 'Oops',
-          message: 'Something wrong. Try again later.',
-        ));
+        _defaultError();
         break;
     }
     await saveError(
@@ -88,12 +66,12 @@ class ErrorHandler {
     );
   }
 
-  static _handleGrpcError(GrpcError e, String method) async {
+  static Future<void> _handleGrpcError(GrpcError e, String method) async {
     if (e.code == StatusCode.unauthenticated) {
       _dialogManager.error(
         ErrorContent(
           title: 'Session expired',
-          message: 'Please log in again',
+          message: 'Please try to log in again.',
           action: () => GetStorage().erase().whenComplete(
                 () => Get.offAllNamed(RootPage.route),
               ),
@@ -107,15 +85,16 @@ class ErrorHandler {
     );
   }
 
-  static _handleError(dynamic e, String method) => saveError(
+  static void _handleError(dynamic e, String method) => saveError(
         code: e.runtimeType.toString(),
         message: '',
         method: method,
-      ).whenComplete(
-        () => _dialogManager.error(ErrorContent(
-          title: 'Oops',
-          message: 'Something wrong. Try again later.',
-        )),
+      ).whenComplete(() => _defaultError());
+
+  static void _defaultError() => _dialogManager.error(
+        ErrorContent(
+            title: 'Oops',
+            message: 'Something went wrong. Please try again later.'),
       );
 
   static Future<void> saveError({
