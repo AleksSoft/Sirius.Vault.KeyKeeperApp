@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/models/resolution_document_model.dart';
+import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
@@ -113,6 +114,7 @@ class TransferDetailController extends GetxController {
       transferSigningRequestId: _transferDetailArgs.transferSigningRequestId,
       resolutionDocumentEnc: resolutionDocumentEnc,
       signature: signatureBase64,
+      apiKey: _transferDetailArgs.vault.apiKey,
     );
   }
 }
@@ -122,10 +124,12 @@ class TransferDetailArgs {
   final String aesSecretKey;
   final String aesIvNonce;
   final String transferSigningRequestId;
-  TransferDetailArgs(
-    this.transferDetail,
-    this.transferSigningRequestId,
-    this.aesSecretKey,
-    this.aesIvNonce,
-  );
+  final Vault vault;
+  TransferDetailArgs({
+    @required this.transferDetail,
+    @required this.transferSigningRequestId,
+    @required this.aesSecretKey,
+    @required this.aesIvNonce,
+    @required this.vault,
+  });
 }

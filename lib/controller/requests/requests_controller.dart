@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
+import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
@@ -12,12 +12,10 @@ import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class RequestsController extends GetxController {
   static RequestsController get con => Get.find();
 
-  final _storage = GetStorage();
   final _repository = TransfersRepository();
   final _rsaService = Get.find<RSAService>();
   final _aesService = Get.find<AESService>();
@@ -42,12 +40,11 @@ class RequestsController extends GetxController {
     String deviceInfoUID = await DeviceInfoService.deviceInfo;
 
     requests.clear();
-    VaultsRepository.loadApiKeys().forEach((apiKey) async {
+    VaultsRepository.loadVaults().forEach((vault) async {
       var approvalRequests = await _repository.getApprovalRequests(
-        deviceInfo: deviceInfoUID,
-        apiKey: apiKey,
-      );
-      requests.addAll(approvalRequests.map((r) => _buildTransferDetail(r)));
+          deviceInfo: deviceInfoUID, apiKey: vault.apiKey);
+      requests
+          .addAll(approvalRequests.map((r) => _buildTransferDetail(r, vault)));
     });
 
     update();
@@ -58,6 +55,7 @@ class RequestsController extends GetxController {
 
   TransferDetailArgs _buildTransferDetail(
     GetApprovalRequestsResponse_ApprovalRequest request,
+    Vault vault,
   ) {
     String secretKey = base64.encode(
       _privateKey.decryptData(base64.decode(request.secretEncBase64)),
@@ -68,10 +66,11 @@ class RequestsController extends GetxController {
       secretKey,
     );
     return TransferDetailArgs(
-      TransferDetailModel.fromJson(json.decode(decryptedJson)),
-      request.transferSigningRequestId,
-      secretKey,
-      request.ivNonce,
+      transferDetail: TransferDetailModel.fromJson(json.decode(decryptedJson)),
+      transferSigningRequestId: request.transferSigningRequestId,
+      aesSecretKey: secretKey,
+      aesIvNonce: request.ivNonce,
+      vault: vault,
     );
   }
 }
