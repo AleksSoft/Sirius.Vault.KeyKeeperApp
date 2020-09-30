@@ -1,3 +1,4 @@
+import 'package:KeyKeeperApp/services/api/api_service.dart';
 import 'package:KeyKeeperApp/services/utils/error_handler.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:KeyKeeperApp/src/api.pbgrpc.dart';
@@ -7,10 +8,11 @@ import 'base_repository.dart';
 
 class TransfersRepository extends BaseRepository<TransfersClient> {
   Future<List<GetApprovalRequestsResponse_ApprovalRequest>> getApprovalRequests(
-      {@required String deviceInfo}) async {
+      {@required String deviceInfo, @required String apiKey}) async {
     GetApprovalRequestsResponse response = await ErrorHandler.safeCall(
-      () => clientSecured.getApprovalRequests(
+      () => client.getApprovalRequests(
         GetApprovalRequestsRequests()..deviceInfo = deviceInfo,
+        options: ApiService.getSecureOptions(apiKey),
       ),
       method: 'getApprovalRequests',
     );
@@ -22,14 +24,16 @@ class TransfersRepository extends BaseRepository<TransfersClient> {
     @required String transferSigningRequestId,
     @required String resolutionDocumentEnc,
     @required String signature,
+    @required String apiKey,
   }) async {
     final response = await ErrorHandler.safeCall(
-      () => clientSecured.resolveApprovalRequests(
+      () => client.resolveApprovalRequests(
         ResolveApprovalRequestsRequest()
           ..deviceInfo = deviceInfo
           ..transferSigningRequestId = transferSigningRequestId
           ..resolutionDocumentEncBase64 = resolutionDocumentEnc
           ..signature = signature,
+        options: ApiService.getSecureOptions(apiKey),
       ),
       method: 'resolveApprovalRequests',
     );

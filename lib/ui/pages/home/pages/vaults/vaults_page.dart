@@ -52,7 +52,7 @@ class _VaultCard extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        onTap: () => VaultsController.con.openDetails(),
+        onTap: () => VaultsController.con.openDetails(vault),
         title: Text(vault.localName),
         subtitle: Text(vault.name),
         trailing: _StatusChip(false),

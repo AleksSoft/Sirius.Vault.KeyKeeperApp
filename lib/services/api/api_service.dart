@@ -14,15 +14,18 @@ class ApiService {
   final _storage = GetStorage();
 
   final Map _clients = Map();
-  final Map _clientsSecured = Map();
 
   T client<T extends Client>() => _clients[T];
-  T clientSecured<T extends Client>() => _clientsSecured[T];
 
   static String get defaultUrl {
     String url = GetStorage().read(AppStorageKeys.baseUrl);
     return url.isNullOrBlank ? urls[0] : url;
   }
+
+  static CallOptions getSecureOptions(String apiKey) => CallOptions(
+        metadata: {'Authorization': 'Bearer $apiKey'},
+        timeout: timeoutDuration,
+      );
 
   /// Updates grpc clients with given [url]
   ///
@@ -33,43 +36,24 @@ class ApiService {
     print('---- Base Url: $url');
 
     var channel = ClientChannel(url, port: 443);
-    var securedOptions = CallOptions(
-      metadata: {
-        'Authorization': 'Bearer ${_storage.read(AppStorageKeys.token)}',
-      },
-      timeout: timeoutDuration,
-    );
     var options = CallOptions(timeout: timeoutDuration);
 
-    _recreateClients(channel, securedOptions, options);
+    _recreateClients(channel, options);
   }
 
-  void _recreateClients(
-    ClientChannel channel,
-    CallOptions securedOptions,
-    CallOptions options,
-  ) {
+  void _recreateClients(ClientChannel channel, CallOptions options) {
     _clients.clear();
-    _clientsSecured.clear();
 
     // adding TransfersClient instanses
     _clients.putIfAbsent(
       TransfersClient,
       () => TransfersClient(channel, options: options),
     );
-    _clientsSecured.putIfAbsent(
-      TransfersClient,
-      () => TransfersClient(channel, options: securedOptions),
-    );
 
     // adding InvitesClient instanses
     _clients.putIfAbsent(
       InvitesClient,
       () => InvitesClient(channel, options: options),
-    );
-    _clientsSecured.putIfAbsent(
-      InvitesClient,
-      () => InvitesClient(channel, options: securedOptions),
     );
   }
 }

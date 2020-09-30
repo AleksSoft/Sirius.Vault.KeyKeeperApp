@@ -4,6 +4,7 @@ import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/repositories/invites_repository.dart';
+import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
@@ -15,7 +16,6 @@ import 'package:get_storage/get_storage.dart';
 class InviteController extends GetxController {
   static InviteController get con => Get.find();
 
-  final _storage = GetStorage();
   final _rsaService = Get.find<RSAService>();
   final _repository = InvitesRepository();
 
@@ -28,40 +28,17 @@ class InviteController extends GetxController {
 
   Future<void> submitCode() async {
     var validatorId = await _rsaService.validatorId;
-    var publicKey = await _rsaService.publicKey;
+    var publicKeyPem = (await _rsaService.publicKey).toPEM();
     String deviceInfo = await DeviceInfoService.deviceInfo;
+
     var response = await _repository.accept(
-      publicKeyPem: publicKey.toPEM(),
+      publicKeyPem: publicKeyPem,
       validatorId: validatorId,
       deviceInfo: deviceInfo,
       inviteId: inviteCodeController.text,
     );
-    if (response != null) {
-      await saveNewVault(response);
-      await VaultsController.con.loadVaults();
-    }
-  }
 
-  Future<void> saveNewVault(AcceptResponse response) async {
-    Vault vault = Vault()
-      ..localName = vaultNameController.text
-      ..name = response.name
-      ..apiKey = response.apiKey
-      ..position = response.position
-      ..description = response.description;
-
-    String jsonStr = _storage.read(AppStorageKeys.errorList);
-
-    SavedVaultsModel model = jsonStr.isNullOrBlank
-        ? SavedVaultsModel()
-        : SavedVaultsModel.fromJson(json.decode(jsonStr));
-
-    model.vaults.add(vault);
-
-    await _storage.write(
-      AppStorageKeys.vaultsList,
-      json.encode(model.toJson()),
-    );
+    if (response != null) await _saveNewVaultAndReload(response);
   }
 
   Future<void> scanQRCode() async {
@@ -76,5 +53,15 @@ class InviteController extends GetxController {
     } else {
       return '';
     }
+  }
+
+  Future<void> _saveNewVaultAndReload(AcceptResponse response) async {
+    await VaultsRepository.saveNewVault(Vault()
+      ..localName = vaultNameController.text
+      ..name = response.name
+      ..apiKey = response.apiKey
+      ..position = response.position
+      ..description = response.description);
+    await VaultsController.con.loadVaults();
   }
 }

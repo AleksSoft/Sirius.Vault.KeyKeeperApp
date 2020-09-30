@@ -1,3 +1,4 @@
+import 'package:KeyKeeperApp/services/api/api_service.dart';
 import 'package:KeyKeeperApp/services/utils/error_handler.dart';
 import 'package:KeyKeeperApp/src/api.pbgrpc.dart';
 import 'package:flutter/foundation.dart';
@@ -26,9 +27,13 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
     @required String validatorId,
     @required String deviceInfo,
     @required String inviteId,
+    @required String apiKey,
   }) async =>
       await ErrorHandler.safeCall(
-        () => clientSecured.getPing(PingRequest()..deviceInfo = deviceInfo),
+        () => client.getPing(
+          PingRequest()..deviceInfo = deviceInfo,
+          options: ApiService.getSecureOptions(apiKey),
+        ),
         method: 'getPing',
       );
 }

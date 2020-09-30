@@ -4,6 +4,7 @@ import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
+import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
@@ -39,13 +40,16 @@ class RequestsController extends GetxController {
 
   Future<void> loadRequests() async {
     String deviceInfoUID = await DeviceInfoService.deviceInfo;
-    String token = _storage.read(AppStorageKeys.token);
-    if (!deviceInfoUID.isNullOrBlank && !token.isNullOrBlank) {
+
+    requests.clear();
+    VaultsRepository.loadApiKeys().forEach((apiKey) async {
       var approvalRequests = await _repository.getApprovalRequests(
         deviceInfo: deviceInfoUID,
+        apiKey: apiKey,
       );
-      requests = approvalRequests.map((r) => _buildTransferDetail(r)).toList();
-    }
+      requests.addAll(approvalRequests.map((r) => _buildTransferDetail(r)));
+    });
+
     update();
   }
 
