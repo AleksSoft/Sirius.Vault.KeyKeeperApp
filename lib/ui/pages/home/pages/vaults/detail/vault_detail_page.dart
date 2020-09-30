@@ -57,17 +57,17 @@ class VaultDetailPage extends StatelessWidget {
                 Divider(),
                 DetailsTile(
                   title: 'Name',
-                  value: 'name',
+                  value: _.vault?.name ?? '',
                   enableCopy: false,
                 ),
                 DetailsTile(
                   title: 'Position',
-                  value: 'position',
+                  value: _.vault?.position ?? '',
                   enableCopy: false,
                 ),
                 DetailsTile(
                   title: 'Description',
-                  value: 'description',
+                  value: _.vault?.description ?? '',
                   enableCopy: false,
                 ),
               ],

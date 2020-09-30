@@ -21,7 +21,6 @@ class VaultsController extends GetxController {
   }
 
   Future<void> loadVaults() async {
-    _storage.remove(AppStorageKeys.vaultsList);
     var saved = _storage.read(AppStorageKeys.vaultsList);
     if (saved != null) {
       var vaultsModel = SavedVaultsModel.fromJson(json.decode(saved));
