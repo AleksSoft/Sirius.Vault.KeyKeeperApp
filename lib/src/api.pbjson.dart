@@ -74,6 +74,7 @@ const AcceptRequest$json = const {
     const {'1': 'deviceInfo', '3': 1, '4': 1, '5': 9, '10': 'deviceInfo'},
     const {'1': 'inviteId', '3': 2, '4': 1, '5': 9, '10': 'inviteId'},
     const {'1': 'validatorId', '3': 3, '4': 1, '5': 9, '10': 'validatorId'},
+    const {'1': 'publicKeyPem', '3': 4, '4': 1, '5': 9, '10': 'publicKeyPem'},
   ],
 };
 

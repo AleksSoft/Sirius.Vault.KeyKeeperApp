@@ -251,6 +251,7 @@ class AcceptRequest extends $pb.GeneratedMessage {
     ..aOS(1, 'deviceInfo', protoName: 'deviceInfo')
     ..aOS(2, 'inviteId', protoName: 'inviteId')
     ..aOS(3, 'validatorId', protoName: 'validatorId')
+    ..aOS(4, 'publicKeyPem', protoName: 'publicKeyPem')
     ..hasRequiredFields = false
   ;
 
@@ -295,6 +296,15 @@ class AcceptRequest extends $pb.GeneratedMessage {
   $core.bool hasValidatorId() => $_has(2);
   @$pb.TagNumber(3)
   void clearValidatorId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get publicKeyPem => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set publicKeyPem($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPublicKeyPem() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPublicKeyPem() => clearField(4);
 }
 
 class AcceptResponse extends $pb.GeneratedMessage {

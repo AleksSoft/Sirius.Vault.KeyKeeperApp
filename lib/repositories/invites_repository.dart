@@ -6,6 +6,7 @@ import 'base_repository.dart';
 
 class InvitesRepository extends BaseRepository<InvitesClient> {
   Future<AcceptResponse> accept({
+    @required String publicKeyPem,
     @required String validatorId,
     @required String deviceInfo,
     @required String inviteId,
@@ -13,6 +14,7 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
       await ErrorHandler.safeCall(
         () => client.accept(
           AcceptRequest()
+            ..publicKeyPem = publicKeyPem
             ..validatorId = validatorId
             ..deviceInfo = deviceInfo
             ..inviteId,

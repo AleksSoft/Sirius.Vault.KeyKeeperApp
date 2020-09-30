@@ -28,8 +28,10 @@ class InviteController extends GetxController {
 
   Future<void> submitCode() async {
     var validatorId = await _rsaService.validatorId;
+    var publicKey = await _rsaService.publicKey;
     String deviceInfo = await DeviceInfoService.deviceInfo;
     var response = await _repository.accept(
+      publicKeyPem: publicKey.toPEM(),
       validatorId: validatorId,
       deviceInfo: deviceInfo,
       inviteId: inviteCodeController.text,
