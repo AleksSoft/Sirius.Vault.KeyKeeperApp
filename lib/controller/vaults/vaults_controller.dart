@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/vaults/detail/vault_detail_page.dart';
@@ -13,14 +15,21 @@ class VaultsController extends GetxController {
   var vaults = <Vault>[];
 
   @override
-  void onInit() async {
+  void onReady() async {
     await loadVaults();
-    super.onInit();
+    super.onReady();
   }
 
   Future<void> loadVaults() async {
-    var saved = _storage.read<SavedVaultsModel>(AppStorageKeys.vaultsList);
-    vaults = saved?.vaults ?? [];
+    _storage.remove(AppStorageKeys.vaultsList);
+    var saved = _storage.read(AppStorageKeys.vaultsList);
+    if (saved != null) {
+      var vaultsModel = SavedVaultsModel.fromJson(json.decode(saved));
+      vaults = vaultsModel?.vaults ?? [];
+    } else {
+      vaults = [];
+    }
+    update();
   }
 
   void openDetails() => Get.toNamed(VaultDetailPage.route);

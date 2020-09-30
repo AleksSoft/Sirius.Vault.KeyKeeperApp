@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
+import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/repositories/invites_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
@@ -33,7 +34,10 @@ class InviteController extends GetxController {
       deviceInfo: deviceInfo,
       inviteId: inviteCodeController.text,
     );
-    if (response != null) saveNewVault(response);
+    if (response != null) {
+      await saveNewVault(response);
+      await VaultsController.con.loadVaults();
+    }
   }
 
   Future<void> saveNewVault(AcceptResponse response) async {

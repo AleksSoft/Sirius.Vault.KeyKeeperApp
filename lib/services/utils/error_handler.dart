@@ -6,7 +6,6 @@ import 'package:KeyKeeperApp/services/api/api_service.dart';
 import 'package:KeyKeeperApp/services/utils/dialog_manager.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,26 +16,24 @@ typedef Future<T> FutureGenerator<T>();
 class ErrorHandler {
   static final _dialogManager = Get.find<DialogManager>();
 
-  static Future safeCall(FutureGenerator future,
-      {@required String method}) async {
-    dynamic response;
-    try {
-      await future().timeout(ApiService.timeoutDuration).catchError(
-            (e) => _handleGrpcError(e, method),
-            test: (e) => e is GrpcError,
-          );
-    } catch (e) {
-      await _handleError(e, method);
-      return null;
-    }
+  static Future safeCall(
+    FutureGenerator future, {
+    @required String method,
+  }) async {
+    dynamic response = await future()
+        .timeout(ApiService.timeoutDuration)
+        .catchError(
+          (e) => _handleGrpcError(e, method),
+          test: (e) => e is GrpcError,
+        )
+        .catchError((e) => _handleError(e, method));
+
     try {
       if (response?.error != null && response.error.hasMessage()) {
-        await _handleApiError(response.error, future, method);
-        return null;
+        _handleApiError(response.error, future, method);
+        response = null;
       }
-    } catch (e) {
-      return response;
-    }
+    } catch (e) {}
     return response;
   }
 
@@ -44,54 +41,52 @@ class ErrorHandler {
     ValidatorApiError error,
     FutureGenerator future,
     String method,
-  ) async =>
-      saveError(
-        code: EnumToString.convertToString(error.code),
-        message: error.message,
-        method: method,
-      ).whenComplete(
-        () {
-          switch (error.code) {
-            case ValidatorApiError_ErrorCodes.ExpiredInvitation:
-              _dialogManager.error(ErrorContent(
-                title: 'Invitation expired',
-                message: 'Please try again',
-              ));
-              break;
-            case ValidatorApiError_ErrorCodes.InternalServerError:
-              _dialogManager.error(ErrorContent(
-                title: 'Internal server error',
-                message: 'Please try again later',
-              ));
-              break;
-            case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
-              _dialogManager.error(ErrorContent(
-                title: 'Oops',
-                message: 'Wrong device info',
-              ));
-              break;
-            case ValidatorApiError_ErrorCodes.WrongInvitation:
-              _dialogManager.error(ErrorContent(
-                title: 'Wrong invitation',
-                message: 'Please try another code',
-              ));
-              break;
-            case ValidatorApiError_ErrorCodes.WrongSignature:
-              _dialogManager.error(ErrorContent(
-                title: 'Wrong signature',
-                message: 'Please try again',
-              ));
-              break;
-            case ValidatorApiError_ErrorCodes.Unknown:
-            default:
-              _dialogManager.error(ErrorContent(
-                title: 'Oops',
-                message: 'Something wrong. Try again later.',
-              ));
-              break;
-          }
-        },
-      );
+  ) async {
+    switch (error.code) {
+      case ValidatorApiError_ErrorCodes.ExpiredInvitation:
+        _dialogManager.error(ErrorContent(
+          title: 'Invitation expired',
+          message: 'Please try again',
+        ));
+        break;
+      case ValidatorApiError_ErrorCodes.InternalServerError:
+        _dialogManager.error(ErrorContent(
+          title: 'Internal server error',
+          message: 'Please try again later',
+        ));
+        break;
+      case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
+        _dialogManager.error(ErrorContent(
+          title: 'Oops',
+          message: 'Wrong device info',
+        ));
+        break;
+      case ValidatorApiError_ErrorCodes.WrongInvitation:
+        _dialogManager.error(ErrorContent(
+          title: 'Wrong invitation',
+          message: 'Please try another code',
+        ));
+        break;
+      case ValidatorApiError_ErrorCodes.WrongSignature:
+        _dialogManager.error(ErrorContent(
+          title: 'Wrong signature',
+          message: 'Please try again',
+        ));
+        break;
+      case ValidatorApiError_ErrorCodes.Unknown:
+      default:
+        _dialogManager.error(ErrorContent(
+          title: 'Oops',
+          message: 'Something wrong. Try again later.',
+        ));
+        break;
+    }
+    await saveError(
+      code: error.code.name,
+      message: error.message,
+      method: method,
+    );
+  }
 
   static _handleGrpcError(GrpcError e, String method) async {
     if (e.code == StatusCode.unauthenticated) {
