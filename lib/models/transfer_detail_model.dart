@@ -1,210 +1,181 @@
-import 'dart:convert';
-
 import 'package:intl/intl.dart';
 
-class TransferDetailModel {
-  String blockchainProtocolId;
-  String operationId;
-  String blockchainId;
-  String networkType;
-  Asset asset;
-  Source source;
-  Destination destination;
+class TransferDetailsModel {
   String amount;
-  String feeLimit;
+  Asset asset;
+  String blockchainId;
+  String blockchainProtocolId;
   ClientContext clientContext;
+  Destination destination;
+  String feeLimit;
+  String networkType;
+  String operationId;
+  Source source;
 
   bool get networkInsecure => 'mainnet' == (networkType ?? '').toLowerCase();
-  bool get isExternal => source.addressGroup != destination.addressGroup;
+  bool get isExternal => source?.group != destination?.group;
   String get addressLabel => isExternal ? 'External' : 'Internal';
 
-  TransferDetailModel({
-    this.blockchainProtocolId,
-    this.operationId,
-    this.blockchainId,
-    this.networkType,
-    this.asset,
-    this.source,
-    this.destination,
-    this.amount,
-    this.feeLimit,
-    this.clientContext,
-  });
+  TransferDetailsModel(
+      {this.amount,
+      this.asset,
+      this.blockchainId,
+      this.blockchainProtocolId,
+      this.clientContext,
+      this.destination,
+      this.feeLimit,
+      this.networkType,
+      this.operationId,
+      this.source});
 
-  TransferDetailModel.fromJson(Map<String, dynamic> json) {
-    blockchainProtocolId = json['BlockchainProtocolId'];
-    operationId = json['OperationId'];
-    blockchainId = json['BlockchainId'];
-    networkType = json['NetworkType'];
-    asset = json['Asset'] != null ? new Asset.fromJson(json['Asset']) : null;
+  TransferDetailsModel.fromJson(Map<String, dynamic> json) {
+    amount = json['amount'];
+    asset = json['asset'] != null ? new Asset.fromJson(json['asset']) : null;
+    blockchainId = json['blockchainId'];
+    blockchainProtocolId = json['blockchainProtocolId'];
+    clientContext = json['clientContext'] != null
+        ? new ClientContext.fromJson(json['clientContext'])
+        : null;
+    destination = json['destination'] != null
+        ? new Destination.fromJson(json['destination'])
+        : null;
+    feeLimit = json['feeLimit'];
+    networkType = json['networkType'];
+    operationId = json['operationId'];
     source =
-        json['Source'] != null ? new Source.fromJson(json['Source']) : null;
-    destination = json['Destination'] != null
-        ? new Destination.fromJson(json['Destination'])
-        : null;
-    amount = json['Amount'];
-    feeLimit = json['FeeLimit'];
-    clientContext = json['ClientContext'] != null
-        ? new ClientContext.fromJson(json['ClientContext'])
-        : null;
+        json['source'] != null ? new Source.fromJson(json['source']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['BlockchainProtocolId'] = this.blockchainProtocolId;
-    data['OperationId'] = this.operationId;
-    data['BlockchainId'] = this.blockchainId;
-    data['NetworkType'] = this.networkType;
+    data['amount'] = this.amount;
     if (this.asset != null) {
-      data['Asset'] = this.asset.toJson();
+      data['asset'] = this.asset.toJson();
     }
-    if (this.source != null) {
-      data['Source'] = this.source.toJson();
+    data['blockchainId'] = this.blockchainId;
+    data['blockchainProtocolId'] = this.blockchainProtocolId;
+    if (this.clientContext != null) {
+      data['clientContext'] = this.clientContext.toJson();
     }
     if (this.destination != null) {
-      data['Destination'] = this.destination.toJson();
+      data['destination'] = this.destination.toJson();
     }
-    data['Amount'] = this.amount;
-    data['FeeLimit'] = this.feeLimit;
-    if (this.clientContext != null) {
-      data['ClientContext'] = this.clientContext.toJson();
+    data['feeLimit'] = this.feeLimit;
+    data['networkType'] = this.networkType;
+    data['operationId'] = this.operationId;
+    if (this.source != null) {
+      data['source'] = this.source.toJson();
     }
     return data;
   }
-
-  @override
-  String toString() => json.encode(this.toJson());
 }
 
 class Asset {
-  String symbol;
   String assetAddress;
   String assetId;
+  String symbol;
 
-  Asset({
-    this.symbol,
-    this.assetAddress,
-    this.assetId,
-  });
+  Asset({this.assetAddress, this.assetId, this.symbol});
 
   Asset.fromJson(Map<String, dynamic> json) {
-    symbol = json['Symbol'];
-    assetAddress = json['AssetAddress'];
-    assetId = json['AssetId'];
+    assetAddress = json['assetAddress'];
+    assetId = json['assetId'];
+    symbol = json['symbol'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Symbol'] = this.symbol;
-    data['AssetAddress'] = this.assetAddress;
-    data['AssetId'] = this.assetId;
-    return data;
-  }
-}
-
-class Source {
-  String address;
-  String addressGroup;
-  String name;
-  String tag;
-  String tagType;
-
-  Source({
-    this.address,
-    this.addressGroup,
-    this.name,
-    this.tag,
-    this.tagType,
-  });
-
-  Source.fromJson(Map<String, dynamic> json) {
-    address = json['Address'];
-    addressGroup = json['AddressGroup'];
-    name = json['Name'];
-    tag = json['Tag'];
-    tagType = json['TagType'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Address'] = this.address;
-    data['AddressGroup'] = this.addressGroup;
-    data['Name'] = this.name;
-    data['Tag'] = this.tag;
-    data['TagType'] = this.tagType;
-    return data;
-  }
-}
-
-class Destination {
-  String address;
-  String addressGroup;
-  String name;
-  String tag;
-  String tagType;
-
-  Destination({
-    this.address,
-    this.addressGroup,
-    this.name,
-    this.tag,
-    this.tagType,
-  });
-
-  Destination.fromJson(Map<String, dynamic> json) {
-    address = json['Address'];
-    addressGroup = json['AddressGroup'];
-    name = json['Name'];
-    tag = json['Tag'];
-    tagType = json['TagType'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Address'] = this.address;
-    data['AddressGroup'] = this.addressGroup;
-    data['Name'] = this.name;
-    data['Tag'] = this.tag;
-    data['TagType'] = this.tagType;
+    data['assetAddress'] = this.assetAddress;
+    data['assetId'] = this.assetId;
+    data['symbol'] = this.symbol;
     return data;
   }
 }
 
 class ClientContext {
   final _dateFormat = DateFormat().addPattern('dd.MM.yy HH:mm:ss');
-  String withdrawalReferenceId;
-  String accountReferenceId;
-  String timestamp;
   String userId;
   String apiKeyId;
-  String iP;
+  String accountReferenceId;
+  String withdrawalReferenceId;
+  String ip;
+  String timestamp;
 
-  ClientContext({
-    this.withdrawalReferenceId,
-    this.accountReferenceId,
-    this.timestamp,
-    this.userId,
-    this.apiKeyId,
-    this.iP,
-  });
+  ClientContext(
+      {this.userId,
+      this.apiKeyId,
+      this.accountReferenceId,
+      this.withdrawalReferenceId,
+      this.ip,
+      this.timestamp});
 
   ClientContext.fromJson(Map<String, dynamic> json) {
-    withdrawalReferenceId = json['WithdrawalReferenceId'];
-    accountReferenceId = json['AccountReferenceId'];
-    timestamp = _dateFormat.format(DateTime.parse(json['Timestamp']));
-    userId = json['UserId'];
-    apiKeyId = json['ApiKeyId'];
-    iP = json['IP'];
+    userId = json['userId'];
+    apiKeyId = json['apiKeyId'];
+    accountReferenceId = json['accountReferenceId'];
+    withdrawalReferenceId = json['withdrawalReferenceId'];
+    ip = json['ip'];
+    timestamp = _dateFormat.format(DateTime.parse(json['timestamp']));
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['WithdrawalReferenceId'] = this.withdrawalReferenceId;
-    data['AccountReferenceId'] = this.accountReferenceId;
-    data['Timestamp'] = this.timestamp;
-    data['UserId'] = this.userId;
-    data['ApiKeyId'] = this.apiKeyId;
-    data['IP'] = this.iP;
+    data['userId'] = this.userId;
+    data['apiKeyId'] = this.apiKeyId;
+    data['accountReferenceId'] = this.accountReferenceId;
+    data['withdrawalReferenceId'] = this.withdrawalReferenceId;
+    data['ip'] = this.ip;
+    data['timestamp'] = this.timestamp;
+    return data;
+  }
+}
+
+class Destination {
+  String address;
+  String name;
+  String group;
+  String tag;
+  String tagType;
+
+  Destination({this.address, this.name, this.group, this.tag, this.tagType});
+
+  Destination.fromJson(Map<String, dynamic> json) {
+    address = json['address'];
+    name = json['name'];
+    group = json['group'];
+    tag = json['tag'];
+    tagType = json['tagType'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['address'] = this.address;
+    data['name'] = this.name;
+    data['group'] = this.group;
+    data['tag'] = this.tag;
+    data['tagType'] = this.tagType;
+    return data;
+  }
+}
+
+class Source {
+  String address;
+  Null name;
+  String group;
+
+  Source({this.address, this.name, this.group});
+
+  Source.fromJson(Map<String, dynamic> json) {
+    address = json['address'];
+    name = json['name'];
+    group = json['group'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['address'] = this.address;
+    data['name'] = this.name;
+    data['group'] = this.group;
     return data;
   }
 }

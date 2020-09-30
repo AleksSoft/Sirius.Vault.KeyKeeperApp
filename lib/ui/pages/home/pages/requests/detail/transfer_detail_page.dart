@@ -71,19 +71,11 @@ class TransferDetailPage extends StatelessWidget {
                 ),
                 DetailsTile(
                   title: 'Address Group',
-                  value: _.transferDetail.source.addressGroup,
+                  value: _.transferDetail.source.group,
                 ),
                 DetailsTile(
                   title: 'Name',
                   value: _.transferDetail.source.name,
-                ),
-                DetailsTile(
-                  title: 'Tag',
-                  value: _.transferDetail.source.tag,
-                ),
-                DetailsTile(
-                  title: 'Tag Type',
-                  value: _.transferDetail.source.tagType,
                 ),
                 Divider(),
                 AppUiHelpers.vSpaceMedium,
@@ -101,7 +93,7 @@ class TransferDetailPage extends StatelessWidget {
                 ),
                 DetailsTile(
                   title: 'Address Group',
-                  value: _.transferDetail.destination.addressGroup,
+                  value: _.transferDetail.destination.group,
                 ),
                 DetailsTile(
                   title: 'Name',
@@ -129,7 +121,7 @@ class TransferDetailPage extends StatelessWidget {
                 ),
                 DetailsTile(
                   title: 'IP',
-                  value: _.transferDetail.clientContext.iP,
+                  value: _.transferDetail.clientContext.ip,
                   enableCopy: true,
                 ),
                 DetailsTile(

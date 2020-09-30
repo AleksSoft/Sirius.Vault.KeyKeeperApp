@@ -5,34 +5,34 @@ import 'package:KeyKeeperApp/src/api.pbenum.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
 class ResolutionDocumentModel {
-  TransferDetailModel transferDetail;
+  TransferDetailsModel transferDetails;
   ResolveApprovalRequestsRequest_ResolutionStatus resolution;
   String resolutionMessage;
 
   ResolutionDocumentModel({
-    this.transferDetail,
+    this.transferDetails,
     this.resolution,
     this.resolutionMessage,
   });
 
   ResolutionDocumentModel.fromJson(Map<String, dynamic> json) {
-    transferDetail = json['TransferDetail'] != null
-        ? new TransferDetailModel.fromJson(json['TransferDetail'])
+    transferDetails = json['transferDetails'] != null
+        ? new TransferDetailsModel.fromJson(json['transferDetails'])
         : null;
     resolution = EnumToString.fromString(
       ResolveApprovalRequestsRequest_ResolutionStatus.values,
-      json['Resolution'],
+      json['resolution'],
     );
-    resolutionMessage = json['ResolutionMessage'];
+    resolutionMessage = json['resolutionMessage'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.transferDetail != null) {
-      data['TransferDetail'] = this.transferDetail.toJson();
+    if (this.transferDetails != null) {
+      data['transferDetails'] = this.transferDetails.toJson();
     }
-    data['Resolution'] = this.resolution.name;
-    data['ResolutionMessage'] = this.resolutionMessage;
+    data['resolution'] = this.resolution.name;
+    data['resolutionMessage'] = this.resolutionMessage;
     return data;
   }
 

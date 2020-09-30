@@ -20,7 +20,7 @@ class RequestsPage extends MenuPage {
       init: RequestsController(),
       builder: (_) => RefreshIndicator(
         color: AppColors.dark,
-        onRefresh: () => _.loadRequests(),
+        onRefresh: () => _.reloadRequests(),
         child: ListView.separated(
           padding: const EdgeInsets.all(AppSizes.medium),
           itemCount: _.requests.length,
@@ -56,14 +56,14 @@ class _RequestCard extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              Formatter.currency(r.amount, symbol: r.asset.symbol),
+              Formatter.currency(r.amount, symbol: r.asset?.symbol ?? ''),
               style: Get.textTheme.subtitle2.copyWith(
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
               ),
             ),
             Text(
-              r.clientContext.timestamp,
+              r.clientContext?.timestamp ?? '',
               style: Get.textTheme.caption,
             ),
           ],
@@ -73,7 +73,7 @@ class _RequestCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              r.blockchainId,
+              r.blockchainId ?? '',
               style: Get.textTheme.subtitle2,
             ),
             Row(
@@ -95,17 +95,15 @@ class _RequestCard extends StatelessWidget {
 class _NetworkChip extends StatelessWidget {
   const _NetworkChip(this.r, {Key key}) : super(key: key);
 
-  final TransferDetailModel r;
+  final TransferDetailsModel r;
 
   @override
   Widget build(BuildContext context) {
     return Chip(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.small,
-      ),
+      padding: const EdgeInsets.all(AppSizes.extraSmall),
       label: Text(
-        r.networkType,
-        style: Get.textTheme.button.copyWith(
+        r.networkType ?? '',
+        style: Get.textTheme.caption.copyWith(
           color: AppColors.primary,
         ),
       ),

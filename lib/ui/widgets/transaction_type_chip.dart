@@ -7,17 +7,15 @@ import 'package:get/get.dart';
 class TransactionTypeChip extends StatelessWidget {
   const TransactionTypeChip(this.r, {Key key}) : super(key: key);
 
-  final TransferDetailModel r;
+  final TransferDetailsModel r;
 
   @override
   Widget build(BuildContext context) {
     return Chip(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.small,
-      ),
+      padding: const EdgeInsets.all(AppSizes.extraSmall),
       label: Text(
         r.addressLabel,
-        style: Get.textTheme.button.copyWith(
+        style: Get.textTheme.caption.copyWith(
           color: AppColors.primary,
         ),
       ),
@@ -26,6 +24,7 @@ class TransactionTypeChip extends StatelessWidget {
       avatar: Icon(
         r.isExternal ? Icons.file_upload : Icons.file_download,
         color: AppColors.primary,
+        size: 18,
       ),
     );
   }

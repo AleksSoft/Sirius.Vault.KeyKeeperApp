@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
+import 'package:KeyKeeperApp/controller/requests/requests_controller.dart';
 import 'package:KeyKeeperApp/models/resolution_document_model.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
@@ -31,7 +32,7 @@ class TransferDetailController extends GetxController {
 
   TransferDetailArgs _transferDetailArgs;
 
-  TransferDetailModel get transferDetail => _transferDetailArgs.transferDetail;
+  TransferDetailsModel get transferDetail => _transferDetailArgs.transferDetail;
 
   int get selectedResolutionIndex => resolutionsMap.keys.firstWhere(
         (key) => resolutionsMap[key] == selectedResolution,
@@ -72,7 +73,10 @@ class TransferDetailController extends GetxController {
         buttonColor: AppColors.dark,
         cancelTextColor: AppColors.dark,
         onConfirm: () => _resolveRequest().then(
-          (value) => Get.back(closeOverlays: value),
+          (value) {
+            RequestsController.con.reloadRequests();
+            Get.back(closeOverlays: value);
+          },
         ),
       );
 
@@ -93,10 +97,12 @@ class TransferDetailController extends GetxController {
     var deviceInfo = await DeviceInfoService.deviceInfo;
 
     var resolutionDocument = ResolutionDocumentModel(
-      transferDetail: transferDetail,
+      transferDetails: transferDetail,
       resolution: selectedResolution,
       resolutionMessage: msgTextController.text ?? '',
     );
+
+    print('-----resolutionDocument: ${resolutionDocument.toString()}');
 
     var resolutionDocumentEnc = _aesService.encrypt(
       resolutionDocument.toString(),
@@ -120,7 +126,7 @@ class TransferDetailController extends GetxController {
 }
 
 class TransferDetailArgs {
-  final TransferDetailModel transferDetail;
+  final TransferDetailsModel transferDetail;
   final String aesSecretKey;
   final String aesIvNonce;
   final String transferSigningRequestId;

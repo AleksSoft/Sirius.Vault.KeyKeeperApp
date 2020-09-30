@@ -3,6 +3,10 @@ class SavedVaultsModel {
 
   SavedVaultsModel({this.vaults});
 
+  SavedVaultsModel.empty() {
+    vaults = [];
+  }
+
   SavedVaultsModel.fromJson(Map<String, dynamic> json) {
     if (json['vaults'] != null) {
       vaults = new List<Vault>();

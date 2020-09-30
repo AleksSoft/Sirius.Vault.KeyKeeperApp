@@ -25,7 +25,7 @@ class VaultsRepository {
     String jsonStr = _storage.read(AppStorageKeys.errorList);
 
     SavedVaultsModel model = jsonStr.isNullOrBlank
-        ? SavedVaultsModel()
+        ? SavedVaultsModel.empty()
         : SavedVaultsModel.fromJson(json.decode(jsonStr));
 
     model.vaults.add(vault);

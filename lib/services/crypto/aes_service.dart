@@ -8,14 +8,14 @@ class AESService {
   String get randKey => CryptKey().genFortuna();
 
   String encrypt(String input, String nonce, String keyStr) {
-    var aes = AesCrypt(key: keyStr, padding: PaddingAES.none);
-    var encrypted = aes.gcm.encrypt(inp: input, iv: nonce);
+    var aes = AesCrypt(key: keyStr, padding: PaddingAES.pkcs7);
+    var encrypted = aes.cbc.encrypt(inp: input, iv: nonce);
     return encrypted;
   }
 
   String decrypt(String input, String nonce, String keyStr) {
-    var aes = AesCrypt(key: keyStr, padding: PaddingAES.none);
-    var decrypted = aes.gcm.decrypt(enc: input, iv: nonce);
+    var aes = AesCrypt(key: keyStr, padding: PaddingAES.pkcs7);
+    var decrypted = aes.cbc.decrypt(enc: input, iv: nonce);
     return decrypted;
   }
 }
