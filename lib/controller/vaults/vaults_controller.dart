@@ -11,12 +11,12 @@ class VaultsController extends GetxController {
 
   @override
   void onReady() async {
-    await loadVaults();
     super.onReady();
+    await reloadVaults();
   }
 
-  Future<void> loadVaults() async {
-    vaults = VaultsRepository.loadVaults();
+  Future<void> reloadVaults() async {
+    vaults = VaultsRepository.savedVaultsList;
     update();
   }
 

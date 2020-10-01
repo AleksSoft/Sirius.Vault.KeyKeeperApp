@@ -40,7 +40,7 @@ class RequestsController extends GetxController {
     String deviceInfoUID = await DeviceInfoService.deviceInfo;
 
     requests.clear();
-    for (Vault vault in VaultsRepository.loadVaults()) {
+    for (Vault vault in VaultsRepository.savedVaultsList) {
       var approvalRequests = await _repository.getApprovalRequests(
           deviceInfo: deviceInfoUID, apiKey: vault.apiKey);
       var transferDetails = approvalRequests

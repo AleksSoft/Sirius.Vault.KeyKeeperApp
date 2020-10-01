@@ -53,13 +53,13 @@ class InviteController extends GetxController {
   }
 
   Future<void> _saveNewVaultAndReload(AcceptResponse response) async {
-    await VaultsRepository.saveNewVault(Vault()
+    await VaultsRepository.updateVault(Vault()
       ..localName = vaultNameController.text
       ..name = response.name
       ..apiKey = response.apiKey
       ..position = response.position
       ..description = response.description);
-    await VaultsController.con.loadVaults();
+    await VaultsController.con.reloadVaults();
     Get.back();
   }
 }

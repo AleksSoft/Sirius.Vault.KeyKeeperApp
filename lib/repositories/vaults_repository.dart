@@ -6,31 +6,45 @@ import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
 class VaultsRepository {
-  static List<String> loadApiKeys() =>
-      loadVaults().map((v) => v.apiKey).toList();
+  static SavedVaultsModel get _savedVaultsModel {
+    String jsonStr = GetStorage().read(AppStorageKeys.vaultsList);
 
-  static List<Vault> loadVaults() {
-    final _storage = GetStorage();
-    var saved = _storage.read(AppStorageKeys.vaultsList);
-    if (saved != null) {
-      var vaultsModel = SavedVaultsModel.fromJson(json.decode(saved));
-      return vaultsModel?.vaults ?? [];
-    } else {
-      return [];
+    if (jsonStr.isNullOrBlank) {
+      return SavedVaultsModel.empty();
     }
+    return SavedVaultsModel.fromJson(json.decode(jsonStr));
   }
 
-  static Future<void> saveNewVault(Vault vault) async {
-    final _storage = GetStorage();
-    String jsonStr = _storage.read(AppStorageKeys.errorList);
+  static List<Vault> get savedVaultsList => _savedVaultsModel.vaults;
 
-    SavedVaultsModel model = jsonStr.isNullOrBlank
-        ? SavedVaultsModel.empty()
-        : SavedVaultsModel.fromJson(json.decode(jsonStr));
+  static List<String> get savedApiKeys =>
+      savedVaultsList.map((v) => v.apiKey).toList();
 
-    model.vaults.add(vault);
+  static Future<void> updateVault(Vault newVault) async {
+    final model = _savedVaultsModel;
 
-    await _storage.write(
+    int vaultIndex = model.vaults.indexWhere(
+      (element) => element.apiKey == newVault.apiKey,
+    );
+
+    if (vaultIndex < 0) {
+      model.vaults.add(newVault);
+    } else {
+      model.vaults[vaultIndex] = newVault;
+    }
+
+    await GetStorage().write(
+      AppStorageKeys.vaultsList,
+      json.encode(model.toJson()),
+    );
+  }
+
+  static Future<void> deleteVaultByKey(String apiKey) async {
+    final model = _savedVaultsModel;
+
+    model.vaults.removeWhere((vault) => vault.apiKey == apiKey);
+
+    await GetStorage().write(
       AppStorageKeys.vaultsList,
       json.encode(model.toJson()),
     );

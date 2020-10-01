@@ -23,7 +23,7 @@ class VaultsPage extends MenuPage {
         ),
         body: RefreshIndicator(
           color: AppColors.dark,
-          onRefresh: () => _.loadVaults(),
+          onRefresh: () => _.reloadVaults(),
           child: ListView.separated(
             padding: const EdgeInsets.all(AppSizes.medium),
             itemCount: _.vaults.length,

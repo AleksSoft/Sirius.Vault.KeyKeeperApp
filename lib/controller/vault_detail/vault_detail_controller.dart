@@ -1,4 +1,7 @@
+import 'package:KeyKeeperApp/app/ui/app_colors.dart';
+import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
+import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,14 +15,44 @@ class VaultDetailController extends GetxController {
   @override
   void onInit() {
     vault = Get.arguments as Vault;
+    localNameController.text = vault.localName;
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    localNameController.text = vault.localName;
-    super.onReady();
-  }
+  bool get edited => localNameController.text.trim() != vault.localName;
 
   bool get stausOk => true;
+
+  void detachVault() =>
+      VaultsRepository.deleteVaultByKey(vault.apiKey).whenComplete(() =>
+          VaultsController.con.reloadVaults().whenComplete(() => Get.back()));
+
+  void save() => VaultsRepository.updateVault(
+        vault..localName = localNameController.text.trim(),
+      ).whenComplete(() {
+        Get.rawSnackbar(
+          message: 'Changes saved',
+          snackStyle: SnackStyle.GROUNDED,
+        );
+        update();
+      });
+
+  Future<bool> back() async {
+    if (edited) {
+      await Get.defaultDialog(
+        title: 'Save changes?',
+        content: SizedBox.shrink(),
+        buttonColor: AppColors.dark,
+        confirmTextColor: AppColors.primary,
+        cancelTextColor: AppColors.dark,
+        onConfirm: () {
+          save();
+          VaultsController.con.reloadVaults();
+          Get.back();
+        },
+        onCancel: () => true,
+      );
+    }
+    return true;
+  }
 }
