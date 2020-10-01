@@ -23,10 +23,8 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
         method: 'accept',
       );
 
-  Future<AcceptResponse> getPing({
-    @required String validatorId,
+  Future<PingResponse> getPing({
     @required String deviceInfo,
-    @required String inviteId,
     @required String apiKey,
   }) async =>
       await ErrorHandler.safeCall(

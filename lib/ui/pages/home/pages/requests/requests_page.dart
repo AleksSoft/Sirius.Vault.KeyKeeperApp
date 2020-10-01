@@ -21,10 +21,9 @@ class RequestsPage extends MenuPage {
       builder: (_) => RefreshIndicator(
         color: AppColors.dark,
         onRefresh: () => _.reloadRequests(),
-        child: ListView.separated(
+        child: ListView.builder(
           padding: const EdgeInsets.all(AppSizes.medium),
           itemCount: _.requests.length,
-          separatorBuilder: (context, index) => AppUiHelpers.vSpaceMedium,
           itemBuilder: (context, index) => _RequestCard(_.requests[index]),
         ),
       ),

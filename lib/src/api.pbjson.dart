@@ -100,7 +100,7 @@ const PingResponse$json = const {
   '1': 'PingResponse',
   '2': const [
     const {'1': 'error', '3': 1, '4': 1, '5': 11, '6': '.ValidatorApi.ValidatorApiError', '10': 'error'},
-    const {'1': 'messageEnc', '3': 2, '4': 1, '5': 12, '10': 'messageEnc'},
+    const {'1': 'messageEnc', '3': 2, '4': 1, '5': 9, '10': 'messageEnc'},
     const {'1': 'signatureMessage', '3': 3, '4': 1, '5': 9, '10': 'signatureMessage'},
   ],
 };

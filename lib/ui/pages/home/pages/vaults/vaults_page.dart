@@ -1,6 +1,5 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
-import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
@@ -24,10 +23,9 @@ class VaultsPage extends MenuPage {
         body: RefreshIndicator(
           color: AppColors.dark,
           onRefresh: () => _.reloadVaults(),
-          child: ListView.separated(
+          child: ListView.builder(
             padding: const EdgeInsets.all(AppSizes.medium),
             itemCount: _.vaults.length,
-            separatorBuilder: (context, index) => AppUiHelpers.vSpaceMedium,
             itemBuilder: (context, index) => _VaultCard(_.vaults[index]),
           ),
         ),

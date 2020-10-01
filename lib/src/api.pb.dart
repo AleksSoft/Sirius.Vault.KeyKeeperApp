@@ -414,7 +414,7 @@ class PingRequest extends $pb.GeneratedMessage {
 class PingResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('PingResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
     ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
-    ..a<$core.List<$core.int>>(2, 'messageEnc', $pb.PbFieldType.OY, protoName: 'messageEnc')
+    ..aOS(2, 'messageEnc', protoName: 'messageEnc')
     ..aOS(3, 'signatureMessage', protoName: 'signatureMessage')
     ..hasRequiredFields = false
   ;
@@ -446,9 +446,9 @@ class PingResponse extends $pb.GeneratedMessage {
   ValidatorApiError ensureError() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<$core.int> get messageEnc => $_getN(1);
+  $core.String get messageEnc => $_getSZ(1);
   @$pb.TagNumber(2)
-  set messageEnc($core.List<$core.int> v) { $_setBytes(1, v); }
+  set messageEnc($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasMessageEnc() => $_has(1);
   @$pb.TagNumber(2)

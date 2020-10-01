@@ -1,5 +1,6 @@
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'app_colors.dart';
 
@@ -28,8 +29,8 @@ class AppUiHelpers {
     backgroundColor: Colors.transparent,
     valueColor: AlwaysStoppedAnimation<Color>(AppColors.progressColor),
   );
-  static const CircularProgressIndicator circularProgress =
-      CircularProgressIndicator(
-    valueColor: AlwaysStoppedAnimation<Color>(AppColors.progressColor),
+  static const SpinKitRotatingCircle circularProgress = SpinKitRotatingCircle(
+    color: Colors.white,
+    size: AppSizes.extraLarge,
   );
 }

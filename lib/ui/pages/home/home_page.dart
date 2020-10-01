@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'pages/inbox/inbox_page.dart';
 import 'pages/menu_pages.dart';
 
 class HomePage extends StatelessWidget {
@@ -51,14 +52,14 @@ class _DrawerMenu extends StatelessWidget {
               title: Text('Vaults'),
             ),
             ListTile(
-              onTap: () => c.selectedPage = MenuPage(),
-              leading: Icon(Icons.backup),
-              title: Text('Backup'),
+              onTap: () => c.selectedPage = InboxPage(),
+              leading: Icon(Icons.inbox),
+              title: Text('Admin messages'),
             ),
             ListTile(
               onTap: () => c.selectedPage = MenuPage(),
-              leading: Icon(Icons.inbox),
-              title: Text('Inbox'),
+              leading: Icon(Icons.backup),
+              title: Text('Backup'),
             ),
             ListTile(
               onTap: () => c.selectedPage = MenuPage(),
