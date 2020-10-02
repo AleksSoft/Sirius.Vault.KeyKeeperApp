@@ -1,5 +1,5 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
 import 'package:flutter/material.dart';

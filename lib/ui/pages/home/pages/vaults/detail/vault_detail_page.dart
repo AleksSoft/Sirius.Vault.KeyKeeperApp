@@ -1,7 +1,7 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
-import 'package:KeyKeeperApp/controller/vault_detail/vault_detail_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/ui/widgets/details_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

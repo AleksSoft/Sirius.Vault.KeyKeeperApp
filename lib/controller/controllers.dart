@@ -1,0 +1,10 @@
+export 'root/root_controller.dart';
+export 'register/register_controller.dart';
+export 'local_auth/local_auth_controller.dart';
+export 'home/home_controller.dart';
+export 'home/pages/inbox/inbox_controller.dart';
+export 'home/pages/requests/detail/transfer_detail_controller.dart';
+export 'home/pages/requests/requests_controller.dart';
+export 'home/pages/vaults/detail/vault_detail_controller.dart';
+export 'home/pages/vaults/invite/invite_controller.dart';
+export 'home/pages/vaults/vaults_controller.dart';

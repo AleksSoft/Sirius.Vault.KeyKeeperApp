@@ -1,4 +1,4 @@
-import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

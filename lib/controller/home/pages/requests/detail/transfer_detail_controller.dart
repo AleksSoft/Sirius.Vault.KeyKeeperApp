@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/controller/requests/requests_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/resolution_document_model.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';

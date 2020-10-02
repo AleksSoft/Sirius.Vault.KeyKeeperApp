@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'pages/inbox/inbox_page.dart';
 import 'pages/menu_pages.dart';
 
 class HomePage extends StatelessWidget {

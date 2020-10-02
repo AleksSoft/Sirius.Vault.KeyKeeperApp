@@ -1,7 +1,7 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
-import 'package:KeyKeeperApp/controller/invite/invite_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

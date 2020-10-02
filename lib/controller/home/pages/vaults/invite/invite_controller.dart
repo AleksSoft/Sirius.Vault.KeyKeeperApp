@@ -1,4 +1,4 @@
-import 'package:KeyKeeperApp/controller/vaults/vaults_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/repositories/invites_repository.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';

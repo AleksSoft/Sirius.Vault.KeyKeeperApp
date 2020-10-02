@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/controller/transfer_detail/transfer_detail_controller.dart';
+import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
