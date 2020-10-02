@@ -38,6 +38,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSFaceIDUsageDescription</key>
-	<string>It is needed for obtaining maximum privacy in app usage</string>
+	<string>Face ID and Touch ID are needed to check local auth into application</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is needed to scan QR codes</string>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>

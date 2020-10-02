@@ -1,6 +1,5 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
-import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,54 +35,79 @@ class _DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _VaultStatusView(),
-            ListTile(
-              onTap: () => c.selectedPage = RequestsPage(),
-              leading: Icon(Icons.list),
-              title: Text('Requests'),
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _VaultStatusView(),
+                ListTile(
+                  onTap: () => c.selectedPage = RequestsPage(),
+                  leading: Icon(Icons.list),
+                  title: Text('Requests'),
+                ),
+                ListTile(
+                  onTap: () => c.selectedPage = VaultsPage(),
+                  leading: Icon(Icons.view_carousel),
+                  title: Text('Vaults'),
+                ),
+                ListTile(
+                  onTap: () => c.selectedPage = InboxPage(),
+                  leading: Icon(Icons.inbox),
+                  title: Text('Admin messages'),
+                ),
+                ListTile(
+                  onTap: () => c.changePin(),
+                  leading: Icon(Icons.dialpad),
+                  title: Text('Change PIN'),
+                ),
+                ListTile(
+                  onTap: () => c.selectedPage = MenuPage(),
+                  leading: Icon(Icons.backup),
+                  title: Text('Backup'),
+                ),
+              ],
             ),
-            ListTile(
-              onTap: () => c.selectedPage = VaultsPage(),
-              leading: Icon(Icons.view_carousel),
-              title: Text('Vaults'),
+          ),
+          Spacer(),
+          Container(
+            height: 200,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ListTile(
+                  onTap: () => c.sharePublicKeyPem(),
+                  leading: Icon(Icons.share),
+                  title: Text('Share public key'),
+                ),
+                ListTile(
+                  onTap: () => c.shareValidatorId(),
+                  leading: Icon(Icons.share),
+                  title: Text('Share validator id'),
+                ),
+                ListTile(
+                  onTap: () => c.logout(),
+                  leading: Icon(Icons.exit_to_app),
+                  title: Text('Logout'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.medium,
+                  ),
+                  child: Text(
+                    c.appVersion,
+                    style: Get.textTheme.overline.copyWith(
+                      color: AppColors.secondary,
+                      fontSize: 9,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
-            ListTile(
-              onTap: () => c.selectedPage = InboxPage(),
-              leading: Icon(Icons.inbox),
-              title: Text('Admin messages'),
-            ),
-            ListTile(
-              onTap: () => c.selectedPage = MenuPage(),
-              leading: Icon(Icons.backup),
-              title: Text('Backup'),
-            ),
-            ListTile(
-              onTap: () => c.selectedPage = MenuPage(),
-              leading: Icon(Icons.dialpad),
-              title: Text('Change PIN'),
-            ),
-            ListTile(
-              onTap: () => c.logout(),
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Logout'),
-            ),
-            AppUiHelpers.vSpaceExtraLarge,
-            ListTile(
-              onTap: () => c.sharePublicKeyPem(),
-              leading: Icon(Icons.share),
-              title: Text('Share public key'),
-            ),
-            ListTile(
-              onTap: () => c.shareValidatorId(),
-              leading: Icon(Icons.share),
-              title: Text('Share validator id'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

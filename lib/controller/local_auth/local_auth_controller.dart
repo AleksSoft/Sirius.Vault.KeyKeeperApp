@@ -26,21 +26,16 @@ class LocalAuthController extends GetxController {
 
   String get header => _getHeaderStr();
 
-  bool _isRegister;
-  bool get showBack => !_isRegister ?? false;
+  bool _isRegister = false;
+  bool get showBack => _isRegister;
 
-  bool _showLocalAuth;
-  bool get showLocalAuth => _showLocalAuth ?? false;
+  bool _showLocalAuth = false;
+  bool get showLocalAuth => _showLocalAuth;
 
   int get fieldsCount => 4;
 
   @override
-  void onInit() async {
-    _isRegister = !_storage.hasData(AppStorageKeys.pinCode);
-    _showLocalAuth =
-        !_isRegister && (await LocalAuthService.canCheckBiometrics);
-    _viewState.value =
-        _isRegister ? PinViewState.CREATE_PIN : PinViewState.DEFAULT;
+  void onInit() {
     ever(_pinValue, (pin) {
       if (pin?.length == fieldsCount) {
         submit(pin);
@@ -50,7 +45,14 @@ class LocalAuthController extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onReady() async {
+    _isRegister = ((Get.arguments ?? false) as bool) ||
+        !_storage.hasData(AppStorageKeys.pinCode);
+    _showLocalAuth =
+        !_isRegister && (await LocalAuthService.canCheckBiometrics);
+    _viewState.value =
+        _isRegister ? PinViewState.CREATE_PIN : PinViewState.DEFAULT;
+    update();
     super.onReady();
     if (showLocalAuth) {
       toggleLocalAuth();

@@ -1,10 +1,12 @@
 import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/requests/requests_page.dart';
+import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 
 class HomeController extends GetxController {
@@ -15,6 +17,8 @@ class HomeController extends GetxController {
 
   RSAPublicKey _publicKey;
   String _validatorId;
+
+  String appVersion = '';
 
   MenuPage _selectedPage = RequestsPage();
   MenuPage get selectedPage => _selectedPage;
@@ -30,7 +34,15 @@ class HomeController extends GetxController {
   void onInit() async {
     _publicKey = await _rsaService.publicKey;
     _validatorId = await _rsaService.validatorId;
+    appVersion = await _appVersionString;
     super.onInit();
+  }
+
+  Future<String> get _appVersionString async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    return 'v$version ($buildNumber)';
   }
 
   void logout() => _storage.erase().whenComplete(
@@ -40,4 +52,6 @@ class HomeController extends GetxController {
   void sharePublicKeyPem() => Share.share(_publicKey.toPEM());
 
   void shareValidatorId() => Share.share(_validatorId);
+
+  void changePin() => Get.toNamed(LocalAuthPage.route, arguments: true);
 }
