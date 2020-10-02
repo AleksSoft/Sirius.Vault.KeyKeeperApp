@@ -1,7 +1,6 @@
 import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
-import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -62,7 +61,7 @@ class _DrawerMenu extends StatelessWidget {
                   title: Text('Change PIN'),
                 ),
                 ListTile(
-                  onTap: () => c.selectedPage = MenuPage(),
+                  onTap: () => c.selectedPage = BackupPage(),
                   leading: Icon(Icons.backup),
                   title: Text('Backup'),
                 ),

@@ -6,8 +6,7 @@ import 'package:KeyKeeperApp/models/resolution_document_model.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
-import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
+import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
@@ -24,8 +23,7 @@ class TransferDetailController extends GetxController {
     2: ResolveApprovalRequestsRequest_ResolutionStatus.skip,
   };
 
-  final _aesService = Get.find<AESService>();
-  final _rsaService = Get.find<RSAService>();
+  final _crypto = Get.find<CryptoService>();
   final _repository = TransfersRepository();
 
   var msgTextController = TextEditingController();
@@ -104,13 +102,13 @@ class TransferDetailController extends GetxController {
 
     print('-----resolutionDocument: ${resolutionDocument.toString()}');
 
-    var resolutionDocumentEnc = _aesService.encrypt(
+    var resolutionDocumentEnc = _crypto.aesEncrypt(
       resolutionDocument.toString(),
       _transferDetailArgs.aesIvNonce,
       _transferDetailArgs.aesSecretKey,
     );
 
-    var privateKey = await _rsaService.privateKey;
+    var privateKey = await _crypto.rsaPrivateKey;
     var binaryDocument = utf8.encode(resolutionDocument.toString());
     var binarySignature = privateKey.createSHA256Signature(binaryDocument);
     var signatureBase64 = base64.encode(binarySignature);

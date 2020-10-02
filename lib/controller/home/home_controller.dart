@@ -1,4 +1,4 @@
-import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
+import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/requests/requests_page.dart';
 import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
@@ -12,7 +12,7 @@ import 'package:share/share.dart';
 class HomeController extends GetxController {
   static HomeController get con => Get.find();
 
-  final _rsaService = Get.find<RSAService>();
+  final _crypto = Get.find<CryptoService>();
   final _storage = GetStorage();
 
   RSAPublicKey _publicKey;
@@ -32,8 +32,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    _publicKey = await _rsaService.publicKey;
-    _validatorId = await _rsaService.validatorId;
+    _publicKey = await _crypto.rsaPublicKey;
+    _validatorId = await _crypto.validatorId;
     appVersion = await _appVersionString;
     super.onInit();
   }

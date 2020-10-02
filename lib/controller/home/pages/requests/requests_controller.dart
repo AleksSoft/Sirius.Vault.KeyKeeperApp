@@ -5,8 +5,7 @@ import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/aes_service.dart';
-import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
+import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
@@ -17,8 +16,7 @@ class RequestsController extends GetxController {
   static RequestsController get con => Get.find();
 
   final _repository = TransfersRepository();
-  final _rsaService = Get.find<RSAService>();
-  final _aesService = Get.find<AESService>();
+  final _crypto = Get.find<CryptoService>();
 
   RSAPrivateKey _privateKey;
 
@@ -26,7 +24,7 @@ class RequestsController extends GetxController {
 
   @override
   void onInit() async {
-    _privateKey = await _rsaService.privateKey;
+    _privateKey = await _crypto.rsaPrivateKey;
     super.onInit();
   }
 
@@ -66,7 +64,7 @@ class RequestsController extends GetxController {
       var secretDecr = _privateKey.decryptData(secretEncBase64);
       String secretKey = base64.encode(secretDecr);
 
-      String decryptedJson = _aesService.decrypt(
+      String decryptedJson = _crypto.aesDecrypt(
         request.transactionDetailsEncBase64,
         request.ivNonce,
         secretKey,

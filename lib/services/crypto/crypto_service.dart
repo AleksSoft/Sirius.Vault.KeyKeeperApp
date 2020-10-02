@@ -4,31 +4,42 @@ import 'dart:typed_data';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:crypto/crypto.dart';
+import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pointycastle/export.dart' as pointy;
 import 'package:crypton/crypton.dart';
 import 'package:flutter/material.dart';
+import 'package:steel_crypt/steel_crypt.dart';
 
-class RSAService {
+class CryptoService {
   static const int publicExponent = 3;
   static const int strength = 1024;
   static const int certainty = 25;
 
+  static const int keyBitSize = 256;
+  static const int macBitSize = 128;
+  static const int nonceBitSize = 128;
+
   final _storage = GetStorage();
 
-  Future<RSAPrivateKey> get privateKey async => (await keyPair).privateKey;
-
-  Future<RSAPublicKey> get publicKey async => (await keyPair).publicKey;
-
+  /// get validator id from RSA publc key
   Future<String> get validatorId async {
-    var key = await publicKey;
+    var key = await rsaPublicKey;
     var bytes = utf8.encode(key.toPEM());
-    var sha256Digest = sha256.convert(bytes);
-    return base64.encode(sha256Digest.bytes);
+    return sha256Hash(bytes);
   }
 
-  Future<RSAKeypairSir> get keyPair async {
-    if (!_storage.hasData(AppStorageKeys.privateKey)) {
+  /// get generated RSA private key
+  Future<RSAPrivateKey> get rsaPrivateKey async =>
+      (await rsaKeyPair).privateKey;
+
+  /// get generated RSA public key
+  Future<RSAPublicKey> get rsaPublicKey async => (await rsaKeyPair).publicKey;
+
+  /// get generated RSA key pair
+  Future<RSAKeypairSir> get rsaKeyPair async {
+    var privateKeyValue = _storage.read(AppStorageKeys.privateKey);
+    if (GetUtils.isNullOrBlank(privateKeyValue)) {
       var keyPair = _createKeyPair();
       await _storage.write(
         AppStorageKeys.privateKey,
@@ -36,12 +47,34 @@ class RSAService {
       );
       return keyPair;
     } else {
-      return RSAKeypairSir(
-        RSAPrivateKey.fromPEM(
-          _storage.read(AppStorageKeys.privateKey),
-        ),
-      );
+      return RSAKeypairSir(RSAPrivateKey.fromPEM(privateKeyValue));
     }
+  }
+
+  /// get random key for AES
+  String get randKey => CryptKey().genFortuna();
+
+  /// get random iv for AES
+  String get randNonce => CryptKey().genDart(len: nonceBitSize ~/ 8);
+
+  /// encrypt data with AES algorythm
+  String aesEncrypt(String input, String nonce, String keyStr) {
+    var aes = AesCrypt(key: keyStr, padding: PaddingAES.pkcs7);
+    var encrypted = aes.cbc.encrypt(inp: input, iv: nonce);
+    return encrypted;
+  }
+
+  /// decrypt encrypted data with AES algorythm
+  String aesDecrypt(String input, String nonce, String keyStr) {
+    var aes = AesCrypt(key: keyStr, padding: PaddingAES.pkcs7);
+    var decrypted = aes.cbc.decrypt(enc: input, iv: nonce);
+    return decrypted;
+  }
+
+  /// get bytes sha256 hash
+  String sha256Hash(Uint8List bytes) {
+    var sha256Digest = sha256.convert(bytes);
+    return base64.encode(sha256Digest.bytes);
   }
 
   RSAKeypair _createKeyPair() => RSAKeypairSir.fromParameters(
@@ -61,7 +94,7 @@ class RSAKeypairSir implements RSAKeypair {
   RSAKeypairSir(this._privateKey)
       : _publicKey = RSAPublicKey(
           _privateKey.asPointyCastle.modulus,
-          BigInt.from(RSAService.publicExponent),
+          BigInt.from(CryptoService.publicExponent),
         );
 
   RSAKeypairSir.fromParameters({

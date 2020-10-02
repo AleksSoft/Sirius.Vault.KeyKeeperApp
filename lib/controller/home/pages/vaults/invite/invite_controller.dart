@@ -2,7 +2,7 @@ import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/repositories/invites_repository.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
+import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:barcode_scan/barcode_scan.dart';
@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class InviteController extends GetxController {
   static InviteController get con => Get.find();
 
-  final _rsaService = Get.find<RSAService>();
+  final _crypto = Get.find<CryptoService>();
   final _repository = InvitesRepository();
 
   final inviteCodeController = TextEditingController();
@@ -23,8 +23,8 @@ class InviteController extends GetxController {
       !vaultNameController.text.isNullOrBlank;
 
   Future<void> submitCode() async {
-    var validatorId = await _rsaService.validatorId;
-    var publicKeyPem = (await _rsaService.publicKey).toPEM();
+    var validatorId = await _crypto.validatorId;
+    var publicKeyPem = (await _crypto.rsaPublicKey).toPEM();
     String deviceInfo = await DeviceInfoService.deviceInfo;
     String inviteId = inviteCodeController.text.trim();
 

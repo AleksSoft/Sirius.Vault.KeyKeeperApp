@@ -8,3 +8,4 @@ export 'home/pages/requests/requests_controller.dart';
 export 'home/pages/vaults/detail/vault_detail_controller.dart';
 export 'home/pages/vaults/invite/invite_controller.dart';
 export 'home/pages/vaults/vaults_controller.dart';
+export 'home/pages/backup/backup_controller.dart';

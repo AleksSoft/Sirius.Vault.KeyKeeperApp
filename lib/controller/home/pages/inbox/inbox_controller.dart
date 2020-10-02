@@ -1,6 +1,6 @@
 import 'package:KeyKeeperApp/repositories/invites_repository.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/rsa_service.dart';
+import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class InboxController extends GetxController {
   static InboxController get con => Get.find();
 
-  final _rsaService = Get.find<RSAService>();
+  final _crypto = Get.find<CryptoService>();
   final _repository = InvitesRepository();
 
   RSAKeypairSir _keyPair;
@@ -27,7 +27,7 @@ class InboxController extends GetxController {
 
   @override
   void onInit() async {
-    _keyPair = await _rsaService.keyPair;
+    _keyPair = await _crypto.rsaKeyPair;
     super.onInit();
   }
 
