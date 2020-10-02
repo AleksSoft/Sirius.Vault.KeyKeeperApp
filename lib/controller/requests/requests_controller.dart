@@ -42,7 +42,9 @@ class RequestsController extends GetxController {
     requests.clear();
     for (Vault vault in VaultsRepository.savedVaultsList) {
       var approvalRequests = await _repository.getApprovalRequests(
-          deviceInfo: deviceInfoUID, apiKey: vault.apiKey);
+        deviceInfo: deviceInfoUID,
+        apiKey: vault.apiKey,
+      );
       var transferDetails = approvalRequests
           .map((r) => _buildTransferDetail(r, vault))
           .where((element) => element != null)
@@ -70,16 +72,16 @@ class RequestsController extends GetxController {
         secretKey,
       );
 
+      var jsonMap = json.decode(decryptedJson);
       return TransferDetailArgs(
-        transferDetail: TransferDetailsModel.fromJson(
-          json.decode(decryptedJson),
-        ),
+        transferDetail: TransferDetailsModel.fromJson(jsonMap),
         transferSigningRequestId: request.transferSigningRequestId,
         aesSecretKey: secretKey,
         aesIvNonce: request.ivNonce,
         vault: vault,
       );
     } catch (e) {
+      print(e);
       return null;
     }
   }

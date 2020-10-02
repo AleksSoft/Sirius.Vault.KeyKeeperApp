@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/703237344/barcode_scan.iml" filepath="$PROJECT_DIR$/.idea/modules/703237344/barcode_scan.iml" group="android/barcode_scan" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-671360714/clipboard_manager.iml" filepath="$PROJECT_DIR$/.idea/modules/-671360714/clipboard_manager.iml" group="android/clipboard_manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-761670952/device_info.iml" filepath="$PROJECT_DIR$/.idea/modules/-761670952/device_info.iml" group="android/device_info" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1137077310/flutter_plugin_android_lifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/1137077310/flutter_plugin_android_lifecycle.iml" group="android/flutter_plugin_android_lifecycle" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1086062188/local_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/1086062188/local_auth.iml" group="android/local_auth" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1651971543/path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/1651971543/path_provider.iml" group="android/path_provider" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-672218561/share.iml" filepath="$PROJECT_DIR$/.idea/modules/-672218561/share.iml" group="android/share" />
+    </modules>
+  </component>
+</project>

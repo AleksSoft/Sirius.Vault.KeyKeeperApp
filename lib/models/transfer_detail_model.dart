@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class TransferDetailsModel {
   String amount;
@@ -115,7 +116,9 @@ class ClientContext {
     accountReferenceId = json['accountReferenceId'];
     withdrawalReferenceId = json['withdrawalReferenceId'];
     ip = json['ip'];
-    timestamp = _dateFormat.format(DateTime.parse(json['timestamp']));
+    timestamp = GetUtils.isNullOrBlank(json['timestamp'])
+        ? ''
+        : _dateFormat.format(DateTime.parse(json['timestamp']));
   }
 
   Map<String, dynamic> toJson() {

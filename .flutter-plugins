@@ -2,9 +2,10 @@
 barcode_scan=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-3.0.1/
 clipboard_manager=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/clipboard_manager-0.0.4/
 device_info=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+8/
-flutter_plugin_android_lifecycle=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.8/
-local_auth=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth-0.6.3+1/
-path_provider=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.11/
+flutter_plugin_android_lifecycle=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
+local_auth=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth-0.6.3+2/
+path_provider=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.18/
 path_provider_linux=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2/
-path_provider_macos=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+3/
-share=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/share-0.6.5+1/
+path_provider_macos=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+4/
+path_provider_windows=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+1/
+share=/Users/antonrozdorozhniuk/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/share-0.6.5+2/
