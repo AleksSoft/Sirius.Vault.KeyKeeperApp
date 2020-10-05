@@ -26,6 +26,7 @@ class AppRoutes {
     GetPage(
       name: HomePage.route,
       page: () => HomePage(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: TransferDetailPage.route,

@@ -2,8 +2,10 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/register/register_controller.dart';
+import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -14,68 +16,128 @@ class RegisterPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: null,
       child: Scaffold(
-        body: SafeArea(
-          child: GetBuilder<RegisterController>(
-            init: RegisterController(),
-            builder: (_) {
-              return Stack(
-                children: [
-                  Positioned(
-                    top: AppSizes.medium,
-                    left: AppSizes.small,
-                    right: AppSizes.small,
-                    child: Text(
-                      'Register',
-                      textAlign: TextAlign.center,
-                      style: Get.textTheme.headline6,
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppSizes.medium),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            'Start from backup',
+            textAlign: TextAlign.center,
+            style: Get.textTheme.headline6,
+          ),
+          actions: [
+            FlatButton(
+              onPressed: () => RegisterController.con.skip(),
+              child: Text('Skip'),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSizes.medium),
+              child: GetBuilder<RegisterController>(
+                init: RegisterController(),
+                builder: (_) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Enter password to decypt backup data',
+                        style: Get.textTheme.button.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      AppUiHelpers.vSpaceMedium,
+                      Theme(
+                        data: Get.theme.copyWith(primaryColor: AppColors.dark),
+                        child: TextFormField(
+                          controller: _.passwordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          onChanged: (v) => _.update(),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (v) => _.isValidPass
+                              ? null
+                              : 'Password should be at least 8 chars long',
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password',
+                            alignLabelWithHint: true,
+                          ),
+                        ),
+                      ),
+                      AppUiHelpers.vSpaceMedium,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Obx(
-                            () => Theme(
-                              data: Get.theme.copyWith(
-                                primaryColor: AppColors.dark,
-                              ),
-                              child: TextFormField(
-                                keyboardType: TextInputType.multiline,
-                                initialValue: _.tokenValue,
-                                maxLines: 5,
-                                onChanged: (value) => _.tokenValue = value,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Token',
-                                  alignLabelWithHint: true,
-                                ),
-                              ),
+                          Text(
+                            'Enter encrypted backup text or scan QR code',
+                            style: Get.textTheme.button.copyWith(
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          AppUiHelpers.vSpaceMedium,
-                          Text(
-                            'This screen is temporary.',
-                            style: Get.textTheme.caption,
+                          IconButton(
+                            onPressed: () => _.scanQRCode(),
+                            icon: Icon(Icons.qr_code_scanner),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: AppSizes.medium,
-                    right: AppSizes.medium,
-                    left: AppSizes.medium,
-                    child: CupertinoButton.filled(
-                      onPressed: () => _.submit(),
-                      child: Text('Submit'),
-                    ),
-                  ),
-                ],
-              );
-            },
+                      AppUiHelpers.vSpaceMedium,
+                      Theme(
+                        data: Get.theme.copyWith(
+                          primaryColor: AppColors.dark,
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.multiline,
+                          controller: _.dataController,
+                          maxLines: 5,
+                          onChanged: (v) => _.update(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Encrypted data',
+                            alignLabelWithHint: true,
+                          ),
+                        ),
+                      ),
+                      AppUiHelpers.vSpaceMedium,
+                      AppUiHelpers.vSpaceExtraLarge,
+                      Center(
+                        child: ArgonButton(
+                          height: AppSizes.extraLarge * 1.5,
+                          width: Get.width - AppSizes.medium * 2,
+                          roundLoadingShape: true,
+                          borderRadius: 5.0,
+                          color: _.isValidData
+                              ? AppColors.dark
+                              : AppColors.secondary,
+                          onTap: (a, b, s) => _.isValidData ? _.submit() : {},
+                          splashColor: _.isValidData
+                              ? AppColors.light
+                              : Colors.transparent,
+                          child: Text(
+                            "Submit",
+                            style: Get.textTheme.button.copyWith(
+                              color: AppColors.light,
+                            ),
+                          ),
+                          loader: Container(
+                            padding: EdgeInsets.all(AppSizes.small),
+                            child: SpinKitRotatingCircle(
+                              color: Colors.white,
+                              size: AppSizes.extraLarge,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ),
         ),
       ),

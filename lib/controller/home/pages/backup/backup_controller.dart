@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/models/backup_model.dart';
 import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/backup/backup_page.dart';
 import 'package:flutter/material.dart';
@@ -46,15 +45,15 @@ class BackupController extends GetxController {
     var nonceBytes = base64.decode(nonce);
 
     // create backup model
-    var model = _keyPair.privateKey.toPEM();
-    var modelBytes = utf8.encode(model.toString());
+    var input = _keyPair.privateKey.toPEM();
 
-    // input = (nonceBytes+jsonBytes)
-    var appendedBytes = List<int>.from(nonceBytes)..addAll(modelBytes);
-    String input = base64.encode(appendedBytes);
-
-    // encrypt
+    // encrypt and obtain encryptedBytes
     String encrypted = _crypto.aesEncrypt(input, nonce, keyValue);
-    return encrypted;
+    var encryptedBytes = base64.decode(encrypted);
+
+    // result = (nonceBytes+encryptedBytes)
+    var appendedBytes = List<int>.from(nonceBytes)..addAll(encryptedBytes);
+    String result = base64.encode(appendedBytes);
+    return result;
   }
 }
