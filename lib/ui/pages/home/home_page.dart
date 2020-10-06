@@ -32,6 +32,7 @@ class _DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SingleChildScrollView(
             child: Column(
@@ -66,53 +67,52 @@ class _DrawerMenu extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 200,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ListTile(
-                  onTap: () => c.sharePublicKeyPem(),
-                  leading: Icon(Icons.share),
-                  title: Text('Share public key'),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ListTile(
+                onTap: () => c.sharePublicKeyPem(),
+                leading: Icon(Icons.share),
+                title: Text('Share public key'),
+              ),
+              ListTile(
+                onTap: () => c.shareValidatorId(),
+                leading: Icon(Icons.share),
+                title: Text('Share validator id'),
+              ),
+              ListTile(
+                onTap: () => c.logout(),
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Logout'),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: AppSizes.medium,
+                  right: AppSizes.medium,
+                  bottom: AppSizes.medium,
                 ),
-                ListTile(
-                  onTap: () => c.shareValidatorId(),
-                  leading: Icon(Icons.share),
-                  title: Text('Share validator id'),
-                ),
-                ListTile(
-                  onTap: () => c.logout(),
-                  leading: Icon(Icons.exit_to_app),
-                  title: Text('Logout'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSizes.medium,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        c.appVersion,
-                        style: Get.textTheme.overline.copyWith(
-                          color: AppColors.secondary,
-                          fontSize: 10,
-                        ),
-                        textAlign: TextAlign.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      c.appVersion,
+                      style: Get.textTheme.overline.copyWith(
+                        color: AppColors.secondary,
+                        fontSize: 10,
                       ),
-                      GestureDetector(
-                        onTap: () => c.selectedPage = DevSettingsPage(),
-                        child: Text(
-                          'Dev settings',
-                          style: TextStyle(fontSize: 10),
-                        ),
+                      textAlign: TextAlign.center,
+                    ),
+                    FlatButton(
+                      onPressed: () => c.selectedPage = DevSettingsPage(),
+                      child: Text(
+                        'Dev settings',
+                        style: TextStyle(fontSize: 10),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

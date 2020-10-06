@@ -9,32 +9,36 @@ class DevSettingsPage extends MenuPage {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppSizes.medium),
-      child: SingleChildScrollView(
-        child: GetBuilder<DevSettingsController>(
-          init: DevSettingsController(),
-          builder: (_) => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('Base url:', style: Get.textTheme.headline6),
-              DropdownButton<String>(
-                isExpanded: true,
-                value: _.defaultUrl,
-                items: _.urlList
-                    .map((e) => DropdownMenuItem<String>(
-                          value: e,
-                          child: Text(
-                            e,
-                            maxLines: 1,
-                            softWrap: false,
-                            overflow: TextOverflow.fade,
-                          ),
-                        ))
-                    .toList(),
-                onChanged: (url) => _.updateDefaultUrl(url),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizes.medium),
+          child: SingleChildScrollView(
+            child: GetBuilder<DevSettingsController>(
+              init: DevSettingsController(),
+              builder: (_) => Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Base url:', style: Get.textTheme.headline6),
+                  DropdownButton<String>(
+                    isExpanded: true,
+                    value: _.defaultUrl,
+                    items: _.urlList
+                        .map((e) => DropdownMenuItem<String>(
+                              value: e,
+                              child: Text(
+                                e,
+                                maxLines: 1,
+                                softWrap: false,
+                                overflow: TextOverflow.fade,
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (url) => _.updateDefaultUrl(url),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
