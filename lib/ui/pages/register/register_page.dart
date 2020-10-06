@@ -5,6 +5,7 @@ import 'package:KeyKeeperApp/controller/register/register_controller.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -134,12 +135,14 @@ class RegisterPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppUiHelpers.vSpaceExtraLarge,
-                      FlatButton(
-                        onPressed: () => Get.to(DevSettingsPage()),
-                        child: Text(
-                          'Dev settings',
-                          style: TextStyle(fontSize: 10),
+                      Visibility(
+                        visible: !kReleaseMode,
+                        child: FlatButton(
+                          onPressed: () => Get.to(DevSettingsPage()),
+                          child: Text(
+                            'Dev settings',
+                            style: TextStyle(fontSize: 10),
+                          ),
                         ),
                       ),
                     ],
