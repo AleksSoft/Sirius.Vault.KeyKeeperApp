@@ -35,7 +35,6 @@ dependencies:
   enum_to_string: ^1.0.9
   argon_buttons_flutter: ^1.0.6
   package_info: ^0.4.3
-  firebase_messaging: ^7.0.2
 
 dev_dependencies:
   flutter_test:
