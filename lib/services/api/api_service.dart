@@ -5,19 +5,19 @@ import 'package:get_storage/get_storage.dart';
 import 'package:grpc/grpc.dart';
 
 class ApiService {
-  static final List<String> urls = <String>[
-    // 'vault-validator-api.swisschain.io',
+  static const List<String> urls = <String>[
     'sirius-validator-dev.swisschain.info',
-    // 'vault-validator-api-test.swisschain.info',
+    'sirius-validator-test.swisschain.info',
   ];
-  static final timeoutDuration = const Duration(seconds: 60);
+  static const timeoutDuration = const Duration(seconds: 60);
+
   final _storage = GetStorage();
 
   final Map _clients = Map();
 
   T client<T extends Client>() => _clients[T];
 
-  static String get defaultUrl {
+  String get defaultUrl {
     String url = GetStorage().read(AppStorageKeys.baseUrl);
     return url.isNullOrBlank ? urls[0] : url;
   }

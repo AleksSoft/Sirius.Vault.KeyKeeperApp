@@ -15,71 +15,74 @@ class BackupPage extends MenuPage {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BackupController>(
-      init: BackupController(),
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(AppSizes.medium),
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Text(
-                  'Enter password please!\nIt will be used to encrypt your backup data.',
-                  style: Get.textTheme.button.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                AppUiHelpers.vSpaceMedium,
-                Theme(
-                  data: Get.theme.copyWith(primaryColor: AppColors.dark),
-                  child: TextFormField(
-                    controller: _.passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    onChanged: (v) => _.update(),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (v) => _.isValidPass
-                        ? null
-                        : 'Password should be at least 8 chars long',
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      alignLabelWithHint: true,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: ArgonButton(
-                  height: AppSizes.extraLarge * 1.5,
-                  width: Get.width - AppSizes.medium * 2,
-                  roundLoadingShape: true,
-                  borderRadius: 5.0,
-                  color: _.isValidPass ? AppColors.dark : AppColors.secondary,
-                  onTap: (a, b, s) => _.isValidPass ? _.openBackupShare() : {},
-                  child: Text(
-                    "Submit",
+    return SafeArea(
+      child: GetBuilder<BackupController>(
+        init: BackupController(),
+        builder: (_) => Padding(
+          padding: const EdgeInsets.all(AppSizes.medium),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Enter password please!\nIt will be used to encrypt your backup data.',
                     style: Get.textTheme.button.copyWith(
-                      color: AppColors.light,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  AppUiHelpers.vSpaceMedium,
+                  Theme(
+                    data: Get.theme.copyWith(primaryColor: AppColors.dark),
+                    child: TextFormField(
+                      controller: _.passwordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      onChanged: (v) => _.update(),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (v) => _.isValidPass
+                          ? null
+                          : 'Password should be at least 8 chars long',
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                        alignLabelWithHint: true,
+                      ),
                     ),
                   ),
-                  loader: Container(
-                    padding: EdgeInsets.all(AppSizes.small),
-                    child: SpinKitRotatingCircle(
-                      color: Colors.white,
-                      size: AppSizes.extraLarge,
+                ],
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: ArgonButton(
+                    height: AppSizes.extraLarge * 1.5,
+                    width: Get.width - AppSizes.medium * 2,
+                    roundLoadingShape: true,
+                    borderRadius: 5.0,
+                    color: _.isValidPass ? AppColors.dark : AppColors.secondary,
+                    onTap: (a, b, s) =>
+                        _.isValidPass ? _.openBackupShare() : {},
+                    child: Text(
+                      "Submit",
+                      style: Get.textTheme.button.copyWith(
+                        color: AppColors.light,
+                      ),
+                    ),
+                    loader: Container(
+                      padding: EdgeInsets.all(AppSizes.small),
+                      child: SpinKitRotatingCircle(
+                        color: Colors.white,
+                        size: AppSizes.extraLarge,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -18,11 +18,9 @@ class HomePage extends StatelessWidget {
         drawer: _DrawerMenu(),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
-          child: _.selectedPage,
+          child: Container(child: _.selectedPage),
         ),
-        appBar: AppBar(
-          title: Text(_.selectedPage.title ?? ''),
-        ),
+        appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
       ),
     );
   }
@@ -68,7 +66,6 @@ class _DrawerMenu extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
           Container(
             height: 200,
             child: Column(
@@ -93,13 +90,25 @@ class _DrawerMenu extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppSizes.medium,
                   ),
-                  child: Text(
-                    c.appVersion,
-                    style: Get.textTheme.overline.copyWith(
-                      color: AppColors.secondary,
-                      fontSize: 9,
-                    ),
-                    textAlign: TextAlign.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        c.appVersion,
+                        style: Get.textTheme.overline.copyWith(
+                          color: AppColors.secondary,
+                          fontSize: 10,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      GestureDetector(
+                        onTap: () => c.selectedPage = DevSettingsPage(),
+                        child: Text(
+                          'Dev settings',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
