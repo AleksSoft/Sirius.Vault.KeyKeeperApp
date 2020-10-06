@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "737430010307",
+    "firebase_url": "https://sirius-vault-key-keeper.firebaseio.com",
+    "project_id": "sirius-vault-key-keeper",
+    "storage_bucket": "sirius-vault-key-keeper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737430010307:android:46f62348cc9da1137fe576",
+        "android_client_info": {
+          "package_name": "vault.sirius.keykeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737430010307-qkf4bcupv3voobvobmnjiqekolimb9ni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vault.sirius.keykeeper",
+            "certificate_hash": "4127153f4db78c07f32d589510589904ce6131c3"
+          }
+        },
+        {
+          "client_id": "737430010307-0g6vq4s8l4r36t5njqmev1ta1idip0mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5XtFhmW6Z2NA6F0UKW1-dC2x2FRLUsSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737430010307-0g6vq4s8l4r36t5njqmev1ta1idip0mf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "737430010307-e28tpipn95lfgebtu0ilb7hbdufou7ih.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vault.sirius.keykeeper"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

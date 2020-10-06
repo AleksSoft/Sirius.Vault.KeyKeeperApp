@@ -7,8 +7,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/703237344/barcode_scan.iml" filepath="$PROJECT_DIR$/.idea/modules/703237344/barcode_scan.iml" group="android/barcode_scan" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-671360714/clipboard_manager.iml" filepath="$PROJECT_DIR$/.idea/modules/-671360714/clipboard_manager.iml" group="android/clipboard_manager" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-761670952/device_info.iml" filepath="$PROJECT_DIR$/.idea/modules/-761670952/device_info.iml" group="android/device_info" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1366909430/firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/-1366909430/firebase_core.iml" group="android/firebase_core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1778168597/firebase_messaging.iml" filepath="$PROJECT_DIR$/.idea/modules/1778168597/firebase_messaging.iml" group="android/firebase_messaging" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1137077310/flutter_plugin_android_lifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/1137077310/flutter_plugin_android_lifecycle.iml" group="android/flutter_plugin_android_lifecycle" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1086062188/local_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/1086062188/local_auth.iml" group="android/local_auth" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-677496498/package_info.iml" filepath="$PROJECT_DIR$/.idea/modules/-677496498/package_info.iml" group="android/package_info" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1651971543/path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/1651971543/path_provider.iml" group="android/path_provider" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-672218561/share.iml" filepath="$PROJECT_DIR$/.idea/modules/-672218561/share.iml" group="android/share" />
     </modules>
