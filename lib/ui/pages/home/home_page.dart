@@ -1,7 +1,6 @@
 import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -103,7 +102,7 @@ class _DrawerMenu extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Visibility(
-                      visible: AppUtils.isInDebugMode,
+                      visible: c.appConfig.isDev,
                       child: FlatButton(
                         onPressed: () => c.selectedPage = DevSettingsPage(),
                         child: Text(

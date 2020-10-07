@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
+import 'package:KeyKeeperApp/app/utils/app_config.dart';
 import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/services/utils/dialog_manager.dart';
 import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
@@ -12,6 +13,7 @@ import 'package:get_storage/get_storage.dart';
 class RegisterController extends GetxController {
   static RegisterController get con => Get.find();
 
+  final _config = Get.find<AppConfig>();
   final dataController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -25,6 +27,8 @@ class RegisterController extends GetxController {
   bool get isValidPass =>
       !passwordController.text.isNullOrBlank &&
       passwordController.text.length >= 8;
+
+  AppConfig get appConfig => _config;
 
   Future<void> scanQRCode() async {
     dataController.text = await _getQrCodeValue();

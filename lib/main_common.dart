@@ -8,9 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
+import 'app/utils/app_config.dart';
 import 'app/utils/utils.dart';
 
-Future<void> main() async {
+Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await GetStorage.init();
@@ -25,6 +26,9 @@ Future<void> main() async {
     ),
   );
 
+  await Get.putAsync<AppConfig>(
+    () => AppConfig().init(environment: environment),
+  );
   await Get.putAsync<ApiService>(() => ApiService().init());
 
   runApp(
