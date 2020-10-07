@@ -19,7 +19,7 @@ class DevSettingsController extends GetxController {
 
   @override
   void onInit() {
-    _firebaseToken = _storage.read(AppStorageKeys.firebaseToken) ?? '';
+    _firebaseToken = _storage.read(AppStorageKeys.fcmToken) ?? '';
     super.onInit();
   }
 

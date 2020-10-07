@@ -252,6 +252,7 @@ class AcceptRequest extends $pb.GeneratedMessage {
     ..aOS(2, 'inviteId', protoName: 'inviteId')
     ..aOS(3, 'validatorId', protoName: 'validatorId')
     ..aOS(4, 'publicKeyPem', protoName: 'publicKeyPem')
+    ..aOS(5, 'pushNotificationFCMToken', protoName: 'pushNotificationFCMToken')
     ..hasRequiredFields = false
   ;
 
@@ -305,6 +306,15 @@ class AcceptRequest extends $pb.GeneratedMessage {
   $core.bool hasPublicKeyPem() => $_has(3);
   @$pb.TagNumber(4)
   void clearPublicKeyPem() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get pushNotificationFCMToken => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set pushNotificationFCMToken($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasPushNotificationFCMToken() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearPushNotificationFCMToken() => clearField(5);
 }
 
 class AcceptResponse extends $pb.GeneratedMessage {

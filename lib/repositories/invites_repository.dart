@@ -11,6 +11,7 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
     @required String validatorId,
     @required String deviceInfo,
     @required String inviteId,
+    @required String pushNotificationFCMToken,
   }) async =>
       await ErrorHandler.safeCall(
         () => client.accept(
@@ -18,7 +19,8 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
             ..publicKeyPem = publicKeyPem
             ..validatorId = validatorId
             ..deviceInfo = deviceInfo
-            ..inviteId = inviteId,
+            ..inviteId = inviteId
+            ..pushNotificationFCMToken = pushNotificationFCMToken,
         ),
         method: 'accept',
       );

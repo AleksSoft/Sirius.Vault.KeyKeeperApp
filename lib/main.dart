@@ -67,7 +67,7 @@ Future<void> main() async {
             (String token) {
               assert(token != null);
               GetStorage()
-                  .write(AppStorageKeys.firebaseToken, token)
+                  .write(AppStorageKeys.fcmToken, token)
                   .whenComplete(() => print('token $token'));
             },
           );

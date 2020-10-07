@@ -2,7 +2,6 @@ import 'package:KeyKeeperApp/app/ui/app_colors.dart';
 import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/controllers.dart';
-import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/network_chip.dart';

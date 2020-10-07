@@ -1,3 +1,4 @@
+import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
 import 'package:KeyKeeperApp/repositories/invites_repository.dart';
@@ -8,10 +9,12 @@ import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class InviteController extends GetxController {
   static InviteController get con => Get.find();
 
+  final _storage = GetStorage();
   final _crypto = Get.find<CryptoService>();
   final _repository = InvitesRepository();
 
@@ -27,12 +30,14 @@ class InviteController extends GetxController {
     var publicKeyPem = (await _crypto.rsaPublicKey).toPEM();
     String deviceInfo = await DeviceInfoService.deviceInfo;
     String inviteId = inviteCodeController.text.trim();
+    String fcmToken = _storage.read(AppStorageKeys.fcmToken);
 
     var response = await _repository.accept(
       publicKeyPem: publicKeyPem,
       validatorId: validatorId,
       deviceInfo: deviceInfo,
       inviteId: inviteId,
+      pushNotificationFCMToken: fcmToken,
     );
 
     if (response != null) await _saveNewVaultAndReload(response);
