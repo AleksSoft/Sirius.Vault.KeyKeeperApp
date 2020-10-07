@@ -15,6 +15,8 @@ class ApiService {
 
   final Map _clients = Map();
 
+  Future<ApiService> init() => update().then((_) => this);
+
   T client<T extends Client>() => _clients[T];
 
   String get defaultUrl {

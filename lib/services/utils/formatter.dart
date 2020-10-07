@@ -2,13 +2,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class Formatter {
-  static const int minDecimal = 2;
-  static const int maxDecimalDigits = 8;
-
   static String currency(
     String s, {
-    int maxDecimal,
-    String symbol,
+    int decimalDigits,
+    String prefix,
+    String suffix,
     String locale,
     String ifZeroOrNull,
   }) {
@@ -22,13 +20,13 @@ class Formatter {
       if (!ifZeroOrNull.isNullOrBlank) return ifZeroOrNull;
     }
 
-    String formatSymbol = symbol.isNullOrBlank ? '' : '$symbol ';
-    int decimalDigits = maxDecimal == null ? minDecimal : maxDecimal;
+    String formatPrefix = prefix ?? '$prefix ';
+    String formatSuffix = suffix ?? ' $suffix';
 
-    return '$formatSymbol${NumberFormat.currency(
+    return '$formatPrefix${NumberFormat.currency(
       locale: locale ?? 'eu',
       symbol: '',
       decimalDigits: decimalDigits,
-    ).format(double.tryParse(s) ?? 0.0)}';
+    ).format(double.tryParse(s) ?? 0.0)}$formatSuffix';
   }
 }

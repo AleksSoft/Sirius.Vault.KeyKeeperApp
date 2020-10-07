@@ -4,6 +4,7 @@ import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
 import 'package:KeyKeeperApp/ui/widgets/details_tile.dart';
+import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,15 @@ class TransferDetailPage extends StatelessWidget {
   static final String route = '/transfer-detail';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Transfer validation')),
-      body: SingleChildScrollView(
-        child: GetBuilder<TransferDetailController>(
-          init: TransferDetailController(),
-          builder: (_) => Padding(
+    return GetBuilder<TransferDetailController>(
+      init: TransferDetailController(),
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          title: Text('Transfer validation'),
+          actions: [TransactionTypeChip(_.transferDetail)],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.only(
               top: AppSizes.medium,
               left: AppSizes.medium,
@@ -43,8 +47,10 @@ class TransferDetailPage extends StatelessWidget {
                 ),
                 DetailsTile(
                   title: 'Amount',
-                  value:
-                      '${_.transferDetail.asset.symbol} ${Formatter.currency(_.transferDetail.amount)}',
+                  value: Formatter.currency(
+                    _.transferDetail?.amount,
+                    prefix: _.transferDetail?.asset?.symbol,
+                  ),
                 ),
                 DetailsTile(
                   title: 'Network Type',
