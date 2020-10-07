@@ -1,6 +1,4 @@
-import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
-import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/register/register_controller.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
@@ -136,7 +134,7 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: !kReleaseMode,
+                        visible: AppUtils.isInDebugMode,
                         child: FlatButton(
                           onPressed: () => Get.to(DevSettingsPage()),
                           child: Text(

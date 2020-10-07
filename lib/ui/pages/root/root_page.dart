@@ -1,5 +1,4 @@
-import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

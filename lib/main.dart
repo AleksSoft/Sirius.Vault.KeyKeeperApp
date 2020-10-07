@@ -1,6 +1,5 @@
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/app/routes/app_routes.dart';
-import 'package:KeyKeeperApp/app/ui/app_themes.dart';
 import 'package:KeyKeeperApp/bindings/initial_binding.dart';
 import 'package:KeyKeeperApp/services/api/api_service.dart';
 import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
@@ -8,6 +7,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+
+import 'app/utils/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

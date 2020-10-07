@@ -1,8 +1,8 @@
-import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'app_colors.dart';
+import 'app_sizes.dart';
 
 class AppUiHelpers {
   // vertical space

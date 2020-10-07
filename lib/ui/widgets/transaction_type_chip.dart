@@ -1,5 +1,4 @@
-import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

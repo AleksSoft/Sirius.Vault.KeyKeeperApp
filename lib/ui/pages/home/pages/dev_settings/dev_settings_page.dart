@@ -1,4 +1,4 @@
-import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/home/pages/dev_settings/dev_settings_controller.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/material.dart';

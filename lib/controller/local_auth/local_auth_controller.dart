@@ -1,5 +1,5 @@
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
-import 'package:KeyKeeperApp/app/ui/app_colors.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/services/local_auth_service.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

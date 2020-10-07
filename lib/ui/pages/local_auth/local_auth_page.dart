@@ -1,6 +1,4 @@
-import 'package:KeyKeeperApp/app/ui/app_colors.dart';
-import 'package:KeyKeeperApp/app/ui/app_sizes.dart';
-import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/local_auth/local_auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
