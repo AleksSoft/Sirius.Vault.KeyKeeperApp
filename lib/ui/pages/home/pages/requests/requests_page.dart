@@ -5,6 +5,7 @@ import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
+import 'package:KeyKeeperApp/ui/widgets/network_chip.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,6 @@ class RequestsPage extends MenuPage {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RequestsController>(
-      init: RequestsController(),
       builder: (_) => RefreshIndicator(
         color: AppColors.dark,
         onRefresh: () => _.reloadRequests(),
@@ -54,7 +54,7 @@ class _RequestCard extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              Formatter.currency(r.amount, prefix: r.asset?.symbol),
+              Formatter.currency(r.amount, suffix: r.asset?.symbol),
               style: Get.textTheme.subtitle2.copyWith(
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
@@ -78,7 +78,7 @@ class _RequestCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                _NetworkChip(r),
+                NetworkChip(r),
                 AppUiHelpers.hSpaceSmall,
                 TransactionTypeChip(r),
               ],
@@ -86,27 +86,6 @@ class _RequestCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _NetworkChip extends StatelessWidget {
-  const _NetworkChip(this.r, {Key key}) : super(key: key);
-
-  final TransferDetailsModel r;
-
-  @override
-  Widget build(BuildContext context) {
-    return Chip(
-      padding: const EdgeInsets.all(AppSizes.extraSmall),
-      label: Text(
-        r.networkType ?? '',
-        style: Get.textTheme.caption.copyWith(
-          color: AppColors.primary,
-        ),
-      ),
-      backgroundColor: r.networkInsecure ? AppColors.red : AppColors.green,
-      elevation: 0,
     );
   }
 }

@@ -28,12 +28,6 @@ class RequestsController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() async {
-    super.onReady();
-    await reloadRequests();
-  }
-
   Future<void> reloadRequests() async {
     String deviceInfoUID = await DeviceInfoService.deviceInfo;
 

@@ -20,8 +20,8 @@ class Formatter {
       if (!ifZeroOrNull.isNullOrBlank) return ifZeroOrNull;
     }
 
-    String formatPrefix = prefix ?? '$prefix ';
-    String formatSuffix = suffix ?? ' $suffix';
+    String formatPrefix = prefix == null ? '' : '$prefix ';
+    String formatSuffix = suffix == null ? '' : ' $suffix';
 
     return '$formatPrefix${NumberFormat.currency(
       locale: locale ?? 'eu',

@@ -16,7 +16,7 @@ class DetailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: this.value != null,
+      visible: !this.value.isNullOrBlank,
       child: ListTile(
         contentPadding: const EdgeInsets.all(0),
         title: Text(this.title ?? ''),

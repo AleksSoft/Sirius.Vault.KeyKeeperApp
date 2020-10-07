@@ -4,6 +4,7 @@ import 'package:KeyKeeperApp/app/ui/app_ui_helpers.dart';
 import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
 import 'package:KeyKeeperApp/ui/widgets/details_tile.dart';
+import 'package:KeyKeeperApp/ui/widgets/network_chip.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,8 +20,13 @@ class TransferDetailPage extends StatelessWidget {
       init: TransferDetailController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text('Transfer validation'),
-          actions: [TransactionTypeChip(_.transferDetail)],
+          title: Text('Transfer'),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: AppSizes.medium),
+              child: TransactionTypeChip(_.transferDetail),
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -49,17 +55,18 @@ class TransferDetailPage extends StatelessWidget {
                   title: 'Amount',
                   value: Formatter.currency(
                     _.transferDetail?.amount,
-                    prefix: _.transferDetail?.asset?.symbol,
+                    suffix: _.transferDetail?.asset?.symbol,
                   ),
-                ),
-                DetailsTile(
-                  title: 'Network Type',
-                  value: _.transferDetail.networkType,
                 ),
                 DetailsTile(
                   title: 'Blockchain ID',
                   value: _.transferDetail.blockchainId,
                   enableCopy: true,
+                ),
+                ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  title: Text('Network Type'),
+                  trailing: NetworkChip(_.transferDetail),
                 ),
                 Divider(),
                 AppUiHelpers.vSpaceMedium,

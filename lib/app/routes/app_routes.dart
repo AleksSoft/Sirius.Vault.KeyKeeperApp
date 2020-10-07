@@ -1,3 +1,4 @@
+import 'package:KeyKeeperApp/bindings/root_binding.dart';
 import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
 import 'package:KeyKeeperApp/ui/pages/home/pages/vaults/detail/vault_detail_page.dart';
@@ -26,6 +27,7 @@ class AppRoutes {
     GetPage(
       name: HomePage.route,
       page: () => HomePage(),
+      binding: HomeBinding(),
       transition: Transition.fade,
     ),
     GetPage(
