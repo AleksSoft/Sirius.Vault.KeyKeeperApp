@@ -8,9 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
-void main() async {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await GetStorage.init();
+
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  await _firebaseMessaging.requestNotificationPermissions(
+    const IosNotificationSettings(
+      sound: true,
+      badge: true,
+      alert: true,
+      provisional: true,
+    ),
+  );
+
   runApp(
     GestureDetector(
       onTap: () {
@@ -29,7 +41,7 @@ void main() async {
         transitionDuration: const Duration(milliseconds: 150),
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
-        onInit: () async {
+        onInit: () {
           _firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
               print("onMessage: $message");
@@ -42,14 +54,6 @@ void main() async {
             onResume: (Map<String, dynamic> message) async {
               print("onResume: $message");
             },
-          );
-          await _firebaseMessaging.requestNotificationPermissions(
-            const IosNotificationSettings(
-              sound: true,
-              badge: true,
-              alert: true,
-              provisional: true,
-            ),
           );
           _firebaseMessaging.onIosSettingsRegistered.listen(
             (IosNotificationSettings settings) {
