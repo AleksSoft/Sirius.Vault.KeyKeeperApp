@@ -14,6 +14,7 @@ class RequestsPage extends MenuPage {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RequestsController>(
+      initState: (_) => RequestsController.con.reloadRequests(),
       builder: (_) => RefreshIndicator(
         color: AppColors.dark,
         onRefresh: () => _.reloadRequests(),
