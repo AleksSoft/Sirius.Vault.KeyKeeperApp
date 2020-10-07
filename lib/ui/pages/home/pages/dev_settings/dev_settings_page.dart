@@ -19,22 +19,32 @@ class DevSettingsPage extends MenuPage {
               builder: (_) => Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('Base url:', style: Get.textTheme.headline6),
-                  DropdownButton<String>(
-                    isExpanded: true,
-                    value: _.defaultUrl,
-                    items: _.urlList
-                        .map((e) => DropdownMenuItem<String>(
-                              value: e,
-                              child: Text(
-                                e,
-                                maxLines: 1,
-                                softWrap: false,
-                                overflow: TextOverflow.fade,
-                              ),
-                            ))
-                        .toList(),
-                    onChanged: (url) => _.updateDefaultUrl(url),
+                  ListTile(
+                    title: Text('Base url:'),
+                    subtitle: DropdownButton<String>(
+                      isExpanded: true,
+                      value: _.defaultUrl,
+                      items: _.urlList
+                          .map((e) => DropdownMenuItem<String>(
+                                value: e,
+                                child: Text(
+                                  e,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ))
+                          .toList(),
+                      onChanged: (url) => _.updateDefaultUrl(url),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('Firebase token:'),
+                    subtitle: SelectableText(_.fbToken),
+                    trailing: IconButton(
+                      onPressed: () => _.copy('Firebase token', _.fbToken),
+                      icon: Icon(Icons.content_copy),
+                    ),
                   ),
                 ],
               ),

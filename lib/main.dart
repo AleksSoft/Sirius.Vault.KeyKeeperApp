@@ -1,3 +1,4 @@
+import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/app/routes/app_routes.dart';
 import 'package:KeyKeeperApp/app/ui/app_themes.dart';
 import 'package:KeyKeeperApp/bindings/initial_binding.dart';
@@ -33,7 +34,8 @@ void main() async {
             onMessage: (Map<String, dynamic> message) async {
               print("onMessage: $message");
             },
-            onBackgroundMessage: backgroundMessageHandler,
+            onBackgroundMessage:
+                GetPlatform.isIOS ? null : backgroundMessageHandler,
             onLaunch: (Map<String, dynamic> message) async {
               print("onLaunch: $message");
             },
@@ -57,7 +59,9 @@ void main() async {
           _firebaseMessaging.getToken().then(
             (String token) {
               assert(token != null);
-              print('token $token');
+              GetStorage()
+                  .write(AppStorageKeys.firebaseToken, token)
+                  .whenComplete(() => print('token $token'));
             },
           );
         },
