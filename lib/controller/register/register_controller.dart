@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
 import 'package:KeyKeeperApp/app/utils/app_config.dart';
+import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
+import 'package:KeyKeeperApp/services/qr_service.dart';
 import 'package:KeyKeeperApp/services/utils/dialog_manager.dart';
 import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,7 +32,7 @@ class RegisterController extends GetxController {
   AppConfig get appConfig => _config;
 
   Future<void> scanQRCode() async {
-    dataController.text = await _getQrCodeValue();
+    dataController.text = await QrService.scan();
     update();
   }
 
@@ -44,15 +45,6 @@ class RegisterController extends GetxController {
   }
 
   void skip() => Get.offAllNamed(HomePage.route);
-
-  Future<String> _getQrCodeValue() async {
-    var result = await BarcodeScanner.scan();
-    if (result.type == ResultType.Barcode) {
-      return result.rawContent;
-    } else {
-      return '';
-    }
-  }
 
   String _decryptData() {
     try {

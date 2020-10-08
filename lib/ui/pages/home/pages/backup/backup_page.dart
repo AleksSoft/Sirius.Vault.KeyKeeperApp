@@ -117,7 +117,6 @@ class ShareBackupPage extends StatelessWidget {
                 elevation: AppSizes.small,
                 child: QrImage(
                   data: c.encryptedBackup,
-                  version: QrVersions.auto,
                   size: 300,
                 ),
               ),

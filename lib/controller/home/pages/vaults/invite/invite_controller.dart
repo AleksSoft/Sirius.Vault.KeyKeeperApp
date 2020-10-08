@@ -5,8 +5,8 @@ import 'package:KeyKeeperApp/repositories/invites_repository.dart';
 import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
 import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
 import 'package:KeyKeeperApp/services/device_info_service.dart';
+import 'package:KeyKeeperApp/services/qr_service.dart';
 import 'package:KeyKeeperApp/src/api.pb.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -44,17 +44,8 @@ class InviteController extends GetxController {
   }
 
   Future<void> scanQRCode() async {
-    inviteCodeController.text = await getQrCodeValue();
+    inviteCodeController.text = await QrService.scan();
     update();
-  }
-
-  Future<String> getQrCodeValue() async {
-    var result = await BarcodeScanner.scan();
-    if (result.type == ResultType.Barcode) {
-      return result.rawContent;
-    } else {
-      return '';
-    }
   }
 
   Future<void> _saveNewVaultAndReload(AcceptResponse response) async {
