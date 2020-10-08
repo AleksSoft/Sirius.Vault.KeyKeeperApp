@@ -14,10 +14,6 @@ class LocalAuthController extends GetxController {
   final _viewState = PinViewState.CREATE_PIN.obs;
   get viewState => this._viewState.value;
 
-  final _loading = false.obs;
-  bool get loading => this._loading.value;
-  set loading(bool value) => this._loading.value = value;
-
   final _pinValue = ''.obs;
   String get pinValue => this._pinValue.value;
   set pinValue(String value) => this._pinValue.value = value;
@@ -26,8 +22,8 @@ class LocalAuthController extends GetxController {
 
   String get header => _getHeaderStr();
 
-  bool _isRegister = false;
-  bool get showBack => _isRegister;
+  bool _showBack = false;
+  bool get showBack => _showBack;
 
   bool _showLocalAuth = false;
   bool get showLocalAuth => _showLocalAuth;
@@ -35,7 +31,7 @@ class LocalAuthController extends GetxController {
   int get fieldsCount => 4;
 
   @override
-  void onInit() {
+  void onInit() async {
     ever(_pinValue, (pin) {
       if (pin?.length == fieldsCount) {
         submit(pin);
@@ -44,23 +40,26 @@ class LocalAuthController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() async {
-    _isRegister = ((Get.arguments ?? false) as bool) ||
-        !_storage.hasData(AppStorageKeys.pinCode);
+  Future<void> initialize({
+    bool isCreatePin = false,
+    bool isCloseVisible = true,
+  }) async {
+    pinValue = '';
+    _prevPIN = '';
+
+    _showBack = isCloseVisible;
     _showLocalAuth =
-        !_isRegister && (await LocalAuthService.canCheckBiometrics);
+        !isCreatePin && (await LocalAuthService.canCheckBiometrics);
     _viewState.value =
-        _isRegister ? PinViewState.CREATE_PIN : PinViewState.DEFAULT;
+        isCreatePin ? PinViewState.CREATE_PIN : PinViewState.DEFAULT;
+
     update();
-    super.onReady();
-    if (showLocalAuth) {
-      toggleLocalAuth();
-    }
+
+    tryToggleLocalAuth();
   }
 
-  void toggleLocalAuth() async {
-    if (!_isRegister) {
+  Future<void> tryToggleLocalAuth() async {
+    if (showLocalAuth) {
       bool authorized = await LocalAuthService.authenticate();
       if (authorized) {
         pinValue = _storage.read(AppStorageKeys.pinCode);
@@ -103,7 +102,6 @@ class LocalAuthController extends GetxController {
   }
 
   Future<void> _submitPIN() async {
-    loading = true;
     String pin = _storage.read(AppStorageKeys.pinCode);
     if (pin == pinValue) {
       _storage
@@ -122,7 +120,7 @@ class LocalAuthController extends GetxController {
         },
       );
     }
-    loading = false;
+    update();
   }
 
   Future<void> _saveNewPIN() async {

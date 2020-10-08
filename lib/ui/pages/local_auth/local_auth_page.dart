@@ -4,18 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LocalAuthPage extends StatelessWidget {
-  static const String route = '/local-auth';
+  LocalAuthPage({
+    this.isCreatePin = false,
+    this.isCloseVisible = true,
+    Key key,
+  }) : super(key: key);
+
+  final isCreatePin;
+  final isCloseVisible;
+  final c = LocalAuthController.con;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: GetBuilder<LocalAuthController>(
-          init: LocalAuthController(),
-          builder: (c) {
+          initState: (_) => c.initialize(
+            isCreatePin: this.isCreatePin,
+            isCloseVisible: this.isCloseVisible,
+          ),
+          builder: (_) {
             return Stack(
               children: <Widget>[
                 Visibility(
-                  visible: c.showBack,
+                  visible: _.showBack,
                   child: Positioned(
                     top: AppSizes.medium,
                     left: AppSizes.medium,
@@ -26,22 +38,10 @@ class LocalAuthPage extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Obx(() => Text(c.header, style: Get.textTheme.headline6)),
+                      Obx(() => Text(_.header, style: Get.textTheme.headline6)),
                       AppUiHelpers.vSpaceExtraLarge,
                       Numpad(),
                     ],
-                  ),
-                ),
-                Obx(
-                  () => AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child: c.loading
-                        ? Container(
-                            color: AppColors.primary.withOpacity(0.9),
-                            alignment: Alignment.center,
-                            child: AppUiHelpers.circularProgress,
-                          )
-                        : SizedBox.shrink(),
                   ),
                 ),
               ],
@@ -119,7 +119,8 @@ class Numpad extends StatelessWidget {
               NumpadButton(
                 haveBorder: false,
                 icon: c.showLocalAuth ? Icons.fingerprint : null,
-                onPressed: c.showLocalAuth ? () => c.toggleLocalAuth() : null,
+                onPressed:
+                    c.showLocalAuth ? () => c.tryToggleLocalAuth() : null,
               ),
               NumpadButton(
                 text: '0',

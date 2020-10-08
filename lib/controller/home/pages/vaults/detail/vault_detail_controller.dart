@@ -23,9 +23,18 @@ class VaultDetailController extends GetxController {
 
   bool get stausOk => true;
 
-  void detachVault() =>
-      VaultsRepository.deleteVaultByKey(vault.apiKey).whenComplete(() =>
-          VaultsController.con.reloadVaults().whenComplete(() => Get.back()));
+  void detachVault() => Get.defaultDialog(
+        title: 'Delete vault?',
+        content: SizedBox.shrink(),
+        buttonColor: AppColors.dark,
+        confirmTextColor: AppColors.primary,
+        cancelTextColor: AppColors.dark,
+        onConfirm: () => VaultsRepository.deleteVaultByKey(vault.apiKey)
+            .whenComplete(() => VaultsController.con
+                .reloadVaults()
+                .whenComplete(() => Get.back(closeOverlays: true))),
+        onCancel: () => Get.back(),
+      );
 
   void save() => VaultsRepository.updateVault(
         vault..localName = localNameController.text.trim(),

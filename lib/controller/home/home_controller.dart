@@ -57,5 +57,14 @@ class HomeController extends GetxController {
 
   void shareValidatorId() => Share.share(_validatorId);
 
-  void changePin() => Get.toNamed(LocalAuthPage.route, arguments: true);
+  Future<void> changePin() async {
+    Get.to(LocalAuthPage(), fullscreenDialog: true).then((result) {
+      if (result ?? false) {
+        Get.to(
+          LocalAuthPage(isCreatePin: true, isCloseVisible: false),
+          fullscreenDialog: true,
+        );
+      }
+    });
+  }
 }

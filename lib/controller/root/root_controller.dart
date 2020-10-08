@@ -21,7 +21,13 @@ class RootController extends GetxController {
   }
 
   void checkAuth() async {
-    var auth = await Get.toNamed(LocalAuthPage.route);
+    bool hasPin = GetUtils.isNullOrBlank(
+      _storage.read(AppStorageKeys.pinCode),
+    );
+    var auth = await Get.to(
+      LocalAuthPage(isCreatePin: hasPin, isCloseVisible: !hasPin),
+      fullscreenDialog: true,
+    );
     if (auth ?? false) {
       final pKey = _storage.read(AppStorageKeys.privateKey);
       if (GetUtils.isNullOrBlank(pKey)) {
