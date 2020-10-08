@@ -1,6 +1,7 @@
 import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/services/utils/formatter.dart';
+import 'package:KeyKeeperApp/ui/widgets/empty_reloading_view.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:KeyKeeperApp/ui/widgets/network_chip.dart';
 import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
@@ -15,9 +16,11 @@ class RequestsPage extends MenuPage {
   Widget build(BuildContext context) {
     return GetBuilder<RequestsController>(
       initState: (_) => RequestsController.con.reloadRequests(),
-      builder: (_) => RefreshIndicator(
-        color: AppColors.dark,
-        onRefresh: () => _.reloadRequests(),
+      builder: (_) => EmptyReloadingHelper(
+        emptyMessage: 'No active requests available',
+        showEmptyContidion: _.showEmptyContidion,
+        isLoading: _.loading,
+        onRefresh: () => _.silentReloadRequests(),
         child: ListView.builder(
           padding: const EdgeInsets.all(AppSizes.medium),
           itemCount: _.requests.length,

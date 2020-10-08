@@ -9,6 +9,17 @@ class VaultsController extends GetxController {
 
   var vaults = <Vault>[];
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (_loading != value) {
+      _loading = value;
+      update();
+    }
+  }
+
+  bool get showEmptyContidion => (vaults == null || vaults.isEmpty) && !loading;
+
   @override
   void onReady() async {
     super.onReady();
@@ -16,8 +27,9 @@ class VaultsController extends GetxController {
   }
 
   Future<void> reloadVaults() async {
+    loading = true;
     vaults = VaultsRepository.savedVaultsList;
-    update();
+    loading = false;
   }
 
   void openDetails(Vault vault) =>

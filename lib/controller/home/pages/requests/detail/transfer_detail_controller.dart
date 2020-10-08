@@ -29,16 +29,24 @@ class TransferDetailController extends GetxController {
   var msgTextController = TextEditingController();
 
   TransferDetailArgs _transferDetailArgs;
-
   TransferDetailsModel get transferDetail => _transferDetailArgs.transferDetail;
+
+  var selectedResolution =
+      ResolveApprovalRequestsRequest_ResolutionStatus.approve;
+
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (_loading != value) {
+      _loading = value;
+      update();
+    }
+  }
 
   int get selectedResolutionIndex => resolutionsMap.keys.firstWhere(
         (key) => resolutionsMap[key] == selectedResolution,
         orElse: () => 0,
       );
-
-  var selectedResolution =
-      ResolveApprovalRequestsRequest_ResolutionStatus.approve;
 
   @override
   void onInit() {
@@ -70,12 +78,15 @@ class TransferDetailController extends GetxController {
         confirmTextColor: AppColors.light,
         buttonColor: AppColors.dark,
         cancelTextColor: AppColors.dark,
-        onConfirm: () => _resolveRequest().then(
-          (value) {
-            RequestsController.con.reloadRequests();
-            Get.back(closeOverlays: value);
-          },
-        ),
+        onConfirm: () {
+          loading = true;
+          _resolveRequest().then(
+            (value) {
+              RequestsController.con.reloadRequests();
+              Get.back(closeOverlays: value);
+            },
+          ).whenComplete(() => loading = false);
+        },
       );
 
   String getResolutionName(int index) {

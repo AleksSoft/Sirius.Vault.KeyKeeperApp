@@ -25,6 +25,9 @@ class InboxController extends GetxController {
     }
   }
 
+  bool get showEmptyContidion =>
+      (messages == null || messages.isEmpty) && !loading;
+
   @override
   void onInit() async {
     _keyPair = await _crypto.rsaKeyPair;

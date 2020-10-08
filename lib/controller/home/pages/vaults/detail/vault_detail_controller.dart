@@ -24,7 +24,7 @@ class VaultDetailController extends GetxController {
   bool get stausOk => true;
 
   void detachVault() => Get.defaultDialog(
-        title: 'Delete vault?',
+        title: 'Are you sure to delete vault?',
         content: SizedBox.shrink(),
         buttonColor: AppColors.dark,
         confirmTextColor: AppColors.primary,
@@ -33,7 +33,7 @@ class VaultDetailController extends GetxController {
             .whenComplete(() => VaultsController.con
                 .reloadVaults()
                 .whenComplete(() => Get.back(closeOverlays: true))),
-        onCancel: () => Get.back(),
+        onCancel: () {},
       );
 
   void save() => VaultsRepository.updateVault(

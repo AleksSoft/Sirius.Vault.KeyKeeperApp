@@ -1,6 +1,7 @@
 import 'package:KeyKeeperApp/app/utils/utils.dart';
 import 'package:KeyKeeperApp/controller/controllers.dart';
 import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
+import 'package:KeyKeeperApp/ui/widgets/empty_reloading_view.dart';
 import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,8 +20,10 @@ class VaultsPage extends MenuPage {
           child: Icon(Icons.add),
           backgroundColor: AppColors.dark,
         ),
-        body: RefreshIndicator(
-          color: AppColors.dark,
+        body: EmptyReloadingHelper(
+          emptyMessage: 'You have no active vaults',
+          showEmptyContidion: _.showEmptyContidion,
+          isLoading: _.loading,
           onRefresh: () => _.reloadVaults(),
           child: ListView.builder(
             padding: const EdgeInsets.all(AppSizes.medium),

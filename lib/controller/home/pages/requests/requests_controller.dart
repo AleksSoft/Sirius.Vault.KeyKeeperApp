@@ -22,6 +22,18 @@ class RequestsController extends GetxController {
 
   var requests = <TransferDetailArgs>[];
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (_loading != value) {
+      _loading = value;
+      update();
+    }
+  }
+
+  bool get showEmptyContidion =>
+      (requests == null || requests.isEmpty) && !loading;
+
   @override
   void onInit() async {
     _privateKey = await _crypto.rsaPrivateKey;
@@ -29,6 +41,18 @@ class RequestsController extends GetxController {
   }
 
   Future<void> reloadRequests() async {
+    loading = true;
+    await silentReloadRequests();
+    loading = false;
+  }
+
+  void openDetails(TransferDetailArgs args) =>
+      Get.toNamed(TransferDetailPage.route, arguments: args);
+
+  Future<void> silentReloadRequests() =>
+      _updateRequests().whenComplete(() => update());
+
+  Future<void> _updateRequests() async {
     String deviceInfoUID = await DeviceInfoService.deviceInfo;
 
     requests.clear();
@@ -43,11 +67,7 @@ class RequestsController extends GetxController {
           .toList();
       requests.addAll(transferDetails);
     }
-    update();
   }
-
-  void openDetails(TransferDetailArgs args) =>
-      Get.toNamed(TransferDetailPage.route, arguments: args);
 
   TransferDetailArgs _buildTransferDetail(
     GetApprovalRequestsResponse_ApprovalRequest request,
