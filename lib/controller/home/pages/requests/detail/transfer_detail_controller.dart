@@ -12,6 +12,7 @@ import 'package:KeyKeeperApp/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 
 class TransferDetailController extends GetxController {
   static TransferDetailController get con => Get.find();
@@ -53,6 +54,8 @@ class TransferDetailController extends GetxController {
     _transferDetailArgs = Get.arguments as TransferDetailArgs;
     super.onInit();
   }
+
+  void share() => Share.share(json.encode(transferDetail.toJson()));
 
   void copy(String title, String value) =>
       ClipboardManager.copyToClipBoard(value).then((result) {

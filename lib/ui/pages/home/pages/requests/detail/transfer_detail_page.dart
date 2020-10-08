@@ -26,6 +26,11 @@ class TransferDetailPage extends StatelessWidget {
             )
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _.share(),
+          child: Icon(Icons.share),
+          backgroundColor: AppColors.dark,
+        ),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           child: !_.loading
