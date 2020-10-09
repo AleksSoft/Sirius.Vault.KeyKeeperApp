@@ -21,3 +21,5 @@ doc/api/
 *.js.map
 .flutter-plugins
 .flutter-plugins-dependencies
+android/app/key.jks
+android/app/key.jks.old
