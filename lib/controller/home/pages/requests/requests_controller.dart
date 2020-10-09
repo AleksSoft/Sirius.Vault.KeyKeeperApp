@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:KeyKeeperApp/controller/controllers.dart';
@@ -17,6 +18,8 @@ class RequestsController extends GetxController {
 
   final _repository = TransfersRepository();
   final _crypto = Get.find<CryptoService>();
+
+  Timer _requestsReloadTimer;
 
   RSAPrivateKey _privateKey;
 
@@ -38,6 +41,18 @@ class RequestsController extends GetxController {
   void onInit() async {
     _privateKey = await _crypto.rsaPrivateKey;
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    _startPeriodicFetch();
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    _stopPeriodicFetch();
+    super.onClose();
   }
 
   Future<void> reloadRequests() async {
@@ -97,4 +112,13 @@ class RequestsController extends GetxController {
       return null;
     }
   }
+
+  void _startPeriodicFetch() {
+    _requestsReloadTimer = Timer.periodic(
+      const Duration(seconds: 30),
+      (Timer t) => silentReloadRequests(),
+    );
+  }
+
+  void _stopPeriodicFetch() => _requestsReloadTimer?.cancel();
 }
