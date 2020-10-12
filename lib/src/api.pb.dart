@@ -474,6 +474,60 @@ class PingResponse extends $pb.GeneratedMessage {
   void clearSignatureMessage() => clearField(3);
 }
 
+class RemoveVaultConnectionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RemoveVaultConnectionRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  RemoveVaultConnectionRequest._() : super();
+  factory RemoveVaultConnectionRequest() => create();
+  factory RemoveVaultConnectionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveVaultConnectionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  RemoveVaultConnectionRequest clone() => RemoveVaultConnectionRequest()..mergeFromMessage(this);
+  RemoveVaultConnectionRequest copyWith(void Function(RemoveVaultConnectionRequest) updates) => super.copyWith((message) => updates(message as RemoveVaultConnectionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RemoveVaultConnectionRequest create() => RemoveVaultConnectionRequest._();
+  RemoveVaultConnectionRequest createEmptyInstance() => create();
+  static $pb.PbList<RemoveVaultConnectionRequest> createRepeated() => $pb.PbList<RemoveVaultConnectionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RemoveVaultConnectionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RemoveVaultConnectionRequest>(create);
+  static RemoveVaultConnectionRequest _defaultInstance;
+}
+
+class RemoveVaultConnectionResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RemoveVaultConnectionResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
+    ..hasRequiredFields = false
+  ;
+
+  RemoveVaultConnectionResponse._() : super();
+  factory RemoveVaultConnectionResponse() => create();
+  factory RemoveVaultConnectionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RemoveVaultConnectionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  RemoveVaultConnectionResponse clone() => RemoveVaultConnectionResponse()..mergeFromMessage(this);
+  RemoveVaultConnectionResponse copyWith(void Function(RemoveVaultConnectionResponse) updates) => super.copyWith((message) => updates(message as RemoveVaultConnectionResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RemoveVaultConnectionResponse create() => RemoveVaultConnectionResponse._();
+  RemoveVaultConnectionResponse createEmptyInstance() => create();
+  static $pb.PbList<RemoveVaultConnectionResponse> createRepeated() => $pb.PbList<RemoveVaultConnectionResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RemoveVaultConnectionResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RemoveVaultConnectionResponse>(create);
+  static RemoveVaultConnectionResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ValidatorApiError get error => $_getN(0);
+  @$pb.TagNumber(1)
+  set error(ValidatorApiError v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasError() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearError() => clearField(1);
+  @$pb.TagNumber(1)
+  ValidatorApiError ensureError() => $_ensure(0);
+}
+
 class ValidatorApiError extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ValidatorApiError', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
     ..e<ValidatorApiError_ErrorCodes>(1, 'code', $pb.PbFieldType.OE, defaultOrMaker: ValidatorApiError_ErrorCodes.Unknown, valueOf: ValidatorApiError_ErrorCodes.valueOf, enumValues: ValidatorApiError_ErrorCodes.values)

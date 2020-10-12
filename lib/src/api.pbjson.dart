@@ -106,6 +106,17 @@ const PingResponse$json = const {
   ],
 };
 
+const RemoveVaultConnectionRequest$json = const {
+  '1': 'RemoveVaultConnectionRequest',
+};
+
+const RemoveVaultConnectionResponse$json = const {
+  '1': 'RemoveVaultConnectionResponse',
+  '2': const [
+    const {'1': 'error', '3': 1, '4': 1, '5': 11, '6': '.ValidatorApi.ValidatorApiError', '10': 'error'},
+  ],
+};
+
 const ValidatorApiError$json = const {
   '1': 'ValidatorApiError',
   '2': const [

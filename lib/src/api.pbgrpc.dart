@@ -102,6 +102,12 @@ class InvitesClient extends $grpc.Client {
       '/ValidatorApi.Invites/GetPing',
       ($0.PingRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.PingResponse.fromBuffer(value));
+  static final _$removeVaultConnection = $grpc.ClientMethod<
+          $0.RemoveVaultConnectionRequest, $0.RemoveVaultConnectionResponse>(
+      '/ValidatorApi.Invites/RemoveVaultConnection',
+      ($0.RemoveVaultConnectionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.RemoveVaultConnectionResponse.fromBuffer(value));
 
   InvitesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
@@ -116,6 +122,15 @@ class InvitesClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.PingResponse> getPing($0.PingRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(_$getPing, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.RemoveVaultConnectionResponse> removeVaultConnection(
+      $0.RemoveVaultConnectionRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$removeVaultConnection, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -139,6 +154,15 @@ abstract class InvitesServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.PingRequest.fromBuffer(value),
         ($0.PingResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RemoveVaultConnectionRequest,
+            $0.RemoveVaultConnectionResponse>(
+        'RemoveVaultConnection',
+        removeVaultConnection_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.RemoveVaultConnectionRequest.fromBuffer(value),
+        ($0.RemoveVaultConnectionResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.AcceptResponse> accept_Pre(
@@ -151,8 +175,16 @@ abstract class InvitesServiceBase extends $grpc.Service {
     return getPing(call, await request);
   }
 
+  $async.Future<$0.RemoveVaultConnectionResponse> removeVaultConnection_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.RemoveVaultConnectionRequest> request) async {
+    return removeVaultConnection(call, await request);
+  }
+
   $async.Future<$0.AcceptResponse> accept(
       $grpc.ServiceCall call, $0.AcceptRequest request);
   $async.Future<$0.PingResponse> getPing(
       $grpc.ServiceCall call, $0.PingRequest request);
+  $async.Future<$0.RemoveVaultConnectionResponse> removeVaultConnection(
+      $grpc.ServiceCall call, $0.RemoveVaultConnectionRequest request);
 }
