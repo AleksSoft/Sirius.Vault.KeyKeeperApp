@@ -36,4 +36,14 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
         ),
         method: 'getPing',
       );
+
+  Future<RemoveVaultConnectionResponse> removeVaultConnection(
+          {@required String apiKey}) async =>
+      await ErrorHandler.safeCall(
+        () => client.removeVaultConnection(
+          RemoveVaultConnectionRequest(),
+          options: ApiService.getSecureOptions(apiKey),
+        ),
+        method: 'removeVaultConnection',
+      );
 }

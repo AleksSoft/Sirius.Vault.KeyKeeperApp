@@ -14,7 +14,7 @@ service Transfers {
     rpc ResolveApprovalRequests(ResolveApprovalRequestsRequest) returns (ResolveApprovalRequestsResponse);   
 }
 
-service Invites {
+service Invites { 
     rpc Accept (AcceptRequest) returns (AcceptResponse); 
     rpc GetPing(PingRequest) returns (PingResponse);
     rpc RemoveVaultConnection (RemoveVaultConnectionRequest) returns (RemoveVaultConnectionResponse);

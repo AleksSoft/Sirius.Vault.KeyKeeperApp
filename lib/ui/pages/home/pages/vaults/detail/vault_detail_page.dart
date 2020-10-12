@@ -13,84 +13,102 @@ class VaultDetailPage extends StatelessWidget {
       init: VaultDetailController(),
       builder: (_) => WillPopScope(
         onWillPop: () => _.back(),
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Vault details'),
-            actions: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: _.edited
-                    ? IconButton(
-                        onPressed: () => _.save(),
-                        icon: Icon(Icons.check),
-                      )
-                    : IconButton(
-                        onPressed: () => _.detachVault(),
-                        icon: Icon(Icons.delete_outline),
-                      ),
-              )
-            ],
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: !_.loading
+              ? _Content(_)
+              : Container(
+                  alignment: Alignment.center,
+                  color: AppColors.background,
+                  child: AppUiHelpers.circularProgress,
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Content extends StatelessWidget {
+  _Content(this._, {Key key}) : super(key: key);
+  final VaultDetailController _;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Vault details'),
+        actions: [
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: _.edited
+                ? IconButton(
+                    onPressed: () => _.save(),
+                    icon: Icon(Icons.check),
+                  )
+                : IconButton(
+                    onPressed: () => _.detachVault(),
+                    icon: Icon(Icons.delete_outline),
+                  ),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: AppSizes.medium,
+            left: AppSizes.medium,
+            right: AppSizes.medium,
+            bottom: AppSizes.extraLarge,
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: AppSizes.medium,
-                left: AppSizes.medium,
-                right: AppSizes.medium,
-                bottom: AppSizes.extraLarge,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Details:',
+                style: Get.textTheme.headline6.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Details:',
-                    style: Get.textTheme.headline6.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+              AppUiHelpers.vSpaceMedium,
+              Theme(
+                data: Get.theme.copyWith(primaryColor: AppColors.dark),
+                child: TextField(
+                  controller: _.localNameController,
+                  keyboardType: TextInputType.name,
+                  onChanged: (v) => _.update(),
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Local name',
+                    alignLabelWithHint: true,
                   ),
-                  AppUiHelpers.vSpaceMedium,
-                  Theme(
-                    data: Get.theme.copyWith(primaryColor: AppColors.dark),
-                    child: TextField(
-                      controller: _.localNameController,
-                      keyboardType: TextInputType.name,
-                      onChanged: (v) => _.update(),
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Local name',
-                        alignLabelWithHint: true,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: Text('Status'),
-                    trailing: Text(
-                      _.stausOk ? 'Online' : 'Offline',
-                      style: Get.textTheme.button.copyWith(
-                        color: _.stausOk ? AppColors.green : AppColors.red,
-                      ),
-                    ),
-                  ),
-                  Divider(),
-                  DetailsTile(
-                    title: 'Name',
-                    value: _.vault?.name ?? '',
-                    enableCopy: false,
-                  ),
-                  DetailsTile(
-                    title: 'Position',
-                    value: _.vault?.position ?? '',
-                    enableCopy: false,
-                  ),
-                  DetailsTile(
-                    title: 'Description',
-                    value: _.vault?.description ?? '',
-                    enableCopy: false,
-                  ),
-                ],
+                ),
               ),
-            ),
+              ListTile(
+                title: Text('Status'),
+                trailing: Text(
+                  _.stausOk ? 'Online' : 'Offline',
+                  style: Get.textTheme.button.copyWith(
+                    color: _.stausOk ? AppColors.green : AppColors.red,
+                  ),
+                ),
+              ),
+              Divider(),
+              DetailsTile(
+                title: 'Name',
+                value: _.vault?.name ?? '',
+                enableCopy: false,
+              ),
+              DetailsTile(
+                title: 'Position',
+                value: _.vault?.position ?? '',
+                enableCopy: false,
+              ),
+              DetailsTile(
+                title: 'Description',
+                value: _.vault?.description ?? '',
+                enableCopy: false,
+              ),
+            ],
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
+import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,9 +9,20 @@ import 'package:get/get.dart';
 class VaultDetailController extends GetxController {
   static VaultDetailController get con => Get.find();
 
+  final _repo = InvitesRepository();
+
   final localNameController = TextEditingController();
 
   var vault = Vault();
+
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (loading != value) {
+      _loading = value;
+      update();
+    }
+  }
 
   @override
   void onInit() {
@@ -29,10 +41,17 @@ class VaultDetailController extends GetxController {
         buttonColor: AppColors.dark,
         confirmTextColor: AppColors.primary,
         cancelTextColor: AppColors.dark,
-        onConfirm: () => VaultsRepository.deleteVaultByKey(vault.apiKey)
-            .whenComplete(() => VaultsController.con
-                .reloadVaults()
-                .whenComplete(() => Get.back(closeOverlays: true))),
+        onConfirm: () {
+          loading = true;
+          _repo.removeVaultConnection(apiKey: vault.apiKey).whenComplete(() {
+            loading = false;
+            VaultsRepository.deleteVaultByKey(vault.apiKey).whenComplete(
+              () => VaultsController.con
+                  .reloadVaults()
+                  .whenComplete(() => Get.back(closeOverlays: true)),
+            );
+          });
+        },
         onCancel: () {},
       );
 
