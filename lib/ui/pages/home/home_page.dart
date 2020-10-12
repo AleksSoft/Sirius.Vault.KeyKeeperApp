@@ -1,5 +1,5 @@
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/home/home_controller.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

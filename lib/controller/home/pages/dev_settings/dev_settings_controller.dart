@@ -1,5 +1,5 @@
-import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
-import 'package:KeyKeeperApp/services/api/api_service.dart';
+import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/services/api/api_service.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

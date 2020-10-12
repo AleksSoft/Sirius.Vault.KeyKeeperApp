@@ -1,10 +1,10 @@
-import 'package:KeyKeeperApp/bindings/home_binding.dart';
-import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
-import 'package:KeyKeeperApp/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
-import 'package:KeyKeeperApp/ui/pages/home/pages/vaults/detail/vault_detail_page.dart';
-import 'package:KeyKeeperApp/ui/pages/home/pages/vaults/invite/invite_page.dart';
-import 'package:KeyKeeperApp/ui/pages/register/register_page.dart';
-import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
+import 'package:validator/bindings/home_binding.dart';
+import 'package:validator/ui/pages/home/home_page.dart';
+import 'package:validator/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
+import 'package:validator/ui/pages/home/pages/vaults/detail/vault_detail_page.dart';
+import 'package:validator/ui/pages/home/pages/vaults/invite/invite_page.dart';
+import 'package:validator/ui/pages/register/register_page.dart';
+import 'package:validator/ui/pages/root/root_page.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {

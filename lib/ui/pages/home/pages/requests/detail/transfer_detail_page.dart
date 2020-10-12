@@ -1,9 +1,9 @@
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/controllers.dart';
-import 'package:KeyKeeperApp/services/utils/formatter.dart';
-import 'package:KeyKeeperApp/ui/widgets/details_tile.dart';
-import 'package:KeyKeeperApp/ui/widgets/network_chip.dart';
-import 'package:KeyKeeperApp/ui/widgets/transaction_type_chip.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/controllers.dart';
+import 'package:validator/services/utils/formatter.dart';
+import 'package:validator/ui/widgets/details_tile.dart';
+import 'package:validator/ui/widgets/network_chip.dart';
+import 'package:validator/ui/widgets/transaction_type_chip.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

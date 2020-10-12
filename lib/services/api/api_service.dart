@@ -1,5 +1,5 @@
-import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
-import 'package:KeyKeeperApp/src/api.pbgrpc.dart';
+import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/src/api.pbgrpc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:grpc/grpc.dart';

@@ -1,5 +1,5 @@
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/root/root_controller.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';

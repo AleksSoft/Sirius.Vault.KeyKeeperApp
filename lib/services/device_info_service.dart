@@ -1,4 +1,4 @@
-import 'package:KeyKeeperApp/models/device_info_model.dart';
+import 'package:validator/models/device_info_model.dart';
 import 'package:device_info/device_info.dart';
 import 'package:get/utils.dart';
 

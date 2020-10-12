@@ -1,4 +1,4 @@
-import 'package:KeyKeeperApp/app/utils/app_config.dart';
+import 'package:validator/app/utils/app_config.dart';
 
 import 'main_common.dart';
 

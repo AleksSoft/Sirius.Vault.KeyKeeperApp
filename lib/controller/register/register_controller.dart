@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
-import 'package:KeyKeeperApp/app/utils/app_config.dart';
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
-import 'package:KeyKeeperApp/services/qr_service.dart';
-import 'package:KeyKeeperApp/services/utils/dialog_manager.dart';
-import 'package:KeyKeeperApp/ui/pages/home/home_page.dart';
+import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/app/utils/app_config.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/services/crypto/crypto_service.dart';
+import 'package:validator/services/qr_service.dart';
+import 'package:validator/services/utils/dialog_manager.dart';
+import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

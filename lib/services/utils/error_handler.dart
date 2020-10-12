@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/app/common/app_storage_keys.dart';
-import 'package:KeyKeeperApp/models/saved_errors_model.dart';
-import 'package:KeyKeeperApp/services/api/api_service.dart';
-import 'package:KeyKeeperApp/services/utils/dialog_manager.dart';
-import 'package:KeyKeeperApp/src/api.pb.dart';
-import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
+import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/models/saved_errors_model.dart';
+import 'package:validator/services/api/api_service.dart';
+import 'package:validator/services/utils/dialog_manager.dart';
+import 'package:validator/src/api.pb.dart';
+import 'package:validator/ui/pages/root/root_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

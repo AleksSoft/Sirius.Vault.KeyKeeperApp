@@ -1,5 +1,5 @@
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/local_auth/local_auth_controller.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/local_auth/local_auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

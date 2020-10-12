@@ -1,8 +1,8 @@
-import 'package:KeyKeeperApp/repositories/invites_repository.dart';
-import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
-import 'package:KeyKeeperApp/services/device_info_service.dart';
-import 'package:KeyKeeperApp/src/api.pb.dart';
+import 'package:validator/repositories/invites_repository.dart';
+import 'package:validator/repositories/vaults_repository.dart';
+import 'package:validator/services/crypto/crypto_service.dart';
+import 'package:validator/services/device_info_service.dart';
+import 'package:validator/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:get/get.dart';
 

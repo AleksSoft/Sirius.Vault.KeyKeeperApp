@@ -1,6 +1,6 @@
-import 'package:KeyKeeperApp/services/api/api_service.dart';
-import 'package:KeyKeeperApp/services/utils/error_handler.dart';
-import 'package:KeyKeeperApp/src/api.pbgrpc.dart';
+import 'package:validator/services/api/api_service.dart';
+import 'package:validator/services/utils/error_handler.dart';
+import 'package:validator/src/api.pbgrpc.dart';
 import 'package:flutter/foundation.dart';
 
 import 'base_repository.dart';

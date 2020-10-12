@@ -1,7 +1,7 @@
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/controllers.dart';
-import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
-import 'package:KeyKeeperApp/repositories/vaults_repository.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/controllers.dart';
+import 'package:validator/models/saved_vaults_model.dart';
+import 'package:validator/repositories/vaults_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

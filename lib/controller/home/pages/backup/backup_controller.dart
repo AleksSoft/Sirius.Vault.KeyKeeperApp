@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
-import 'package:KeyKeeperApp/ui/pages/home/pages/backup/backup_page.dart';
+import 'package:validator/services/crypto/crypto_service.dart';
+import 'package:validator/ui/pages/home/pages/backup/backup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';

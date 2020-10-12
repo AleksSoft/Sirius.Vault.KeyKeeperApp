@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:KeyKeeperApp/app/utils/utils.dart';
+import 'package:validator/app/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';

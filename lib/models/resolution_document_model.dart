@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
-import 'package:KeyKeeperApp/src/api.pbenum.dart';
+import 'package:validator/models/transfer_detail_model.dart';
+import 'package:validator/src/api.pbenum.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
 class ResolutionDocumentModel {

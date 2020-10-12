@@ -1,7 +1,7 @@
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/controllers.dart';
-import 'package:KeyKeeperApp/ui/widgets/empty_reloading_view.dart';
-import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/controllers.dart';
+import 'package:validator/ui/widgets/empty_reloading_view.dart';
+import 'package:validator/ui/widgets/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

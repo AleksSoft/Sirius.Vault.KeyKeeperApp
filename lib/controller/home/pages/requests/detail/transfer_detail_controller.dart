@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:KeyKeeperApp/app/utils/utils.dart';
-import 'package:KeyKeeperApp/controller/controllers.dart';
-import 'package:KeyKeeperApp/models/resolution_document_model.dart';
-import 'package:KeyKeeperApp/models/saved_vaults_model.dart';
-import 'package:KeyKeeperApp/models/transfer_detail_model.dart';
-import 'package:KeyKeeperApp/repositories/transfers_repository.dart';
-import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
-import 'package:KeyKeeperApp/services/device_info_service.dart';
-import 'package:KeyKeeperApp/src/api.pb.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/controllers.dart';
+import 'package:validator/models/resolution_document_model.dart';
+import 'package:validator/models/saved_vaults_model.dart';
+import 'package:validator/models/transfer_detail_model.dart';
+import 'package:validator/repositories/transfers_repository.dart';
+import 'package:validator/services/crypto/crypto_service.dart';
+import 'package:validator/services/device_info_service.dart';
+import 'package:validator/src/api.pb.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

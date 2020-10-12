@@ -1,9 +1,9 @@
-import 'package:KeyKeeperApp/app/utils/app_config.dart';
-import 'package:KeyKeeperApp/services/crypto/crypto_service.dart';
-import 'package:KeyKeeperApp/ui/pages/home/pages/requests/requests_page.dart';
-import 'package:KeyKeeperApp/ui/pages/local_auth/local_auth_page.dart';
-import 'package:KeyKeeperApp/ui/pages/root/root_page.dart';
-import 'package:KeyKeeperApp/ui/widgets/menu_page.dart';
+import 'package:validator/app/utils/app_config.dart';
+import 'package:validator/services/crypto/crypto_service.dart';
+import 'package:validator/ui/pages/home/pages/requests/requests_page.dart';
+import 'package:validator/ui/pages/local_auth/local_auth_page.dart';
+import 'package:validator/ui/pages/root/root_page.dart';
+import 'package:validator/ui/widgets/menu_page.dart';
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
