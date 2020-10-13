@@ -7,11 +7,13 @@ class LocalAuthPage extends StatelessWidget {
   LocalAuthPage({
     this.isCreatePin = false,
     this.isCloseVisible = true,
+    this.checkLocalAuth = true,
     Key key,
   }) : super(key: key);
 
   final isCreatePin;
   final isCloseVisible;
+  final checkLocalAuth;
   final c = LocalAuthController.con;
 
   @override
@@ -22,6 +24,7 @@ class LocalAuthPage extends StatelessWidget {
           initState: (_) => c.initialize(
             isCreatePin: this.isCreatePin,
             isCloseVisible: this.isCloseVisible,
+            checkLocalAuth: this.checkLocalAuth,
           ),
           builder: (_) {
             return Stack(

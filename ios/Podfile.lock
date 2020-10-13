@@ -1,6 +1,4 @@
 PODS:
-  - clipboard_manager (0.0.3):
-    - Flutter
   - device_info (0.0.1):
     - Flutter
   - Firebase/CoreOnly (6.26.0):
@@ -86,7 +84,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - clipboard_manager (from `.symlinks/plugins/clipboard_manager/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
@@ -114,8 +111,6 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
-  clipboard_manager:
-    :path: ".symlinks/plugins/clipboard_manager/ios"
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
   firebase_core:
@@ -136,7 +131,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share/ios"
 
 SPEC CHECKSUMS:
-  clipboard_manager: f4800834e62cc26b1cc4e0a92a35cd452dd8b827
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
   firebase_core: 00e54a4744164a6b5a250b96dd1ad5afaba7a342

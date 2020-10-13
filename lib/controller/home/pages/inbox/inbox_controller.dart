@@ -1,9 +1,9 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/device_info_service.dart';
 import 'package:validator/src/api.pb.dart';
-import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:get/get.dart';
 
 class InboxController extends GetxController {
@@ -49,8 +49,7 @@ class InboxController extends GetxController {
     loading = false;
   }
 
-  void copy(String value) =>
-      ClipboardManager.copyToClipBoard(value).then((result) {
+  void copy(String value) => FlutterClipboard.copy(value).then((_) {
         if (Get.isSnackbarOpen) Get.back();
         Get.rawSnackbar(
           message: '$value copied to clipboard',

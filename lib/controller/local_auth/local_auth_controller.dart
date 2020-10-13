@@ -43,13 +43,15 @@ class LocalAuthController extends GetxController {
   Future<void> initialize({
     bool isCreatePin = false,
     bool isCloseVisible = true,
+    bool checkLocalAuth = true,
   }) async {
     pinValue = '';
     _prevPIN = '';
 
     _showBack = isCloseVisible;
-    _showLocalAuth =
-        !isCreatePin && (await LocalAuthService.canCheckBiometrics);
+    _showLocalAuth = checkLocalAuth &&
+        !isCreatePin &&
+        (await LocalAuthService.canCheckBiometrics);
     _viewState.value =
         isCreatePin ? PinViewState.CREATE_PIN : PinViewState.DEFAULT;
 

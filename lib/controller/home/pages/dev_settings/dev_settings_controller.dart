@@ -1,6 +1,6 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/services/api/api_service.dart';
-import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -29,7 +29,7 @@ class DevSettingsController extends GetxController {
   }
 
   void copy(String title, String value) =>
-      ClipboardManager.copyToClipBoard(value).then((result) {
+      FlutterClipboard.copy(value).then((_) {
         if (Get.isSnackbarOpen) Get.back();
         Get.rawSnackbar(
           message: '$title copied to clipboard',

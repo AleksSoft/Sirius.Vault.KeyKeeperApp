@@ -57,14 +57,15 @@ class HomeController extends GetxController {
 
   void shareValidatorId() => Share.share(_validatorId);
 
-  Future<void> changePin() async {
-    Get.to(LocalAuthPage(), fullscreenDialog: true).then((result) {
-      if (result ?? false) {
-        Get.to(
-          LocalAuthPage(isCreatePin: true, isCloseVisible: false),
-          fullscreenDialog: true,
-        );
-      }
-    });
-  }
+  void changePin() => Get.to(
+        LocalAuthPage(checkLocalAuth: false),
+        fullscreenDialog: true,
+      ).then((result) {
+        if (result ?? false) {
+          Get.to(
+            LocalAuthPage(isCreatePin: true, isCloseVisible: false),
+            fullscreenDialog: true,
+          );
+        }
+      });
 }
