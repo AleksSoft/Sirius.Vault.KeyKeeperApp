@@ -1,6 +1,6 @@
 {
-    "name": "KeyKeeper",
-    "short_name": "KeyKeeper",
+    "name": "validator",
+    "short_name": "validator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

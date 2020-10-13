@@ -10,7 +10,6 @@ class AppThemes {
     accentColor: AppColors.accent,
     scaffoldBackgroundColor: AppColors.background,
     backgroundColor: AppColors.background,
-    cursorColor: AppColors.coursorColor,
     textTheme: GoogleFonts.latoTextTheme(),
   );
 }
