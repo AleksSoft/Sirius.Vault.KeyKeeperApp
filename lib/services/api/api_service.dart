@@ -6,7 +6,8 @@ import 'package:grpc/grpc.dart';
 
 class ApiService {
   static const List<String> urls = <String>[
-    'sirius-validator-test.swisschain.info', // default base URL
+    'vault-validator-api.swisschain.io', // default base URL
+    'sirius-validator-test.swisschain.info',
     'sirius-validator-dev.swisschain.info',
   ];
   static const timeoutDuration = const Duration(seconds: 60);
