@@ -10,7 +10,6 @@
         <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/clipboard_manager-0.0.4/android" />
             <option value="$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+8/android" />
             <option value="$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.5.0+1/android" />
             <option value="$PROJECT_DIR$/../../../../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-7.0.3/android" />

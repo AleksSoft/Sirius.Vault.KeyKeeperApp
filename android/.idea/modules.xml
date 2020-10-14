@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-671360714/clipboard_manager.iml" filepath="$PROJECT_DIR$/.idea/modules/-671360714/clipboard_manager.iml" group="android/clipboard_manager" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-761670952/device_info.iml" filepath="$PROJECT_DIR$/.idea/modules/-761670952/device_info.iml" group="android/device_info" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1389746928/firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/1389746928/firebase_core.iml" group="android/firebase_core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-29285866/firebase_messaging.iml" filepath="$PROJECT_DIR$/.idea/modules/-29285866/firebase_messaging.iml" group="android/firebase_messaging" />
