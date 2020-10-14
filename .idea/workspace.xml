@@ -10,7 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a6746bd-415e-41c4-9a07-9f154145c0d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/validator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validator.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +27,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_API_22" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/swisschain/Sirius.Vault.KeyKeeperApp.git" />
+      </set>
+    </option>
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -37,7 +51,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="Flutter.Dev">
@@ -64,13 +81,19 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="99" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602252466622">
-      <screen x="0" y="23" width="1440" height="829" />
+    <state x="351" y="178" key="#Dev" timestamp="1602691181433">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="351" y="178" key="#Dev/0.0.1440.900@0.0.1440.900" timestamp="1602691181433" />
+    <state x="184" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602690737617">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1602690737617" />
     <state x="184" y="99" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.829@0.23.1440.829" timestamp="1602252466622" />
-    <state x="457" y="234" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1602252333492">
-      <screen x="0" y="23" width="1440" height="829" />
+    <state x="457" y="229" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1602690725719">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="457" y="229" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1602690725719" />
     <state x="457" y="234" key="#com.intellij.ide.util.TreeFileChooserDialog/0.23.1440.829@0.23.1440.829" timestamp="1602252333492" />
     <state x="408" y="185" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1601595287774">
       <screen x="0" y="0" width="1440" height="900" />
@@ -92,14 +115,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="699" height="203" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1601595398923" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1602486526736">
+    <state x="325" y="136" width="932" height="598" key="NewModule_or_Project.wizard" timestamp="1602691298829">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602486526736" />
+    <state x="325" y="136" width="932" height="598" key="NewModule_or_Project.wizard/0.0.1440.900@0.0.1440.900" timestamp="1602691298829" />
+    <state x="215" y="23" width="1024" height="829" key="SettingsEditor" timestamp="1602691403074">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="215" y="23" width="1024" height="829" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602691403074" />
     <state x="221" y="105" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1602252441677" />
     <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602485525267">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.829@0.23.1440.829" timestamp="1602485525267" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1602691666829">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1602691666829" />
   </component>
 </project>
