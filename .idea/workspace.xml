@@ -10,16 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a6746bd-415e-41c4-9a07-9f154145c0d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/settings_aar.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/validator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/validator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/qr_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/qr_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +92,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -125,27 +119,31 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="408" y="185" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1601595287774" />
+    <state x="285" y="52" key="CommitChangelistDialog2" timestamp="1602759130414">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="285" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1602759130414" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog" timestamp="1602752591444">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1602752537235" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.829@0.23.1440.829" timestamp="1602752591444" />
-    <state width="1398" height="220" key="GridCell.Tab.0.bottom" timestamp="1602753618860">
+    <state width="1398" height="209" key="GridCell.Tab.0.bottom" timestamp="1602759132504">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="220" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602753618860" />
-    <state width="1398" height="220" key="GridCell.Tab.0.center" timestamp="1602753618859">
+    <state width="1398" height="209" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602759132504" />
+    <state width="1398" height="209" key="GridCell.Tab.0.center" timestamp="1602759132502">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="220" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602753618859" />
-    <state width="1398" height="220" key="GridCell.Tab.0.left" timestamp="1602753618858">
+    <state width="1398" height="209" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602759132502" />
+    <state width="1398" height="209" key="GridCell.Tab.0.left" timestamp="1602759132501">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="220" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602753618858" />
-    <state width="1398" height="220" key="GridCell.Tab.0.right" timestamp="1602753618860">
+    <state width="1398" height="209" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602759132500" />
+    <state width="1398" height="209" key="GridCell.Tab.0.right" timestamp="1602759132503">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="220" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602753618860" />
+    <state width="1398" height="209" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602759132503" />
     <state x="325" y="136" width="932" height="598" key="NewModule_or_Project.wizard" timestamp="1602691298829">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -155,6 +153,10 @@
     </state>
     <state x="215" y="23" width="1024" height="829" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602691403074" />
     <state x="221" y="105" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1602252441677" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1602759261075">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1602759261075" />
     <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602485525267">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
