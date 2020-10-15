@@ -9,8 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a6746bd-415e-41c4-9a07-9f154145c0d3" name="Default Changelist" comment="gitignore updated">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="3a6746bd-415e-41c4-9a07-9f154145c0d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602759269853</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="gitignore updated">
+      <created>1602759461543</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602759461543</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -131,31 +137,31 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="408" y="185" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1601595287774" />
-    <state x="285" y="52" key="CommitChangelistDialog2" timestamp="1602759401898">
+    <state x="285" y="52" key="CommitChangelistDialog2" timestamp="1602759461356">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="285" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1602759401898" />
+    <state x="285" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1602759461356" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog" timestamp="1602752591444">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1602752537235" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.829@0.23.1440.829" timestamp="1602752591444" />
-    <state width="1398" height="209" key="GridCell.Tab.0.bottom" timestamp="1602759409805">
+    <state width="1398" height="407" key="GridCell.Tab.0.bottom" timestamp="1602763304242">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602759409805" />
-    <state width="1398" height="209" key="GridCell.Tab.0.center" timestamp="1602759409804">
+    <state width="1398" height="407" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602763304242" />
+    <state width="1398" height="407" key="GridCell.Tab.0.center" timestamp="1602763304241">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602759409804" />
-    <state width="1398" height="209" key="GridCell.Tab.0.left" timestamp="1602759409803">
+    <state width="1398" height="407" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602763304241" />
+    <state width="1398" height="407" key="GridCell.Tab.0.left" timestamp="1602763304240">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602759409803" />
-    <state width="1398" height="209" key="GridCell.Tab.0.right" timestamp="1602759409805">
+    <state width="1398" height="407" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602763304240" />
+    <state width="1398" height="407" key="GridCell.Tab.0.right" timestamp="1602763304241">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602759409805" />
+    <state width="1398" height="407" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602763304241" />
     <state x="325" y="136" width="932" height="598" key="NewModule_or_Project.wizard" timestamp="1602691298829">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -165,10 +171,10 @@
     </state>
     <state x="215" y="23" width="1024" height="829" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602691403074" />
     <state x="221" y="105" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1602252441677" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1602759454686">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1602759464648">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1602759454686" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1602759464648" />
     <state x="100" y="100" width="1240" height="700" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602485525267">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
@@ -177,9 +183,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="372" y="207" width="695" height="486" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1602753036015" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1602753110210">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1602763232691">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1602753110210" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1602763232691" />
   </component>
 </project>

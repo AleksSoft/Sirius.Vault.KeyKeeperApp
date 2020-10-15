@@ -131,6 +131,7 @@ class ShareBackupPage extends StatelessWidget {
             ),
             AppUiHelpers.vSpaceMedium,
             FloatingActionButton(
+              heroTag: 'fab-backup-share',
               onPressed: () => c.share(),
               backgroundColor: AppColors.dark,
               child: Icon(Icons.share),

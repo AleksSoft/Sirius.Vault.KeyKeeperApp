@@ -15,6 +15,7 @@ class InboxPage extends MenuPage {
       init: InboxController(),
       builder: (_) => Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: 'fab-reload-inbox',
           onPressed: () => _.reload(),
           child: Icon(Icons.replay),
           backgroundColor: AppColors.dark,

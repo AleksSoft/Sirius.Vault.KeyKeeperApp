@@ -27,6 +27,7 @@ class TransferDetailPage extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: 'fab-share-transferdetail',
           onPressed: () => _.share(),
           child: Icon(Icons.share),
           backgroundColor: AppColors.dark,

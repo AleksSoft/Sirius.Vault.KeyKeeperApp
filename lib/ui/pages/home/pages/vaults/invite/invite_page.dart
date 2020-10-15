@@ -18,6 +18,7 @@ class InvitePage extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           child: _.submitAllowed
               ? FloatingActionButton(
+                  heroTag: 'fab-invite-submit',
                   onPressed: () => InviteController.con.submitCode(),
                   child: Icon(Icons.add, color: AppColors.light),
                   backgroundColor: AppColors.dark,

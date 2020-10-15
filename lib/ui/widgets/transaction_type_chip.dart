@@ -15,28 +15,23 @@ class TransactionTypeChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'trans-type-chip',
-      child: Material(
-        child: Chip(
-          padding: const EdgeInsets.all(AppSizes.extraSmall),
-          label: Visibility(
-            visible: showLabel,
-            child: Text(
-              r.addressLabel,
-              style: Get.textTheme.caption.copyWith(
-                color: AppColors.primary,
-              ),
-            ),
-          ),
-          backgroundColor: r.isExternal ? AppColors.red : AppColors.green,
-          elevation: 0,
-          avatar: Icon(
-            r.isExternal ? Icons.file_upload : Icons.file_download,
+    return Chip(
+      padding: const EdgeInsets.all(AppSizes.extraSmall),
+      label: Visibility(
+        visible: showLabel,
+        child: Text(
+          r.addressLabel,
+          style: Get.textTheme.caption.copyWith(
             color: AppColors.primary,
-            size: 18,
           ),
         ),
+      ),
+      backgroundColor: r.isExternal ? AppColors.red : AppColors.green,
+      elevation: 0,
+      avatar: Icon(
+        r.isExternal ? Icons.file_upload : Icons.file_download,
+        color: AppColors.primary,
+        size: 18,
       ),
     );
   }

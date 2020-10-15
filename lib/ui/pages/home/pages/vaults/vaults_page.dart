@@ -16,6 +16,7 @@ class VaultsPage extends MenuPage {
       init: VaultsController(),
       builder: (_) => Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: 'fab-vaults-invite',
           onPressed: () => _.openNewInvite(),
           child: Icon(Icons.add),
           backgroundColor: AppColors.dark,
