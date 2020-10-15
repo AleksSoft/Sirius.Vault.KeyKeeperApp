@@ -1,14 +1,8 @@
-import 'package:validator/app/utils/utils.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:barcode_scan_fix/barcode_scan.dart';
 
 class QrService {
   static Future<String> scan() async {
-    final result = await FlutterBarcodeScanner.scanBarcode(
-      AppColors.red.value.toRadixString(16),
-      'Cancel',
-      true,
-      ScanMode.QR,
-    );
+    final result = await BarcodeScanner.scan();
     return result ?? '';
   }
 }
