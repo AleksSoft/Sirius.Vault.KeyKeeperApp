@@ -20,7 +20,6 @@ dependencies:
   http: ^0.12.2
   qr_flutter: ^3.2.0
   barcode_scan_fix: ^1.0.2
-  barcode_scan: any
   badges: ^1.1.3
   local_auth: ^0.6.3+3
   share: ^0.6.5+2
