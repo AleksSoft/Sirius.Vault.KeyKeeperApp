@@ -44,7 +44,7 @@ Future<void> mainCommon(Environment environment) async {
         enableLog: true,
         translations: AppTranslations(),
         locale: Locale('en'),
-        title: 'app_title'.tr,
+        title: 'Validator',
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
         transitionDuration: const Duration(milliseconds: 150),
