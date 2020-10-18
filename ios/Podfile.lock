@@ -1,4 +1,7 @@
 PODS:
+  - barcode_scan_fix (0.0.1):
+    - Flutter
+    - MTBBarcodeScanner
   - device_info (0.0.1):
     - Flutter
   - Firebase/CoreOnly (6.26.0):
@@ -46,8 +49,6 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 6.5)
     - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.0.0)
-  - flutter_barcode_scanner (1.0.1):
-    - Flutter
   - GoogleDataTransport (7.3.0):
     - nanopb (~> 1.30906.0)
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
@@ -69,6 +70,7 @@ PODS:
     - GoogleUtilities/Logger
   - local_auth (0.0.1):
     - Flutter
+  - MTBBarcodeScanner (5.0.11)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -84,11 +86,11 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - barcode_scan_fix (from `.symlinks/plugins/barcode_scan_fix/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
-  - flutter_barcode_scanner (from `.symlinks/plugins/flutter_barcode_scanner/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -106,11 +108,14 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleDataTransport
     - GoogleUtilities
+    - MTBBarcodeScanner
     - nanopb
     - PromisesObjC
     - Protobuf
 
 EXTERNAL SOURCES:
+  barcode_scan_fix:
+    :path: ".symlinks/plugins/barcode_scan_fix/ios"
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
   firebase_core:
@@ -119,8 +124,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
-  flutter_barcode_scanner:
-    :path: ".symlinks/plugins/flutter_barcode_scanner/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
   package_info:
@@ -131,6 +134,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share/ios"
 
 SPEC CHECKSUMS:
+  barcode_scan_fix: 80dd65de55f27eec6591dd077c8b85f2b79e31f1
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Firebase: 7cf5f9c67f03cb3b606d1d6535286e1080e57eb6
   firebase_core: 00e54a4744164a6b5a250b96dd1ad5afaba7a342
@@ -143,10 +147,10 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
   FirebaseMessaging: 29543feb343b09546ab3aa04d008ee8595b43c44
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_barcode_scanner: 49cd22fac3304077a6c1672f63bee4a2572ffd85
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   local_auth: 25938960984c3a7f6e3253e3f8d962fdd16852bd
+  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
