@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>737430010307-e28tpipn95lfgebtu0ilb7hbdufou7ih.apps.googleusercontent.com</string>
+	<string>737430010307-24ci5t0s2o24vo506mtolkok4943p8t8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.737430010307-e28tpipn95lfgebtu0ilb7hbdufou7ih</string>
+	<string>com.googleusercontent.apps.737430010307-24ci5t0s2o24vo506mtolkok4943p8t8</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>737430010307-tr21dcnqmfpvvui77gq6dhijakv3vk6j.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAKkfQpA0cbivYwDyUm4Y2VvZoHW7yY3ac</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>vault.sirius.keykeeper</string>
+	<string>com.swisschain.validator</string>
 	<key>PROJECT_ID</key>
 	<string>sirius-vault-key-keeper</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:737430010307:ios:25948ece53e0949d7fe576</string>
+	<string>1:737430010307:ios:0f00b8a2e72c30bd7fe576</string>
 	<key>DATABASE_URL</key>
 	<string>https://sirius-vault-key-keeper.firebaseio.com</string>
 </dict>
