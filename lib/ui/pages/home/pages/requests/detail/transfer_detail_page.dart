@@ -67,19 +67,19 @@ class _DetailsView extends StatelessWidget {
             AppUiHelpers.vSpaceSmall,
             DetailsTile(
               title: 'Operation ID',
-              value: c.transferDetail.operationId,
+              value: (c.transferDetail?.operationId ?? '').toString(),
               enableCopy: true,
             ),
             DetailsTile(
               title: 'Amount',
               value: Formatter.currency(
-                c.transferDetail?.amount,
+                (c.transferDetail?.amount ?? '').toString(),
                 suffix: c.transferDetail?.asset?.symbol,
               ),
             ),
             DetailsTile(
               title: 'Blockchain ID',
-              value: c.transferDetail.blockchainId,
+              value: (c.transferDetail?.blockchain?.id ?? '').toString(),
               enableCopy: true,
             ),
             ListTile(
@@ -98,16 +98,16 @@ class _DetailsView extends StatelessWidget {
             AppUiHelpers.vSpaceSmall,
             DetailsTile(
               title: 'Address',
-              value: c.transferDetail.source.address,
+              value: c.transferDetail.sourceAddress?.address,
               enableCopy: true,
             ),
             DetailsTile(
               title: 'Address Group',
-              value: c.transferDetail.source.group,
+              value: c.transferDetail.sourceAddress?.group,
             ),
             DetailsTile(
               title: 'Name',
-              value: c.transferDetail.source.name,
+              value: c.transferDetail.sourceAddress?.name,
             ),
             Divider(),
             AppUiHelpers.vSpaceMedium,
@@ -120,54 +120,55 @@ class _DetailsView extends StatelessWidget {
             AppUiHelpers.vSpaceSmall,
             DetailsTile(
               title: 'Address',
-              value: c.transferDetail.destination.address,
+              value: c.transferDetail.destinationAddress?.address,
               enableCopy: true,
             ),
             DetailsTile(
               title: 'Address Group',
-              value: c.transferDetail.destination.group,
+              value: c.transferDetail.destinationAddress?.group,
             ),
             DetailsTile(
               title: 'Name',
-              value: c.transferDetail.destination.name,
+              value: c.transferDetail.destinationAddress?.name,
             ),
             DetailsTile(
               title: 'Tag',
-              value: c.transferDetail.destination.tag,
+              value: c.transferDetail.destinationAddress?.tag,
             ),
             Divider(),
             AppUiHelpers.vSpaceMedium,
             DetailsTile(
               title: 'Fee limit',
-              value: c.transferDetail.feeLimit,
+              value: (c.transferDetail.feeLimit ?? '').toString(),
             ),
             DetailsTile(
               title: 'Account reference id',
-              value: c.transferDetail.clientContext.accountReferenceId,
+              value: c.transferDetail.transferContext?.accountReferenceId,
               enableCopy: true,
             ),
             DetailsTile(
               title: 'Api Key ID',
-              value: c.transferDetail.clientContext.apiKeyId,
+              value: c.transferDetail.transferContext?.requestContext?.apiKeyId,
               enableCopy: true,
             ),
             DetailsTile(
               title: 'IP',
-              value: c.transferDetail.clientContext.ip,
+              value: c.transferDetail.transferContext?.requestContext?.ip,
               enableCopy: true,
             ),
             DetailsTile(
               title: 'Timestamp',
-              value: c.transferDetail.clientContext.timestamp,
+              value:
+                  c.transferDetail.transferContext?.requestContext?.timestamp,
             ),
             DetailsTile(
               title: 'User ID',
-              value: c.transferDetail.clientContext.userId,
+              value: c.transferDetail.transferContext?.requestContext?.userId,
               enableCopy: true,
             ),
             DetailsTile(
               title: 'Withdraw reference ID',
-              value: c.transferDetail.clientContext.withdrawalReferenceId,
+              value: c.transferDetail.transferContext?.withdrawalReferenceId,
               enableCopy: true,
             ),
             Divider(),

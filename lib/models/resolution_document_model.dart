@@ -5,7 +5,7 @@ import 'package:validator/src/api.pbenum.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
 class ResolutionDocumentModel {
-  TransferDetailsModel transferDetails;
+  TransferDetailModel transferDetails;
   ResolveApprovalRequestsRequest_ResolutionStatus resolution;
   String resolutionMessage;
 
@@ -17,7 +17,7 @@ class ResolutionDocumentModel {
 
   ResolutionDocumentModel.fromJson(Map<String, dynamic> json) {
     transferDetails = json['transferDetails'] != null
-        ? new TransferDetailsModel.fromJson(json['transferDetails'])
+        ? new TransferDetailModel.fromJson(json['transferDetails'])
         : null;
     resolution = EnumToString.fromString(
       ResolveApprovalRequestsRequest_ResolutionStatus.values,

@@ -1,148 +1,151 @@
+import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:intl/intl.dart';
-import 'package:get/get.dart';
 
-class TransferDetailsModel {
-  String amount;
+class TransferDetailModel {
+  int operationId;
+  Blockchain blockchain;
   Asset asset;
-  String blockchainId;
-  String blockchainProtocolId;
-  ClientContext clientContext;
-  Destination destination;
-  String feeLimit;
-  String networkType;
-  String operationId;
-  Source source;
+  SourceAddress sourceAddress;
+  DestinationAddress destinationAddress;
+  double amount;
+  double feeLimit;
+  TransferContext transferContext;
 
-  bool get networkInsecure => 'mainnet' == (networkType ?? '').toLowerCase();
-  bool get isExternal => source?.group != destination?.group;
+  bool get networkInsecure =>
+      'mainnet' == (blockchain?.networkType ?? '').toLowerCase();
+  bool get isExternal => sourceAddress?.group != destinationAddress?.group;
   String get addressLabel => isExternal ? 'External' : 'Internal';
 
-  TransferDetailsModel(
-      {this.amount,
+  TransferDetailModel(
+      {this.operationId,
+      this.blockchain,
       this.asset,
-      this.blockchainId,
-      this.blockchainProtocolId,
-      this.clientContext,
-      this.destination,
+      this.sourceAddress,
+      this.destinationAddress,
+      this.amount,
       this.feeLimit,
-      this.networkType,
-      this.operationId,
-      this.source});
+      this.transferContext});
 
-  TransferDetailsModel.fromJson(Map<String, dynamic> json) {
-    amount = json['amount'];
-    asset = json['asset'] != null ? new Asset.fromJson(json['asset']) : null;
-    blockchainId = json['blockchainId'];
-    blockchainProtocolId = json['blockchainProtocolId'];
-    clientContext = json['clientContext'] != null
-        ? new ClientContext.fromJson(json['clientContext'])
-        : null;
-    destination = json['destination'] != null
-        ? new Destination.fromJson(json['destination'])
-        : null;
-    feeLimit = json['feeLimit'];
-    networkType = json['networkType'];
+  TransferDetailModel.fromJson(Map<String, dynamic> json) {
     operationId = json['operationId'];
-    source =
-        json['source'] != null ? new Source.fromJson(json['source']) : null;
+    blockchain = json['blockchain'] != null
+        ? new Blockchain.fromJson(json['blockchain'])
+        : null;
+    asset = json['asset'] != null ? new Asset.fromJson(json['asset']) : null;
+    sourceAddress = json['sourceAddress'] != null
+        ? new SourceAddress.fromJson(json['sourceAddress'])
+        : null;
+    destinationAddress = json['destinationAddress'] != null
+        ? new DestinationAddress.fromJson(json['destinationAddress'])
+        : null;
+    amount = json['amount'];
+    feeLimit = json['feeLimit'];
+    transferContext = json['transferContext'] != null
+        ? new TransferContext.fromJson(json['transferContext'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['amount'] = this.amount;
+    data['operationId'] = this.operationId;
+    if (this.blockchain != null) {
+      data['blockchain'] = this.blockchain.toJson();
+    }
     if (this.asset != null) {
       data['asset'] = this.asset.toJson();
     }
-    data['blockchainId'] = this.blockchainId;
-    data['blockchainProtocolId'] = this.blockchainProtocolId;
-    if (this.clientContext != null) {
-      data['clientContext'] = this.clientContext.toJson();
+    if (this.sourceAddress != null) {
+      data['sourceAddress'] = this.sourceAddress.toJson();
     }
-    if (this.destination != null) {
-      data['destination'] = this.destination.toJson();
+    if (this.destinationAddress != null) {
+      data['destinationAddress'] = this.destinationAddress.toJson();
     }
+    data['amount'] = this.amount;
     data['feeLimit'] = this.feeLimit;
-    data['networkType'] = this.networkType;
-    data['operationId'] = this.operationId;
-    if (this.source != null) {
-      data['source'] = this.source.toJson();
+    if (this.transferContext != null) {
+      data['transferContext'] = this.transferContext.toJson();
     }
+    return data;
+  }
+}
+
+class Blockchain {
+  String id;
+  String protocolId;
+  String networkType;
+
+  Blockchain({this.id, this.protocolId, this.networkType});
+
+  Blockchain.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    protocolId = json['protocolId'];
+    networkType = json['networkType'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['protocolId'] = this.protocolId;
+    data['networkType'] = this.networkType;
     return data;
   }
 }
 
 class Asset {
-  String assetAddress;
-  String assetId;
+  int id;
   String symbol;
+  String address;
 
-  Asset({this.assetAddress, this.assetId, this.symbol});
+  Asset({this.id, this.symbol, this.address});
 
   Asset.fromJson(Map<String, dynamic> json) {
-    assetAddress = json['assetAddress'];
-    assetId = json['assetId'];
+    id = json['id'];
     symbol = json['symbol'];
+    address = json['address'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['assetAddress'] = this.assetAddress;
-    data['assetId'] = this.assetId;
+    data['id'] = this.id;
     data['symbol'] = this.symbol;
+    data['address'] = this.address;
     return data;
   }
 }
 
-class ClientContext {
-  final _dateFormat = DateFormat().addPattern('dd.MM.yy HH:mm:ss');
-  String userId;
-  String apiKeyId;
-  String accountReferenceId;
-  String withdrawalReferenceId;
-  String ip;
-  String timestamp;
+class SourceAddress {
+  String address;
+  Null name;
+  String group;
 
-  ClientContext(
-      {this.userId,
-      this.apiKeyId,
-      this.accountReferenceId,
-      this.withdrawalReferenceId,
-      this.ip,
-      this.timestamp});
+  SourceAddress({this.address, this.name, this.group});
 
-  ClientContext.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
-    apiKeyId = json['apiKeyId'];
-    accountReferenceId = json['accountReferenceId'];
-    withdrawalReferenceId = json['withdrawalReferenceId'];
-    ip = json['ip'];
-    timestamp = GetUtils.isNullOrBlank(json['timestamp'])
-        ? ''
-        : _dateFormat.format(DateTime.parse(json['timestamp']));
+  SourceAddress.fromJson(Map<String, dynamic> json) {
+    address = json['address'];
+    name = json['name'];
+    group = json['group'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userId'] = this.userId;
-    data['apiKeyId'] = this.apiKeyId;
-    data['accountReferenceId'] = this.accountReferenceId;
-    data['withdrawalReferenceId'] = this.withdrawalReferenceId;
-    data['ip'] = this.ip;
-    data['timestamp'] = this.timestamp;
+    data['address'] = this.address;
+    data['name'] = this.name;
+    data['group'] = this.group;
     return data;
   }
 }
 
-class Destination {
+class DestinationAddress {
   String address;
   String name;
   String group;
   String tag;
   String tagType;
 
-  Destination({this.address, this.name, this.group, this.tag, this.tagType});
+  DestinationAddress(
+      {this.address, this.name, this.group, this.tag, this.tagType});
 
-  Destination.fromJson(Map<String, dynamic> json) {
+  DestinationAddress.fromJson(Map<String, dynamic> json) {
     address = json['address'];
     name = json['name'];
     group = json['group'];
@@ -161,24 +164,83 @@ class Destination {
   }
 }
 
-class Source {
-  String address;
-  Null name;
-  String group;
+class TransferContext {
+  String document;
+  String signature;
+  String accountReferenceId;
+  String withdrawalReferenceId;
+  String component;
+  String operationType;
+  String sourceGroup;
+  String destinationGroup;
+  RequestContext requestContext;
 
-  Source({this.address, this.name, this.group});
+  TransferContext(
+      {this.document,
+      this.signature,
+      this.accountReferenceId,
+      this.withdrawalReferenceId,
+      this.component,
+      this.operationType,
+      this.sourceGroup,
+      this.destinationGroup,
+      this.requestContext});
 
-  Source.fromJson(Map<String, dynamic> json) {
-    address = json['address'];
-    name = json['name'];
-    group = json['group'];
+  TransferContext.fromJson(Map<String, dynamic> json) {
+    document = json['document'];
+    signature = json['signature'];
+    accountReferenceId = json['accountReferenceId'];
+    withdrawalReferenceId = json['withdrawalReferenceId'];
+    component = json['component'];
+    operationType = json['operationType'];
+    sourceGroup = json['sourceGroup'];
+    destinationGroup = json['destinationGroup'];
+    requestContext = json['requestContext'] != null
+        ? new RequestContext.fromJson(json['requestContext'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['address'] = this.address;
-    data['name'] = this.name;
-    data['group'] = this.group;
+    data['document'] = this.document;
+    data['signature'] = this.signature;
+    data['accountReferenceId'] = this.accountReferenceId;
+    data['withdrawalReferenceId'] = this.withdrawalReferenceId;
+    data['component'] = this.component;
+    data['operationType'] = this.operationType;
+    data['sourceGroup'] = this.sourceGroup;
+    data['destinationGroup'] = this.destinationGroup;
+    if (this.requestContext != null) {
+      data['requestContext'] = this.requestContext.toJson();
+    }
+    return data;
+  }
+}
+
+class RequestContext {
+  String userId;
+  String apiKeyId;
+  String ip;
+  String timestamp;
+  final _dateFormat = DateFormat().addPattern('dd.MM.yy HH:mm:ss');
+
+  RequestContext({this.userId, this.apiKeyId, this.ip, this.timestamp});
+
+  RequestContext.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    apiKeyId = json['apiKeyId'];
+    ip = json['ip'];
+    timestamp = GetUtils.isNullOrBlank(json['timestamp'])
+        ? ''
+        : _dateFormat.format(DateTime.parse(json['timestamp']));
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['apiKeyId'] = this.apiKeyId;
+    data['ip'] = this.ip;
+    data['timestamp'] = this.timestamp;
     return data;
   }
 }

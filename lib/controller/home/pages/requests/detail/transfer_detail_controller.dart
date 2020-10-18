@@ -30,7 +30,7 @@ class TransferDetailController extends GetxController {
   var msgTextController = TextEditingController();
 
   TransferDetailArgs _transferDetailArgs;
-  TransferDetailsModel get transferDetail => _transferDetailArgs.transferDetail;
+  TransferDetailModel get transferDetail => _transferDetailArgs.transferDetail;
 
   var selectedResolution =
       ResolveApprovalRequestsRequest_ResolutionStatus.approve;
@@ -138,7 +138,7 @@ class TransferDetailController extends GetxController {
 }
 
 class TransferDetailArgs {
-  final TransferDetailsModel transferDetail;
+  final TransferDetailModel transferDetail;
   final String aesSecretKey;
   final String aesIvNonce;
   final String transferSigningRequestId;

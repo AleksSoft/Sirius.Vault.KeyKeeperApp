@@ -55,14 +55,14 @@ class _RequestCard extends StatelessWidget {
           textBaseline: TextBaseline.alphabetic,
           children: [
             Text(
-              Formatter.currency(r.amount, suffix: r.asset?.symbol),
+              Formatter.currency(r.amount.toString(), suffix: r.asset?.symbol),
               style: Get.textTheme.subtitle2.copyWith(
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
               ),
             ),
             Text(
-              r.clientContext?.timestamp ?? '',
+              r.transferContext?.requestContext?.timestamp ?? '',
               style: Get.textTheme.caption,
             ),
           ],
@@ -72,7 +72,7 @@ class _RequestCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              r.blockchainId ?? '',
+              r.blockchain?.id ?? '',
               style: Get.textTheme.subtitle2,
             ),
             Row(

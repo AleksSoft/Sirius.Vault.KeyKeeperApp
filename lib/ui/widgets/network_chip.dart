@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 class NetworkChip extends StatelessWidget {
   const NetworkChip(this.r, {Key key}) : super(key: key);
 
-  final TransferDetailsModel r;
+  final TransferDetailModel r;
 
   @override
   Widget build(BuildContext context) {
     return Chip(
       padding: const EdgeInsets.all(AppSizes.extraSmall),
       label: Text(
-        r.networkType ?? '',
+        r.blockchain.networkType ?? '',
         style: Get.textTheme.caption.copyWith(
           color: AppColors.primary,
         ),

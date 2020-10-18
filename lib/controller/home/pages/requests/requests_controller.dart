@@ -101,7 +101,7 @@ class RequestsController extends GetxController {
 
       var jsonMap = json.decode(decryptedJson);
       return TransferDetailArgs(
-        transferDetail: TransferDetailsModel.fromJson(jsonMap),
+        transferDetail: TransferDetailModel.fromJson(jsonMap),
         transferSigningRequestId: request.transferSigningRequestId,
         aesSecretKey: secretKey,
         aesIvNonce: request.ivNonce,

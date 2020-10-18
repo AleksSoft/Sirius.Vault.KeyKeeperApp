@@ -10,7 +10,7 @@ class TransactionTypeChip extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  final TransferDetailsModel r;
+  final TransferDetailModel r;
   final bool showLabel;
 
   @override
