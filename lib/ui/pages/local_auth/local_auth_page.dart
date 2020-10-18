@@ -18,38 +18,38 @@ class LocalAuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: GetBuilder<LocalAuthController>(
-          initState: (_) => c.initialize(
-            isCreatePin: this.isCreatePin,
-            isCloseVisible: this.isCloseVisible,
-            checkLocalAuth: this.checkLocalAuth,
+    return GetBuilder<LocalAuthController>(
+      initState: (_) => c.initialize(
+        isCreatePin: this.isCreatePin,
+        isCloseVisible: this.isCloseVisible,
+        checkLocalAuth: this.checkLocalAuth,
+      ),
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          leading: Visibility(
+            visible: _.showBack,
+            child: Positioned(
+              top: AppSizes.medium,
+              left: AppSizes.medium,
+              child: CloseButton(),
+            ),
           ),
-          builder: (_) {
-            return Stack(
+        ),
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Visibility(
-                  visible: _.showBack,
-                  child: Positioned(
-                    top: AppSizes.medium,
-                    left: AppSizes.medium,
-                    child: CloseButton(),
-                  ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Obx(() => Text(_.header, style: Get.textTheme.headline6)),
-                      AppUiHelpers.vSpaceExtraLarge,
-                      Numpad(),
-                    ],
-                  ),
-                ),
+                Obx(() => Text(_.header, style: Get.textTheme.headline6)),
+                AppUiHelpers.vSpaceExtraLarge,
+                Numpad(),
               ],
-            );
-          },
+            ),
+          ),
         ),
       ),
     );
@@ -61,7 +61,6 @@ class Numpad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 50.0),
       child: Column(
         children: <Widget>[
           Obx(() => Preview(text: c.pinValue, length: c.fieldsCount)),
@@ -117,7 +116,7 @@ class Numpad extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               NumpadButton(
                 haveBorder: false,
@@ -154,7 +153,7 @@ class Preview extends StatelessWidget {
       previewLength.add(Dot(isActive: text.length >= i + 1));
     }
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
+        padding: EdgeInsets.symmetric(vertical: AppSizes.medium),
         child: Wrap(children: previewLength));
   }
 }
@@ -204,8 +203,8 @@ class NumpadButton extends StatelessWidget {
           )
         : Text(this.text ?? '', style: buttonStyle);
 
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: AppSizes.small),
       child: OutlineButton(
         borderSide: haveBorder
             ? BorderSide(color: AppColors.secondary.withOpacity(0.3))
@@ -214,7 +213,7 @@ class NumpadButton extends StatelessWidget {
             icon != null ? Colors.transparent : AppColors.dark.withOpacity(0.3),
         splashColor:
             icon != null ? Colors.transparent : AppColors.dark.withOpacity(0.1),
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(AppSizes.large),
         shape: CircleBorder(),
         onPressed: onPressed,
         child: label,
