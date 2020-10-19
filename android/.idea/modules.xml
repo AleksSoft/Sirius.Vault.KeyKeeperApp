@@ -3,6 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2020029445/android.barcode_scan_fix.iml" filepath="$PROJECT_DIR$/.idea/modules/-2020029445/android.barcode_scan_fix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-920484653/android.device_info.iml" filepath="$PROJECT_DIR$/.idea/modules/-920484653/android.device_info.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/890586986/android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/890586986/android.firebase_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1326339236/android.firebase_messaging.iml" filepath="$PROJECT_DIR$/.idea/modules/-1326339236/android.firebase_messaging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1732940232/android.flutter_plugin_android_lifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/-1732940232/android.flutter_plugin_android_lifecycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1409999667/android.local_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/1409999667/android.local_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1453895444/android.package_info.iml" filepath="$PROJECT_DIR$/.idea/modules/1453895444/android.package_info.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/790993461/android.path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/790993461/android.path_provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-608454726/android.share.iml" filepath="$PROJECT_DIR$/.idea/modules/-608454726/android.share.iml" />
     </modules>
   </component>
 </project>
