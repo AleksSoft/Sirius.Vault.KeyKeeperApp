@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
 import 'package:validator/models/transfer_detail_model.dart';
@@ -13,7 +14,7 @@ import 'package:validator/ui/pages/home/pages/requests/detail/transfer_detail_pa
 import 'package:crypton/crypton.dart';
 import 'package:get/get.dart';
 
-class RequestsController extends GetxController {
+class RequestsController extends GetxController with WidgetsBindingObserver {
   static RequestsController get con => Get.find();
 
   final _repository = TransfersRepository();
@@ -34,12 +35,13 @@ class RequestsController extends GetxController {
     }
   }
 
-  bool get showEmptyContidion =>
+  bool get showEmptyCondition =>
       (requests == null || requests.isEmpty) && !loading;
 
   @override
   void onInit() async {
     _privateKey = await _crypto.rsaPrivateKey;
+    WidgetsBinding.instance.addObserver(this);
     super.onInit();
   }
 
@@ -52,7 +54,24 @@ class RequestsController extends GetxController {
   @override
   void onClose() {
     _stopPeriodicFetch();
+    WidgetsBinding.instance.removeObserver(this);
     super.onClose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _startPeriodicFetch();
+        break;
+      case AppLifecycleState.paused:
+        _stopPeriodicFetch();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+      default:
+        break;
+    }
   }
 
   Future<void> reloadRequests() async {

@@ -18,7 +18,7 @@ class RequestsPage extends MenuPage {
       initState: (_) => RequestsController.con.reloadRequests(),
       builder: (_) => EmptyReloadingHelper(
         emptyMessage: 'No active requests available',
-        showEmptyContidion: _.showEmptyContidion,
+        showEmptyContidion: _.showEmptyCondition,
         isLoading: _.loading,
         onRefresh: () => _.silentReloadRequests(),
         child: ListView.builder(
