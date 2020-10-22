@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
@@ -49,7 +50,7 @@ class RootController extends GetxController {
       _storage.read(AppStorageKeys.pinCode),
     );
     var auth = await Get.to(
-      LocalAuthPage(isCreatePin: !hasPin, isCloseVisible: !hasPin),
+      LocalAuthPage(isCreatePin: !hasPin, isCloseVisible: true),
       fullscreenDialog: true,
     );
     if (auth ?? false) {
@@ -58,6 +59,12 @@ class RootController extends GetxController {
         await Get.toNamed(RegisterPage.route);
       }
       Get.offAllNamed(HomePage.route);
+    } else {
+      await _storage.erase();
+      Get.rawSnackbar(
+        message: 'Local session cleared',
+        snackStyle: SnackStyle.GROUNDED,
+      );
     }
   }
 }

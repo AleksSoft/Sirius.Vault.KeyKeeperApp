@@ -18,6 +18,8 @@ class RootPage extends StatelessWidget {
           children: <Widget>[
             AnimatedPositioned(
               duration: _duration,
+              onEnd: () => Future.delayed(const Duration(milliseconds: 300))
+                  .whenComplete(() => _.checkAuth()),
               curve: Curves.easeInOutCubic,
               top: AppSizes.medium,
               right: AppSizes.medium,
