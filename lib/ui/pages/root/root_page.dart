@@ -107,6 +107,16 @@ class _BottomControls extends StatelessWidget {
               style: Get.textTheme.caption,
             ),
             AppUiHelpers.vSpaceExtraLarge,
+            Visibility(
+              visible: c.appConfig.isDev,
+              child: FlatButton(
+                onPressed: () => Get.to(DevSettingsPage()),
+                child: Text(
+                  'Dev settings',
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
+            ),
           ],
         );
       case ApiVersionStatus.undefined:
