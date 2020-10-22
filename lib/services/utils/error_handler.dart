@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/models/saved_errors_model.dart';
-import 'package:validator/services/api/api_service.dart';
 import 'package:validator/services/utils/dialog_manager.dart';
 import 'package:validator/src/api.pb.dart';
 import 'package:validator/ui/pages/root/root_page.dart';
@@ -21,21 +20,25 @@ class ErrorHandler {
     @required String method,
     bool showErrorDialog = true,
   }) async {
-    dynamic response = await future()
-        .timeout(ApiService.timeoutDuration)
-        .catchError(
-          (e) => _handleGrpcError(e, method, showErrorDialog),
-          test: (e) => e is GrpcError,
-        )
-        .catchError((e) => _handleError(e, method, showErrorDialog));
-
     try {
-      if (response?.error != null && response.error.hasMessage()) {
-        _handleApiError(response.error, future, method, showErrorDialog);
-        response = null;
-      }
-    } catch (e) {}
-    return response;
+      dynamic response = await future()
+          .catchError(
+            (e) => _handleGrpcError(e, method, showErrorDialog),
+            test: (e) => e is GrpcError,
+          )
+          .catchError((e) => _handleError(e, method, showErrorDialog));
+
+      try {
+        if (response?.error != null && response.error.hasMessage()) {
+          _handleApiError(response.error, future, method, showErrorDialog);
+          response = null;
+        }
+      } catch (e) {}
+      return response;
+    } catch (e) {
+      _handleError(e, method, showErrorDialog);
+      return null;
+    }
   }
 
   static Future<void> _handleApiError(

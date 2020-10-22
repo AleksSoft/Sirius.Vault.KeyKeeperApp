@@ -1,7 +1,7 @@
-import 'package:validator/app/utils/utils.dart';
-import 'package:validator/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/root/root_controller.dart';
 import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 
@@ -79,16 +79,7 @@ class _BottomControls extends StatelessWidget {
                 style: Get.textTheme.headline6,
               ),
             ),
-            Visibility(
-              visible: c.appConfig.isDev,
-              child: FlatButton(
-                onPressed: () => Get.to(DevSettingsPage()),
-                child: Text(
-                  'Dev settings',
-                  style: TextStyle(fontSize: 10),
-                ),
-              ),
-            ),
+            _DevSettingsButton(),
           ],
         );
       case ApiVersionStatus.outdated:
@@ -107,21 +98,29 @@ class _BottomControls extends StatelessWidget {
               style: Get.textTheme.caption,
             ),
             AppUiHelpers.vSpaceExtraLarge,
-            Visibility(
-              visible: c.appConfig.isDev,
-              child: FlatButton(
-                onPressed: () => Get.to(DevSettingsPage()),
-                child: Text(
-                  'Dev settings',
-                  style: TextStyle(fontSize: 10),
-                ),
-              ),
-            ),
+            _DevSettingsButton(),
           ],
         );
       case ApiVersionStatus.undefined:
       default:
         return SizedBox.shrink();
     }
+  }
+}
+
+class _DevSettingsButton extends StatelessWidget {
+  final c = RootController.con;
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: c.appConfig.isDev,
+      child: FlatButton(
+        onPressed: () => c.openDevSettings(),
+        child: Text(
+          'Dev settings',
+          style: TextStyle(fontSize: 10),
+        ),
+      ),
+    );
   }
 }

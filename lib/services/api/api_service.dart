@@ -10,7 +10,7 @@ class ApiService {
     'sirius-validator-test.swisschain.info',
     'sirius-validator-dev.swisschain.info',
   ];
-  static const timeoutDuration = const Duration(seconds: 60);
+  static const timeoutDuration = const Duration(seconds: 30);
 
   final _configStorage = GetStorage('config');
 
