@@ -1,3 +1,4 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,15 @@ class RootPage extends StatelessWidget {
         builder: (_) => Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOutCubic,
-              opacity: _.loading ? 1.0 : 0.0,
-              child: Center(
-                child: AppUiHelpers.circularProgress,
+            Center(
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOutCubic,
+                opacity: _.loading ? 1.0 : 0.0,
+                child: SpinKitFadingCube(
+                  color: Colors.red.shade800,
+                  size: AppSizes.extraLarge,
+                ),
               ),
             ),
             AnimatedPositioned(

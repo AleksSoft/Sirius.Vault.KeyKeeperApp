@@ -29,8 +29,8 @@ class AppUiHelpers {
     backgroundColor: Colors.transparent,
     valueColor: AlwaysStoppedAnimation<Color>(AppColors.progressColor),
   );
-  static const SpinKitRotatingCircle circularProgress = SpinKitRotatingCircle(
-    color: Colors.white,
+  static const circularProgress = SpinKitRotatingCircle(
+    color: AppColors.light,
     size: AppSizes.extraLarge,
   );
 }
