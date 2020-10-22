@@ -222,6 +222,7 @@ class RequestContext {
   String apiKeyId;
   String ip;
   String timestamp;
+  String timestampFormatted;
   final _dateFormat = DateFormat().addPattern('dd.MM.yy HH:mm:ss');
 
   RequestContext({this.userId, this.apiKeyId, this.ip, this.timestamp});
@@ -230,9 +231,10 @@ class RequestContext {
     userId = json['userId'];
     apiKeyId = json['apiKeyId'];
     ip = json['ip'];
-    timestamp = GetUtils.isNullOrBlank(json['timestamp'])
-        ? ''
-        : _dateFormat.format(DateTime.parse(json['timestamp']));
+    timestamp = json['timestamp'];
+    timestampFormatted = !GetUtils.isNullOrBlank(timestamp)
+        ? _dateFormat.format(DateTime.parse(timestamp))
+        : '';
   }
 
   Map<String, dynamic> toJson() {

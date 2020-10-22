@@ -158,8 +158,8 @@ class _DetailsView extends StatelessWidget {
             ),
             DetailsTile(
               title: 'Timestamp',
-              value:
-                  c.transferDetail.transferContext?.requestContext?.timestamp,
+              value: c.transferDetail.transferContext?.requestContext
+                  ?.timestampFormatted,
             ),
             DetailsTile(
               title: 'User ID',

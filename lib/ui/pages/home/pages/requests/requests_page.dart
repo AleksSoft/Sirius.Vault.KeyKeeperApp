@@ -62,7 +62,7 @@ class _RequestCard extends StatelessWidget {
               ),
             ),
             Text(
-              r.transferContext?.requestContext?.timestamp ?? '',
+              r.transferContext?.requestContext?.timestampFormatted,
               style: Get.textTheme.caption,
             ),
           ],
