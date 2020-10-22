@@ -15,6 +15,10 @@ class RootController extends GetxController {
   final _versionRepo = VersionRepository();
   final _storage = GetStorage();
 
+  final _loading = false.obs;
+  bool get loading => this._loading.value;
+  set loading(bool value) => this._loading.value = value;
+
   final _versionOk = true.obs;
   bool get versionOk => this._versionOk.value;
   set versionOk(bool value) => this._versionOk.value = value;
@@ -26,45 +30,43 @@ class RootController extends GetxController {
   AppConfig get appConfig => _config;
 
   @override
-  void onInit() async {
-    await initialPreload();
-    super.onInit();
-  }
-
-  @override
   void onReady() {
     super.onReady();
     showUi = true;
   }
 
-  Future<void> initialPreload() async {
-    // check if app works with proper api version
-    final version = await _versionRepo.getCurrentVersion();
-    versionOk = version != null &&
-        version.major == appConfig.version.major &&
-        version.minor == appConfig.version.minor;
+  Future<void> checkAuth() async {
+    loading = true;
+    versionOk = await _checkApiVersion();
+    if (versionOk) {
+      bool hasPin = !GetUtils.isNullOrBlank(
+        _storage.read(AppStorageKeys.pinCode),
+      );
+      var auth = await Get.to(
+        LocalAuthPage(isCreatePin: !hasPin, isCloseVisible: true),
+        fullscreenDialog: true,
+      );
+      if (auth ?? false) {
+        final pKey = _storage.read(AppStorageKeys.privateKey);
+        if (GetUtils.isNullOrBlank(pKey)) {
+          await Get.toNamed(RegisterPage.route);
+        }
+        Get.offAllNamed(HomePage.route);
+      } else {
+        await _storage.erase();
+        Get.rawSnackbar(
+          message: 'Local session cleared',
+          snackStyle: SnackStyle.GROUNDED,
+        );
+      }
+    }
+    loading = false;
   }
 
-  Future<void> checkAuth() async {
-    bool hasPin = !GetUtils.isNullOrBlank(
-      _storage.read(AppStorageKeys.pinCode),
-    );
-    var auth = await Get.to(
-      LocalAuthPage(isCreatePin: !hasPin, isCloseVisible: true),
-      fullscreenDialog: true,
-    );
-    if (auth ?? false) {
-      final pKey = _storage.read(AppStorageKeys.privateKey);
-      if (GetUtils.isNullOrBlank(pKey)) {
-        await Get.toNamed(RegisterPage.route);
-      }
-      Get.offAllNamed(HomePage.route);
-    } else {
-      await _storage.erase();
-      Get.rawSnackbar(
-        message: 'Local session cleared',
-        snackStyle: SnackStyle.GROUNDED,
-      );
-    }
+  Future<bool> _checkApiVersion() async {
+    final version = await _versionRepo.getCurrentVersion();
+    return version != null &&
+        version.major == appConfig.version.major &&
+        version.minor == appConfig.version.minor;
   }
 }

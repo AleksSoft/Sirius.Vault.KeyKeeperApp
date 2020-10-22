@@ -16,10 +16,17 @@ class RootPage extends StatelessWidget {
         builder: (_) => Stack(
           fit: StackFit.expand,
           children: <Widget>[
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOutCubic,
+              opacity: _.loading ? 1.0 : 0.0,
+              child: Center(
+                child: AppUiHelpers.circularProgress,
+              ),
+            ),
             AnimatedPositioned(
               duration: _duration,
-              onEnd: () => Future.delayed(const Duration(milliseconds: 300))
-                  .whenComplete(() => _.checkAuth()),
+              onEnd: () => _.checkAuth(),
               curve: Curves.easeInOutCubic,
               top: AppSizes.medium,
               right: AppSizes.medium,
