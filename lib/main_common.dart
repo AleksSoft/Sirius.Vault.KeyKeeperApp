@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/app/routes/app_routes.dart';
 import 'package:validator/bindings/initial_binding.dart';
@@ -13,6 +14,8 @@ import 'app/utils/utils.dart';
 
 Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await GetStorage.init();
 
