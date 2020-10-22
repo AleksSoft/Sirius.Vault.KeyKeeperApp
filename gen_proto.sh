@@ -15,3 +15,7 @@ G_SRC_DIR=$SRC_DIR/google
 G_DST_DIR=$DST_DIR/google/protobuf
 
 protoc -I=$G_SRC_DIR --dart_out=grpc:$G_DST_DIR $G_SRC_DIR/*.proto
+
+
+# protoc -I=./assets/protos --dart_out=grpc:./lib/src/ ./assets/protos/*.proto
+# protoc -I=./assets/protos --dart_out=grpc:./lib/src/google/protobuf ./assets/protos/google*.proto

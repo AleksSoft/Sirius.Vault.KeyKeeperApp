@@ -14,17 +14,21 @@ service Transfers {
     rpc ResolveApprovalRequests(ResolveApprovalRequestsRequest) returns (ResolveApprovalRequestsResponse);   
 }
 
-service Invites { 
-    rpc Accept (AcceptRequest) returns (AcceptResponse); 
+service Invites {
+    rpc Accept (AcceptRequest) returns (AcceptResponse);
     rpc GetPing(PingRequest) returns (PingResponse);
     rpc RemoveVaultConnection (RemoveVaultConnectionRequest) returns (RemoveVaultConnectionResponse);
+}
+
+service Version {
+    rpc GetCurrentVersion(GetCurrentVersionRequest) returns (GetCurrentVersionResponce);
 }
 
 
 // ********* Transfers *********
 
 message GetApprovalRequestsRequests {
-    
+
     string deviceInfo = 1; // description of device where runs a client used as a "fingerprint" for device of validator
 
 }
@@ -38,7 +42,7 @@ message GetApprovalRequestsResponse {
             close = 1;
         }
 
-        
+
         string transferSigningRequestId = 1; // ID of the transfer process to be approved
 
         RequestStatus status = 2; // status of the request to approval
@@ -46,7 +50,7 @@ message GetApprovalRequestsResponse {
         string transactionDetailsEncBase64 = 3; // json with transaction details encrupted by AES algorithm with 'Secret' as key and IV as nonce. Formar: base64
 
         string secretEncBase64 = 4; // Secret used for encrypt transaction detail. Secret encrypted by RSA algorithm with validator public key. Formar: base64
-        
+
         string ivNonce = 5; // IV used for encrypt transaction detail. Formar: base64
 
     }
@@ -57,7 +61,7 @@ message GetApprovalRequestsResponse {
 }
 
 message ResolveApprovalRequestsRequest {
-    
+
     enum ResolutionStatus {
         approve = 0; // validator approve a transaction
         reject = 1;  // validator decline a transaction
@@ -71,11 +75,11 @@ message ResolveApprovalRequestsRequest {
     string resolutionDocumentEncBase64 = 3; // Document with transactionDetail, resolution and resolution message.string Document encrupted by AES algorithm with 'Secret' as key and IV from ApprovalRequest.
 
     string signature = 4; // signature for resolutionDocument from validator private key encoded in base64
-    
+
 }
 
 message ResolveApprovalRequestsResponse {
-    
+
     ValidatorApiError error = 1; // NULL in success case; Error description in error case
 
 }
@@ -113,7 +117,7 @@ message PingRequest {
 }
 
 message PingResponse {
-    
+
     ValidatorApiError error = 1; // NULL in success case; Error description in error case
 
     string messageEnc = 2; // ping message ncrypted by RSA algorithm with validator public key in base64 form.
@@ -122,12 +126,26 @@ message PingResponse {
 }
 
 message RemoveVaultConnectionRequest {
-    
+
 }
 
 message RemoveVaultConnectionResponse {
 
     ValidatorApiError error = 1; // NULL in success case; Error description in error case
+
+}
+
+
+// ********* Versions *********
+
+message GetCurrentVersionRequest {
+
+}
+
+message GetCurrentVersionResponce {
+
+    int32 major = 1;
+    int32 minor = 2;
 
 }
 
