@@ -1,4 +1,3 @@
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
@@ -50,54 +49,9 @@ class RootPage extends StatelessWidget {
                 bottom: AppSizes.medium,
                 left: 0,
                 right: 0,
-                child: AnimatedOpacity(
+                child: AnimatedSwitcher(
                   duration: _duration,
-                  curve: Curves.easeInOutCubic,
-                  opacity: _.showUi ? 1.0 : 0.0,
-                  child: AnimatedSwitcher(
-                    duration: _duration,
-                    child: _.versionOk
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              FlatButton(
-                                onPressed: () => _.checkAuth(),
-                                height: AppSizes.extraLarge * 2,
-                                child: Text(
-                                  'start'.tr,
-                                  style: Get.textTheme.headline6,
-                                ),
-                              ),
-                              Visibility(
-                                visible: _.appConfig.isDev,
-                                child: FlatButton(
-                                  onPressed: () => Get.to(DevSettingsPage()),
-                                  child: Text(
-                                    'Dev settings',
-                                    style: TextStyle(fontSize: 10),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                'Application is outaded',
-                                textAlign: TextAlign.center,
-                                style: Get.textTheme.headline6,
-                              ),
-                              AppUiHelpers.vSpaceExtraLarge,
-                              Text(
-                                'Please update te app to continue using',
-                                textAlign: TextAlign.center,
-                                style: Get.textTheme.caption,
-                              ),
-                              AppUiHelpers.vSpaceExtraLarge,
-                            ],
-                          ),
-                  ),
+                  child: _BottomControls(),
                 ),
               ),
             ],
@@ -105,5 +59,59 @@ class RootPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _BottomControls extends StatelessWidget {
+  final c = RootController.con;
+  @override
+  Widget build(BuildContext context) {
+    switch (c.versionStatus) {
+      case ApiVersionStatus.ok:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            FlatButton(
+              onPressed: () => c.checkAuth(),
+              height: AppSizes.extraLarge * 2,
+              child: Text(
+                'start'.tr,
+                style: Get.textTheme.headline6,
+              ),
+            ),
+            Visibility(
+              visible: c.appConfig.isDev,
+              child: FlatButton(
+                onPressed: () => Get.to(DevSettingsPage()),
+                child: Text(
+                  'Dev settings',
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
+            ),
+          ],
+        );
+      case ApiVersionStatus.outdated:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Application is outaded',
+              textAlign: TextAlign.center,
+              style: Get.textTheme.headline6,
+            ),
+            AppUiHelpers.vSpaceExtraLarge,
+            Text(
+              'Please update te app to continue',
+              textAlign: TextAlign.center,
+              style: Get.textTheme.caption,
+            ),
+            AppUiHelpers.vSpaceExtraLarge,
+          ],
+        );
+      case ApiVersionStatus.undefined:
+      default:
+        return SizedBox.shrink();
+    }
   }
 }

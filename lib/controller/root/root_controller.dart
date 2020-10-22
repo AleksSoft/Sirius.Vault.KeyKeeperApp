@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
@@ -7,6 +6,12 @@ import 'package:validator/repositories/version_repository.dart';
 import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:validator/ui/pages/local_auth/local_auth_page.dart';
 import 'package:validator/ui/pages/register/register_page.dart';
+
+enum ApiVersionStatus {
+  ok,
+  outdated,
+  undefined,
+}
 
 class RootController extends GetxController {
   static RootController get con => Get.find();
@@ -19,9 +24,9 @@ class RootController extends GetxController {
   bool get loading => this._loading.value;
   set loading(bool value) => this._loading.value = value;
 
-  final _versionOk = true.obs;
-  bool get versionOk => this._versionOk.value;
-  set versionOk(bool value) => this._versionOk.value = value;
+  final _versionOk = ApiVersionStatus.undefined.obs;
+  ApiVersionStatus get versionStatus => this._versionOk.value;
+  set versionStatus(ApiVersionStatus value) => this._versionOk.value = value;
 
   final _showUi = false.obs;
   bool get showUi => this._showUi.value;
@@ -37,8 +42,8 @@ class RootController extends GetxController {
 
   Future<void> checkAuth() async {
     loading = true;
-    versionOk = await _checkApiVersion();
-    if (versionOk) {
+    versionStatus = await _checkApiVersionStatus();
+    if (versionStatus == ApiVersionStatus.ok) {
       bool hasPin = !GetUtils.isNullOrBlank(
         _storage.read(AppStorageKeys.pinCode),
       );
@@ -63,10 +68,11 @@ class RootController extends GetxController {
     loading = false;
   }
 
-  Future<bool> _checkApiVersion() async {
+  Future<ApiVersionStatus> _checkApiVersionStatus() async {
     final version = await _versionRepo.getCurrentVersion();
-    return version != null &&
+    bool statusOk = version != null &&
         version.major == appConfig.version.major &&
         version.minor == appConfig.version.minor;
+    return statusOk ? ApiVersionStatus.ok : ApiVersionStatus.outdated;
   }
 }
