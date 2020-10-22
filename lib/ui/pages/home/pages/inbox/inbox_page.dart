@@ -20,9 +20,9 @@ class InboxPage extends MenuPage {
           child: Icon(Icons.replay),
           backgroundColor: AppColors.dark,
         ),
-        body: EmptyReloadingHelper(
+        body: EmptyReloadingView(
           emptyMessage: 'You have no admin messages',
-          showEmptyContidion: _.showEmptyContidion,
+          isEmpty: _.showEmptyContidion,
           isLoading: _.loading,
           child: ListView.builder(
             padding: const EdgeInsets.all(AppSizes.medium),

@@ -1,18 +1,20 @@
+import 'dart:ui';
+
 import 'package:validator/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EmptyReloadingHelper extends StatelessWidget {
+class EmptyReloadingView extends StatelessWidget {
   final String emptyHeader;
   final String emptyMessage;
   final Widget child;
-  final bool showEmptyContidion;
+  final bool isEmpty;
   final bool isLoading;
   final RefreshCallback onRefresh;
 
-  const EmptyReloadingHelper({
+  const EmptyReloadingView({
     @required this.child,
-    this.showEmptyContidion,
+    this.isEmpty,
     this.emptyMessage,
     this.emptyHeader,
     this.isLoading,
@@ -29,7 +31,7 @@ class EmptyReloadingHelper extends StatelessWidget {
         children: <Widget>[
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
-            child: showEmptyContidion ?? false
+            child: isEmpty ?? false
                 ? Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -50,13 +52,32 @@ class EmptyReloadingHelper extends StatelessWidget {
                   )
                 : SizedBox.shrink(),
           ),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: isLoading != null && isLoading
-                ? AppUiHelpers.linearProgress
-                : SizedBox.shrink(),
-          ),
           child,
+          isLoading != null && isLoading
+              ? BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  child: Container(
+                    color: AppColors.light.withOpacity(0.3),
+                    height: Get.height,
+                    width: Get.width,
+                    alignment: Alignment.center,
+                    child: Card(
+                      shadowColor: AppColors.dark.withOpacity(0.5),
+                      elevation: AppSizes.medium,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(AppSizes.medium),
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: AppSizes.extraLarge * 3,
+                        width: AppSizes.extraLarge * 3,
+                        child: AppUiHelpers.progressDark,
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox.shrink(),
         ],
       ),
     );

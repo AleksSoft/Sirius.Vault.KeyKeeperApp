@@ -4,6 +4,7 @@ import 'package:validator/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
+import 'package:validator/ui/widgets/empty_reloading_view.dart';
 
 class RootPage extends StatelessWidget {
   static final String route = '/';
@@ -14,101 +15,93 @@ class RootPage extends StatelessWidget {
     return Scaffold(
       body: GetX<RootController>(
         init: RootController(),
-        builder: (_) => Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Center(
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
+        builder: (_) => EmptyReloadingView(
+          isLoading: _.loading,
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              AnimatedPositioned(
+                duration: _duration,
+                onEnd: () => _.checkAuth(),
                 curve: Curves.easeInOutCubic,
-                opacity: _.loading ? 1.0 : 0.0,
-                child: SpinKitFadingCube(
-                  color: Colors.red.shade800,
-                  size: AppSizes.extraLarge,
+                top: AppSizes.medium,
+                right: AppSizes.medium,
+                left: AppSizes.medium,
+                bottom: _.showUi ? Get.height / 2 : AppSizes.medium,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: AppSizes.extraLarge * 3.5,
+                      width: AppSizes.extraLarge * 3.5,
+                    ),
+                    AppUiHelpers.vSpaceLarge,
+                    Text(
+                      'app_title'.tr,
+                      style: Get.textTheme.headline5,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
-            ),
-            AnimatedPositioned(
-              duration: _duration,
-              onEnd: () => _.checkAuth(),
-              curve: Curves.easeInOutCubic,
-              top: AppSizes.medium,
-              right: AppSizes.medium,
-              left: AppSizes.medium,
-              bottom: _.showUi ? Get.height / 2 : AppSizes.medium,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Image.asset(
-                    'assets/images/logo.png',
-                    height: AppSizes.extraLarge * 3.5,
-                    width: AppSizes.extraLarge * 3.5,
-                  ),
-                  AppUiHelpers.vSpaceLarge,
-                  Text(
-                    'app_title'.tr,
-                    style: Get.textTheme.headline5,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: AppSizes.medium,
-              left: 0,
-              right: 0,
-              child: AnimatedOpacity(
-                duration: _duration,
-                curve: Curves.easeInOutCubic,
-                opacity: _.showUi ? 1.0 : 0.0,
-                child: AnimatedSwitcher(
+              Positioned(
+                bottom: AppSizes.medium,
+                left: 0,
+                right: 0,
+                child: AnimatedOpacity(
                   duration: _duration,
-                  child: _.versionOk
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            FlatButton(
-                              onPressed: () => _.checkAuth(),
-                              height: AppSizes.extraLarge * 2,
-                              child: Text(
-                                'start'.tr,
-                                style: Get.textTheme.headline6,
-                              ),
-                            ),
-                            Visibility(
-                              visible: _.appConfig.isDev,
-                              child: FlatButton(
-                                onPressed: () => Get.to(DevSettingsPage()),
+                  curve: Curves.easeInOutCubic,
+                  opacity: _.showUi ? 1.0 : 0.0,
+                  child: AnimatedSwitcher(
+                    duration: _duration,
+                    child: _.versionOk
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              FlatButton(
+                                onPressed: () => _.checkAuth(),
+                                height: AppSizes.extraLarge * 2,
                                 child: Text(
-                                  'Dev settings',
-                                  style: TextStyle(fontSize: 10),
+                                  'start'.tr,
+                                  style: Get.textTheme.headline6,
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              'Application is outaded',
-                              textAlign: TextAlign.center,
-                              style: Get.textTheme.headline6,
-                            ),
-                            AppUiHelpers.vSpaceExtraLarge,
-                            Text(
-                              'Please update te app to continue using',
-                              textAlign: TextAlign.center,
-                              style: Get.textTheme.caption,
-                            ),
-                            AppUiHelpers.vSpaceExtraLarge,
-                          ],
-                        ),
+                              Visibility(
+                                visible: _.appConfig.isDev,
+                                child: FlatButton(
+                                  onPressed: () => Get.to(DevSettingsPage()),
+                                  child: Text(
+                                    'Dev settings',
+                                    style: TextStyle(fontSize: 10),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                'Application is outaded',
+                                textAlign: TextAlign.center,
+                                style: Get.textTheme.headline6,
+                              ),
+                              AppUiHelpers.vSpaceExtraLarge,
+                              Text(
+                                'Please update te app to continue using',
+                                textAlign: TextAlign.center,
+                                style: Get.textTheme.caption,
+                              ),
+                              AppUiHelpers.vSpaceExtraLarge,
+                            ],
+                          ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -36,7 +36,7 @@ class TransferDetailPage extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           child: !_.loading
               ? _DetailsView()
-              : Center(child: AppUiHelpers.circularProgress),
+              : Center(child: AppUiHelpers.progressLight),
         ),
       ),
     );

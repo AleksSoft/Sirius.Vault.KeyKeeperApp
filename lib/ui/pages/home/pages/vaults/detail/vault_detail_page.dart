@@ -20,7 +20,7 @@ class VaultDetailPage extends StatelessWidget {
               : Container(
                   alignment: Alignment.center,
                   color: AppColors.background,
-                  child: AppUiHelpers.circularProgress,
+                  child: AppUiHelpers.progressLight,
                 ),
         ),
       ),

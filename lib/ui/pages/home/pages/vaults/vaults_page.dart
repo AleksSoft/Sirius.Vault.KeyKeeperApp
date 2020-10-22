@@ -21,9 +21,9 @@ class VaultsPage extends MenuPage {
           child: Icon(Icons.add),
           backgroundColor: AppColors.dark,
         ),
-        body: EmptyReloadingHelper(
+        body: EmptyReloadingView(
           emptyMessage: 'You have no active vaults',
-          showEmptyContidion: _.showEmptyContidion,
+          isEmpty: _.showEmptyContidion,
           isLoading: _.loading,
           onRefresh: () => _.reloadVaults(),
           child: ListView.builder(

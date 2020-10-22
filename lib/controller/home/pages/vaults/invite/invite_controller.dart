@@ -21,16 +21,30 @@ class InviteController extends GetxController {
   final inviteCodeController = TextEditingController();
   final vaultNameController = TextEditingController();
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (_loading != value) {
+      _loading = value;
+      update();
+    }
+  }
+
   bool get submitAllowed =>
       !inviteCodeController.text.isNullOrBlank &&
-      !vaultNameController.text.isNullOrBlank;
+      !vaultNameController.text.isNullOrBlank &&
+      !loading;
 
   Future<void> submitCode() async {
+    loading = true;
+
+    await Future.delayed(const Duration(seconds: 1));
+
     var validatorId = await _crypto.validatorId;
     var publicKeyPem = (await _crypto.rsaPublicKey).toPEM();
     String deviceInfo = await DeviceInfoService.deviceInfo;
     String inviteId = inviteCodeController.text.trim();
-    String fcmToken = _storage.read(AppStorageKeys.fcmToken);
+    String fcmToken = _storage.read(AppStorageKeys.fcmToken) ?? '';
 
     var response = await _repository.accept(
       publicKeyPem: publicKeyPem,
@@ -41,6 +55,8 @@ class InviteController extends GetxController {
     );
 
     if (response != null) await _saveNewVaultAndReload(response);
+
+    loading = false;
   }
 
   Future<void> scanQRCode() async {

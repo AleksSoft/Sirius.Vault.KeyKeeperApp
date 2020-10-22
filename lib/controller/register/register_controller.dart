@@ -5,7 +5,6 @@ import 'package:validator/app/utils/app_config.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/qr_service.dart';
-import 'package:validator/services/utils/dialog_manager.dart';
 import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,9 +20,19 @@ class RegisterController extends GetxController {
   final _storage = GetStorage();
   final _crypto = Get.find<CryptoService>();
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (_loading != value) {
+      _loading = value;
+      update();
+    }
+  }
+
   bool get actionAllowed => isValidData && isValidPass;
 
-  bool get isValidData => !dataController.text.isNullOrBlank;
+  bool get isValidData =>
+      !dataController.text.isNullOrBlank && dataController.text.length >= 16;
 
   bool get isValidPass =>
       !passwordController.text.isNullOrBlank &&
@@ -66,8 +75,10 @@ class RegisterController extends GetxController {
       String decrypted = _crypto.aesDecrypt(input, nonce, keyValue);
       return decrypted;
     } catch (e) {
-      DialogManager().error(
-        ErrorContent(title: 'Error decrypting data', message: e.toString()),
+      Get.rawSnackbar(
+        message: 'Error decrypting data',
+        backgroundColor: AppColors.red,
+        snackStyle: SnackStyle.GROUNDED,
       );
       return null;
     }

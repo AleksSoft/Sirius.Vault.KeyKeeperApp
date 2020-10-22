@@ -16,9 +16,9 @@ class RequestsPage extends MenuPage {
   Widget build(BuildContext context) {
     return GetBuilder<RequestsController>(
       initState: (_) => RequestsController.con.reloadRequests(),
-      builder: (_) => EmptyReloadingHelper(
+      builder: (_) => EmptyReloadingView(
         emptyMessage: 'No active requests available',
-        showEmptyContidion: _.showEmptyCondition,
+        isEmpty: _.showEmptyCondition,
         isLoading: _.loading,
         onRefresh: () => _.silentReloadRequests(),
         child: ListView.builder(
