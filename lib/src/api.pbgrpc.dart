@@ -188,3 +188,49 @@ abstract class InvitesServiceBase extends $grpc.Service {
   $async.Future<$0.RemoveVaultConnectionResponse> removeVaultConnection(
       $grpc.ServiceCall call, $0.RemoveVaultConnectionRequest request);
 }
+
+class VersionClient extends $grpc.Client {
+  static final _$getCurrentVersion = $grpc.ClientMethod<
+          $0.GetCurrentVersionRequest, $0.GetCurrentVersionResponce>(
+      '/ValidatorApi.Version/GetCurrentVersion',
+      ($0.GetCurrentVersionRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetCurrentVersionResponce.fromBuffer(value));
+
+  VersionClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
+      : super(channel, options: options);
+
+  $grpc.ResponseFuture<$0.GetCurrentVersionResponce> getCurrentVersion(
+      $0.GetCurrentVersionRequest request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getCurrentVersion, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+}
+
+abstract class VersionServiceBase extends $grpc.Service {
+  $core.String get $name => 'ValidatorApi.Version';
+
+  VersionServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.GetCurrentVersionRequest,
+            $0.GetCurrentVersionResponce>(
+        'GetCurrentVersion',
+        getCurrentVersion_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GetCurrentVersionRequest.fromBuffer(value),
+        ($0.GetCurrentVersionResponce value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$0.GetCurrentVersionResponce> getCurrentVersion_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.GetCurrentVersionRequest> request) async {
+    return getCurrentVersion(call, await request);
+  }
+
+  $async.Future<$0.GetCurrentVersionResponce> getCurrentVersion(
+      $grpc.ServiceCall call, $0.GetCurrentVersionRequest request);
+}

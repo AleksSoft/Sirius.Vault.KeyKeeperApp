@@ -117,6 +117,18 @@ const RemoveVaultConnectionResponse$json = const {
   ],
 };
 
+const GetCurrentVersionRequest$json = const {
+  '1': 'GetCurrentVersionRequest',
+};
+
+const GetCurrentVersionResponce$json = const {
+  '1': 'GetCurrentVersionResponce',
+  '2': const [
+    const {'1': 'major', '3': 1, '4': 1, '5': 5, '10': 'major'},
+    const {'1': 'minor', '3': 2, '4': 1, '5': 5, '10': 'minor'},
+  ],
+};
+
 const ValidatorApiError$json = const {
   '1': 'ValidatorApiError',
   '2': const [

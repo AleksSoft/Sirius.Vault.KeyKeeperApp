@@ -528,6 +528,68 @@ class RemoveVaultConnectionResponse extends $pb.GeneratedMessage {
   ValidatorApiError ensureError() => $_ensure(0);
 }
 
+class GetCurrentVersionRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCurrentVersionRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  GetCurrentVersionRequest._() : super();
+  factory GetCurrentVersionRequest() => create();
+  factory GetCurrentVersionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetCurrentVersionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetCurrentVersionRequest clone() => GetCurrentVersionRequest()..mergeFromMessage(this);
+  GetCurrentVersionRequest copyWith(void Function(GetCurrentVersionRequest) updates) => super.copyWith((message) => updates(message as GetCurrentVersionRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetCurrentVersionRequest create() => GetCurrentVersionRequest._();
+  GetCurrentVersionRequest createEmptyInstance() => create();
+  static $pb.PbList<GetCurrentVersionRequest> createRepeated() => $pb.PbList<GetCurrentVersionRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetCurrentVersionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCurrentVersionRequest>(create);
+  static GetCurrentVersionRequest _defaultInstance;
+}
+
+class GetCurrentVersionResponce extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCurrentVersionResponce', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'major', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, 'minor', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  GetCurrentVersionResponce._() : super();
+  factory GetCurrentVersionResponce() => create();
+  factory GetCurrentVersionResponce.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetCurrentVersionResponce.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetCurrentVersionResponce clone() => GetCurrentVersionResponce()..mergeFromMessage(this);
+  GetCurrentVersionResponce copyWith(void Function(GetCurrentVersionResponce) updates) => super.copyWith((message) => updates(message as GetCurrentVersionResponce));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetCurrentVersionResponce create() => GetCurrentVersionResponce._();
+  GetCurrentVersionResponce createEmptyInstance() => create();
+  static $pb.PbList<GetCurrentVersionResponce> createRepeated() => $pb.PbList<GetCurrentVersionResponce>();
+  @$core.pragma('dart2js:noInline')
+  static GetCurrentVersionResponce getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCurrentVersionResponce>(create);
+  static GetCurrentVersionResponce _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get major => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set major($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMajor() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMajor() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get minor => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set minor($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMinor() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMinor() => clearField(2);
+}
+
 class ValidatorApiError extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('ValidatorApiError', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
     ..e<ValidatorApiError_ErrorCodes>(1, 'code', $pb.PbFieldType.OE, defaultOrMaker: ValidatorApiError_ErrorCodes.Unknown, valueOf: ValidatorApiError_ErrorCodes.valueOf, enumValues: ValidatorApiError_ErrorCodes.values)
