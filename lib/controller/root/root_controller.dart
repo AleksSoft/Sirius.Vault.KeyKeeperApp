@@ -25,10 +25,15 @@ class RootController extends GetxController {
   AppConfig get appConfig => _config;
 
   @override
-  void onReady() async {
+  void onInit() async {
+    await initialPreload();
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
     super.onReady();
     showUi = true;
-    await initialPreload();
   }
 
   Future<void> initialPreload() async {

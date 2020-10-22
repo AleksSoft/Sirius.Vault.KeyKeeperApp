@@ -29,8 +29,8 @@ class RootPage extends StatelessWidget {
                 children: <Widget>[
                   Image.asset(
                     'assets/images/logo.png',
-                    height: AppSizes.extraLarge * 2,
-                    width: AppSizes.extraLarge * 2,
+                    height: AppSizes.extraLarge * 3.5,
+                    width: AppSizes.extraLarge * 3.5,
                   ),
                   AppUiHelpers.vSpaceLarge,
                   Text(
