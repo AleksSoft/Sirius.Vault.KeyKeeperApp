@@ -13,7 +13,7 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
     @required String inviteId,
     @required String pushNotificationFCMToken,
   }) async =>
-      await ErrorHandler.safeCall(
+      await ErrorHandler.safeCall<AcceptResponse>(
         () => client.accept(
           AcceptRequest()
             ..publicKeyPem = publicKeyPem
@@ -29,7 +29,7 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
     @required String deviceInfo,
     @required String apiKey,
   }) async =>
-      await ErrorHandler.safeCall(
+      await ErrorHandler.safeCall<PingResponse>(
         () => client.getPing(
           PingRequest()..deviceInfo = deviceInfo,
           options: ApiService.getSecureOptions(apiKey),
@@ -39,7 +39,7 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
 
   Future<RemoveVaultConnectionResponse> removeVaultConnection(
           {@required String apiKey}) async =>
-      await ErrorHandler.safeCall(
+      await ErrorHandler.safeCall<RemoveVaultConnectionResponse>(
         () => client.removeVaultConnection(
           RemoveVaultConnectionRequest(),
           options: ApiService.getSecureOptions(apiKey),

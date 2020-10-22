@@ -16,22 +16,22 @@ typedef Future<T> FutureGenerator<T>();
 class ErrorHandler {
   static final _dialogManager = Get.find<DialogManager>();
 
-  static Future safeCall(
-    FutureGenerator future, {
+  static Future<T> safeCall<T>(
+    FutureGenerator<T> future, {
     @required String method,
-    bool hideErrorDialog = false,
+    bool showErrorDialog = true,
   }) async {
     dynamic response = await future()
         .timeout(ApiService.timeoutDuration)
         .catchError(
-          (e) => _handleGrpcError(e, method),
+          (e) => _handleGrpcError(e, method, showErrorDialog),
           test: (e) => e is GrpcError,
         )
-        .catchError((e) => _handleError(e, method));
+        .catchError((e) => _handleError(e, method, showErrorDialog));
 
     try {
       if (response?.error != null && response.error.hasMessage()) {
-        _handleApiError(response.error, future, method);
+        _handleApiError(response.error, future, method, showErrorDialog);
         response = null;
       }
     } catch (e) {}
@@ -42,22 +42,25 @@ class ErrorHandler {
     ValidatorApiError error,
     FutureGenerator future,
     String method,
+    bool showDialog,
   ) async {
-    switch (error.code) {
-      case ValidatorApiError_ErrorCodes.ExpiredInvitation:
-      case ValidatorApiError_ErrorCodes.InternalServerError:
-      case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
-      case ValidatorApiError_ErrorCodes.WrongInvitation:
-      case ValidatorApiError_ErrorCodes.WrongSignature:
-      case ValidatorApiError_ErrorCodes.Unknown:
-        _dialogManager.error(ErrorContent(
-          title: error.code.name,
-          message: error.message,
-        ));
-        break;
-      default:
-        _defaultError();
-        break;
+    if (showDialog) {
+      switch (error.code) {
+        case ValidatorApiError_ErrorCodes.ExpiredInvitation:
+        case ValidatorApiError_ErrorCodes.InternalServerError:
+        case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
+        case ValidatorApiError_ErrorCodes.WrongInvitation:
+        case ValidatorApiError_ErrorCodes.WrongSignature:
+        case ValidatorApiError_ErrorCodes.Unknown:
+          _dialogManager.error(ErrorContent(
+            title: error.code.name,
+            message: error.message,
+          ));
+          break;
+        default:
+          _defaultErrorDialog();
+          break;
+      }
     }
     await saveError(
       code: error.code.name,
@@ -66,7 +69,11 @@ class ErrorHandler {
     );
   }
 
-  static Future<void> _handleGrpcError(GrpcError e, String method) async {
+  static Future<void> _handleGrpcError(
+    GrpcError e,
+    String method,
+    bool showDialog,
+  ) async {
     if (e.code == StatusCode.unauthenticated) {
       _dialogManager.error(
         ErrorContent(
@@ -85,13 +92,16 @@ class ErrorHandler {
     );
   }
 
-  static void _handleError(dynamic e, String method) => saveError(
+  static void _handleError(dynamic e, String method, bool showDialog) =>
+      saveError(
         code: e.runtimeType.toString(),
         message: '',
         method: method,
-      ).whenComplete(() => _defaultError());
+      ).whenComplete(() {
+        if (showDialog) _defaultErrorDialog();
+      });
 
-  static void _defaultError() => _dialogManager.error(
+  static void _defaultErrorDialog() => _dialogManager.error(
         ErrorContent(
             title: 'Oops',
             message: 'Something went wrong. Please try again later.'),

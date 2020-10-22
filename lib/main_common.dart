@@ -18,6 +18,7 @@ Future<void> mainCommon(Environment environment) async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await GetStorage.init();
+  await GetStorage.init('config');
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   await _firebaseMessaging.requestNotificationPermissions(
@@ -30,7 +31,10 @@ Future<void> mainCommon(Environment environment) async {
   );
 
   await Get.putAsync<AppConfig>(
-    () => AppConfig().init(environment: environment),
+    () => AppConfig().init(
+      environment: environment,
+      appApiVersion: AppApiVersion(1, 0),
+    ),
   );
   await Get.putAsync<ApiService>(() => ApiService().init());
 

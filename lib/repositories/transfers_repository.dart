@@ -9,7 +9,7 @@ import 'base_repository.dart';
 class TransfersRepository extends BaseRepository<TransfersClient> {
   Future<List<GetApprovalRequestsResponse_ApprovalRequest>> getApprovalRequests(
       {@required String deviceInfo, @required String apiKey}) async {
-    GetApprovalRequestsResponse response = await ErrorHandler.safeCall(
+    final response = await ErrorHandler.safeCall<GetApprovalRequestsResponse>(
       () => client.getApprovalRequests(
         GetApprovalRequestsRequests()..deviceInfo = deviceInfo,
         options: ApiService.getSecureOptions(apiKey),
@@ -26,7 +26,8 @@ class TransfersRepository extends BaseRepository<TransfersClient> {
     @required String signature,
     @required String apiKey,
   }) async {
-    final response = await ErrorHandler.safeCall(
+    final response =
+        await ErrorHandler.safeCall<ResolveApprovalRequestsResponse>(
       () => client.resolveApprovalRequests(
         ResolveApprovalRequestsRequest()
           ..deviceInfo = deviceInfo

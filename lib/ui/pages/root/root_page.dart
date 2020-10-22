@@ -2,10 +2,11 @@ import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/root/root_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
 
 class RootPage extends StatelessWidget {
   static final String route = '/';
-  final duration = const Duration(seconds: 1);
+  final _duration = const Duration(seconds: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,12 @@ class RootPage extends StatelessWidget {
           fit: StackFit.expand,
           children: <Widget>[
             AnimatedPositioned(
-              onEnd: () => _.checkAuth(),
-              duration: duration,
-              top: _.showUi ? 120 : -10,
-              right: 10,
-              left: 10,
+              duration: _duration,
+              curve: Curves.easeInOutCubic,
+              top: AppSizes.medium,
+              right: AppSizes.medium,
+              left: AppSizes.medium,
+              bottom: _.showUi ? Get.height / 2 : AppSizes.medium,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -44,11 +46,52 @@ class RootPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: AnimatedOpacity(
-                duration: duration,
+                duration: _duration,
+                curve: Curves.easeInOutCubic,
                 opacity: _.showUi ? 1.0 : 0.0,
-                child: FlatButton(
-                  onPressed: () => _.checkAuth(),
-                  child: Text('start'.tr),
+                child: AnimatedSwitcher(
+                  duration: _duration,
+                  child: _.versionOk
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            FlatButton(
+                              onPressed: () => _.checkAuth(),
+                              height: AppSizes.extraLarge * 2,
+                              child: Text(
+                                'start'.tr,
+                                style: Get.textTheme.headline6,
+                              ),
+                            ),
+                            Visibility(
+                              visible: _.appConfig.isDev,
+                              child: FlatButton(
+                                onPressed: () => Get.to(DevSettingsPage()),
+                                child: Text(
+                                  'Dev settings',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              'Application is outaded',
+                              textAlign: TextAlign.center,
+                              style: Get.textTheme.headline6,
+                            ),
+                            AppUiHelpers.vSpaceExtraLarge,
+                            Text(
+                              'Please update te app to continue using',
+                              textAlign: TextAlign.center,
+                              style: Get.textTheme.caption,
+                            ),
+                            AppUiHelpers.vSpaceExtraLarge,
+                          ],
+                        ),
                 ),
               ),
             ),

@@ -12,7 +12,7 @@ class ApiService {
   ];
   static const timeoutDuration = const Duration(seconds: 60);
 
-  final _storage = GetStorage();
+  final _configStorage = GetStorage('config');
 
   final Map _clients = Map();
 
@@ -21,7 +21,7 @@ class ApiService {
   T client<T extends Client>() => _clients[T];
 
   String get defaultUrl {
-    String url = GetStorage().read(AppStorageKeys.baseUrl);
+    String url = GetStorage('config').read(AppStorageKeys.baseUrl);
     return url.isNullOrBlank ? urls[0] : url;
   }
 
@@ -35,7 +35,7 @@ class ApiService {
   /// If [url] is null the stored value is used
   Future<void> update({String url}) async {
     if (url.isNullOrBlank) url = defaultUrl;
-    await _storage.write(AppStorageKeys.baseUrl, url);
+    await _configStorage.write(AppStorageKeys.baseUrl, url);
     print('---- Base Url: $url');
 
     var channel = ClientChannel(url, port: 443);
@@ -57,6 +57,12 @@ class ApiService {
     _clients.putIfAbsent(
       InvitesClient,
       () => InvitesClient(channel, options: options),
+    );
+
+    // adding VersionClient instanses
+    _clients.putIfAbsent(
+      VersionClient,
+      () => VersionClient(channel, options: options),
     );
   }
 }

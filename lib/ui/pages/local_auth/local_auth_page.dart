@@ -1,7 +1,7 @@
-import 'package:validator/app/utils/utils.dart';
-import 'package:validator/controller/local_auth/local_auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controller/local_auth/local_auth_controller.dart';
 
 class LocalAuthPage extends StatelessWidget {
   LocalAuthPage({
@@ -18,38 +18,38 @@ class LocalAuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LocalAuthController>(
-      initState: (_) => c.initialize(
-        isCreatePin: this.isCreatePin,
-        isCloseVisible: this.isCloseVisible,
-        checkLocalAuth: this.checkLocalAuth,
-      ),
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          leading: Visibility(
-            visible: _.showBack,
-            child: Positioned(
-              top: AppSizes.medium,
-              left: AppSizes.medium,
-              child: CloseButton(),
-            ),
+    return Scaffold(
+      body: SafeArea(
+        child: GetBuilder<LocalAuthController>(
+          initState: (_) => c.initialize(
+            isCreatePin: this.isCreatePin,
+            isCloseVisible: this.isCloseVisible,
+            checkLocalAuth: this.checkLocalAuth,
           ),
-        ),
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          builder: (_) {
+            return Stack(
               children: <Widget>[
-                Obx(() => Text(_.header, style: Get.textTheme.headline6)),
-                AppUiHelpers.vSpaceExtraLarge,
-                Numpad(),
+                Visibility(
+                  visible: _.showBack,
+                  child: Positioned(
+                    top: AppSizes.medium,
+                    left: AppSizes.medium,
+                    child: CloseButton(),
+                  ),
+                ),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Obx(() => Text(_.header, style: Get.textTheme.headline6)),
+                      AppUiHelpers.vSpaceExtraLarge,
+                      Numpad(),
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
