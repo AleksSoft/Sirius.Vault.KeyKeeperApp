@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/services.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/app/routes/app_routes.dart';
@@ -15,12 +16,16 @@ import 'app/utils/utils.dart';
 Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // set only portrait orientation for device
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  // init local storage
   await GetStorage.init();
   await GetStorage.init('config');
 
+  // init firebase messaging
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // ask for needed permissions (push notifications)
   await _firebaseMessaging.requestNotificationPermissions(
     const IosNotificationSettings(
       sound: true,
@@ -30,6 +35,8 @@ Future<void> mainCommon(Environment environment) async {
     ),
   );
 
+  // init async instances
+  await Get.putAsync<RemoteConfig>(() => setupRemoteConfig());
   await Get.putAsync<AppConfig>(
     () => AppConfig().init(
       environment: environment,
@@ -38,6 +45,7 @@ Future<void> mainCommon(Environment environment) async {
   );
   await Get.putAsync<ApiService>(() => ApiService().init());
 
+  // start app with all configurations done
   runApp(
     GestureDetector(
       onTap: () {
@@ -48,32 +56,32 @@ Future<void> mainCommon(Environment environment) async {
         debugShowMaterialGrid: false,
         showPerformanceOverlay: false,
         showSemanticsDebugger: false,
-        enableLog: true,
+        enableLog: environment == Environment.dev,
         translations: AppTranslations(),
         locale: Locale('en'),
-        title: 'Validator',
+        title: 'Sirius Validator',
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
-        transitionDuration: const Duration(milliseconds: 150),
+        transitionDuration: const Duration(milliseconds: 200),
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
         onInit: () {
           _firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
-              print("onMessage: $message");
+              print("---- onMessage: $message");
             },
             onBackgroundMessage:
                 GetPlatform.isIOS ? null : backgroundMessageHandler,
             onLaunch: (Map<String, dynamic> message) async {
-              print("onLaunch: $message");
+              print("---- onLaunch: $message");
             },
             onResume: (Map<String, dynamic> message) async {
-              print("onResume: $message");
+              print("---- onResume: $message");
             },
           );
           _firebaseMessaging.onIosSettingsRegistered.listen(
             (IosNotificationSettings settings) {
-              print("Settings registered: $settings");
+              print("---- iOS settings registered: $settings");
             },
           );
           _firebaseMessaging.getToken().then(
@@ -81,7 +89,7 @@ Future<void> mainCommon(Environment environment) async {
               assert(token != null);
               GetStorage()
                   .write(AppStorageKeys.fcmToken, token)
-                  .whenComplete(() => print('token $token'));
+                  .whenComplete(() => print('---- fcm token: $token'));
             },
           );
         },
@@ -90,6 +98,18 @@ Future<void> mainCommon(Environment environment) async {
   );
 }
 
+/// method to handle firebase push notification messages in background
 Future<dynamic> backgroundMessageHandler(Map<String, dynamic> message) async {
-  print("onBackgroundMessage: $message");
+  print("---- onBackgroundMessage: $message");
+}
+
+/// init firebase remote config
+Future<RemoteConfig> setupRemoteConfig() async {
+  final RemoteConfig remoteConfig = await RemoteConfig.instance;
+  // Enable developer mode to relax fetch throttling
+  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
+  remoteConfig.setDefaults(<String, dynamic>{});
+  await remoteConfig.fetch();
+  print('---- remote config: ${remoteConfig.getAll().toString()}');
+  return remoteConfig;
 }

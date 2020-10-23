@@ -110,11 +110,9 @@ class TransferDetailController extends GetxController {
 
     var resolutionDocument = ResolutionDocumentModel(
       transferDetails: transferDetail,
-      resolution: selectedResolution,
+      resolution: _getDocumentResolution(selectedResolution),
       resolutionMessage: msgTextController.text ?? '',
     );
-
-    print('-----resolutionDocument: ${resolutionDocument.toString()}');
 
     var resolutionDocumentEnc = _crypto.aesEncrypt(
       resolutionDocument.toString(),
@@ -134,6 +132,21 @@ class TransferDetailController extends GetxController {
       signature: signatureBase64,
       apiKey: _transferDetailArgs.vault.apiKey,
     );
+  }
+
+  String _getDocumentResolution(
+    ResolveApprovalRequestsRequest_ResolutionStatus status,
+  ) {
+    switch (status) {
+      case ResolveApprovalRequestsRequest_ResolutionStatus.approve:
+        return 'Approved';
+      case ResolveApprovalRequestsRequest_ResolutionStatus.reject:
+        return 'Rejected';
+      case ResolveApprovalRequestsRequest_ResolutionStatus.skip:
+        return 'Skipped';
+      default:
+        return '';
+    }
   }
 }
 

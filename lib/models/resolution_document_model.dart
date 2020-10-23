@@ -1,12 +1,10 @@
 import 'dart:convert';
 
-import 'package:validator/models/transfer_detail_model.dart';
-import 'package:validator/src/api.pbenum.dart';
-import 'package:enum_to_string/enum_to_string.dart';
+import 'transfer_detail_model.dart';
 
 class ResolutionDocumentModel {
   TransferDetailModel transferDetails;
-  ResolveApprovalRequestsRequest_ResolutionStatus resolution;
+  String resolution;
   String resolutionMessage;
 
   ResolutionDocumentModel({
@@ -19,10 +17,7 @@ class ResolutionDocumentModel {
     transferDetails = json['transferDetails'] != null
         ? new TransferDetailModel.fromJson(json['transferDetails'])
         : null;
-    resolution = EnumToString.fromString(
-      ResolveApprovalRequestsRequest_ResolutionStatus.values,
-      json['resolution'],
-    );
+    resolution = json['resolution'];
     resolutionMessage = json['resolutionMessage'];
   }
 
@@ -31,7 +26,7 @@ class ResolutionDocumentModel {
     if (this.transferDetails != null) {
       data['transferDetails'] = this.transferDetails.toJson();
     }
-    data['resolution'] = this.resolution.name;
+    data['resolution'] = this.resolution;
     data['resolutionMessage'] = this.resolutionMessage;
     return data;
   }
