@@ -1,3 +1,5 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:validator/app/common/app_config_keys.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/src/api.pbgrpc.dart';
 import 'package:get/get.dart';
@@ -5,30 +7,32 @@ import 'package:get_storage/get_storage.dart';
 import 'package:grpc/grpc.dart';
 
 class ApiService {
-  static const List<String> urls = <String>[
-    'vault-validator-api.swisschain.io', // default base URL
+  static const List<String> devUrls = <String>[
     'sirius-validator-test.swisschain.info',
     'sirius-validator-dev.swisschain.info',
   ];
   static const timeoutDuration = const Duration(seconds: 30);
 
-  final _configStorage = GetStorage('config');
+  final _configStorage = GetStorage(AppConfigKeys.config);
+  final _remoteConfig = Get.find<RemoteConfig>();
 
   final Map _clients = Map();
 
-  Future<ApiService> init() => update().then((_) => this);
-
   T client<T extends Client>() => _clients[T];
 
+  String get prodtUrl => _remoteConfig.getString(AppConfigKeys.prodUrl) ?? '';
+
   String get defaultUrl {
-    String url = GetStorage('config').read(AppStorageKeys.baseUrl);
-    return url.isNullOrBlank ? urls[0] : url;
+    String url = GetStorage(AppConfigKeys.config).read(AppStorageKeys.baseUrl);
+    return url.isNullOrBlank ? prodtUrl : url;
   }
 
   static CallOptions getSecureOptions(String apiKey) => CallOptions(
         metadata: {'Authorization': 'Bearer $apiKey'},
         timeout: timeoutDuration,
       );
+
+  Future<ApiService> init() => update().then((_) => this);
 
   /// Updates grpc clients with given [url]
   ///

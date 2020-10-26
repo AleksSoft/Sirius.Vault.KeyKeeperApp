@@ -10,18 +10,21 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
+import 'app/common/app_config_keys.dart';
 import 'app/utils/app_config.dart';
 import 'app/utils/utils.dart';
 
 Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final bool isDev = environment == Environment.dev;
+
   // set only portrait orientation for device
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // init local storage
   await GetStorage.init();
-  await GetStorage.init('config');
+  await GetStorage.init(AppConfigKeys.config);
 
   // init firebase messaging
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -36,7 +39,7 @@ Future<void> mainCommon(Environment environment) async {
   );
 
   // init async instances
-  await Get.putAsync<RemoteConfig>(() => setupRemoteConfig());
+  await Get.putAsync<RemoteConfig>(() => setupRemoteConfig(isDev));
   await Get.putAsync<AppConfig>(
     () => AppConfig().init(
       environment: environment,
@@ -56,7 +59,7 @@ Future<void> mainCommon(Environment environment) async {
         debugShowMaterialGrid: false,
         showPerformanceOverlay: false,
         showSemanticsDebugger: false,
-        enableLog: environment == Environment.dev,
+        enableLog: isDev,
         translations: AppTranslations(),
         locale: Locale('en'),
         title: 'Sirius Validator',
@@ -104,12 +107,18 @@ Future<dynamic> backgroundMessageHandler(Map<String, dynamic> message) async {
 }
 
 /// init firebase remote config
-Future<RemoteConfig> setupRemoteConfig() async {
+Future<RemoteConfig> setupRemoteConfig(bool isDebug) async {
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
   // Enable developer mode to relax fetch throttling
-  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
-  remoteConfig.setDefaults(<String, dynamic>{});
-  await remoteConfig.fetch();
-  print('---- remote config: ${remoteConfig.getAll().toString()}');
+  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: isDebug));
+  remoteConfig.setDefaults(<String, dynamic>{
+    AppConfigKeys.prodUrl: 'sirius-validator.swisschain.io',
+  });
+  try {
+    await remoteConfig.fetch();
+    await remoteConfig.activateFetched();
+  } catch (e) {
+    print(e);
+  }
   return remoteConfig;
 }
