@@ -20,11 +20,11 @@ class ApiService {
 
   T client<T extends Client>() => _clients[T];
 
-  String get prodtUrl => _remoteConfig.getString(AppConfigKeys.prodUrl) ?? '';
+  String get prodUrl => _remoteConfig.getString(AppConfigKeys.prodUrl) ?? '';
 
   String get defaultUrl {
     String url = GetStorage(AppConfigKeys.config).read(AppStorageKeys.baseUrl);
-    return url.isNullOrBlank ? prodtUrl : url;
+    return url.isNullOrBlank ? prodUrl : url;
   }
 
   static CallOptions getSecureOptions(String apiKey) => CallOptions(

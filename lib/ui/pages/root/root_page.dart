@@ -66,7 +66,8 @@ class _BottomControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (c.versionStatus) {
-      case ApiVersionStatus.ok:
+      case RootPageState.api_ok:
+      case RootPageState.api_undefined:
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -81,7 +82,7 @@ class _BottomControls extends StatelessWidget {
             _DevSettingsButton(),
           ],
         );
-      case ApiVersionStatus.outdated:
+      case RootPageState.api_outdated:
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -100,7 +101,7 @@ class _BottomControls extends StatelessWidget {
             _DevSettingsButton(),
           ],
         );
-      case ApiVersionStatus.undefined:
+      case RootPageState.starting:
       default:
         return SizedBox.shrink();
     }

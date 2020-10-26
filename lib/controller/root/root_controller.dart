@@ -8,11 +8,7 @@ import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dar
 import 'package:validator/ui/pages/local_auth/local_auth_page.dart';
 import 'package:validator/ui/pages/register/register_page.dart';
 
-enum ApiVersionStatus {
-  ok,
-  outdated,
-  undefined,
-}
+enum RootPageState { starting, api_ok, api_outdated, api_undefined }
 
 class RootController extends GetxController {
   static RootController get con => Get.find();
@@ -25,9 +21,9 @@ class RootController extends GetxController {
   bool get loading => this._loading.value;
   set loading(bool value) => this._loading.value = value;
 
-  final _versionOk = ApiVersionStatus.undefined.obs;
-  ApiVersionStatus get versionStatus => this._versionOk.value;
-  set versionStatus(ApiVersionStatus value) => this._versionOk.value = value;
+  final _versionOk = RootPageState.starting.obs;
+  RootPageState get versionStatus => this._versionOk.value;
+  set versionStatus(RootPageState value) => this._versionOk.value = value;
 
   final _showUi = false.obs;
   bool get showUi => this._showUi.value;
@@ -44,7 +40,7 @@ class RootController extends GetxController {
   Future<void> checkAuth() async {
     loading = true;
     versionStatus = await _checkApiVersionStatus();
-    if (versionStatus == ApiVersionStatus.ok) {
+    if (versionStatus == RootPageState.api_ok) {
       bool hasPin = !GetUtils.isNullOrBlank(
         _storage.read(AppStorageKeys.pinCode),
       );
@@ -69,12 +65,12 @@ class RootController extends GetxController {
     loading = false;
   }
 
-  Future<ApiVersionStatus> _checkApiVersionStatus() async {
+  Future<RootPageState> _checkApiVersionStatus() async {
     final version = await _versionRepo.getCurrentVersion();
-    bool statusOk = version == null ||
-        (version.major == appConfig.version.major &&
-            version.minor == appConfig.version.minor);
-    return statusOk ? ApiVersionStatus.ok : ApiVersionStatus.outdated;
+    if (version == null) return RootPageState.api_undefined;
+    bool statusOk = version.major == appConfig.version.major &&
+        version.minor == appConfig.version.minor;
+    return statusOk ? RootPageState.api_ok : RootPageState.api_outdated;
   }
 
   Future<void> openDevSettings() async {
