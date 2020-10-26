@@ -7,7 +7,7 @@ class AppTranslations extends Translations {
           "app_title": "Validator",
           "start": "Start",
           "msg_outdated": "Application is outaded",
-          "msg_update": "Please update te app to continue",
+          "msg_update": "Please update the app to continue",
           "copyright": "© 2020 Swisschain, Inc."
         },
         'ru': {
