@@ -83,10 +83,10 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
   void openDetails(TransferDetailArgs args) =>
       Get.toNamed(TransferDetailPage.route, arguments: args);
 
-  Future<void> silentReloadRequests() =>
-      _updateRequests().whenComplete(() => update());
+  Future<void> silentReloadRequests({bool showErrors = true}) =>
+      _updateRequests(showErrors: showErrors).whenComplete(() => update());
 
-  Future<void> _updateRequests() async {
+  Future<void> _updateRequests({bool showErrors = true}) async {
     String deviceInfoUID = await DeviceInfoService.deviceInfo;
 
     requests.clear();
@@ -94,6 +94,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
       var approvalRequests = await _repository.getApprovalRequests(
         deviceInfo: deviceInfoUID,
         apiKey: vault.apiKey,
+        showErrorDialog: showErrors,
       );
       var transferDetails = approvalRequests
           .map((r) => _buildTransferDetail(r, vault))
@@ -135,7 +136,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
   void _startPeriodicFetch() {
     _requestsReloadTimer = Timer.periodic(
       const Duration(seconds: 30),
-      (Timer t) => silentReloadRequests(),
+      (Timer t) => silentReloadRequests(showErrors: false),
     );
   }
 

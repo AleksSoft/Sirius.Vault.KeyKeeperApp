@@ -13,12 +13,12 @@ class NetworkChip extends StatelessWidget {
     return Chip(
       padding: const EdgeInsets.all(AppSizes.extraSmall),
       label: Text(
-        r.blockchain.networkType ?? '',
+        r.blockchain?.networkType ?? '',
         style: Get.textTheme.caption.copyWith(
           color: AppColors.primary,
         ),
       ),
-      backgroundColor: r.networkInsecure ? AppColors.red : AppColors.green,
+      backgroundColor: r.networkSecure ? AppColors.green : AppColors.red,
       elevation: 0,
     );
   }

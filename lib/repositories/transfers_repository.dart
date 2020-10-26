@@ -7,13 +7,18 @@ import 'package:flutter/foundation.dart';
 import 'base_repository.dart';
 
 class TransfersRepository extends BaseRepository<TransfersClient> {
-  Future<List<GetApprovalRequestsResponse_ApprovalRequest>> getApprovalRequests(
-      {@required String deviceInfo, @required String apiKey}) async {
+  Future<List<GetApprovalRequestsResponse_ApprovalRequest>>
+      getApprovalRequests({
+    @required String deviceInfo,
+    @required String apiKey,
+    bool showErrorDialog = true,
+  }) async {
     final response = await ErrorHandler.safeCall<GetApprovalRequestsResponse>(
       () => client.getApprovalRequests(
         GetApprovalRequestsRequests()..deviceInfo = deviceInfo,
         options: ApiService.getSecureOptions(apiKey),
       ),
+      showErrorDialog: showErrorDialog,
       method: 'getApprovalRequests',
     );
     return response?.payload ?? [];

@@ -71,14 +71,14 @@ class RootController extends GetxController {
 
   Future<ApiVersionStatus> _checkApiVersionStatus() async {
     final version = await _versionRepo.getCurrentVersion();
-    bool statusOk = version != null &&
-        version.major == appConfig.version.major &&
-        version.minor == appConfig.version.minor;
+    bool statusOk = version == null ||
+        (version.major == appConfig.version.major &&
+            version.minor == appConfig.version.minor);
     return statusOk ? ApiVersionStatus.ok : ApiVersionStatus.outdated;
   }
 
   Future<void> openDevSettings() async {
     await Get.to(DevSettingsPage());
-    checkAuth();
+    await checkAuth();
   }
 }

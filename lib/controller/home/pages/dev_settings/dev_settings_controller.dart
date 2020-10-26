@@ -13,7 +13,8 @@ class DevSettingsController extends GetxController {
   String _firebaseToken = '';
   String get fbToken => _firebaseToken;
 
-  List<String> get urlList => [_api.defaultUrl]..addAll(ApiService.devUrls);
+  List<String> get urlList =>
+      <String>[_api.prodtUrl]..addAll(ApiService.devUrls);
 
   String get defaultUrl => _api.defaultUrl;
 

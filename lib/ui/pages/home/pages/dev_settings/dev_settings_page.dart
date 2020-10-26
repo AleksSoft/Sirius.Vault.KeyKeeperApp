@@ -1,15 +1,18 @@
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/home/pages/dev_settings/dev_settings_controller.dart';
-import 'package:validator/ui/widgets/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DevSettingsPage extends MenuPage {
-  String get title => 'Developer settings';
-
+class DevSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0.0,
+        leading: CloseButton(),
+        title: Text('Developer settings'),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.medium),

@@ -86,13 +86,13 @@ class _BottomControls extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Application is outaded',
+              'msg_outdated'.tr,
               textAlign: TextAlign.center,
               style: Get.textTheme.headline6,
             ),
             AppUiHelpers.vSpaceExtraLarge,
             Text(
-              'Please update te app to continue',
+              'msg_update'.tr,
               textAlign: TextAlign.center,
               style: Get.textTheme.caption,
             ),

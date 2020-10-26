@@ -11,8 +11,8 @@ class TransferDetailModel {
   double feeLimit;
   TransferContext transferContext;
 
-  bool get networkInsecure =>
-      'mainnet' == (blockchain?.networkType ?? '').toLowerCase();
+  bool get networkSecure =>
+      'test' == (blockchain?.networkType ?? '').toLowerCase();
   bool get isExternal => sourceAddress?.group != destinationAddress?.group;
   String get addressLabel => isExternal ? 'External' : 'Internal';
 

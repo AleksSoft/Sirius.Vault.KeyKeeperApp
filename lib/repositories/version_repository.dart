@@ -7,7 +7,6 @@ class VersionRepository extends BaseRepository<VersionClient> {
   Future<GetCurrentVersionResponce> getCurrentVersion() =>
       ErrorHandler.safeCall<GetCurrentVersionResponce>(
         () => client.getCurrentVersion(GetCurrentVersionRequest()),
-        showErrorDialog: false,
         method: 'getCurrentVersion',
       );
 }
