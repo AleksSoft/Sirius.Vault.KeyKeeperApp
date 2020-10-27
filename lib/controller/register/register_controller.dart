@@ -51,16 +51,20 @@ class RegisterController extends GetxController {
 
   Future<void> submit() async {
     GestureUtils.unfocus();
+    loading = true;
     String decrypted = _decryptData();
     if (!decrypted.isNullOrBlank) {
       await _storage.write(AppStorageKeys.privateKey, decrypted);
-      skip();
+      skip(isProgressVisible: false);
     }
+    loading = false;
   }
 
-  void skip() {
+  void skip({bool isProgressVisible = true}) {
+    if (isProgressVisible) loading = true;
     GestureUtils.unfocus();
     Get.offAllNamed(HomePage.route);
+    if (isProgressVisible) loading = false;
   }
 
   void togglePasswordVisibility() {
