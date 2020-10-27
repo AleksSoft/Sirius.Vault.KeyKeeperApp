@@ -3,6 +3,7 @@ import 'package:validator/controller/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class InvitePage extends StatelessWidget {
   static const String route = '/invite';
@@ -55,11 +56,13 @@ class InvitePage extends StatelessWidget {
                 ),
                 Theme(
                   data: Get.theme.copyWith(primaryColor: AppColors.dark),
-                  child: TextField(
+                  child: TextFormField(
                     controller: _.inviteCodeController,
                     keyboardType: TextInputType.multiline,
                     onChanged: (v) => _.update(),
                     maxLines: 5,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (s) => Get.focusScope.nextFocus(),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Invite code (required)',
@@ -70,11 +73,13 @@ class InvitePage extends StatelessWidget {
                 AppUiHelpers.vSpaceMedium,
                 Theme(
                   data: Get.theme.copyWith(primaryColor: AppColors.dark),
-                  child: TextField(
+                  child: TextFormField(
                     controller: _.vaultNameController,
                     keyboardType: TextInputType.name,
                     onChanged: (v) => _.update(),
                     maxLines: 1,
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (s) => GestureUtils.unfocus(),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Vault name (required)',

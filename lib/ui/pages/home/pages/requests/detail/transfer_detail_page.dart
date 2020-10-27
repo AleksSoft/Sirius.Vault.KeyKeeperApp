@@ -1,6 +1,5 @@
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
-import 'package:validator/services/utils/formatter.dart';
 import 'package:validator/ui/widgets/details_tile.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 import 'package:validator/ui/widgets/network_chip.dart';
@@ -10,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:validator/utils/formatter.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class TransferDetailPage extends StatelessWidget {
   static final String route = '/transfer-detail';
@@ -206,7 +207,7 @@ class _DetailsView extends StatelessWidget {
               data: Get.theme.copyWith(
                 primaryColor: AppColors.dark,
               ),
-              child: TextField(
+              child: TextFormField(
                 controller: c.msgTextController,
                 keyboardType: TextInputType.multiline,
                 maxLines: 5,
@@ -227,6 +228,7 @@ class _DetailsView extends StatelessWidget {
                 color: AppColors.dark,
                 onTap: (startLoading, stopLoading, btnState) {
                   if (btnState == ButtonState.Idle) {
+                    GestureUtils.unfocus();
                     startLoading();
                     c.checkSubmit().whenComplete(() => stopLoading());
                   }

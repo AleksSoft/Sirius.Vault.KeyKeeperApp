@@ -9,6 +9,7 @@ import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class RegisterController extends GetxController {
   static RegisterController get con => Get.find();
@@ -29,6 +30,9 @@ class RegisterController extends GetxController {
     }
   }
 
+  bool _isPasswordVisible = false;
+  bool get isPasswordVisible => _isPasswordVisible;
+
   bool get actionAllowed => isValidData && isValidPass;
 
   bool get isValidData =>
@@ -46,6 +50,7 @@ class RegisterController extends GetxController {
   }
 
   Future<void> submit() async {
+    GestureUtils.unfocus();
     String decrypted = _decryptData();
     if (!decrypted.isNullOrBlank) {
       await _storage.write(AppStorageKeys.privateKey, decrypted);
@@ -53,7 +58,15 @@ class RegisterController extends GetxController {
     }
   }
 
-  void skip() => Get.offAllNamed(HomePage.route);
+  void skip() {
+    GestureUtils.unfocus();
+    Get.offAllNamed(HomePage.route);
+  }
+
+  void togglePasswordVisibility() {
+    _isPasswordVisible = !_isPasswordVisible;
+    update();
+  }
 
   String _decryptData() {
     try {

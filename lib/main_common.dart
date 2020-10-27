@@ -9,6 +9,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 import 'app/common/app_config_keys.dart';
 import 'app/utils/app_config.dart';
@@ -51,9 +52,7 @@ Future<void> mainCommon(Environment environment) async {
   // start app with all configurations done
   runApp(
     GestureDetector(
-      onTap: () {
-        WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
-      },
+      onTap: () => GestureUtils.unfocus(),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         debugShowMaterialGrid: false,

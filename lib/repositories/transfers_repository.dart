@@ -1,8 +1,8 @@
 import 'package:validator/services/api/api_service.dart';
-import 'package:validator/services/utils/error_handler.dart';
 import 'package:validator/src/api.pb.dart';
 import 'package:validator/src/api.pbgrpc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:validator/utils/error_handler.dart';
 
 import 'base_repository.dart';
 

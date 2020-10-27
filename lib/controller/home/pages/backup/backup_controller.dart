@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:validator/services/crypto/crypto_service.dart';
-import 'package:validator/ui/pages/home/pages/backup/backup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
+import 'package:validator/ui/pages/home/pages/backup/share_backup_page.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class BackupController extends GetxController {
   static BackupController get con => Get.find();
@@ -17,6 +18,9 @@ class BackupController extends GetxController {
 
   var encryptedBackup = '';
 
+  bool _isPasswordVisible = false;
+  bool get isPasswordVisible => _isPasswordVisible;
+
   bool get isValidPass =>
       !passwordController.text.isNullOrBlank &&
       passwordController.text.length >= 8;
@@ -27,7 +31,13 @@ class BackupController extends GetxController {
     super.onInit();
   }
 
+  void togglePasswordVisibility() {
+    _isPasswordVisible = !_isPasswordVisible;
+    update();
+  }
+
   void openBackupShare() {
+    GestureUtils.unfocus();
     encryptedBackup = _getBackupData();
     Get.to(ShareBackupPage(), fullscreenDialog: true);
   }

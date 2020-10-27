@@ -13,12 +13,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (_) => Scaffold(
+        appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
         drawer: _DrawerMenu(),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           child: Container(child: _.selectedPage),
         ),
-        appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
       ),
     );
   }
@@ -29,91 +29,101 @@ class _DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: ListView(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          _VaultStatusView(),
+          ListTile(
+            onTap: () => c.selectedPage = RequestsPage(),
+            leading: Icon(Icons.list),
+            title: Text('Requests'),
+          ),
+          ListTile(
+            onTap: () => c.selectedPage = VaultsPage(),
+            leading: Icon(Icons.view_carousel),
+            title: Text('Vaults'),
+          ),
+          ListTile(
+            onTap: () => c.selectedPage = InboxPage(),
+            leading: Icon(Icons.inbox),
+            title: Text('Admin messages'),
+          ),
+          ListTile(
+            onTap: () => c.changePin(),
+            leading: Icon(Icons.dialpad),
+            title: Text('Change PIN'),
+          ),
+          ListTile(
+            onTap: () => c.selectedPage = BackupPage(),
+            leading: Icon(Icons.backup),
+            title: Text('Backup'),
+          ),
+          Divider(
+            indent: AppSizes.medium,
+            endIndent: AppSizes.medium,
+          ),
+          ListTile(
+            title: Text('Share:'),
+            subtitle: ButtonBar(
               children: [
-                _VaultStatusView(),
-                ListTile(
-                  onTap: () => c.selectedPage = RequestsPage(),
-                  leading: Icon(Icons.list),
-                  title: Text('Requests'),
+                ElevatedButton(
+                  onPressed: () => c.sharePublicKeyPem(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateColor.resolveWith(
+                      (states) => AppColors.dark,
+                    ),
+                  ),
+                  child: Text('Public key'),
                 ),
-                ListTile(
-                  onTap: () => c.selectedPage = VaultsPage(),
-                  leading: Icon(Icons.view_carousel),
-                  title: Text('Vaults'),
-                ),
-                ListTile(
-                  onTap: () => c.selectedPage = InboxPage(),
-                  leading: Icon(Icons.inbox),
-                  title: Text('Admin messages'),
-                ),
-                ListTile(
-                  onTap: () => c.changePin(),
-                  leading: Icon(Icons.dialpad),
-                  title: Text('Change PIN'),
-                ),
-                ListTile(
-                  onTap: () => c.selectedPage = BackupPage(),
-                  leading: Icon(Icons.backup),
-                  title: Text('Backup'),
+                ElevatedButton(
+                  onPressed: () => c.shareValidatorId(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateColor.resolveWith(
+                      (states) => AppColors.dark,
+                    ),
+                  ),
+                  child: Text('Validator ID'),
                 ),
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ListTile(
-                onTap: () => c.sharePublicKeyPem(),
-                leading: Icon(Icons.share),
-                title: Text('Share public key'),
-              ),
-              ListTile(
-                onTap: () => c.shareValidatorId(),
-                leading: Icon(Icons.share),
-                title: Text('Share validator id'),
-              ),
-              ListTile(
-                onTap: () => c.logout(),
-                leading: Icon(Icons.exit_to_app),
-                title: Text('Logout'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: AppSizes.medium,
-                  right: AppSizes.medium,
-                  bottom: AppSizes.medium,
+          Divider(
+            indent: AppSizes.medium,
+            endIndent: AppSizes.medium,
+          ),
+          ListTile(
+            onTap: () => c.logout(),
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Logout'),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: AppSizes.medium,
+              right: AppSizes.medium,
+              bottom: AppSizes.medium,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  c.appVersion,
+                  style: Get.textTheme.overline.copyWith(
+                    color: AppColors.secondary,
+                    fontSize: 10,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      c.appVersion,
-                      style: Get.textTheme.overline.copyWith(
-                        color: AppColors.secondary,
-                        fontSize: 10,
-                      ),
-                      textAlign: TextAlign.center,
+                Visibility(
+                  visible: c.appConfig.isDev,
+                  child: FlatButton(
+                    onPressed: () => Get.to(DevSettingsPage()),
+                    child: Text(
+                      'Dev settings',
+                      style: TextStyle(fontSize: 10),
                     ),
-                    Visibility(
-                      visible: c.appConfig.isDev,
-                      child: FlatButton(
-                        onPressed: () => Get.to(DevSettingsPage()),
-                        child: Text(
-                          'Dev settings',
-                          style: TextStyle(fontSize: 10),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -122,10 +132,7 @@ class _DrawerMenu extends StatelessWidget {
 }
 
 class _VaultStatusView extends StatelessWidget {
-  const _VaultStatusView({
-    Key key,
-  }) : super(key: key);
-
+  const _VaultStatusView({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

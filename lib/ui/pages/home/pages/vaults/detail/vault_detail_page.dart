@@ -4,6 +4,7 @@ import 'package:validator/ui/widgets/details_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class VaultDetailPage extends StatelessWidget {
   static const String route = '/vault-detail';
@@ -71,11 +72,13 @@ class _Content extends StatelessWidget {
               AppUiHelpers.vSpaceMedium,
               Theme(
                 data: Get.theme.copyWith(primaryColor: AppColors.dark),
-                child: TextField(
+                child: TextFormField(
                   controller: _.localNameController,
                   keyboardType: TextInputType.name,
                   onChanged: (v) => _.update(),
                   maxLines: 1,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (s) => GestureUtils.unfocus(),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Local name',

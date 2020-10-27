@@ -10,6 +10,7 @@ import 'package:validator/src/api.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class InviteController extends GetxController {
   static InviteController get con => Get.find();
@@ -36,6 +37,7 @@ class InviteController extends GetxController {
       !loading;
 
   Future<void> submitCode() async {
+    GestureUtils.unfocus();
     loading = true;
 
     await Future.delayed(const Duration(seconds: 1));

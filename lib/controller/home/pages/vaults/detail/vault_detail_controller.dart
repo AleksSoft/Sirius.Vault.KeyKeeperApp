@@ -5,6 +5,7 @@ import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class VaultDetailController extends GetxController {
   static VaultDetailController get con => Get.find();
@@ -35,35 +36,41 @@ class VaultDetailController extends GetxController {
 
   bool get stausOk => true;
 
-  void detachVault() => Get.defaultDialog(
-        title: 'Are you sure to delete vault?',
-        content: SizedBox.shrink(),
-        buttonColor: AppColors.dark,
-        confirmTextColor: AppColors.primary,
-        cancelTextColor: AppColors.dark,
-        onConfirm: () {
-          loading = true;
-          _repo.removeVaultConnection(apiKey: vault.apiKey).whenComplete(() {
-            loading = false;
-            VaultsRepository.deleteVaultByKey(vault.apiKey).whenComplete(
-              () => VaultsController.con
-                  .reloadVaults()
-                  .whenComplete(() => Get.back(closeOverlays: true)),
-            );
-          });
-        },
-        onCancel: () {},
-      );
+  void detachVault() {
+    GestureUtils.unfocus();
+    Get.defaultDialog(
+      title: 'Are you sure to delete vault?',
+      content: SizedBox.shrink(),
+      buttonColor: AppColors.dark,
+      confirmTextColor: AppColors.primary,
+      cancelTextColor: AppColors.dark,
+      onConfirm: () {
+        loading = true;
+        _repo.removeVaultConnection(apiKey: vault.apiKey).whenComplete(() {
+          loading = false;
+          VaultsRepository.deleteVaultByKey(vault.apiKey).whenComplete(
+            () => VaultsController.con
+                .reloadVaults()
+                .whenComplete(() => Get.back(closeOverlays: true)),
+          );
+        });
+      },
+      onCancel: () {},
+    );
+  }
 
-  void save() => VaultsRepository.updateVault(
-        vault..localName = localNameController.text.trim(),
-      ).whenComplete(() {
-        Get.rawSnackbar(
-          message: 'Changes saved',
-          snackStyle: SnackStyle.GROUNDED,
-        );
-        update();
-      });
+  void save() {
+    GestureUtils.unfocus();
+    VaultsRepository.updateVault(
+      vault..localName = localNameController.text.trim(),
+    ).whenComplete(() {
+      Get.rawSnackbar(
+        message: 'Changes saved',
+        snackStyle: SnackStyle.GROUNDED,
+      );
+      update();
+    });
+  }
 
   Future<bool> back() async {
     if (edited) {

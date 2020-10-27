@@ -5,7 +5,7 @@ import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:validator/utils/gesture_utils.dart';
 
 class BackupPage extends MenuPage {
   @override
@@ -35,16 +35,26 @@ class BackupPage extends MenuPage {
                     child: TextFormField(
                       controller: _.passwordController,
                       keyboardType: TextInputType.visiblePassword,
+                      obscureText: !_.isPasswordVisible,
                       onChanged: (v) => _.update(),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (v) => _.isValidPass
                           ? null
                           : 'Password should be at least 8 chars long',
                       maxLines: 1,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (s) => GestureUtils.unfocus(),
                       decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () => _.togglePasswordVisibility(),
+                          icon: Icon(
+                            _.isPasswordVisible
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                          ),
+                        ),
                         border: OutlineInputBorder(),
                         labelText: 'Password',
-                        alignLabelWithHint: true,
                       ),
                     ),
                   ),
@@ -81,62 +91,6 @@ class BackupPage extends MenuPage {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ShareBackupPage extends StatelessWidget {
-  ShareBackupPage({Key key}) : super(key: key);
-  final c = BackupController.con;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(elevation: 0),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: AppSizes.medium,
-                right: AppSizes.medium,
-                bottom: AppSizes.medium,
-              ),
-              child: Text(
-                'Data is encrypted with your password.\nDon\'t forget it!',
-                style: Get.textTheme.button.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Center(
-              child: Card(
-                elevation: AppSizes.small,
-                child: QrImage(
-                  data: c.encryptedBackup,
-                  size: 300,
-                ),
-              ),
-            ),
-            AppUiHelpers.vSpaceMedium,
-            Text(
-              'Scan QR code.\nOr just share encrypted data!',
-              style: Get.textTheme.button.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            AppUiHelpers.vSpaceMedium,
-            FloatingActionButton(
-              heroTag: 'fab-backup-share',
-              onPressed: () => c.share(),
-              backgroundColor: AppColors.dark,
-              child: Icon(Icons.share),
-            ),
-          ],
         ),
       ),
     );

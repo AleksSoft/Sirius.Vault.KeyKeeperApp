@@ -1,7 +1,7 @@
 import 'package:validator/controller/local_auth/local_auth_controller.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
-import 'package:validator/services/utils/dialog_manager.dart';
 import 'package:get/get.dart';
+import 'package:validator/utils/dialog_manager.dart';
 
 class InitialBinding extends Bindings {
   @override
