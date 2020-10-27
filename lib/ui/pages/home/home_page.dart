@@ -1,4 +1,4 @@
-import 'package:validator/app/utils/utils.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/controller/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,5 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:validator/app/utils/utils.dart';
 import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
@@ -73,6 +74,7 @@ class InboxController extends GetxController {
       //   return null;
       // }
     } catch (e) {
+      AppLog.logger.e(e);
       return null;
     }
   }

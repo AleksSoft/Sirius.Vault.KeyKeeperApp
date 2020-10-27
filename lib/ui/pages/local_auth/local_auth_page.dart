@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:validator/app/utils/utils.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/controller/local_auth/local_auth_controller.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 

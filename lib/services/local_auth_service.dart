@@ -1,4 +1,5 @@
 import 'package:local_auth/local_auth.dart';
+import 'package:validator/app/utils/utils.dart';
 
 class LocalAuthService {
   static Future<bool> authenticate() async {
@@ -15,10 +16,11 @@ class LocalAuthService {
         return false;
       }
     } catch (e) {
-      print(e);
+      AppLog.logger.e(e);
       return false;
     }
   }
 
-  static Future<bool> get canCheckBiometrics async => await LocalAuthentication().canCheckBiometrics;
+  static Future<bool> get canCheckBiometrics async =>
+      await LocalAuthentication().canCheckBiometrics;
 }

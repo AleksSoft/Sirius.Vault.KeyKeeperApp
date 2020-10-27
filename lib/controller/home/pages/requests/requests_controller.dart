@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
 import 'package:validator/models/transfer_detail_model.dart';
@@ -128,7 +129,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
         vault: vault,
       );
     } catch (e) {
-      print(e);
+      AppLog.logger.e(e);
       return null;
     }
   }

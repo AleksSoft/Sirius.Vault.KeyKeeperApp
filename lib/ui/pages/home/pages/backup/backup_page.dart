@@ -1,3 +1,4 @@
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/ui/widgets/menu_page.dart';
@@ -5,7 +6,6 @@ import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:validator/utils/gesture_utils.dart';
 
 class BackupPage extends MenuPage {
   @override

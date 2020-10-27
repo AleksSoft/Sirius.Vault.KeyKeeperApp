@@ -1,10 +1,9 @@
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/ui/widgets/details_tile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:validator/utils/gesture_utils.dart';
 
 class VaultDetailPage extends StatelessWidget {
   static const String route = '/vault-detail';

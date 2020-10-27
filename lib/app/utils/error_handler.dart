@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/app/utils/utils.dart';
 import 'package:validator/models/saved_errors_model.dart';
 import 'package:validator/src/api.pb.dart';
 import 'package:validator/ui/pages/root/root_page.dart';
@@ -66,7 +67,7 @@ class ErrorHandler {
           break;
       }
     }
-    await saveError(
+    logError(
       code: error.code.name,
       message: error.message,
       method: method,
@@ -89,27 +90,41 @@ class ErrorHandler {
         ),
       );
     }
-    await saveError(
+    logError(
       code: e.code.toString(),
       message: e.message,
       method: method,
     );
   }
 
-  static void _handleError(dynamic e, String method, bool showDialog) =>
-      saveError(
-        code: e.runtimeType.toString(),
-        message: '',
-        method: method,
-      ).whenComplete(() {
-        if (showDialog) _defaultErrorDialog();
-      });
+  static Future<void> _handleError(
+    dynamic e,
+    String method,
+    bool showDialog,
+  ) async {
+    logError(
+      code: e.code.toString(),
+      message: '',
+      method: method,
+    );
+    AppLog.logger.e(e);
+    if (showDialog) _defaultErrorDialog();
+  }
 
   static void _defaultErrorDialog() => _dialogManager.error(
         ErrorContent(
             title: 'Oops',
             message: 'Something went wrong. Please try again later.'),
       );
+
+  static void logError({
+    @required String code,
+    @required String message,
+    @required String method,
+  }) =>
+      AppLog.logger.e('''Error in method: $method
+        Code: $code
+        Message: $message''');
 
   static Future<void> saveError({
     @required String code,

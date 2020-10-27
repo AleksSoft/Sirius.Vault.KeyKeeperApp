@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:validator/app/utils/utils.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
 import 'package:validator/ui/pages/home/pages/backup/share_backup_page.dart';
-import 'package:validator/utils/gesture_utils.dart';
 
 class BackupController extends GetxController {
   static BackupController get con => Get.find();

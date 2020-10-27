@@ -1,3 +1,4 @@
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
@@ -6,7 +7,6 @@ import 'package:validator/ui/widgets/network_chip.dart';
 import 'package:validator/ui/widgets/transaction_type_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:validator/utils/formatter.dart';
 
 class RequestsPage extends MenuPage {
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:validator/app/utils/utils.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/controller/controllers.dart';
 
 class ShareBackupPage extends StatelessWidget {

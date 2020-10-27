@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
-import 'package:validator/app/utils/utils.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/repositories/version_repository.dart';
 import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dart';

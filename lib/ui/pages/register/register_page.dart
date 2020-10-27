@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/register/register_controller.dart';
 import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
-import 'package:validator/utils/gesture_utils.dart';
 
 class RegisterPage extends StatelessWidget {
   static final String route = '/register';

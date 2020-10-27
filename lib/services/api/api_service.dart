@@ -1,6 +1,7 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:validator/app/common/app_config_keys.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/app/utils/utils.dart';
 import 'package:validator/src/api.pbgrpc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -40,7 +41,7 @@ class ApiService {
   Future<void> update({String url}) async {
     if (url.isNullOrBlank) url = defaultUrl;
     await _configStorage.write(AppStorageKeys.baseUrl, url);
-    print('---- Base Url: $url');
+    AppLog.loggerNoStack.i('Base Url: $url');
 
     var channel = ClientChannel(url, port: 443);
     var options = CallOptions(timeout: timeoutDuration);

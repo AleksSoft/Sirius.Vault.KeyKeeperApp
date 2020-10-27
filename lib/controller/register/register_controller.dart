@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:validator/app/common/app_storage_keys.dart';
-import 'package:validator/app/utils/app_config.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/qr_service.dart';
@@ -9,7 +9,6 @@ import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:validator/utils/gesture_utils.dart';
 
 class RegisterController extends GetxController {
   static RegisterController get con => Get.find();
@@ -92,6 +91,7 @@ class RegisterController extends GetxController {
       String decrypted = _crypto.aesDecrypt(input, nonce, keyValue);
       return decrypted;
     } catch (e) {
+      AppLog.logger.e(e);
       Get.rawSnackbar(
         message: 'Error decrypting data',
         backgroundColor: AppColors.red,

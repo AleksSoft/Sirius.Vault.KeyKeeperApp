@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:clipboard/clipboard.dart';
-import 'package:validator/app/utils/utils.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/models/resolution_document_model.dart';
 import 'package:validator/models/saved_vaults_model.dart';

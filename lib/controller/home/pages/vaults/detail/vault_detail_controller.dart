@@ -1,3 +1,4 @@
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
@@ -5,7 +6,6 @@ import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:validator/utils/gesture_utils.dart';
 
 class VaultDetailController extends GetxController {
   static VaultDetailController get con => Get.find();

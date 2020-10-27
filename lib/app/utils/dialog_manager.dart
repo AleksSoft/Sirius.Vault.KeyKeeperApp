@@ -1,9 +1,11 @@
 import 'dart:collection';
 
-import 'package:validator/app/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:validator/app/common/common.dart';
+
+import 'app_log.dart';
 
 class DialogManager {
   ListQueue<ErrorContent> _errorsQueue = ListQueue<ErrorContent>();
@@ -36,7 +38,9 @@ class DialogManager {
           _checkNext();
         },
       );
-    } catch (e) {}
+    } catch (e) {
+      AppLog.logger.e(e);
+    }
   }
 }
 

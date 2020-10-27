@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
-import 'package:validator/app/utils/app_config.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/ui/pages/home/pages/requests/requests_page.dart';
 import 'package:validator/ui/pages/local_auth/local_auth_page.dart';

@@ -17,22 +17,18 @@ dependencies:
   steel_crypt: ^2.2.2+1
   crypton: ^1.1.1
   crypto: ^2.1.5
-  http: ^0.12.2
   qr_flutter: ^3.2.0
   barcode_scan_fix: ^1.0.2
-  badges: ^1.1.3
   local_auth: ^0.6.3+3
   share: ^0.6.5+2
-  google_fonts: ^1.1.0
   device_info: '>=0.4.2+9 <2.0.0'
-  auto_animated: ^2.1.0
   grpc: ^2.3.0
   protobuf: ^1.0.1
   clipboard: ^0.1.2+8
   flutter_spinkit: ^4.1.2+1
   intl: ^0.15.8
+  logger_flutter: ^0.7.1
   equatable: ^1.2.5
-  enum_to_string: ^1.0.13
   argon_buttons_flutter: ^1.0.6
   flutter_money_formatter: ^0.8.3
   package_info: ^0.4.3

@@ -1,4 +1,4 @@
-import 'package:validator/utils/error_handler.dart';
+import 'package:validator/app/utils/utils.dart';
 import 'package:validator/src/api.pbgrpc.dart';
 
 import 'base_repository.dart';

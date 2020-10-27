@@ -1,7 +1,7 @@
-import 'package:validator/app/utils/utils.dart';
-import 'package:validator/controller/home/pages/dev_settings/dev_settings_controller.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/controller/home/pages/dev_settings/dev_settings_controller.dart';
 
 class DevSettingsPage extends StatelessWidget {
   @override
