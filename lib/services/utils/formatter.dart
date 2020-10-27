@@ -1,32 +1,25 @@
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
+import 'package:get/utils.dart';
 
 class Formatter {
   static String currency(
     String s, {
-    int decimalDigits,
+    int fractionDigits,
     String prefix,
     String suffix,
-    String locale,
-    String ifZeroOrNull,
+    String orElse,
   }) {
-    if (s.isNullOrBlank) {
-      if (!ifZeroOrNull.isNullOrBlank) {
-        return ifZeroOrNull;
-      } else {
-        s = s.isNullOrBlank ? '0.0' : s;
-      }
-    } else if ((double.tryParse(s) ?? 0.0) == 0) {
-      if (!ifZeroOrNull.isNullOrBlank) return ifZeroOrNull;
-    }
+    double amount = double.tryParse(s ?? '0.0') ?? 0.0;
+    if (amount == 0 && !orElse.isNullOrBlank) return orElse;
+
+    int fractionDigitsLength = s.substring(s.indexOf(".")).length;
 
     String formatPrefix = prefix == null ? '' : '$prefix ';
     String formatSuffix = suffix == null ? '' : ' $suffix';
 
-    return '$formatPrefix${NumberFormat.currency(
-      locale: locale ?? 'eu',
-      symbol: '',
-      decimalDigits: decimalDigits,
-    ).format(double.tryParse(s) ?? 0.0)}$formatSuffix';
+    var fmf = FlutterMoneyFormatter(amount: amount);
+    fmf = fmf.copyWith(fractionDigits: fractionDigits ?? fractionDigitsLength);
+
+    return '$formatPrefix${fmf.output.nonSymbol}$formatSuffix';
   }
 }

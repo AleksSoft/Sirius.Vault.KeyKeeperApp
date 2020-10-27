@@ -8,6 +8,7 @@ class AppTranslations extends Translations {
           "start": "Start",
           "msg_outdated": "Application is outaded",
           "msg_update": "Please update the app to continue",
+          "msg_requests_empty": "No active requests available",
           "copyright": "© 2020 Swisschain, Inc."
         },
         'ru': {

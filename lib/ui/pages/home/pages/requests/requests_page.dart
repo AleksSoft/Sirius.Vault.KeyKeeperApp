@@ -17,7 +17,7 @@ class RequestsPage extends MenuPage {
     return GetBuilder<RequestsController>(
       initState: (_) => RequestsController.con.reloadRequests(),
       builder: (_) => EmptyReloadingView(
-        emptyMessage: 'No active requests available',
+        emptyMessage: 'msg_requests_empty'.tr,
         isEmpty: _.showEmptyCondition,
         isLoading: _.loading,
         onRefresh: () => _.silentReloadRequests(),
@@ -47,44 +47,50 @@ class _RequestCard extends StatelessWidget {
           Radius.circular(AppSizes.small),
         ),
       ),
-      child: ListTile(
-        onTap: () => RequestsController.con.openDetails(args),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(
-              Formatter.currency(r.amount.toString(), suffix: r.asset?.symbol),
-              style: Get.textTheme.subtitle2.copyWith(
-                fontWeight: FontWeight.w600,
-                fontSize: 16.0,
+      child: Padding(
+        padding: const EdgeInsets.only(top: AppSizes.small),
+        child: ListTile(
+          onTap: () => RequestsController.con.openDetails(args),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                Formatter.currency(
+                  r.amount.toString(),
+                  suffix: r.asset?.symbol,
+                ),
+                style: Get.textTheme.subtitle2.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16.0,
+                ),
               ),
-            ),
-            Text(
-              r.transferContext?.requestContext?.timestampFormatted,
-              style: Get.textTheme.caption,
-            ),
-          ],
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              r.blockchain?.id ?? '',
-              style: Get.textTheme.subtitle2,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                NetworkChip(r),
-                AppUiHelpers.hSpaceSmall,
-                TransactionTypeChip(r),
-              ],
-            )
-          ],
+              Text(
+                r.transferContext?.requestContext?.timestampFormatted,
+                style: Get.textTheme.caption,
+              ),
+            ],
+          ),
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                r.blockchain?.id ?? '',
+                style: Get.textTheme.subtitle2,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  NetworkChip(r),
+                  AppUiHelpers.hSpaceSmall,
+                  TransactionTypeChip(r),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
