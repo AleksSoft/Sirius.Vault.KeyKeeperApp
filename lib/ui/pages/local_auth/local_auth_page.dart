@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/local_auth/local_auth_controller.dart';
+import 'package:validator/ui/widgets/empty_reloading_view.dart';
 
 class LocalAuthPage extends StatelessWidget {
   LocalAuthPage({
@@ -27,27 +28,31 @@ class LocalAuthPage extends StatelessWidget {
             checkLocalAuth: this.checkLocalAuth,
           ),
           builder: (_) {
-            return Stack(
-              children: <Widget>[
-                Visibility(
-                  visible: _.showBack,
-                  child: Positioned(
-                    top: AppSizes.medium,
-                    left: AppSizes.medium,
-                    child: CloseButton(),
+            return EmptyReloadingView(
+              isLoading: _.loading,
+              child: Stack(
+                children: <Widget>[
+                  Visibility(
+                    visible: _.showBack,
+                    child: Positioned(
+                      top: AppSizes.medium,
+                      left: AppSizes.medium,
+                      child: CloseButton(),
+                    ),
                   ),
-                ),
-                Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Obx(() => Text(_.header, style: Get.textTheme.headline6)),
-                      AppUiHelpers.vSpaceExtraLarge,
-                      Numpad(),
-                    ],
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Obx(() =>
+                            Text(_.header, style: Get.textTheme.headline6)),
+                        AppUiHelpers.vSpaceExtraLarge,
+                        Numpad(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),

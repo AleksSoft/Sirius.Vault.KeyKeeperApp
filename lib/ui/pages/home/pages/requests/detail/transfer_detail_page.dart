@@ -2,6 +2,7 @@ import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controller/controllers.dart';
 import 'package:validator/services/utils/formatter.dart';
 import 'package:validator/ui/widgets/details_tile.dart';
+import 'package:validator/ui/widgets/empty_reloading_view.dart';
 import 'package:validator/ui/widgets/network_chip.dart';
 import 'package:validator/ui/widgets/transaction_type_chip.dart';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
@@ -26,17 +27,20 @@ class TransferDetailPage extends StatelessWidget {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          heroTag: 'fab-share-transferdetail',
-          onPressed: () => _.share(),
-          child: Icon(Icons.share),
-          backgroundColor: AppColors.dark,
-        ),
-        body: AnimatedSwitcher(
+        floatingActionButton: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           child: !_.loading
-              ? _DetailsView()
-              : Center(child: AppUiHelpers.progressLight),
+              ? FloatingActionButton(
+                  heroTag: 'fab-share-transferdetail',
+                  onPressed: () => _.share(),
+                  child: Icon(Icons.share),
+                  backgroundColor: AppColors.dark,
+                )
+              : SizedBox.shrink(),
+        ),
+        body: EmptyReloadingView(
+          isLoading: _.loading,
+          child: _DetailsView(),
         ),
       ),
     );

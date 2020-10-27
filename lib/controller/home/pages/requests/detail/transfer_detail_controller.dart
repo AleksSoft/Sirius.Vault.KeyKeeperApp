@@ -73,24 +73,27 @@ class TransferDetailController extends GetxController {
     }
   }
 
-  Future<void> checkSubmit() async => await Get.defaultDialog(
-        title: '${getResolutionName(selectedResolutionIndex)}',
-        middleText: 'Are you sure?',
-        textConfirm: 'Confirm',
-        textCancel: 'Cancel',
-        confirmTextColor: AppColors.light,
-        buttonColor: AppColors.dark,
-        cancelTextColor: AppColors.dark,
-        onConfirm: () {
-          loading = true;
-          _resolveRequest().then(
-            (value) {
-              RequestsController.con.reloadRequests();
-              Get.back(closeOverlays: value);
-            },
-          ).whenComplete(() => loading = false);
-        },
-      );
+  Future<void> checkSubmit() async {
+    loading = true;
+    await Get.defaultDialog(
+      title: '${getResolutionName(selectedResolutionIndex)}',
+      middleText: 'Are you sure?',
+      textConfirm: 'Confirm',
+      textCancel: 'Cancel',
+      confirmTextColor: AppColors.light,
+      buttonColor: AppColors.dark,
+      cancelTextColor: AppColors.dark,
+      onConfirm: () {
+        _resolveRequest().then(
+          (value) {
+            RequestsController.con.reloadRequests();
+            Get.back(closeOverlays: value);
+          },
+        );
+      },
+    );
+    loading = false;
+  }
 
   String getResolutionName(int index) {
     switch (resolutionsMap[index]) {

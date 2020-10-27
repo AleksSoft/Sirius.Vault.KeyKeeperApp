@@ -18,6 +18,15 @@ class LocalAuthController extends GetxController {
   String get pinValue => this._pinValue.value;
   set pinValue(String value) => this._pinValue.value = value;
 
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    if (loading != value) {
+      _loading = value;
+      update();
+    }
+  }
+
   String _prevPIN = '';
 
   String get header => _getHeaderStr();
@@ -47,6 +56,7 @@ class LocalAuthController extends GetxController {
   }) async {
     pinValue = '';
     _prevPIN = '';
+    loading = false;
 
     _showBack = isCloseVisible;
     _showLocalAuth = checkLocalAuth &&
@@ -62,11 +72,13 @@ class LocalAuthController extends GetxController {
 
   Future<void> tryToggleLocalAuth() async {
     if (showLocalAuth) {
+      loading = true;
       bool authorized = await LocalAuthService.authenticate();
       if (authorized) {
         pinValue = _storage.read(AppStorageKeys.pinCode);
         await _submitPIN();
       }
+      loading = false;
     }
   }
 
