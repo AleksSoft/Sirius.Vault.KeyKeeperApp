@@ -41,7 +41,7 @@ class ApiService {
   Future<void> update({String url}) async {
     if (url.isNullOrBlank) url = defaultUrl;
     await _configStorage.write(AppStorageKeys.baseUrl, url);
-    AppLog.loggerNoStack.i('Base Url: $url');
+    AppLog.loggerNoStack.d('Base Url: $url');
 
     var channel = ClientChannel(url, port: 443);
     var options = CallOptions(timeout: timeoutDuration);

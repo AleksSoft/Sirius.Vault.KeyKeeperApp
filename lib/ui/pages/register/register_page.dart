@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
-import 'package:validator/controller/register/register_controller.dart';
+import 'package:validator/controllers/register/register_controller.dart';
 import 'package:validator/ui/pages/home/pages/dev_settings/dev_settings_page.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 
@@ -55,7 +55,8 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-class _BackupContentFileds extends GetView<RegisterController> {
+class _BackupContentFileds extends StatelessWidget {
+  final c = RegisterController.con;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,12 +76,12 @@ class _BackupContentFileds extends GetView<RegisterController> {
             primaryColor: AppColors.dark,
           ),
           child: TextFormField(
-            controller: controller.passwordController,
+            controller: c.passwordController,
             keyboardType: TextInputType.visiblePassword,
-            obscureText: !controller.isPasswordVisible,
-            onChanged: (v) => controller.update(),
+            obscureText: !c.isPasswordVisible,
+            onChanged: (v) => c.update(),
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (v) => controller.isValidPass
+            validator: (v) => c.isValidPass
                 ? null
                 : 'Password should be at least 8 chars long',
             maxLines: 1,
@@ -88,9 +89,9 @@ class _BackupContentFileds extends GetView<RegisterController> {
             onFieldSubmitted: (s) => Get.focusScope.nextFocus(),
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                onPressed: () => controller.togglePasswordVisibility(),
+                onPressed: () => c.togglePasswordVisibility(),
                 icon: Icon(
-                  controller.isPasswordVisible
+                  c.isPasswordVisible
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
                 ),
@@ -108,11 +109,11 @@ class _BackupContentFileds extends GetView<RegisterController> {
           ),
           child: TextFormField(
             keyboardType: TextInputType.multiline,
-            controller: controller.dataController,
+            controller: c.dataController,
             maxLines: 5,
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (s) => GestureUtils.unfocus(),
-            onChanged: (v) => controller.update(),
+            onChanged: (v) => c.update(),
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Encrypted data',
@@ -127,12 +128,9 @@ class _BackupContentFileds extends GetView<RegisterController> {
             width: Get.width - AppSizes.medium * 2,
             roundLoadingShape: true,
             borderRadius: 5.0,
-            color:
-                controller.isValidData ? AppColors.dark : AppColors.secondary,
-            onTap: (a, b, s) =>
-                controller.isValidData ? controller.submit() : {},
-            splashColor:
-                controller.isValidData ? AppColors.light : Colors.transparent,
+            color: c.isValidData ? AppColors.dark : AppColors.secondary,
+            onTap: (a, b, s) => c.isValidData ? c.submit() : {},
+            splashColor: c.isValidData ? AppColors.light : Colors.transparent,
             child: Text(
               "Submit",
               style: Get.textTheme.button.copyWith(
@@ -153,7 +151,7 @@ class _BackupContentFileds extends GetView<RegisterController> {
           child: Text('Skip'),
         ),
         Visibility(
-          visible: controller.appConfig.isDev,
+          visible: c.appConfig.isDev,
           child: FlatButton(
             onPressed: () => Get.to(DevSettingsPage()),
             child: Text(

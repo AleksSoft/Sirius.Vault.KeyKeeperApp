@@ -1,4 +1,4 @@
-import 'package:validator/bindings/home_binding.dart';
+import 'package:validator/app/bindings/home_binding.dart';
 import 'package:validator/ui/pages/home/home_page.dart';
 import 'package:validator/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
 import 'package:validator/ui/pages/home/pages/vaults/detail/vault_detail_page.dart';

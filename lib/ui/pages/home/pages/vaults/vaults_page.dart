@@ -1,5 +1,5 @@
 import 'package:validator/app/common/common.dart';
-import 'package:validator/controller/controllers.dart';
+import 'package:validator/controllers/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 import 'package:validator/ui/widgets/menu_page.dart';

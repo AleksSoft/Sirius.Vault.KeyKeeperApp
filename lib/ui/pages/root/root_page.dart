@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validator/app/common/common.dart';
-import 'package:validator/controller/root/root_controller.dart';
+import 'package:validator/controllers/root/root_controller.dart';
+import 'package:validator/ui/widgets/app_log_console.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 
 class RootPage extends StatelessWidget {
@@ -13,47 +14,49 @@ class RootPage extends StatelessWidget {
     return Scaffold(
       body: GetX<RootController>(
         init: RootController(),
-        builder: (_) => EmptyReloadingView(
-          isLoading: _.loading,
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              AnimatedPositioned(
-                duration: _duration,
-                onEnd: () => _.checkAuth(),
-                curve: Curves.easeInOutCubic,
-                top: AppSizes.medium,
-                right: AppSizes.medium,
-                left: AppSizes.medium,
-                bottom: _.showUi ? Get.height / 2 : AppSizes.medium,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/images/logo.png',
-                      height: AppSizes.logoSize,
-                      width: AppSizes.logoSize,
-                    ),
-                    AppUiHelpers.vSpaceLarge,
-                    Text(
-                      'app_title'.tr,
-                      style: Get.textTheme.headline5,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                bottom: AppSizes.medium,
-                left: 0,
-                right: 0,
-                child: AnimatedSwitcher(
+        builder: (_) => AppLogConsole(
+          child: EmptyReloadingView(
+            isLoading: _.loading,
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                AnimatedPositioned(
                   duration: _duration,
-                  child: _BottomControls(),
+                  onEnd: () => _.checkAuth(),
+                  curve: Curves.easeInOutCubic,
+                  top: AppSizes.medium,
+                  right: AppSizes.medium,
+                  left: AppSizes.medium,
+                  bottom: _.showUi ? Get.height / 2 : AppSizes.medium,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: AppSizes.logoSize,
+                        width: AppSizes.logoSize,
+                      ),
+                      AppUiHelpers.vSpaceLarge,
+                      Text(
+                        'app_title'.tr,
+                        style: Get.textTheme.headline5,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Positioned(
+                  bottom: AppSizes.medium,
+                  left: 0,
+                  right: 0,
+                  child: AnimatedSwitcher(
+                    duration: _duration,
+                    child: _BottomControls(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

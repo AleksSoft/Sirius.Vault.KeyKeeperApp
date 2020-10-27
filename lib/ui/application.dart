@@ -2,10 +2,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:validator/app/bindings/initial_binding.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/app/routes/app_routes.dart';
 import 'package:validator/app/utils/utils.dart';
-import 'package:validator/bindings/initial_binding.dart';
 import 'package:validator/main_common.dart';
 
 import 'pages/root/root_page.dart';

@@ -45,7 +45,10 @@ class InboxController extends GetxController {
         apiKey: apiKey,
       );
       var decrypted = _decrypt(ping);
-      if (decrypted != null) messages.add(decrypted);
+      if (decrypted != null) {
+        AppLog.loggerNoStack.i('---- Ping Response ----\n$decrypted');
+        messages.add(decrypted);
+      }
     }
     loading = false;
   }

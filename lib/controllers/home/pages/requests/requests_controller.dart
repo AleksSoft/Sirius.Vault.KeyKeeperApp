@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:validator/app/utils/utils.dart';
-import 'package:validator/controller/controllers.dart';
+import 'package:validator/controllers/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
 import 'package:validator/models/transfer_detail_model.dart';
 import 'package:validator/repositories/transfers_repository.dart';
@@ -98,7 +98,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
         showErrorDialog: showErrors,
       );
       var transferDetails = approvalRequests
-          .map((r) => _buildTransferDetail(r, vault))
+          .map((r) => _buildTransferDetail(r, vault, showErrors))
           .where((element) => element != null)
           .toList();
       requests.addAll(transferDetails);
@@ -108,6 +108,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
   TransferDetailArgs _buildTransferDetail(
     GetApprovalRequestsResponse_ApprovalRequest request,
     Vault vault,
+    bool showLogs,
   ) {
     try {
       var secretEncBase64 = base64.decode(request.secretEncBase64);
@@ -119,6 +120,16 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
         request.ivNonce,
         secretKey,
       );
+
+      if (showLogs) {
+        AppLog.loggerNoStack.i('''
+          ---- Transfer Detail Decrypt ----
+          privateKeyPem: ${_privateKey.toPEM()}
+          secretEncBase64: $secretEncBase64
+          secretKey: $secretKey
+          decryptedJson: $decryptedJson
+          ''');
+      }
 
       var jsonMap = json.decode(decryptedJson);
       return TransferDetailArgs(

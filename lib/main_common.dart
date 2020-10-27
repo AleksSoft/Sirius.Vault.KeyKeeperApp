@@ -49,11 +49,9 @@ Future<void> mainCommon(Environment environment) async {
   runApp(
     GestureDetector(
       onTap: () => GestureUtils.unfocus(),
-      child: LogConsoleOnShake(
-        child: Application(
-          isDev: isDev,
-          firebaseMessaging: _firebaseMessaging,
-        ),
+      child: Application(
+        isDev: isDev,
+        firebaseMessaging: _firebaseMessaging,
       ),
     ),
   );

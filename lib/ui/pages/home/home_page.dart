@@ -1,8 +1,9 @@
 import 'package:validator/app/common/common.dart';
-import 'package:validator/controller/home/home_controller.dart';
+import 'package:validator/controllers/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/ui/widgets/app_log_console.dart';
 
 import 'pages/menu_pages.dart';
 
@@ -12,12 +13,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (_) => Scaffold(
-        appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
-        drawer: _DrawerMenu(),
-        body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: Container(child: _.selectedPage),
+      builder: (_) => AppLogConsole(
+        child: Scaffold(
+          appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
+          drawer: _DrawerMenu(),
+          body: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: Container(child: _.selectedPage),
+          ),
         ),
       ),
     );

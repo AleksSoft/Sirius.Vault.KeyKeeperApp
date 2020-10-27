@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:clipboard/clipboard.dart';
 import 'package:validator/app/common/common.dart';
-import 'package:validator/controller/controllers.dart';
+import 'package:validator/app/utils/utils.dart';
+import 'package:validator/controllers/controllers.dart';
 import 'package:validator/models/resolution_document_model.dart';
 import 'package:validator/models/saved_vaults_model.dart';
 import 'package:validator/models/transfer_detail_model.dart';
@@ -86,7 +87,10 @@ class TransferDetailController extends GetxController {
       onConfirm: () {
         _resolveRequest().then(
           (value) {
-            RequestsController.con.reloadRequests();
+            AppLog.loggerNoStack.i('''
+              ---- Resolve Approval Response ----
+              result: $value''');
+            if (value) RequestsController.con.reloadRequests();
             Get.back(closeOverlays: value);
           },
         );
@@ -117,16 +121,32 @@ class TransferDetailController extends GetxController {
       resolutionMessage: msgTextController.text ?? '',
     );
 
+    String resolutionDocumentStr = resolutionDocument.toString();
+
     var resolutionDocumentEnc = _crypto.aesEncrypt(
-      resolutionDocument.toString(),
+      resolutionDocumentStr,
       _transferDetailArgs.aesIvNonce,
       _transferDetailArgs.aesSecretKey,
     );
 
     var privateKey = await _crypto.rsaPrivateKey;
-    var binaryDocument = utf8.encode(resolutionDocument.toString());
+    var binaryDocument = utf8.encode(resolutionDocumentStr);
     var binarySignature = privateKey.createSHA256Signature(binaryDocument);
     var signatureBase64 = base64.encode(binarySignature);
+
+    AppLog.loggerNoStack.i('''
+      ---- Resolve Approval Request ----
+      resolutionDocument: $resolutionDocumentStr
+      deviceInfo: $deviceInfo
+      apiKey: ${_transferDetailArgs.vault.apiKey}
+      transferSigningRequestId: ${_transferDetailArgs.transferSigningRequestId}
+      ---- Encryption Details  ----
+      privateKeyPem: ${privateKey.toPEM()}
+      signatureBase64: $signatureBase64
+      ivNonce: ${_transferDetailArgs.aesIvNonce}
+      secretKey: ${_transferDetailArgs.aesSecretKey}
+      resolutionDocumentEnc: $resolutionDocumentEnc
+      ''');
 
     return await _repository.resolveApprovalRequest(
       deviceInfo: deviceInfo,

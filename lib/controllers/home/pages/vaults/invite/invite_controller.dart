@@ -1,6 +1,6 @@
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/app/utils/utils.dart';
-import 'package:validator/controller/controllers.dart';
+import 'package:validator/controllers/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
 import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
@@ -40,13 +40,20 @@ class InviteController extends GetxController {
     GestureUtils.unfocus();
     loading = true;
 
-    await Future.delayed(const Duration(seconds: 1));
-
     var validatorId = await _crypto.validatorId;
     var publicKeyPem = (await _crypto.rsaPublicKey).toPEM();
     String deviceInfo = await DeviceInfoService.deviceInfo;
     String inviteId = inviteCodeController.text.trim();
     String fcmToken = _storage.read(AppStorageKeys.fcmToken) ?? '';
+
+    AppLog.loggerNoStack.i('''
+    ---- Accept Invite Code Request ----
+    validatorId: $validatorId
+    publicKeyPem: $publicKeyPem
+    deviceInfo: $deviceInfo
+    inviteId: $inviteId
+    fcmToken: $fcmToken
+    ''');
 
     var response = await _repository.accept(
       publicKeyPem: publicKeyPem,
@@ -67,6 +74,9 @@ class InviteController extends GetxController {
   }
 
   Future<void> _saveNewVaultAndReload(AcceptResponse response) async {
+    AppLog.loggerNoStack
+        .i('---- Accept Invite Code Response ----\n${response.toProto3Json()}');
+
     await VaultsRepository.updateVault(Vault()
       ..localName = vaultNameController.text
       ..name = response.name
