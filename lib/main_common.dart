@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/services.dart';
@@ -27,10 +29,9 @@ Future<void> mainCommon(Environment environment) async {
 
   // init firebase
   await Firebase.initializeApp();
-  // init firebase messaging
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  // ask for needed permissions (push notifications)
-  await _firebaseMessaging.requestNotificationPermissions(
+  FirebaseAnalytics analytics = FirebaseAnalytics();
+  final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+  await firebaseMessaging.requestNotificationPermissions(
     const IosNotificationSettings(
       sound: true,
       badge: true,
@@ -67,8 +68,11 @@ Future<void> mainCommon(Environment environment) async {
         transitionDuration: const Duration(milliseconds: 200),
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: analytics),
+        ],
         onInit: () {
-          _firebaseMessaging.configure(
+          firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
               AppLog.loggerNoStack.i('FCM onMessage:\n$message');
             },
@@ -81,12 +85,12 @@ Future<void> mainCommon(Environment environment) async {
               AppLog.loggerNoStack.i('FCM onResume:\n$message');
             },
           );
-          _firebaseMessaging.onIosSettingsRegistered.listen(
+          firebaseMessaging.onIosSettingsRegistered.listen(
             (IosNotificationSettings settings) {
               AppLog.loggerNoStack.d('FCM iOS settings registered:\n$settings');
             },
           );
-          _firebaseMessaging.getToken().then(
+          firebaseMessaging.getToken().then(
             (String token) {
               assert(token != null);
               GetStorage().write(AppStorageKeys.fcmToken, token).whenComplete(
