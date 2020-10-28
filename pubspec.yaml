@@ -12,29 +12,44 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # get packages
   get: ^3.15.0
   get_storage: ^1.3.2
+
+  # grpc packages
+  grpc: ^2.3.0
+  protobuf: ^1.0.1
+  protoc_plugin: ^19.0.1
+
+  # crypto packages
   steel_crypt: ^2.2.2+1
   crypton: ^1.1.1
   crypto: ^2.1.5
+
+  # feature packages
   qr_flutter: ^3.2.0
   barcode_scan_fix: ^1.0.2
   local_auth: ^0.6.3+3
   share: ^0.6.5+2
-  device_info: '>=0.4.2+9 <2.0.0'
-  grpc: ^2.3.0
-  protobuf: ^1.0.1
-  clipboard: ^0.1.2+8
-  flutter_spinkit: ^4.1.2+1
-  intl: ^0.15.8
   logger_flutter: ^0.7.1
-  equatable: ^1.2.5
-  argon_buttons_flutter: ^1.0.6
-  flutter_money_formatter: ^0.8.3
+
+  # util packages
+  device_info: '>=0.4.2+9 <2.0.0'
+  clipboard: ^0.1.2+8
+  intl: ^0.15.8
   package_info: ^0.4.3
+  equatable: ^1.2.5
+  flutter_money_formatter: ^0.8.3
+
+  # firebase packages
+  firebase_core: "^0.5.0+1"
   firebase_messaging: ^7.0.3
   firebase_remote_config: ^0.4.0+2
-  protoc_plugin: ^19.0.1
+  firebase_crashlytics: ^0.2.1+1
+
+  # ui & animation packages
+  argon_buttons_flutter: ^1.0.6
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
   flutter_test:
