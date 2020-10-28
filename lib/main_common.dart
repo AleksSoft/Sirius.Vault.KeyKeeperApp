@@ -1,15 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/services.dart';
-import 'package:logger_flutter/logger_flutter.dart';
 import 'package:validator/services/api/api_service.dart';
-import 'package:validator/ui/application.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
+import 'app/bindings/initial_binding.dart';
 import 'app/common/common.dart';
+import 'app/routes/app_routes.dart';
 import 'app/utils/utils.dart';
+import 'ui/pages/root/root_page.dart';
 
 Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +25,8 @@ Future<void> mainCommon(Environment environment) async {
   await GetStorage.init();
   await GetStorage.init(AppConfigKeys.config);
 
+  // init firebase
+  await Firebase.initializeApp();
   // init firebase messaging
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   // ask for needed permissions (push notifications)
@@ -49,9 +53,48 @@ Future<void> mainCommon(Environment environment) async {
   runApp(
     GestureDetector(
       onTap: () => GestureUtils.unfocus(),
-      child: Application(
-        isDev: isDev,
-        firebaseMessaging: _firebaseMessaging,
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        debugShowMaterialGrid: false,
+        showPerformanceOverlay: false,
+        showSemanticsDebugger: false,
+        enableLog: isDev,
+        translations: AppTranslations(),
+        locale: Locale('en'),
+        title: 'Sirius Validator',
+        theme: AppThemes.light,
+        getPages: AppRoutes.routes,
+        transitionDuration: const Duration(milliseconds: 200),
+        initialRoute: RootPage.route,
+        initialBinding: InitialBinding(),
+        onInit: () {
+          _firebaseMessaging.configure(
+            onMessage: (Map<String, dynamic> message) async {
+              AppLog.loggerNoStack.i('FCM onMessage:\n$message');
+            },
+            onBackgroundMessage:
+                GetPlatform.isIOS ? null : backgroundMessageHandler,
+            onLaunch: (Map<String, dynamic> message) async {
+              AppLog.loggerNoStack.i('FCM onLaunch:\n$message');
+            },
+            onResume: (Map<String, dynamic> message) async {
+              AppLog.loggerNoStack.i('FCM onResume:\n$message');
+            },
+          );
+          _firebaseMessaging.onIosSettingsRegistered.listen(
+            (IosNotificationSettings settings) {
+              AppLog.loggerNoStack.d('FCM iOS settings registered:\n$settings');
+            },
+          );
+          _firebaseMessaging.getToken().then(
+            (String token) {
+              assert(token != null);
+              GetStorage().write(AppStorageKeys.fcmToken, token).whenComplete(
+                    () => AppLog.loggerNoStack.d('FCM token:\n$token'),
+                  );
+            },
+          );
+        },
       ),
     ),
   );
@@ -59,7 +102,7 @@ Future<void> mainCommon(Environment environment) async {
 
 /// method to handle firebase push notification messages in background
 Future<dynamic> backgroundMessageHandler(Map<String, dynamic> message) async {
-  AppLog.loggerNoStack.i('onBackgroundMessage: $message');
+  AppLog.loggerNoStack.i('FCM onBackgroundMessage:\n$message');
 }
 
 /// init firebase remote config

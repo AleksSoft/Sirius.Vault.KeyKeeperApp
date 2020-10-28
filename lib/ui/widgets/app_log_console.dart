@@ -14,7 +14,6 @@ class AppLogConsole extends StatelessWidget {
     return Scaffold(
       body: this.isDev
           ? LogConsoleOnShake(
-              debugOnly: false,
               child: this.child,
             )
           : this.child,
