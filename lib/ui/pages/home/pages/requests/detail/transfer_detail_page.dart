@@ -78,7 +78,7 @@ class _DetailsView extends StatelessWidget {
               title: 'Amount',
               value: Formatter.currency(
                 (c.transferDetail?.amount ?? '').toString(),
-                suffix: c.transferDetail?.asset?.symbol,
+                prefix: c.transferDetail?.asset?.symbol,
               ),
             ),
             DetailsTile(

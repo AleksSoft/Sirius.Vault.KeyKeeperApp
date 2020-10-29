@@ -113,13 +113,15 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
     try {
       var secretEncBase64 = base64.decode(request.secretEncBase64);
       var secretDecr = _privateKey.decryptData(secretEncBase64);
-      String secretKey = base64.encode(secretDecr);
+      var secretKey = base64.encode(secretDecr);
 
-      String decryptedJson = _crypto.aesDecrypt(
+      var decryptedJson = _crypto.aesDecrypt(
         request.transactionDetailsEncBase64,
         request.ivNonce,
         secretKey,
       );
+      var jsonMap = json.decode(decryptedJson);
+      var transferDetail = TransferDetailModel.fromJson(jsonMap);
 
       if (showLogs) {
         AppLog.loggerNoStack.i('''
@@ -130,10 +132,8 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
           decryptedJson: $decryptedJson
           ''');
       }
-
-      var jsonMap = json.decode(decryptedJson);
       return TransferDetailArgs(
-        transferDetail: TransferDetailModel.fromJson(jsonMap),
+        transferDetail: transferDetail,
         transferSigningRequestId: request.transferSigningRequestId,
         aesSecretKey: secretKey,
         aesIvNonce: request.ivNonce,

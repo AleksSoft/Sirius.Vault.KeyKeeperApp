@@ -58,13 +58,15 @@ class _RequestCard extends StatelessWidget {
             children: [
               Text(
                 Formatter.currency(
-                  r.amount.toString(),
-                  suffix: r.asset?.symbol,
+                  (r.amount ?? '').toString(),
+                  prefix: r.asset?.symbol,
                 ),
                 style: Get.textTheme.subtitle2.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 16.0,
                 ),
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
               ),
               Text(
                 r.transferContext?.requestContext?.timestampFormatted,

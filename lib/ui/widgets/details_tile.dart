@@ -19,8 +19,8 @@ class DetailsTile extends StatelessWidget {
       visible: !this.value.isNullOrBlank,
       child: ListTile(
         contentPadding: const EdgeInsets.all(0),
-        title: Text(this.title ?? ''),
-        subtitle: Text(this.value ?? ''),
+        title: Text(this.title ?? '', softWrap: true),
+        subtitle: Text(this.value ?? '', softWrap: true),
         trailing: Visibility(
           visible: this.enableCopy && !this.value.isNullOrBlank,
           child: IconButton(
