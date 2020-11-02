@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 
-enum Environment { dev, prod }
+enum Environment { dev, test, prod }
 
 class AppConfig {
-  Environment _environment = Environment.dev;
+  Environment _environment = Environment.prod;
   AppApiVersion _appApiVersion = AppApiVersion(0, 0);
 
   bool get isDev => _environment == Environment.dev;
+  bool get isTest => _environment == Environment.test;
   bool get isProd => _environment == Environment.prod;
 
   AppApiVersion get version => _appApiVersion;

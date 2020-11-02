@@ -116,7 +116,7 @@ class _DevSettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: c.appConfig.isDev,
+      visible: !c.appConfig.isProd,
       child: FlatButton(
         onPressed: () => c.openDevSettings(),
         child: Text(

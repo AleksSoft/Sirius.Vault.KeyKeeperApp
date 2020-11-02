@@ -151,7 +151,7 @@ class _BackupContentFileds extends StatelessWidget {
           child: Text('Skip'),
         ),
         Visibility(
-          visible: c.appConfig.isDev,
+          visible: !c.appConfig.isProd,
           child: FlatButton(
             onPressed: () => Get.to(DevSettingsPage()),
             child: Text(

@@ -25,7 +25,9 @@ class EmptyReloadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () => onRefresh?.call(),
+      onRefresh: () => Future.delayed(Duration()).whenComplete(
+        () => onRefresh?.call(),
+      ),
       color: AppColors.dark,
       child: Stack(
         children: <Widget>[

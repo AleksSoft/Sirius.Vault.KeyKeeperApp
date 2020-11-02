@@ -40,10 +40,10 @@
               "client_type": 3
             },
             {
-              "client_id": "737430010307-24ci5t0s2o24vo506mtolkok4943p8t8.apps.googleusercontent.com",
+              "client_id": "737430010307-35u3q8bbjjldfvh66nrha4tn4nom51jh.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.swisschain.validator"
+                "bundle_id": "com.swisschain.validator.dev"
               }
             }
           ]
@@ -52,17 +52,17 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:737430010307:android:46f62348cc9da1137fe576",
+        "mobilesdk_app_id": "1:737430010307:android:c586d7bc4111c3dc7fe576",
         "android_client_info": {
-          "package_name": "vault.sirius.keykeeper"
+          "package_name": "com.swisschain.validator.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "737430010307-qkf4bcupv3voobvobmnjiqekolimb9ni.apps.googleusercontent.com",
+          "client_id": "737430010307-1oh35nf7148ahfuoqkqmqcngaj2gtcm0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "vault.sirius.keykeeper",
+            "package_name": "com.swisschain.validator.dev",
             "certificate_hash": "4127153f4db78c07f32d589510589904ce6131c3"
           }
         },
@@ -84,10 +84,54 @@
               "client_type": 3
             },
             {
-              "client_id": "737430010307-24ci5t0s2o24vo506mtolkok4943p8t8.apps.googleusercontent.com",
+              "client_id": "737430010307-35u3q8bbjjldfvh66nrha4tn4nom51jh.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.swisschain.validator"
+                "bundle_id": "com.swisschain.validator.dev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737430010307:android:9980c92f75c89e767fe576",
+        "android_client_info": {
+          "package_name": "com.swisschain.validator.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737430010307-7jbupjmtbtsi0cr41ifmge4aipu113n9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swisschain.validator.test",
+            "certificate_hash": "4127153f4db78c07f32d589510589904ce6131c3"
+          }
+        },
+        {
+          "client_id": "737430010307-0g6vq4s8l4r36t5njqmev1ta1idip0mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5XtFhmW6Z2NA6F0UKW1-dC2x2FRLUsSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737430010307-0g6vq4s8l4r36t5njqmev1ta1idip0mf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "737430010307-35u3q8bbjjldfvh66nrha4tn4nom51jh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.swisschain.validator.dev"
               }
             }
           ]

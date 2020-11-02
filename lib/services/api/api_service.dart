@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:validator/app/common/app_config_keys.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
@@ -8,10 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:grpc/grpc.dart';
 
 class ApiService {
-  static const List<String> devUrls = <String>[
-    'sirius-validator-test.swisschain.info',
-    'sirius-validator-dev.swisschain.info',
-  ];
   static const timeoutDuration = const Duration(seconds: 30);
 
   final _configStorage = GetStorage(AppConfigKeys.config);
@@ -19,13 +17,13 @@ class ApiService {
 
   final Map _clients = Map();
 
-  T client<T extends Client>() => _clients[T];
+  List<String> apiUrls = [];
 
-  String get prodUrl => _remoteConfig.getString(AppConfigKeys.prodUrl) ?? '';
+  T client<T extends Client>() => _clients[T];
 
   String get defaultUrl {
     String url = GetStorage(AppConfigKeys.config).read(AppStorageKeys.baseUrl);
-    return url.isNullOrBlank ? prodUrl : url;
+    return url.isNullOrBlank ? apiUrls[0] : url;
   }
 
   static CallOptions getSecureOptions(String apiKey) => CallOptions(
@@ -33,7 +31,16 @@ class ApiService {
         timeout: timeoutDuration,
       );
 
-  Future<ApiService> init() => update().then((_) => this);
+  Future<ApiService> init() async {
+    // init urls from config
+    var apiUrlsJson = _remoteConfig.getString(AppConfigKeys.apiUrls);
+    apiUrls = (json.decode(apiUrlsJson) as List<dynamic>).cast<String>();
+    AppLog.loggerNoStack.i('API urls:\n$apiUrlsJson');
+
+    // update services
+    await update();
+    return this;
+  }
 
   /// Updates grpc clients with given [url]
   ///

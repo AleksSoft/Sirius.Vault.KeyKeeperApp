@@ -18,7 +18,7 @@ import 'ui/pages/root/root_page.dart';
 Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final bool isDev = environment == Environment.dev;
+  final bool notProd = environment != Environment.prod;
 
   // set only portrait orientation for device
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -41,7 +41,7 @@ Future<void> mainCommon(Environment environment) async {
   );
 
   // init async instances
-  await Get.putAsync<RemoteConfig>(() => setupRemoteConfig(isDev));
+  await Get.putAsync<RemoteConfig>(() => setupRemoteConfig(notProd));
   await Get.putAsync<AppConfig>(
     () => AppConfig().init(
       environment: environment,
@@ -59,10 +59,10 @@ Future<void> mainCommon(Environment environment) async {
         debugShowMaterialGrid: false,
         showPerformanceOverlay: false,
         showSemanticsDebugger: false,
-        enableLog: isDev,
+        enableLog: notProd,
         translations: AppTranslations(),
         locale: Locale('en'),
-        title: 'Sirius Validator',
+        title: _getAppTitle(environment),
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
         transitionDuration: const Duration(milliseconds: 200),
@@ -104,18 +104,30 @@ Future<void> mainCommon(Environment environment) async {
   );
 }
 
+String _getAppTitle(Environment env) {
+  switch (env) {
+    case Environment.dev:
+      return 'Dev Sirius Validator';
+    case Environment.test:
+      return 'Test Sirius Validator';
+    case Environment.prod:
+    default:
+      return 'Sirius Validator';
+  }
+}
+
 /// method to handle firebase push notification messages in background
 Future<dynamic> backgroundMessageHandler(Map<String, dynamic> message) async {
   AppLog.loggerNoStack.i('FCM onBackgroundMessage:\n$message');
 }
 
 /// init firebase remote config
-Future<RemoteConfig> setupRemoteConfig(bool isDebug) async {
+Future<RemoteConfig> setupRemoteConfig(bool notProd) async {
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
   // Enable developer mode to relax fetch throttling
-  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: isDebug));
+  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: notProd));
   remoteConfig.setDefaults(<String, dynamic>{
-    AppConfigKeys.prodUrl: 'sirius-validator.swisschain.io',
+    AppConfigKeys.apiUrls: ['sirius-validator.swisschain.io'],
   });
   try {
     await remoteConfig.fetch();

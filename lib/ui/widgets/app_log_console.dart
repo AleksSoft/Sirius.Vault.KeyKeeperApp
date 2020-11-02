@@ -7,16 +7,16 @@ class AppLogConsole extends StatelessWidget {
   AppLogConsole({@required this.child, Key key}) : super(key: key);
 
   final Widget child;
-  final isDev = Get.find<AppConfig>().isDev;
+  final appConifg = Get.find<AppConfig>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: this.isDev
-          ? LogConsoleOnShake(
+      body: this.appConifg.isProd
+          ? this.child
+          : LogConsoleOnShake(
               child: this.child,
-            )
-          : this.child,
+            ),
     );
   }
 }

@@ -63,18 +63,30 @@ android {
    }
 
    buildTypes {
-        debug {
-            applicationIdSuffix ".test"
-            debuggable true
-       }
-        profile {
-            applicationIdSuffix ".test"
-            debuggable true
-       }
        release {
            signingConfig signingConfigs.release
        }
    }
+
+   flavorDimensions "app"
+    productFlavors {
+        devQA {
+            dimension "app"
+            resValue "string", "app_name", "Test Sirius Validator"
+            applicationIdSuffix ".test"
+            versionNameSuffix "-test"
+        }
+        dev {
+            dimension "app"
+            resValue "string", "app_name", "Dev Sirius Validator"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+        }
+        prod {
+            dimension "app"
+            resValue "string", "app_name", "Sirius Validator"
+        }
+    }
 }
 
 flutter {

@@ -103,7 +103,7 @@ class ErrorHandler {
     bool showDialog,
   ) async {
     logError(
-      code: e.code.toString(),
+      code: e.toString(),
       message: '',
       method: method,
     );
