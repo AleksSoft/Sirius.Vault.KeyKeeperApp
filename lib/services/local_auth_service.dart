@@ -8,7 +8,7 @@ class LocalAuthService {
       if (await canCheckBiometrics) {
         await Future.delayed(Duration(milliseconds: 300));
         return await _auth.authenticateWithBiometrics(
-          localizedReason: 'Authenticate to access',
+          localizedReason: 'Please authenticate to continue',
           useErrorDialogs: true,
           stickyAuth: true,
         );

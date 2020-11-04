@@ -48,7 +48,7 @@ android {
     defaultConfig {
         applicationId "com.swisschain.validator"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -64,7 +64,17 @@ android {
    }
 
    buildTypes {
+       debug {
+           debuggable true
+           minifyEnabled true
+           shrinkResources true
+           proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+       }
        release {
+           debuggable false
+           minifyEnabled true
+           shrinkResources true
+           proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
            signingConfig signingConfigs.release
        }
    }
