@@ -34,7 +34,7 @@ class _DrawerMenu extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          _VaultStatusView(),
+          // _VaultStatusView(),
           ListTile(
             onTap: () => c.selectedPage = RequestsPage(),
             leading: Icon(Icons.list),
