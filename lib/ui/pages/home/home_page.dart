@@ -12,9 +12,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (_) => AppLogConsole(
-        child: Scaffold(
+    return AppLogConsole(
+      child: GetBuilder<HomeController>(
+        builder: (_) => Scaffold(
           appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
           drawer: _DrawerMenu(),
           body: AnimatedSwitcher(

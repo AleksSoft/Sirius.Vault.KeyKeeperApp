@@ -11,11 +11,11 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GetX<RootController>(
-        init: RootController(),
-        builder: (_) => AppLogConsole(
-          child: EmptyReloadingView(
+    return AppLogConsole(
+      child: Scaffold(
+        body: GetX<RootController>(
+          init: RootController(),
+          builder: (_) => EmptyReloadingView(
             isLoading: _.loading,
             child: Stack(
               fit: StackFit.expand,
