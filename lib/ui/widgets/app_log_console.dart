@@ -15,6 +15,7 @@ class AppLogConsole extends StatelessWidget {
       body: this.appConifg.isProd
           ? this.child
           : LogConsoleOnShake(
+              debugOnly: false,
               child: this.child,
             ),
     );
