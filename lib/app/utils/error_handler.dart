@@ -107,7 +107,6 @@ class ErrorHandler {
       message: '',
       method: method,
     );
-    AppLog.logger.e(e);
     if (showDialog) _defaultErrorDialog();
   }
 
