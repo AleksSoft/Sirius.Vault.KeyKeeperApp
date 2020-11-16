@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger_flutter/logger_flutter.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/controllers/home/home_controller.dart';
-import 'package:validator/ui/widgets/app_log_console.dart';
 
 import 'pages/menu_pages.dart';
 
@@ -12,9 +12,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppLogConsole(
-      child: GetBuilder<HomeController>(
-        builder: (_) => Scaffold(
+    return GetBuilder<HomeController>(
+      builder: (_) => LogConsoleOnShake(
+        dark: Get.isDarkMode,
+        debugOnly: _.appConfig.isProd,
+        child: Scaffold(
           appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
           drawer: _DrawerMenu(),
           body: AnimatedSwitcher(
