@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger_flutter/logger_flutter.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/controllers/root/root_controller.dart';
-import 'package:validator/ui/widgets/app_log_console.dart';
 import 'package:validator/ui/widgets/empty_reloading_view.dart';
 
 class RootPage extends StatelessWidget {
@@ -11,7 +11,8 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppLogConsole(
+    return LogConsoleOnShake(
+      dark: Get.isDarkMode,
       child: Scaffold(
         body: GetX<RootController>(
           init: RootController(),
