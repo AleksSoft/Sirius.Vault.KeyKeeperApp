@@ -1,13 +1,14 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/services.dart';
-import 'package:validator/services/api/api_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:logger_flutter/logger_flutter.dart';
+import 'package:validator/services/api/api_service.dart';
 
 import 'app/bindings/initial_binding.dart';
 import 'app/common/common.dart';
@@ -49,6 +50,10 @@ Future<void> mainCommon(Environment environment) async {
     ),
   );
   await Get.putAsync<ApiService>(() => ApiService().init());
+
+  if (notProd) {
+    LogConsole.init();
+  }
 
   // start app with all configurations done
   runApp(

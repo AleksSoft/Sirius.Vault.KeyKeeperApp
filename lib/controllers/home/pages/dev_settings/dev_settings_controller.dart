@@ -1,8 +1,9 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:validator/app/common/app_storage_keys.dart';
-import 'package:validator/services/api/api_service.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/app/utils/app_log.dart';
+import 'package:validator/services/api/api_service.dart';
 
 class DevSettingsController extends GetxController {
   static DevSettingsController get con => Get.find();
@@ -36,4 +37,6 @@ class DevSettingsController extends GetxController {
           snackStyle: SnackStyle.GROUNDED,
         );
       });
+
+  void showLogs() => AppLog.showConsole();
 }

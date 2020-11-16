@@ -13,16 +13,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (_) => LogConsoleOnShake(
-        dark: Get.isDarkMode,
-        debugOnly: _.appConfig.isProd,
-        child: Scaffold(
-          appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
-          drawer: _DrawerMenu(),
-          body: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: Container(child: _.selectedPage),
-          ),
+      builder: (_) => Scaffold(
+        appBar: AppBar(title: Text(_.selectedPage.title ?? '')),
+        drawer: _DrawerMenu(),
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: Container(child: _.selectedPage),
         ),
       ),
     );

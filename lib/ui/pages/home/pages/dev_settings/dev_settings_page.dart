@@ -1,6 +1,6 @@
-import 'package:validator/app/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/controllers/home/pages/dev_settings/dev_settings_controller.dart';
 
 class DevSettingsPage extends StatelessWidget {
@@ -12,6 +12,12 @@ class DevSettingsPage extends StatelessWidget {
         elevation: 0.0,
         leading: CloseButton(),
         title: Text('Developer settings'),
+        actions: [
+          FlatButton(
+            onPressed: () => DevSettingsController.con.showLogs(),
+            child: Text('Show logs'),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
