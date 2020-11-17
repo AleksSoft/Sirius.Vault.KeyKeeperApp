@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,16 +32,6 @@ Future<void> mainCommon(Environment environment) async {
 
   // init firebase
   await Firebase.initializeApp();
-  FirebaseAnalytics analytics = FirebaseAnalytics();
-  final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
-  await firebaseMessaging.requestNotificationPermissions(
-    const IosNotificationSettings(
-      sound: true,
-      badge: true,
-      alert: true,
-      provisional: true,
-    ),
-  );
 
   // init async instances
   await Get.putAsync<RemoteConfig>(() => setupRemoteConfig(notProd));
@@ -74,9 +66,19 @@ Future<void> mainCommon(Environment environment) async {
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
         navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: analytics),
+          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
         ],
         onInit: () {
+          final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+          if (Platform.isIOS) {
+            firebaseMessaging.requestNotificationPermissions(
+              const IosNotificationSettings(),
+            );
+            firebaseMessaging.onIosSettingsRegistered.listen((settings) {
+              AppLog.loggerNoStack.v("FCM iOS settings registered: $settings");
+            });
+          }
+
           firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
               AppLog.loggerNoStack.v('FCM onMessage:\n$message');
