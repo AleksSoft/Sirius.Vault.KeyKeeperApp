@@ -68,15 +68,12 @@ Future<void> mainCommon(Environment environment) async {
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
         ],
-        onInit: () {
+        onInit: () async {
           final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
           if (Platform.isIOS) {
-            firebaseMessaging.requestNotificationPermissions(
+            await firebaseMessaging.requestNotificationPermissions(
               const IosNotificationSettings(),
             );
-            firebaseMessaging.onIosSettingsRegistered.listen((settings) {
-              AppLog.loggerNoStack.v("FCM iOS settings registered: $settings");
-            });
           }
 
           firebaseMessaging.configure(
