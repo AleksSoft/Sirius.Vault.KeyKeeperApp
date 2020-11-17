@@ -72,7 +72,12 @@ Future<void> mainCommon(Environment environment) async {
           final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
           if (Platform.isIOS) {
             await firebaseMessaging.requestNotificationPermissions(
-              const IosNotificationSettings(),
+              const IosNotificationSettings(
+                sound: true,
+                badge: true,
+                alert: true,
+                provisional: false,
+              ),
             );
           }
 
