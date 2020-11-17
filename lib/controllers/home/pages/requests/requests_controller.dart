@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:crypton/crypton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controllers/controllers.dart';
 import 'package:validator/models/saved_vaults_model.dart';
@@ -12,8 +14,6 @@ import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/device_info_service.dart';
 import 'package:validator/src/api.pb.dart';
 import 'package:validator/ui/pages/home/pages/requests/detail/transfer_detail_page.dart';
-import 'package:crypton/crypton.dart';
-import 'package:get/get.dart';
 
 class RequestsController extends GetxController with WidgetsBindingObserver {
   static RequestsController get con => Get.find();
@@ -124,7 +124,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
       var transferDetail = TransferDetailModel.fromJson(jsonMap);
 
       if (showLogs) {
-        AppLog.loggerNoStack.i('''
+        AppLog.loggerNoStack.v('''
           ---- Transfer Detail Decrypt ----
           privateKeyPem: ${_privateKey.toPEM()}
           secretEncBase64: $secretEncBase64

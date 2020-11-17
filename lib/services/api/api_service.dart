@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:grpc/grpc.dart';
 import 'package:validator/app/common/app_config_keys.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/src/api.pbgrpc.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:grpc/grpc.dart';
 
 class ApiService {
   static const timeoutDuration = const Duration(seconds: 30);
@@ -35,7 +35,7 @@ class ApiService {
     // init urls from config
     var apiUrlsJson = _remoteConfig.getString(AppConfigKeys.apiUrls);
     apiUrls = (json.decode(apiUrlsJson) as List<dynamic>).cast<String>();
-    AppLog.loggerNoStack.i('API urls:\n$apiUrlsJson');
+    AppLog.loggerNoStack.v('API urls:\n$apiUrlsJson');
 
     // update services
     await update();
@@ -48,7 +48,7 @@ class ApiService {
   Future<void> update({String url}) async {
     if (url.isNullOrBlank) url = defaultUrl;
     await _configStorage.write(AppStorageKeys.baseUrl, url);
-    AppLog.loggerNoStack.d('Base Url: $url');
+    AppLog.loggerNoStack.v('Base Url: $url');
 
     var channel = ClientChannel(url, port: 443);
     var options = CallOptions(timeout: timeoutDuration);

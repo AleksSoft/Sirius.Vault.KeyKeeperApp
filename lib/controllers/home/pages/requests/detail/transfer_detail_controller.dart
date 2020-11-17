@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:share/share.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controllers/controllers.dart';
@@ -11,9 +14,6 @@ import 'package:validator/repositories/transfers_repository.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/device_info_service.dart';
 import 'package:validator/src/api.pb.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:share/share.dart';
 
 class TransferDetailController extends GetxController {
   static TransferDetailController get con => Get.find();
@@ -87,7 +87,7 @@ class TransferDetailController extends GetxController {
       onConfirm: () {
         _resolveRequest().then(
           (value) {
-            AppLog.loggerNoStack.i('''
+            AppLog.loggerNoStack.v('''
               ---- Resolve Approval Response ----
               result: $value''');
             if (value) RequestsController.con.reloadRequests();
@@ -134,7 +134,7 @@ class TransferDetailController extends GetxController {
     var binarySignature = privateKey.createSHA256Signature(binaryDocument);
     var signatureBase64 = base64.encode(binarySignature);
 
-    AppLog.loggerNoStack.i('''
+    AppLog.loggerNoStack.v('''
       ---- Resolve Approval Request ----
       resolutionDocument: $resolutionDocumentStr
       deviceInfo: $deviceInfo

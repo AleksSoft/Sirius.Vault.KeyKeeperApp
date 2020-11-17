@@ -1,11 +1,11 @@
 import 'package:clipboard/clipboard.dart';
+import 'package:get/get.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/repositories/invites_repository.dart';
 import 'package:validator/repositories/vaults_repository.dart';
 import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/device_info_service.dart';
 import 'package:validator/src/api.pb.dart';
-import 'package:get/get.dart';
 
 class InboxController extends GetxController {
   static InboxController get con => Get.find();
@@ -46,7 +46,7 @@ class InboxController extends GetxController {
       );
       var decrypted = _decrypt(ping);
       if (decrypted != null) {
-        AppLog.loggerNoStack.i('---- Ping Response ----\n$decrypted');
+        AppLog.loggerNoStack.v('---- Ping Response ----\n$decrypted');
         messages.add(decrypted);
       }
     }

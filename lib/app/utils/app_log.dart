@@ -4,11 +4,22 @@ import 'package:logger_flutter/logger_flutter.dart';
 
 class AppLog {
   static Logger get logger => Logger(
-        printer: PrettyPrinter(),
+        filter: _AppLogFilter(),
+        printer: PrettyPrinter(
+          methodCount: 2,
+          errorMethodCount: 8,
+          lineLength: 80,
+          printTime: true,
+        ),
       );
 
   static Logger get loggerNoStack => Logger(
-        printer: PrettyPrinter(methodCount: 0),
+        filter: _AppLogFilter(),
+        printer: PrettyPrinter(
+          methodCount: 0,
+          lineLength: 80,
+          printTime: true,
+        ),
       );
 
   static void showConsole() => Get.to(
@@ -17,4 +28,11 @@ class AppLog {
           showCloseButton: true,
         ),
       );
+}
+
+class _AppLogFilter extends LogFilter {
+  @override
+  bool shouldLog(LogEvent event) {
+    return true;
+  }
 }

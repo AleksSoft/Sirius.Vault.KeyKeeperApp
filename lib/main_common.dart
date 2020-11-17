@@ -79,27 +79,27 @@ Future<void> mainCommon(Environment environment) async {
         onInit: () {
           firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
-              AppLog.loggerNoStack.i('FCM onMessage:\n$message');
+              AppLog.loggerNoStack.v('FCM onMessage:\n$message');
             },
             onBackgroundMessage:
                 GetPlatform.isIOS ? null : backgroundMessageHandler,
             onLaunch: (Map<String, dynamic> message) async {
-              AppLog.loggerNoStack.i('FCM onLaunch:\n$message');
+              AppLog.loggerNoStack.v('FCM onLaunch:\n$message');
             },
             onResume: (Map<String, dynamic> message) async {
-              AppLog.loggerNoStack.i('FCM onResume:\n$message');
+              AppLog.loggerNoStack.v('FCM onResume:\n$message');
             },
           );
           firebaseMessaging.onIosSettingsRegistered.listen(
             (IosNotificationSettings settings) {
-              AppLog.loggerNoStack.d('FCM iOS settings registered:\n$settings');
+              AppLog.loggerNoStack.v('FCM iOS settings registered:\n$settings');
             },
           );
           firebaseMessaging.getToken().then(
             (String token) {
               assert(token != null);
               GetStorage().write(AppStorageKeys.fcmToken, token).whenComplete(
-                    () => AppLog.loggerNoStack.d('FCM token:\n$token'),
+                    () => AppLog.loggerNoStack.v('FCM token:\n$token'),
                   );
             },
           );
@@ -123,7 +123,7 @@ String _getAppTitle(Environment env) {
 
 /// method to handle firebase push notification messages in background
 Future<dynamic> backgroundMessageHandler(Map<String, dynamic> message) async {
-  AppLog.loggerNoStack.i('FCM onBackgroundMessage:\n$message');
+  AppLog.loggerNoStack.v('FCM onBackgroundMessage:\n$message');
 }
 
 /// init firebase remote config

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:validator/app/common/app_storage_keys.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/controllers/controllers.dart';
@@ -8,9 +11,6 @@ import 'package:validator/services/crypto/crypto_service.dart';
 import 'package:validator/services/device_info_service.dart';
 import 'package:validator/services/qr_service.dart';
 import 'package:validator/src/api.pb.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class InviteController extends GetxController {
   static InviteController get con => Get.find();
@@ -46,7 +46,7 @@ class InviteController extends GetxController {
     String inviteId = inviteCodeController.text.trim();
     String fcmToken = _storage.read(AppStorageKeys.fcmToken) ?? '';
 
-    AppLog.loggerNoStack.i('''
+    AppLog.loggerNoStack.v('''
     ---- Accept Invite Code Request ----
     validatorId: $validatorId
     publicKeyPem: $publicKeyPem
@@ -75,7 +75,7 @@ class InviteController extends GetxController {
 
   Future<void> _saveNewVaultAndReload(AcceptResponse response) async {
     AppLog.loggerNoStack
-        .i('---- Accept Invite Code Response ----\n${response.toProto3Json()}');
+        .v('---- Accept Invite Code Response ----\n${response.toProto3Json()}');
 
     await VaultsRepository.updateVault(Vault()
       ..localName = vaultNameController.text
