@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -70,7 +68,7 @@ Future<void> mainCommon(Environment environment) async {
         ],
         onInit: () async {
           final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
-          if (Platform.isIOS) {
+          if (GetPlatform.isIOS) {
             await firebaseMessaging.requestNotificationPermissions(
               const IosNotificationSettings(
                 sound: true,
