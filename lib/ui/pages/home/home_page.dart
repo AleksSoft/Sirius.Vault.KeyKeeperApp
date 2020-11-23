@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger_flutter/logger_flutter.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/controllers/home/home_controller.dart';
 

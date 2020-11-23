@@ -3,7 +3,7 @@
 //  source: api.proto
 //
 // @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:async' as $async;
 
@@ -28,25 +28,22 @@ class TransfersClient extends $grpc.Client {
       ($core.List<$core.int> value) =>
           $0.ResolveApprovalRequestsResponse.fromBuffer(value));
 
-  TransfersClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
-      : super(channel, options: options);
+  TransfersClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options,
+      $core.Iterable<$grpc.ClientInterceptor> interceptors})
+      : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$0.GetApprovalRequestsResponse> getApprovalRequests(
       $0.GetApprovalRequestsRequests request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$getApprovalRequests, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
+    return $createUnaryCall(_$getApprovalRequests, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.ResolveApprovalRequestsResponse>
       resolveApprovalRequests($0.ResolveApprovalRequestsRequest request,
           {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$resolveApprovalRequests, $async.Stream.fromIterable([request]),
+    return $createUnaryCall(_$resolveApprovalRequests, request,
         options: options);
-    return $grpc.ResponseFuture(call);
   }
 }
 
@@ -109,30 +106,25 @@ class InvitesClient extends $grpc.Client {
       ($core.List<$core.int> value) =>
           $0.RemoveVaultConnectionResponse.fromBuffer(value));
 
-  InvitesClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
-      : super(channel, options: options);
+  InvitesClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options,
+      $core.Iterable<$grpc.ClientInterceptor> interceptors})
+      : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$0.AcceptResponse> accept($0.AcceptRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(_$accept, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
+    return $createUnaryCall(_$accept, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.PingResponse> getPing($0.PingRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(_$getPing, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
+    return $createUnaryCall(_$getPing, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.RemoveVaultConnectionResponse> removeVaultConnection(
       $0.RemoveVaultConnectionRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$removeVaultConnection, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
+    return $createUnaryCall(_$removeVaultConnection, request, options: options);
   }
 }
 
@@ -197,16 +189,15 @@ class VersionClient extends $grpc.Client {
       ($core.List<$core.int> value) =>
           $0.GetCurrentVersionResponce.fromBuffer(value));
 
-  VersionClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
-      : super(channel, options: options);
+  VersionClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions options,
+      $core.Iterable<$grpc.ClientInterceptor> interceptors})
+      : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$0.GetCurrentVersionResponce> getCurrentVersion(
       $0.GetCurrentVersionRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(
-        _$getCurrentVersion, $async.Stream.fromIterable([request]),
-        options: options);
-    return $grpc.ResponseFuture(call);
+    return $createUnaryCall(_$getCurrentVersion, request, options: options);
   }
 }
 

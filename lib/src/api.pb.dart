@@ -3,7 +3,7 @@
 //  source: api.proto
 //
 // @dart = 2.3
-// ignore_for_file: camel_case_types,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type
+// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
 
@@ -14,8 +14,8 @@ import 'api.pbenum.dart';
 export 'api.pbenum.dart';
 
 class GetApprovalRequestsRequests extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetApprovalRequestsRequests', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOS(1, 'deviceInfo', protoName: 'deviceInfo')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetApprovalRequestsRequests', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'deviceInfo', protoName: 'deviceInfo')
     ..hasRequiredFields = false
   ;
 
@@ -23,8 +23,16 @@ class GetApprovalRequestsRequests extends $pb.GeneratedMessage {
   factory GetApprovalRequestsRequests() => create();
   factory GetApprovalRequestsRequests.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetApprovalRequestsRequests.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetApprovalRequestsRequests clone() => GetApprovalRequestsRequests()..mergeFromMessage(this);
-  GetApprovalRequestsRequests copyWith(void Function(GetApprovalRequestsRequests) updates) => super.copyWith((message) => updates(message as GetApprovalRequestsRequests));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetApprovalRequestsRequests copyWith(void Function(GetApprovalRequestsRequests) updates) => super.copyWith((message) => updates(message as GetApprovalRequestsRequests)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetApprovalRequestsRequests create() => GetApprovalRequestsRequests._();
@@ -45,12 +53,12 @@ class GetApprovalRequestsRequests extends $pb.GeneratedMessage {
 }
 
 class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetApprovalRequestsResponse.ApprovalRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOS(1, 'transferSigningRequestId', protoName: 'transferSigningRequestId')
-    ..e<GetApprovalRequestsResponse_ApprovalRequest_RequestStatus>(2, 'status', $pb.PbFieldType.OE, defaultOrMaker: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.open, valueOf: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.valueOf, enumValues: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.values)
-    ..aOS(3, 'transactionDetailsEncBase64', protoName: 'transactionDetailsEncBase64')
-    ..aOS(4, 'secretEncBase64', protoName: 'secretEncBase64')
-    ..aOS(5, 'ivNonce', protoName: 'ivNonce')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetApprovalRequestsResponse.ApprovalRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'transferSigningRequestId', protoName: 'transferSigningRequestId')
+    ..e<GetApprovalRequestsResponse_ApprovalRequest_RequestStatus>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.open, valueOf: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.valueOf, enumValues: GetApprovalRequestsResponse_ApprovalRequest_RequestStatus.values)
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'transactionDetailsEncBase64', protoName: 'transactionDetailsEncBase64')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'secretEncBase64', protoName: 'secretEncBase64')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ivNonce', protoName: 'ivNonce')
     ..hasRequiredFields = false
   ;
 
@@ -58,8 +66,16 @@ class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
   factory GetApprovalRequestsResponse_ApprovalRequest() => create();
   factory GetApprovalRequestsResponse_ApprovalRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetApprovalRequestsResponse_ApprovalRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetApprovalRequestsResponse_ApprovalRequest clone() => GetApprovalRequestsResponse_ApprovalRequest()..mergeFromMessage(this);
-  GetApprovalRequestsResponse_ApprovalRequest copyWith(void Function(GetApprovalRequestsResponse_ApprovalRequest) updates) => super.copyWith((message) => updates(message as GetApprovalRequestsResponse_ApprovalRequest));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetApprovalRequestsResponse_ApprovalRequest copyWith(void Function(GetApprovalRequestsResponse_ApprovalRequest) updates) => super.copyWith((message) => updates(message as GetApprovalRequestsResponse_ApprovalRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetApprovalRequestsResponse_ApprovalRequest create() => GetApprovalRequestsResponse_ApprovalRequest._();
@@ -116,9 +132,9 @@ class GetApprovalRequestsResponse_ApprovalRequest extends $pb.GeneratedMessage {
 }
 
 class GetApprovalRequestsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetApprovalRequestsResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
-    ..pc<GetApprovalRequestsResponse_ApprovalRequest>(2, 'payload', $pb.PbFieldType.PM, subBuilder: GetApprovalRequestsResponse_ApprovalRequest.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetApprovalRequestsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', subBuilder: ValidatorApiError.create)
+    ..pc<GetApprovalRequestsResponse_ApprovalRequest>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'payload', $pb.PbFieldType.PM, subBuilder: GetApprovalRequestsResponse_ApprovalRequest.create)
     ..hasRequiredFields = false
   ;
 
@@ -126,8 +142,16 @@ class GetApprovalRequestsResponse extends $pb.GeneratedMessage {
   factory GetApprovalRequestsResponse() => create();
   factory GetApprovalRequestsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetApprovalRequestsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetApprovalRequestsResponse clone() => GetApprovalRequestsResponse()..mergeFromMessage(this);
-  GetApprovalRequestsResponse copyWith(void Function(GetApprovalRequestsResponse) updates) => super.copyWith((message) => updates(message as GetApprovalRequestsResponse));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetApprovalRequestsResponse copyWith(void Function(GetApprovalRequestsResponse) updates) => super.copyWith((message) => updates(message as GetApprovalRequestsResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetApprovalRequestsResponse create() => GetApprovalRequestsResponse._();
@@ -153,11 +177,11 @@ class GetApprovalRequestsResponse extends $pb.GeneratedMessage {
 }
 
 class ResolveApprovalRequestsRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResolveApprovalRequestsRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOS(1, 'DeviceInfo', protoName: 'DeviceInfo')
-    ..aOS(2, 'TransferSigningRequestId', protoName: 'TransferSigningRequestId')
-    ..aOS(3, 'resolutionDocumentEncBase64', protoName: 'resolutionDocumentEncBase64')
-    ..aOS(4, 'signature')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResolveApprovalRequestsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'DeviceInfo', protoName: 'DeviceInfo')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'TransferSigningRequestId', protoName: 'TransferSigningRequestId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'resolutionDocumentEncBase64', protoName: 'resolutionDocumentEncBase64')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'signature')
     ..hasRequiredFields = false
   ;
 
@@ -165,8 +189,16 @@ class ResolveApprovalRequestsRequest extends $pb.GeneratedMessage {
   factory ResolveApprovalRequestsRequest() => create();
   factory ResolveApprovalRequestsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ResolveApprovalRequestsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ResolveApprovalRequestsRequest clone() => ResolveApprovalRequestsRequest()..mergeFromMessage(this);
-  ResolveApprovalRequestsRequest copyWith(void Function(ResolveApprovalRequestsRequest) updates) => super.copyWith((message) => updates(message as ResolveApprovalRequestsRequest));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ResolveApprovalRequestsRequest copyWith(void Function(ResolveApprovalRequestsRequest) updates) => super.copyWith((message) => updates(message as ResolveApprovalRequestsRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static ResolveApprovalRequestsRequest create() => ResolveApprovalRequestsRequest._();
@@ -214,8 +246,8 @@ class ResolveApprovalRequestsRequest extends $pb.GeneratedMessage {
 }
 
 class ResolveApprovalRequestsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ResolveApprovalRequestsResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResolveApprovalRequestsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', subBuilder: ValidatorApiError.create)
     ..hasRequiredFields = false
   ;
 
@@ -223,8 +255,16 @@ class ResolveApprovalRequestsResponse extends $pb.GeneratedMessage {
   factory ResolveApprovalRequestsResponse() => create();
   factory ResolveApprovalRequestsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ResolveApprovalRequestsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ResolveApprovalRequestsResponse clone() => ResolveApprovalRequestsResponse()..mergeFromMessage(this);
-  ResolveApprovalRequestsResponse copyWith(void Function(ResolveApprovalRequestsResponse) updates) => super.copyWith((message) => updates(message as ResolveApprovalRequestsResponse));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ResolveApprovalRequestsResponse copyWith(void Function(ResolveApprovalRequestsResponse) updates) => super.copyWith((message) => updates(message as ResolveApprovalRequestsResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static ResolveApprovalRequestsResponse create() => ResolveApprovalRequestsResponse._();
@@ -247,12 +287,12 @@ class ResolveApprovalRequestsResponse extends $pb.GeneratedMessage {
 }
 
 class AcceptRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AcceptRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOS(1, 'deviceInfo', protoName: 'deviceInfo')
-    ..aOS(2, 'inviteId', protoName: 'inviteId')
-    ..aOS(3, 'validatorId', protoName: 'validatorId')
-    ..aOS(4, 'publicKeyPem', protoName: 'publicKeyPem')
-    ..aOS(5, 'pushNotificationFCMToken', protoName: 'pushNotificationFCMToken')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AcceptRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'deviceInfo', protoName: 'deviceInfo')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inviteId', protoName: 'inviteId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'validatorId', protoName: 'validatorId')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'publicKeyPem', protoName: 'publicKeyPem')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pushNotificationFCMToken', protoName: 'pushNotificationFCMToken')
     ..hasRequiredFields = false
   ;
 
@@ -260,8 +300,16 @@ class AcceptRequest extends $pb.GeneratedMessage {
   factory AcceptRequest() => create();
   factory AcceptRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AcceptRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   AcceptRequest clone() => AcceptRequest()..mergeFromMessage(this);
-  AcceptRequest copyWith(void Function(AcceptRequest) updates) => super.copyWith((message) => updates(message as AcceptRequest));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AcceptRequest copyWith(void Function(AcceptRequest) updates) => super.copyWith((message) => updates(message as AcceptRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static AcceptRequest create() => AcceptRequest._();
@@ -318,12 +366,12 @@ class AcceptRequest extends $pb.GeneratedMessage {
 }
 
 class AcceptResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('AcceptResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
-    ..aOS(2, 'apiKey', protoName: 'apiKey')
-    ..aOS(3, 'name')
-    ..aOS(4, 'position')
-    ..aOS(5, 'description')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AcceptResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', subBuilder: ValidatorApiError.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'apiKey', protoName: 'apiKey')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'position')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'description')
     ..hasRequiredFields = false
   ;
 
@@ -331,8 +379,16 @@ class AcceptResponse extends $pb.GeneratedMessage {
   factory AcceptResponse() => create();
   factory AcceptResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AcceptResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   AcceptResponse clone() => AcceptResponse()..mergeFromMessage(this);
-  AcceptResponse copyWith(void Function(AcceptResponse) updates) => super.copyWith((message) => updates(message as AcceptResponse));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AcceptResponse copyWith(void Function(AcceptResponse) updates) => super.copyWith((message) => updates(message as AcceptResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static AcceptResponse create() => AcceptResponse._();
@@ -391,8 +447,8 @@ class AcceptResponse extends $pb.GeneratedMessage {
 }
 
 class PingRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('PingRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOS(1, 'deviceInfo', protoName: 'deviceInfo')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PingRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'deviceInfo', protoName: 'deviceInfo')
     ..hasRequiredFields = false
   ;
 
@@ -400,8 +456,16 @@ class PingRequest extends $pb.GeneratedMessage {
   factory PingRequest() => create();
   factory PingRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PingRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   PingRequest clone() => PingRequest()..mergeFromMessage(this);
-  PingRequest copyWith(void Function(PingRequest) updates) => super.copyWith((message) => updates(message as PingRequest));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PingRequest copyWith(void Function(PingRequest) updates) => super.copyWith((message) => updates(message as PingRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PingRequest create() => PingRequest._();
@@ -422,10 +486,10 @@ class PingRequest extends $pb.GeneratedMessage {
 }
 
 class PingResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('PingResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
-    ..aOS(2, 'messageEnc', protoName: 'messageEnc')
-    ..aOS(3, 'signatureMessage', protoName: 'signatureMessage')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PingResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', subBuilder: ValidatorApiError.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageEnc', protoName: 'messageEnc')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'signatureMessage', protoName: 'signatureMessage')
     ..hasRequiredFields = false
   ;
 
@@ -433,8 +497,16 @@ class PingResponse extends $pb.GeneratedMessage {
   factory PingResponse() => create();
   factory PingResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory PingResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   PingResponse clone() => PingResponse()..mergeFromMessage(this);
-  PingResponse copyWith(void Function(PingResponse) updates) => super.copyWith((message) => updates(message as PingResponse));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PingResponse copyWith(void Function(PingResponse) updates) => super.copyWith((message) => updates(message as PingResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static PingResponse create() => PingResponse._();
@@ -475,7 +547,7 @@ class PingResponse extends $pb.GeneratedMessage {
 }
 
 class RemoveVaultConnectionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RemoveVaultConnectionRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RemoveVaultConnectionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -483,8 +555,16 @@ class RemoveVaultConnectionRequest extends $pb.GeneratedMessage {
   factory RemoveVaultConnectionRequest() => create();
   factory RemoveVaultConnectionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory RemoveVaultConnectionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   RemoveVaultConnectionRequest clone() => RemoveVaultConnectionRequest()..mergeFromMessage(this);
-  RemoveVaultConnectionRequest copyWith(void Function(RemoveVaultConnectionRequest) updates) => super.copyWith((message) => updates(message as RemoveVaultConnectionRequest));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveVaultConnectionRequest copyWith(void Function(RemoveVaultConnectionRequest) updates) => super.copyWith((message) => updates(message as RemoveVaultConnectionRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static RemoveVaultConnectionRequest create() => RemoveVaultConnectionRequest._();
@@ -496,8 +576,8 @@ class RemoveVaultConnectionRequest extends $pb.GeneratedMessage {
 }
 
 class RemoveVaultConnectionResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('RemoveVaultConnectionResponse', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..aOM<ValidatorApiError>(1, 'error', subBuilder: ValidatorApiError.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RemoveVaultConnectionResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', subBuilder: ValidatorApiError.create)
     ..hasRequiredFields = false
   ;
 
@@ -505,8 +585,16 @@ class RemoveVaultConnectionResponse extends $pb.GeneratedMessage {
   factory RemoveVaultConnectionResponse() => create();
   factory RemoveVaultConnectionResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory RemoveVaultConnectionResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   RemoveVaultConnectionResponse clone() => RemoveVaultConnectionResponse()..mergeFromMessage(this);
-  RemoveVaultConnectionResponse copyWith(void Function(RemoveVaultConnectionResponse) updates) => super.copyWith((message) => updates(message as RemoveVaultConnectionResponse));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RemoveVaultConnectionResponse copyWith(void Function(RemoveVaultConnectionResponse) updates) => super.copyWith((message) => updates(message as RemoveVaultConnectionResponse)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static RemoveVaultConnectionResponse create() => RemoveVaultConnectionResponse._();
@@ -529,7 +617,7 @@ class RemoveVaultConnectionResponse extends $pb.GeneratedMessage {
 }
 
 class GetCurrentVersionRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCurrentVersionRequest', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetCurrentVersionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -537,8 +625,16 @@ class GetCurrentVersionRequest extends $pb.GeneratedMessage {
   factory GetCurrentVersionRequest() => create();
   factory GetCurrentVersionRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetCurrentVersionRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetCurrentVersionRequest clone() => GetCurrentVersionRequest()..mergeFromMessage(this);
-  GetCurrentVersionRequest copyWith(void Function(GetCurrentVersionRequest) updates) => super.copyWith((message) => updates(message as GetCurrentVersionRequest));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetCurrentVersionRequest copyWith(void Function(GetCurrentVersionRequest) updates) => super.copyWith((message) => updates(message as GetCurrentVersionRequest)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetCurrentVersionRequest create() => GetCurrentVersionRequest._();
@@ -550,9 +646,9 @@ class GetCurrentVersionRequest extends $pb.GeneratedMessage {
 }
 
 class GetCurrentVersionResponce extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetCurrentVersionResponce', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..a<$core.int>(1, 'major', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, 'minor', $pb.PbFieldType.O3)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetCurrentVersionResponce', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'major', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'minor', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -560,8 +656,16 @@ class GetCurrentVersionResponce extends $pb.GeneratedMessage {
   factory GetCurrentVersionResponce() => create();
   factory GetCurrentVersionResponce.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory GetCurrentVersionResponce.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   GetCurrentVersionResponce clone() => GetCurrentVersionResponce()..mergeFromMessage(this);
-  GetCurrentVersionResponce copyWith(void Function(GetCurrentVersionResponce) updates) => super.copyWith((message) => updates(message as GetCurrentVersionResponce));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetCurrentVersionResponce copyWith(void Function(GetCurrentVersionResponce) updates) => super.copyWith((message) => updates(message as GetCurrentVersionResponce)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static GetCurrentVersionResponce create() => GetCurrentVersionResponce._();
@@ -591,9 +695,9 @@ class GetCurrentVersionResponce extends $pb.GeneratedMessage {
 }
 
 class ValidatorApiError extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('ValidatorApiError', package: const $pb.PackageName('ValidatorApi'), createEmptyInstance: create)
-    ..e<ValidatorApiError_ErrorCodes>(1, 'code', $pb.PbFieldType.OE, defaultOrMaker: ValidatorApiError_ErrorCodes.Unknown, valueOf: ValidatorApiError_ErrorCodes.valueOf, enumValues: ValidatorApiError_ErrorCodes.values)
-    ..aOS(2, 'message')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApiError', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..e<ValidatorApiError_ErrorCodes>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.OE, defaultOrMaker: ValidatorApiError_ErrorCodes.Unknown, valueOf: ValidatorApiError_ErrorCodes.valueOf, enumValues: ValidatorApiError_ErrorCodes.values)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
@@ -601,8 +705,16 @@ class ValidatorApiError extends $pb.GeneratedMessage {
   factory ValidatorApiError() => create();
   factory ValidatorApiError.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory ValidatorApiError.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ValidatorApiError clone() => ValidatorApiError()..mergeFromMessage(this);
-  ValidatorApiError copyWith(void Function(ValidatorApiError) updates) => super.copyWith((message) => updates(message as ValidatorApiError));
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ValidatorApiError copyWith(void Function(ValidatorApiError) updates) => super.copyWith((message) => updates(message as ValidatorApiError)); // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
   static ValidatorApiError create() => ValidatorApiError._();
