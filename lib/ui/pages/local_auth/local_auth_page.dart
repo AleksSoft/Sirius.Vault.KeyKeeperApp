@@ -12,9 +12,9 @@ class LocalAuthPage extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  final isCreatePin;
-  final isCloseVisible;
-  final checkLocalAuth;
+  final bool isCreatePin;
+  final bool isCloseVisible;
+  final bool checkLocalAuth;
   final c = LocalAuthController.con;
 
   @override
