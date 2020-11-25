@@ -30,6 +30,8 @@ Future<void> mainCommon(Environment environment) async {
 
   // init firebase
   await Firebase.initializeApp();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
   // init async instances
   await Get.putAsync<RemoteConfig>(() => setupRemoteConfig(notProd));
@@ -64,22 +66,10 @@ Future<void> mainCommon(Environment environment) async {
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
         navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+          FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
         ],
-        onInit: () async {
-          final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
-          if (GetPlatform.isIOS) {
-            await firebaseMessaging.requestNotificationPermissions(
-              const IosNotificationSettings(
-                sound: true,
-                badge: true,
-                alert: true,
-                provisional: false,
-              ),
-            );
-          }
-
-          firebaseMessaging.configure(
+        onInit: () {
+          _firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
               AppLog.loggerNoStack.v('FCM onMessage:\n$message');
             },
@@ -92,12 +82,20 @@ Future<void> mainCommon(Environment environment) async {
               AppLog.loggerNoStack.v('FCM onResume:\n$message');
             },
           );
-          firebaseMessaging.onIosSettingsRegistered.listen(
+          _firebaseMessaging.requestNotificationPermissions(
+            const IosNotificationSettings(
+              sound: true,
+              badge: true,
+              alert: true,
+              provisional: false,
+            ),
+          );
+          _firebaseMessaging.onIosSettingsRegistered.listen(
             (IosNotificationSettings settings) {
               AppLog.loggerNoStack.v('FCM iOS settings registered:\n$settings');
             },
           );
-          firebaseMessaging.getToken().then(
+          _firebaseMessaging.getToken().then(
             (String token) {
               assert(token != null);
               GetStorage().write(AppStorageKeys.fcmToken, token).whenComplete(
