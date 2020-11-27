@@ -87,7 +87,7 @@ class TransferDetailController extends GetxController {
       onConfirm: () {
         _resolveRequest().then(
           (value) {
-            AppLog.loggerNoStack.v('''
+            AppLog.loggerNoStack.i('''
               ---- Resolve Approval Response ----
               result: $value''');
             if (value) RequestsController.con.reloadRequests();
@@ -134,7 +134,7 @@ class TransferDetailController extends GetxController {
     var binarySignature = privateKey.createSHA256Signature(binaryDocument);
     var signatureBase64 = base64.encode(binarySignature);
 
-    AppLog.loggerNoStack.v('''
+    AppLog.loggerNoStack.i('''
       ---- Resolve Approval Request ----
       resolutionDocument: $resolutionDocumentStr
       deviceInfo: $deviceInfo

@@ -68,7 +68,7 @@ class RootController extends GetxController {
 
   Future<RootPageState> _checkApiVersionStatus() async {
     final version = await _versionRepo.getCurrentVersion();
-    AppLog.loggerNoStack.v('''
+    AppLog.loggerNoStack.i('''
       ---- Check Api Version Response ----
       major: ${version?.major ?? ''}
       minor: ${version?.minor ?? ''}

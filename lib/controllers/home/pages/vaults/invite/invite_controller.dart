@@ -46,7 +46,7 @@ class InviteController extends GetxController {
     String inviteId = inviteCodeController.text.trim();
     String fcmToken = _storage.read(AppStorageKeys.fcmToken) ?? '';
 
-    AppLog.loggerNoStack.v('''
+    AppLog.loggerNoStack.i('''
     ---- Accept Invite Code Request ----
     validatorId: $validatorId
     publicKeyPem: $publicKeyPem

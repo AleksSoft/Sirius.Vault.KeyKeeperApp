@@ -35,7 +35,7 @@ class ApiService {
     // init urls from config
     var apiUrlsJson = _remoteConfig.getString(AppConfigKeys.apiUrls);
     apiUrls = (json.decode(apiUrlsJson) as List<dynamic>).cast<String>();
-    AppLog.loggerNoStack.v('API urls:\n$apiUrlsJson');
+    AppLog.loggerNoStack.i('API urls:\n$apiUrlsJson');
 
     // update services
     await update();
@@ -48,7 +48,7 @@ class ApiService {
   Future<void> update({String url}) async {
     if (url.isNullOrBlank) url = defaultUrl;
     await _configStorage.write(AppStorageKeys.baseUrl, url);
-    AppLog.loggerNoStack.v('Base Url: $url');
+    AppLog.loggerNoStack.i('Base Url: $url');
 
     var channel = ClientChannel(url, port: 443);
     var options = CallOptions(timeout: timeoutDuration);

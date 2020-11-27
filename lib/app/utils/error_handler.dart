@@ -43,12 +43,12 @@ class ErrorHandler {
     }
   }
 
-  static Future<void> _handleApiError(
+  static void _handleApiError(
     ValidatorApiError error,
     FutureGenerator future,
     String method,
     bool showDialog,
-  ) async {
+  ) {
     if (showDialog) {
       switch (error.code) {
         case ValidatorApiError_ErrorCodes.ExpiredInvitation:
@@ -74,11 +74,11 @@ class ErrorHandler {
     );
   }
 
-  static Future<void> _handleGrpcError(
+  static void _handleGrpcError(
     GrpcError e,
     String method,
     bool showDialog,
-  ) async {
+  ) {
     if (e.code == StatusCode.unauthenticated) {
       _dialogManager.error(
         ErrorContent(
@@ -97,11 +97,11 @@ class ErrorHandler {
     );
   }
 
-  static Future<void> _handleError(
+  static void _handleError(
     dynamic e,
     String method,
     bool showDialog,
-  ) async {
+  ) {
     logError(
       code: e.toString(),
       message: '',

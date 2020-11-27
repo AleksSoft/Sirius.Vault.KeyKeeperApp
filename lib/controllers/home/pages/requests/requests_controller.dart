@@ -124,7 +124,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
       var transferDetail = TransferDetailModel.fromJson(jsonMap);
 
       if (showLogs) {
-        AppLog.loggerNoStack.v('''
+        AppLog.loggerNoStack.i('''
           ---- Transfer Detail Decrypt ----
           privateKeyPem: ${_privateKey.toPEM()}
           secretEncBase64: $secretEncBase64

@@ -46,7 +46,7 @@ class InboxController extends GetxController {
       );
       var decrypted = _decrypt(ping);
       if (decrypted != null) {
-        AppLog.loggerNoStack.v('---- Ping Response ----\n$decrypted');
+        AppLog.loggerNoStack.i('---- Ping Response ----\n$decrypted');
         messages.add(decrypted);
       }
     }
@@ -63,7 +63,7 @@ class InboxController extends GetxController {
 
   String _decrypt(PingResponse ping) {
     try {
-      // TODO: server says it's not implemented so skipping
+      // server says it's not implemented so skipping
       // bool signatureVerified = _keyPair.publicKey.verifySHA256Signature(
       //   base64.decode(ping.messageEnc),
       //   base64.decode(ping.signatureMessage),

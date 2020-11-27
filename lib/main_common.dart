@@ -19,8 +19,6 @@ import 'ui/pages/root/root_page.dart';
 Future<void> mainCommon(Environment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final bool notProd = environment != Environment.prod;
-
   // set only portrait orientation for device
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
@@ -34,18 +32,17 @@ Future<void> mainCommon(Environment environment) async {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
   // init async instances
-  await Get.putAsync<RemoteConfig>(() => setupRemoteConfig(notProd));
+  await Get.putAsync<RemoteConfig>(() => _setupRemoteConfig());
+  await Get.putAsync<ApiService>(() => ApiService().init());
   await Get.putAsync<AppConfig>(
     () => AppConfig().init(
       environment: environment,
       appApiVersion: AppApiVersion(1, 0),
     ),
   );
-  await Get.putAsync<ApiService>(() => ApiService().init());
 
-  if (notProd) {
-    LogConsole.init();
-  }
+  final AppConfig _appConfig = Get.find<AppConfig>();
+  if (!_appConfig.isProd) LogConsole.init();
 
   // start app with all configurations done
   runApp(
@@ -56,10 +53,10 @@ Future<void> mainCommon(Environment environment) async {
         debugShowMaterialGrid: false,
         showPerformanceOverlay: false,
         showSemanticsDebugger: false,
-        enableLog: notProd,
+        enableLog: !_appConfig.isProd,
         translations: AppTranslations(),
         locale: Locale('en'),
-        title: _getAppTitle(environment),
+        title: _appConfig.appTitle,
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
         transitionDuration: const Duration(milliseconds: 200),
@@ -69,19 +66,23 @@ Future<void> mainCommon(Environment environment) async {
           FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
         ],
         onInit: () {
+          final _storage = GetStorage();
+          String _appFcmToken = GetStorage().read(AppStorageKeys.fcmToken);
+
           _firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
-              AppLog.loggerNoStack.v('FCM onMessage:\n$message');
+              AppLog.loggerNoStack.i('FCM onMessage:\n$message');
             },
             onBackgroundMessage:
                 GetPlatform.isIOS ? null : backgroundMessageHandler,
             onLaunch: (Map<String, dynamic> message) async {
-              AppLog.loggerNoStack.v('FCM onLaunch:\n$message');
+              AppLog.loggerNoStack.i('FCM onLaunch:\n$message');
             },
             onResume: (Map<String, dynamic> message) async {
-              AppLog.loggerNoStack.v('FCM onResume:\n$message');
+              AppLog.loggerNoStack.i('FCM onResume:\n$message');
             },
           );
+
           _firebaseMessaging.requestNotificationPermissions(
             const IosNotificationSettings(
               sound: true,
@@ -90,47 +91,41 @@ Future<void> mainCommon(Environment environment) async {
               provisional: false,
             ),
           );
-          _firebaseMessaging.onIosSettingsRegistered.listen(
-            (IosNotificationSettings settings) {
-              AppLog.loggerNoStack.v('FCM iOS settings registered:\n$settings');
-            },
-          );
-          _firebaseMessaging.getToken().then(
-            (String token) {
-              assert(token != null);
-              GetStorage().write(AppStorageKeys.fcmToken, token).whenComplete(
-                    () => AppLog.loggerNoStack.v('FCM token:\n$token'),
-                  );
-            },
-          );
+
+          _firebaseMessaging.getToken().then((String token) {
+            _appFcmToken = token;
+            _saveFcmToken(_storage, _appFcmToken);
+          });
+
+          _firebaseMessaging.onTokenRefresh.listen((String token) {
+            if (_appFcmToken != token) {
+              _appFcmToken = token;
+              _saveFcmToken(_storage, _appFcmToken);
+            }
+          });
         },
       ),
     ),
   );
 }
 
-String _getAppTitle(Environment env) {
-  switch (env) {
-    case Environment.dev:
-      return 'Dev Sirius Validator';
-    case Environment.test:
-      return 'Test Sirius Validator';
-    case Environment.prod:
-    default:
-      return 'Sirius Validator';
-  }
+void _saveFcmToken(GetStorage storage, String token) {
+  assert(token != null);
+  storage.write(AppStorageKeys.fcmToken, token).whenComplete(() {
+    AppLog.loggerNoStack.i('FCM token:\n$token');
+  });
 }
 
 /// method to handle firebase push notification messages in background
 Future<dynamic> backgroundMessageHandler(Map<String, dynamic> message) async {
-  AppLog.loggerNoStack.v('FCM onBackgroundMessage:\n$message');
+  AppLog.loggerNoStack.i('FCM onBackgroundMessage:\n$message');
 }
 
 /// init firebase remote config
-Future<RemoteConfig> setupRemoteConfig(bool notProd) async {
+Future<RemoteConfig> _setupRemoteConfig() async {
   final RemoteConfig remoteConfig = await RemoteConfig.instance;
   // Enable developer mode to relax fetch throttling
-  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: notProd));
+  remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: false));
   remoteConfig.setDefaults(<String, dynamic>{
     AppConfigKeys.apiUrls: ['sirius-validator.swisschain.io'],
   });
