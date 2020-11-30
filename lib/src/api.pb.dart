@@ -616,6 +616,86 @@ class RemoveVaultConnectionResponse extends $pb.GeneratedMessage {
   ValidatorApiError ensureError() => $_ensure(0);
 }
 
+class RefreshPushNotificationFCMTokenRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RefreshPushNotificationFCMTokenRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pushNotificationFCMToken', protoName: 'pushNotificationFCMToken')
+    ..hasRequiredFields = false
+  ;
+
+  RefreshPushNotificationFCMTokenRequest._() : super();
+  factory RefreshPushNotificationFCMTokenRequest() => create();
+  factory RefreshPushNotificationFCMTokenRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RefreshPushNotificationFCMTokenRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RefreshPushNotificationFCMTokenRequest clone() => RefreshPushNotificationFCMTokenRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RefreshPushNotificationFCMTokenRequest copyWith(void Function(RefreshPushNotificationFCMTokenRequest) updates) => super.copyWith((message) => updates(message as RefreshPushNotificationFCMTokenRequest)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RefreshPushNotificationFCMTokenRequest create() => RefreshPushNotificationFCMTokenRequest._();
+  RefreshPushNotificationFCMTokenRequest createEmptyInstance() => create();
+  static $pb.PbList<RefreshPushNotificationFCMTokenRequest> createRepeated() => $pb.PbList<RefreshPushNotificationFCMTokenRequest>();
+  @$core.pragma('dart2js:noInline')
+  static RefreshPushNotificationFCMTokenRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RefreshPushNotificationFCMTokenRequest>(create);
+  static RefreshPushNotificationFCMTokenRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get pushNotificationFCMToken => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set pushNotificationFCMToken($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPushNotificationFCMToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPushNotificationFCMToken() => clearField(1);
+}
+
+class RefreshPushNotificationFCMTokenResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RefreshPushNotificationFCMTokenResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
+    ..aOM<ValidatorApiError>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'error', subBuilder: ValidatorApiError.create)
+    ..hasRequiredFields = false
+  ;
+
+  RefreshPushNotificationFCMTokenResponse._() : super();
+  factory RefreshPushNotificationFCMTokenResponse() => create();
+  factory RefreshPushNotificationFCMTokenResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RefreshPushNotificationFCMTokenResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RefreshPushNotificationFCMTokenResponse clone() => RefreshPushNotificationFCMTokenResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RefreshPushNotificationFCMTokenResponse copyWith(void Function(RefreshPushNotificationFCMTokenResponse) updates) => super.copyWith((message) => updates(message as RefreshPushNotificationFCMTokenResponse)); // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static RefreshPushNotificationFCMTokenResponse create() => RefreshPushNotificationFCMTokenResponse._();
+  RefreshPushNotificationFCMTokenResponse createEmptyInstance() => create();
+  static $pb.PbList<RefreshPushNotificationFCMTokenResponse> createRepeated() => $pb.PbList<RefreshPushNotificationFCMTokenResponse>();
+  @$core.pragma('dart2js:noInline')
+  static RefreshPushNotificationFCMTokenResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RefreshPushNotificationFCMTokenResponse>(create);
+  static RefreshPushNotificationFCMTokenResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ValidatorApiError get error => $_getN(0);
+  @$pb.TagNumber(1)
+  set error(ValidatorApiError v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasError() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearError() => clearField(1);
+  @$pb.TagNumber(1)
+  ValidatorApiError ensureError() => $_ensure(0);
+}
+
 class GetCurrentVersionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetCurrentVersionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
     ..hasRequiredFields = false
@@ -698,6 +778,7 @@ class ValidatorApiError extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApiError', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidatorApi'), createEmptyInstance: create)
     ..e<ValidatorApiError_ErrorCodes>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.OE, defaultOrMaker: ValidatorApiError_ErrorCodes.Unknown, valueOf: ValidatorApiError_ErrorCodes.valueOf, enumValues: ValidatorApiError_ErrorCodes.values)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'data')
     ..hasRequiredFields = false
   ;
 
@@ -741,5 +822,14 @@ class ValidatorApiError extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(1);
   @$pb.TagNumber(2)
   void clearMessage() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get data => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set data($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasData() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearData() => clearField(3);
 }
 

@@ -117,6 +117,20 @@ const RemoveVaultConnectionResponse$json = const {
   ],
 };
 
+const RefreshPushNotificationFCMTokenRequest$json = const {
+  '1': 'RefreshPushNotificationFCMTokenRequest',
+  '2': const [
+    const {'1': 'pushNotificationFCMToken', '3': 1, '4': 1, '5': 9, '10': 'pushNotificationFCMToken'},
+  ],
+};
+
+const RefreshPushNotificationFCMTokenResponse$json = const {
+  '1': 'RefreshPushNotificationFCMTokenResponse',
+  '2': const [
+    const {'1': 'error', '3': 1, '4': 1, '5': 11, '6': '.ValidatorApi.ValidatorApiError', '10': 'error'},
+  ],
+};
+
 const GetCurrentVersionRequest$json = const {
   '1': 'GetCurrentVersionRequest',
 };
@@ -134,6 +148,7 @@ const ValidatorApiError$json = const {
   '2': const [
     const {'1': 'code', '3': 1, '4': 1, '5': 14, '6': '.ValidatorApi.ValidatorApiError.ErrorCodes', '10': 'code'},
     const {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+    const {'1': 'data', '3': 3, '4': 1, '5': 9, '10': 'data'},
   ],
   '4': const [ValidatorApiError_ErrorCodes$json],
 };
@@ -147,6 +162,7 @@ const ValidatorApiError_ErrorCodes$json = const {
     const {'1': 'WrongSignature', '2': 3},
     const {'1': 'WrongInvitation', '2': 4},
     const {'1': 'ExpiredInvitation', '2': 5},
+    const {'1': 'ExpiredApiKey', '2': 6},
   ],
 };
 

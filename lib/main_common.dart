@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger_flutter/logger_flutter.dart';
+import 'package:validator/repositories/invites_repository.dart';
+import 'package:validator/repositories/vaults_repository.dart';
 import 'package:validator/services/api/api_service.dart';
 
 import 'app/bindings/initial_binding.dart';
@@ -59,7 +61,7 @@ Future<void> mainCommon(Environment environment) async {
         title: _appConfig.appTitle,
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
-        transitionDuration: const Duration(milliseconds: 200),
+        transitionDuration: const Duration(milliseconds: 300),
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
         navigatorObservers: [
@@ -67,7 +69,7 @@ Future<void> mainCommon(Environment environment) async {
         ],
         onInit: () {
           final _storage = GetStorage();
-          String _appFcmToken = GetStorage().read(AppStorageKeys.fcmToken);
+          String _appFcmToken = _storage.read(AppStorageKeys.fcmToken);
 
           _firebaseMessaging.configure(
             onMessage: (Map<String, dynamic> message) async {
@@ -93,8 +95,10 @@ Future<void> mainCommon(Environment environment) async {
           );
 
           _firebaseMessaging.getToken().then((String token) {
-            _appFcmToken = token;
-            _saveFcmToken(_storage, _appFcmToken);
+            if (_appFcmToken != token) {
+              _appFcmToken = token;
+              _saveFcmToken(_storage, _appFcmToken);
+            }
           });
 
           _firebaseMessaging.onTokenRefresh.listen((String token) {
@@ -112,6 +116,11 @@ Future<void> mainCommon(Environment environment) async {
 void _saveFcmToken(GetStorage storage, String token) {
   assert(token != null);
   storage.write(AppStorageKeys.fcmToken, token).whenComplete(() {
+    VaultsRepository.savedApiKeys.forEach((apiKey) async =>
+        await InvitesRepository().refreshPushNotificationFCMToken(
+          pushNotificationFCMToken: token,
+          apiKey: apiKey,
+        ));
     AppLog.loggerNoStack.i('FCM token:\n$token');
   });
 }

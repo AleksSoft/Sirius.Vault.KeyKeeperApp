@@ -48,6 +48,7 @@ class ValidatorApiError_ErrorCodes extends $pb.ProtobufEnum {
   static const ValidatorApiError_ErrorCodes WrongSignature = ValidatorApiError_ErrorCodes._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'WrongSignature');
   static const ValidatorApiError_ErrorCodes WrongInvitation = ValidatorApiError_ErrorCodes._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'WrongInvitation');
   static const ValidatorApiError_ErrorCodes ExpiredInvitation = ValidatorApiError_ErrorCodes._(5, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ExpiredInvitation');
+  static const ValidatorApiError_ErrorCodes ExpiredApiKey = ValidatorApiError_ErrorCodes._(6, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ExpiredApiKey');
 
   static const $core.List<ValidatorApiError_ErrorCodes> values = <ValidatorApiError_ErrorCodes> [
     Unknown,
@@ -56,6 +57,7 @@ class ValidatorApiError_ErrorCodes extends $pb.ProtobufEnum {
     WrongSignature,
     WrongInvitation,
     ExpiredInvitation,
+    ExpiredApiKey,
   ];
 
   static final $core.Map<$core.int, ValidatorApiError_ErrorCodes> _byValue = $pb.ProtobufEnum.initByValue(values);

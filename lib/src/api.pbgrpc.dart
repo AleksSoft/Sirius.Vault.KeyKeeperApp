@@ -105,6 +105,14 @@ class InvitesClient extends $grpc.Client {
       ($0.RemoveVaultConnectionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.RemoveVaultConnectionResponse.fromBuffer(value));
+  static final _$refreshPushNotificationFCMToken = $grpc.ClientMethod<
+          $0.RefreshPushNotificationFCMTokenRequest,
+          $0.RefreshPushNotificationFCMTokenResponse>(
+      '/ValidatorApi.Invites/RefreshPushNotificationFCMToken',
+      ($0.RefreshPushNotificationFCMTokenRequest value) =>
+          value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.RefreshPushNotificationFCMTokenResponse.fromBuffer(value));
 
   InvitesClient($grpc.ClientChannel channel,
       {$grpc.CallOptions options,
@@ -125,6 +133,14 @@ class InvitesClient extends $grpc.Client {
       $0.RemoveVaultConnectionRequest request,
       {$grpc.CallOptions options}) {
     return $createUnaryCall(_$removeVaultConnection, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.RefreshPushNotificationFCMTokenResponse>
+      refreshPushNotificationFCMToken(
+          $0.RefreshPushNotificationFCMTokenRequest request,
+          {$grpc.CallOptions options}) {
+    return $createUnaryCall(_$refreshPushNotificationFCMToken, request,
+        options: options);
   }
 }
 
@@ -155,6 +171,16 @@ abstract class InvitesServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.RemoveVaultConnectionRequest.fromBuffer(value),
         ($0.RemoveVaultConnectionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.RefreshPushNotificationFCMTokenRequest,
+            $0.RefreshPushNotificationFCMTokenResponse>(
+        'RefreshPushNotificationFCMToken',
+        refreshPushNotificationFCMToken_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.RefreshPushNotificationFCMTokenRequest.fromBuffer(value),
+        ($0.RefreshPushNotificationFCMTokenResponse value) =>
+            value.writeToBuffer()));
   }
 
   $async.Future<$0.AcceptResponse> accept_Pre(
@@ -173,12 +199,23 @@ abstract class InvitesServiceBase extends $grpc.Service {
     return removeVaultConnection(call, await request);
   }
 
+  $async.Future<$0.RefreshPushNotificationFCMTokenResponse>
+      refreshPushNotificationFCMToken_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$0.RefreshPushNotificationFCMTokenRequest>
+              request) async {
+    return refreshPushNotificationFCMToken(call, await request);
+  }
+
   $async.Future<$0.AcceptResponse> accept(
       $grpc.ServiceCall call, $0.AcceptRequest request);
   $async.Future<$0.PingResponse> getPing(
       $grpc.ServiceCall call, $0.PingRequest request);
   $async.Future<$0.RemoveVaultConnectionResponse> removeVaultConnection(
       $grpc.ServiceCall call, $0.RemoveVaultConnectionRequest request);
+  $async.Future<$0.RefreshPushNotificationFCMTokenResponse>
+      refreshPushNotificationFCMToken($grpc.ServiceCall call,
+          $0.RefreshPushNotificationFCMTokenRequest request);
 }
 
 class VersionClient extends $grpc.Client {

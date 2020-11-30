@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:validator/app/common/app_storage_keys.dart';
+import 'package:validator/app/common/common.dart';
 import 'package:validator/app/utils/utils.dart';
 import 'package:validator/models/saved_errors_model.dart';
+import 'package:validator/repositories/vaults_repository.dart';
 import 'package:validator/src/api.pb.dart';
 import 'package:validator/ui/pages/root/root_page.dart';
 import 'package:flutter/foundation.dart';
@@ -49,23 +51,26 @@ class ErrorHandler {
     String method,
     bool showDialog,
   ) {
-    if (showDialog) {
-      switch (error.code) {
-        case ValidatorApiError_ErrorCodes.ExpiredInvitation:
-        case ValidatorApiError_ErrorCodes.InternalServerError:
-        case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
-        case ValidatorApiError_ErrorCodes.WrongInvitation:
-        case ValidatorApiError_ErrorCodes.WrongSignature:
-        case ValidatorApiError_ErrorCodes.Unknown:
+    switch (error.code) {
+      case ValidatorApiError_ErrorCodes.ExpiredApiKey:
+        VaultsRepository.expireVault(error.data);
+        break;
+      case ValidatorApiError_ErrorCodes.ExpiredInvitation:
+      case ValidatorApiError_ErrorCodes.InternalServerError:
+      case ValidatorApiError_ErrorCodes.WrongDeviceInfo:
+      case ValidatorApiError_ErrorCodes.WrongInvitation:
+      case ValidatorApiError_ErrorCodes.WrongSignature:
+      case ValidatorApiError_ErrorCodes.Unknown:
+        if (showDialog) {
           _dialogManager.error(ErrorContent(
             title: error.code.name,
             message: error.message,
           ));
-          break;
-        default:
-          _defaultErrorDialog();
-          break;
-      }
+        }
+        break;
+      default:
+        if (showDialog) _defaultErrorDialog();
+        break;
     }
     logError(
       code: error.code.name,

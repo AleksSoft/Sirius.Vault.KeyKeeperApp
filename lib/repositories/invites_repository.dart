@@ -46,4 +46,18 @@ class InvitesRepository extends BaseRepository<InvitesClient> {
         ),
         method: 'removeVaultConnection',
       );
+
+  Future<RefreshPushNotificationFCMTokenResponse>
+      refreshPushNotificationFCMToken({
+    @required String pushNotificationFCMToken,
+    @required String apiKey,
+  }) async =>
+          await ErrorHandler.safeCall<RefreshPushNotificationFCMTokenResponse>(
+            () => client.refreshPushNotificationFCMToken(
+              RefreshPushNotificationFCMTokenRequest()
+                ..pushNotificationFCMToken = pushNotificationFCMToken,
+              options: ApiService.getSecureOptions(apiKey),
+            ),
+            method: 'refreshPushNotificationFCMToken',
+          );
 }
