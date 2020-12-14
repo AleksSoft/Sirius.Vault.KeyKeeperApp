@@ -18,6 +18,8 @@ import 'package:validator/ui/pages/home/pages/requests/detail/transfer_detail_pa
 class RequestsController extends GetxController with WidgetsBindingObserver {
   static RequestsController get con => Get.find();
 
+  static const PERIODIC_FETCH_DELTA_SEC = 30;
+
   final _repository = TransfersRepository();
   final _crypto = Get.find<CryptoService>();
 
@@ -63,7 +65,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
-        _startPeriodicFetch();
+        reloadRequests().whenComplete(() => _startPeriodicFetch());
         break;
       case AppLifecycleState.paused:
         _stopPeriodicFetch();
@@ -147,7 +149,7 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
 
   void _startPeriodicFetch() {
     _requestsReloadTimer = Timer.periodic(
-      const Duration(seconds: 30),
+      const Duration(seconds: PERIODIC_FETCH_DELTA_SEC),
       (Timer t) => silentReloadRequests(showErrors: false),
     );
   }

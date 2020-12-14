@@ -61,7 +61,8 @@ Future<void> mainCommon(Environment environment) async {
         title: _appConfig.appTitle,
         theme: AppThemes.light,
         getPages: AppRoutes.routes,
-        transitionDuration: const Duration(milliseconds: 300),
+        transitionDuration: Get.defaultTransitionDuration,
+        defaultTransition: Transition.cupertino,
         initialRoute: RootPage.route,
         initialBinding: InitialBinding(),
         navigatorObservers: [

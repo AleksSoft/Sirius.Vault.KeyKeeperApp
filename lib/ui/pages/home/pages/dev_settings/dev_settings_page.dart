@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:validator/app/common/common.dart';
 import 'package:validator/controllers/home/pages/dev_settings/dev_settings_controller.dart';
 
-class DevSettingsPage extends StatelessWidget {
+class DevSettingsPage extends GetView<DevSettingsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +14,7 @@ class DevSettingsPage extends StatelessWidget {
         title: Text('Developer settings'),
         actions: [
           FlatButton(
-            onPressed: () => DevSettingsController.con.showLogs(),
+            onPressed: () => controller.showLogs(),
             child: Text('Show logs'),
           ),
         ],
