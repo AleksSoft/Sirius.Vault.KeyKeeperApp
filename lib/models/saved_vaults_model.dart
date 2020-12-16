@@ -9,7 +9,7 @@ class SavedVaultsModel {
 
   SavedVaultsModel.fromJson(Map<String, dynamic> json) {
     if (json['vaults'] != null) {
-      vaults = new List<Vault>();
+      vaults = <Vault>[];
       json['vaults'].forEach((v) {
         vaults.add(new Vault.fromJson(v));
       });

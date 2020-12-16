@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class VaultsPage extends MenuPage {
   @override
-  String get title => 'Vaults';
+  String get title => 'Custodies';
 
   @override
   Widget build(BuildContext context) {

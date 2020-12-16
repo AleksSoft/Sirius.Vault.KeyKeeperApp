@@ -40,7 +40,7 @@ class _DrawerMenu extends StatelessWidget {
           ListTile(
             onTap: () => c.selectedPage = VaultsPage(),
             leading: Icon(Icons.view_carousel),
-            title: Text('Vaults'),
+            title: Text('Custodies'),
           ),
           ListTile(
             onTap: () => c.selectedPage = InboxPage(),

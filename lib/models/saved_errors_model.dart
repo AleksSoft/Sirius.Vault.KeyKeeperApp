@@ -1,12 +1,12 @@
 import 'base_model.dart';
 
 class SavedErrorsModel extends BaseModel<SavedErrorsModel> {
-  List<SavedError> errors = List();
+  List<SavedError> errors = [];
 
   @override
   SavedErrorsModel fromJson(Map<String, dynamic> json) {
     if (json['errors'] != null) {
-      errors = new List<SavedError>();
+      errors = <SavedError>[];
       json['errors'].forEach((v) {
         errors.add(SavedError().fromJson(v));
       });
