@@ -60,9 +60,9 @@ class VaultsRepository {
     if (vault != null) {
       Get.defaultDialog(
         barrierDismissible: false,
-        title: 'Vault expired',
+        title: 'Custody expired',
         middleText:
-            'Oops.. One of your vaults named "${vault.localName}" will be removed',
+            'Oops.. One of your custodies named "${vault.localName}" will be removed',
         buttonColor: AppColors.dark,
         confirmTextColor: AppColors.primary,
         textConfirm: 'Accept',
