@@ -110,7 +110,6 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
         );
         if (index < 0) requests.add(details);
       });
-      requests.addAll(transferDetails);
     }
   }
 
