@@ -36,7 +36,6 @@ dependencies:
   intl: ^0.15.8
   package_info: ^0.4.3
   equatable: ^1.2.5
-  flutter_money_formatter: ^0.8.3
   logger_flutter: ^0.7.1
 
   # firebase

@@ -94,8 +94,6 @@ PODS:
     - GoogleUtilities/Environment (~> 6.7)
     - "GoogleUtilities/NSData+zlib (~> 6.7)"
   - Flutter (1.0.0)
-  - flutter_money_formatter (0.0.1):
-    - Flutter
   - GoogleAppMeasurement (6.8.3):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/MethodSwizzler (~> 6.7)
@@ -152,7 +150,6 @@ DEPENDENCIES:
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `6.26.0`)
   - Flutter (from `Flutter`)
-  - flutter_money_formatter (from `.symlinks/plugins/flutter_money_formatter/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -199,8 +196,6 @@ EXTERNAL SOURCES:
     :tag: 6.26.0
   Flutter:
     :path: Flutter
-  flutter_money_formatter:
-    :path: ".symlinks/plugins/flutter_money_formatter/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
   package_info:
@@ -237,7 +232,6 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
   FirebaseRemoteConfig: 35a729305f254fb15a2e541d4b36f3a379da7fdc
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  flutter_money_formatter: d0d18ddc5be333fad8d09964d741b59fa11a91dc
   GoogleAppMeasurement: 966e88df9d19c15715137bb2ddaf52373f111436
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
