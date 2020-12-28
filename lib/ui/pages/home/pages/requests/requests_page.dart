@@ -57,10 +57,7 @@ class _RequestCard extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                Formatter.currency(
-                  (r.amount ?? '').toString(),
-                  prefix: r.asset?.symbol,
-                ),
+                '${r.asset?.symbol} ${r.amount ?? ''}',
                 style: Get.textTheme.subtitle2.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 16.0,

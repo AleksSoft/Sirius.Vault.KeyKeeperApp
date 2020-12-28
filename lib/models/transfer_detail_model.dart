@@ -7,8 +7,8 @@ class TransferDetailModel {
   Asset asset;
   SourceAddress sourceAddress;
   DestinationAddress destinationAddress;
-  double amount;
-  double feeLimit;
+  String amount;
+  String feeLimit;
   TransferContext transferContext;
 
   bool get networkSecure =>

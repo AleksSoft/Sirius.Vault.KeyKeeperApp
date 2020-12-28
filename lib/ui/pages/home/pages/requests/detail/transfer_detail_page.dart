@@ -76,10 +76,8 @@ class _DetailsView extends StatelessWidget {
             ),
             DetailsTile(
               title: 'Amount',
-              value: Formatter.currency(
-                (c.transferDetail?.amount ?? '').toString(),
-                prefix: c.transferDetail?.asset?.symbol,
-              ),
+              value:
+                  '${c.transferDetail?.asset?.symbol ?? ''} ${c.transferDetail?.amount ?? ''}',
             ),
             DetailsTile(
               title: 'Blockchain ID',
@@ -143,7 +141,7 @@ class _DetailsView extends StatelessWidget {
             AppUiHelpers.vSpaceMedium,
             DetailsTile(
               title: 'Fee limit',
-              value: (c.transferDetail.feeLimit ?? '').toString(),
+              value: c.transferDetail.feeLimit ?? '',
             ),
             DetailsTile(
               title: 'Account reference id',
