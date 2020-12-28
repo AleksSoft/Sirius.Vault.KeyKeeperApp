@@ -22,7 +22,7 @@ class VaultsPage extends MenuPage {
           backgroundColor: AppColors.dark,
         ),
         body: EmptyReloadingView(
-          emptyMessage: 'You have no active vaults',
+          emptyMessage: 'You have no active custodies',
           isEmpty: _.showEmptyContidion,
           isLoading: _.loading,
           onRefresh: () => _.reloadVaults(),

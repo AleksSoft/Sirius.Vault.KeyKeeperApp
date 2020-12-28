@@ -35,7 +35,7 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vault details'),
+        title: Text('Custody details'),
         actions: [
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),

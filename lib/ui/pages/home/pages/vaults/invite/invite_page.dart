@@ -82,7 +82,7 @@ class InvitePage extends StatelessWidget {
                     onFieldSubmitted: (s) => GestureUtils.unfocus(),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Vault name (required)',
+                      labelText: 'Custody name (required)',
                       alignLabelWithHint: true,
                     ),
                   ),

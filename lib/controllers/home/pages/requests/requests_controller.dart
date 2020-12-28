@@ -101,9 +101,15 @@ class RequestsController extends GetxController with WidgetsBindingObserver {
       );
       var transferDetails = approvalRequests
           .map((r) => _buildTransferDetail(r, vault, showErrors))
-          .where((element) => element != null)
+          .where((e) => e != null)
           .toList();
-      requests.addAll(transferDetails);
+
+      transferDetails.forEach((details) {
+        int index = requests.indexWhere(
+          (e) => e.transferSigningRequestId == details.transferSigningRequestId,
+        );
+        if (index < 0) requests.add(details);
+      });
     }
   }
 

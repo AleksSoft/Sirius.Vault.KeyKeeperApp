@@ -173,6 +173,7 @@ class TransferDetailController extends GetxController {
   }
 }
 
+@immutable
 class TransferDetailArgs {
   final TransferDetailModel transferDetail;
   final String aesSecretKey;
