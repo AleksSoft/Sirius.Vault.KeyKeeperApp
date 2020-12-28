@@ -7,14 +7,16 @@ class TransferDetailModel {
   Asset asset;
   SourceAddress sourceAddress;
   DestinationAddress destinationAddress;
-  String amount;
-  String feeLimit;
+  double amount;
+  double feeLimit;
   TransferContext transferContext;
 
   bool get networkSecure =>
       'test' == (blockchain?.networkType ?? '').toLowerCase();
   bool get isExternal => sourceAddress?.group != destinationAddress?.group;
   String get addressLabel => isExternal ? 'External' : 'Internal';
+  String get amountStr => (amount ?? 0.0).toString();
+  String get feeLimitStr => (feeLimit ?? 0.0).toString();
 
   TransferDetailModel(
       {this.operationId,

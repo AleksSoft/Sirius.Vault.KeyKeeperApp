@@ -57,7 +57,7 @@ class _RequestCard extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                '${r.asset?.symbol} ${r.amount ?? ''}',
+                '${r.asset?.symbol ?? ''} ${r.amountStr}',
                 style: Get.textTheme.subtitle2.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 16.0,
@@ -75,10 +75,15 @@ class _RequestCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                r.blockchain?.id ?? '',
-                style: Get.textTheme.subtitle2,
+              Flexible(
+                child: Text(
+                  r.blockchain?.id ?? '',
+                  style: Get.textTheme.subtitle2,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
+              AppUiHelpers.hSpaceSmall,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
